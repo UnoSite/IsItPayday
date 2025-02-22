@@ -1,0 +1,11 @@
+{
+  "domain": "isitpayday",
+  "name": "Is It Payday?",
+  "version": "0.6.1",
+  "documentation": "https://github.com/UnoSite/IsItPayday",
+  "dependencies": [],
+  "codeowners": ["@UnoSite"],
+  "requirements": ["aiohttp"],
+  "config_flow": true,
+  "iot_class": "cloud_polling"
+}

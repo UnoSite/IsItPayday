@@ -1,27 +1,38 @@
-"""Is It Payday? integration."""
-import logging
-from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
-from homeassistant.helpers.aiohttp_client import async_get_clientsession
-from .const import DOMAIN
+from homeassistant.config_entries import ConfigEntry
+from homeassistant.helpers.typing import ConfigType
+from .const import DOMAIN, VERSION
 
-_LOGGER = logging.getLogger(__name__)
+async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
+    """Opsætning af integrationen."""
+    hass.data.setdefault(DOMAIN, {})
+    return True
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
-    """Set up Is It Payday? from a config entry."""
+    """Opsæt integrationen via config flow."""
     hass.data.setdefault(DOMAIN, {})
-    hass.data[DOMAIN][entry.entry_id] = entry
 
-    session = async_get_clientsession(hass)
-    hass.data[DOMAIN][f"{entry.entry_id}_session"] = session
+    # Opdater versionen korrekt
+    if entry.version != VERSION:
+        hass.config_entries.async_update_entry(entry, version=VERSION)
 
-    hass.config_entries.async_setup_platforms(entry, ["sensor"])
+    # Brug den nye metode 'await async_forward_entry_setups'
+    await hass.config_entries.async_forward_entry_setups(entry, ["binary_sensor", "sensor"])
 
     return True
 
 async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
-    """Unload Is It Payday? config entry."""
-    if f"{entry.entry_id}_session" in hass.data[DOMAIN]:
-        del hass.data[DOMAIN][f"{entry.entry_id}_session"]
+    """Fjern integrationen korrekt uden fejl."""
+    unload_ok = await hass.config_entries.async_forward_entry_unload(entry, "binary_sensor")
+    unload_ok &= await hass.config_entries.async_forward_entry_unload(entry, "sensor")
 
-    return await hass.config_entries.async_unload_platforms(entry, ["sensor"])
+    if unload_ok:
+        hass.data[DOMAIN].pop(entry.entry_id, None)
+
+    return unload_ok
+
+async def async_migrate_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
+    """Håndter migrering af konfigurationsdata."""
+    if entry.version != VERSION:
+        hass.config_entries.async_update_entry(entry, version=VERSION)
+    return True

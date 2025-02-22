@@ -13,14 +13,14 @@ class IsItPaydayConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     VERSION = 1
 
     async def async_step_user(self, user_input=None):
-        """Forhindrer flere installationer."""
+        """Prevent multiple installations."""
         if self._async_current_entries():
             return self.async_abort(reason="Only one installation is allowed.")
 
         return await self._show_setup_form(user_input)
 
     async def _show_setup_form(self, user_input):
-        """Vis formular til valg af land."""
+        """Show form for selecting country."""
         errors = {}
 
         country_options = await self._fetch_supported_countries()
@@ -47,13 +47,13 @@ class IsItPaydayConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         )
 
     def _get_schema(self, country_options):
-        """Returnerer skema til valg af land."""
+        """Return schema for selecting country."""
         return vol.Schema({
-            vol.Required(CONF_COUNTRY, default="Danmark"): vol.In(country_options.values())
+            vol.Required(CONF_COUNTRY, default="Denmark"): vol.In(country_options.values())
         })
 
     async def _fetch_supported_countries(self):
-        """Henter understøttede lande fra API'et."""
+        """Fetch supported countries from the API."""
         try:
             async with aiohttp.ClientSession() as session:
                 async with session.get(API_URL, timeout=10) as response:

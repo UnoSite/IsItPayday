@@ -13,14 +13,14 @@ _LOGGER = logging.getLogger(__name__)
 API_URL_TEMPLATE = "https://api.isitpayday.com/monthly?payday={days}&country={country}&timezone={tz}"
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry, async_add_entities):
-    """Opsæt binary sensor baseret på konfiguration."""
+    """Set up binary sensor based on configuration."""
     country_id = entry.data.get(CONF_COUNTRY_ID, "DK")
     timezone = hass.config.time_zone
 
     async_add_entities([IsItPaydayBinarySensor(entry.entry_id, country_id, timezone)], True)
 
 class IsItPaydayBinarySensor(BinarySensorEntity):
-    """Repræsenterer en Is It Payday?-sensor."""
+    """Represents an Is It Payday? sensor."""
 
     def __init__(self, entry_id, country_id, timezone):
         self._entry_id = entry_id
@@ -53,7 +53,7 @@ class IsItPaydayBinarySensor(BinarySensorEntity):
 
     @property
     def device_info(self) -> DeviceInfo:
-        """Gør alle enheder til en del af samme device."""
+        """Ensure all entities belong to the same device."""
         return DeviceInfo(
             identifiers={(DOMAIN, self._entry_id)},
             name="Is It Payday?",
@@ -64,22 +64,22 @@ class IsItPaydayBinarySensor(BinarySensorEntity):
         )
 
     async def async_update(self):
-        """Henter data fra API ved hver polling."""
+        """Fetch data from the API on each polling cycle."""
         days_in_month = calendar.monthrange(datetime.now().year, datetime.now().month)[1]
         self._api_url = API_URL_TEMPLATE.format(days=days_in_month, country=self._country_id, tz=self._timezone)
 
-        _LOGGER.debug(f"IsItPayday: Henter data fra {self._api_url}")
+        _LOGGER.debug(f"IsItPayday: Fetching data from {self._api_url}")
 
         try:
             async with aiohttp.ClientSession() as session:
                 async with session.get(self._api_url, timeout=10) as response:
                     if response.status != 200:
-                        _LOGGER.error(f"IsItPayday: API-fejl {response.status}")
+                        _LOGGER.error(f"IsItPayday: API error {response.status}")
                         return
 
                     data = await response.json()
                     _LOGGER.debug(f"IsItPayday: API response: {data}")
                     self._state = data.get("isPayDay", False)
         except aiohttp.ClientError as err:
-            _LOGGER.error(f"IsItPayday: API-kald fejlede - {err}")
+            _LOGGER.error(f"IsItPayday: API request failed - {err}")
             self._state = False

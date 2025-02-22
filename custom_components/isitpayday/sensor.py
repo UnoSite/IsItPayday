@@ -14,7 +14,7 @@ _LOGGER = logging.getLogger(__name__)
 API_URL_TEMPLATE = "https://api.isitpayday.com/monthly?payday={days}&country={country}&timezone={tz}"
 
 class BaseIsItPaydaySensor(SensorEntity):
-    """Base class for all sensors, ensuring they share device info."""
+    """Baseklasse for alle sensorer, så de deler device_info."""
 
     def __init__(self, entry_id, unique_id, entity_id):
         self._entry_id = entry_id
@@ -23,7 +23,7 @@ class BaseIsItPaydaySensor(SensorEntity):
 
     @property
     def device_info(self) -> DeviceInfo:
-        """Ensure all entities belong to the same device."""
+        """Gør alle enheder til en del af samme device."""
         return DeviceInfo(
             identifiers={(DOMAIN, self._entry_id)},
             name="Is It Payday?",
@@ -34,7 +34,7 @@ class BaseIsItPaydaySensor(SensorEntity):
         )
 
 class CountrySensor(BaseIsItPaydaySensor):
-    """Sensor to display the selected country."""
+    """Sensor til at vise hvilket land der er valgt."""
 
     def __init__(self, entry_id, country_name):
         super().__init__(entry_id, "payday_country", "sensor.payday_country")
@@ -57,7 +57,7 @@ class CountrySensor(BaseIsItPaydaySensor):
         return "mdi:flag"
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry, async_add_entities):
-    """Set up sensors based on configuration."""
+    """Opsæt sensorer baseret på konfiguration."""
     country_name = entry.data.get(CONF_COUNTRY, "Unknown")
     country_id = entry.data.get(CONF_COUNTRY_ID, "DK")
     timezone = hass.config.time_zone
@@ -73,7 +73,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry, async_add_e
     await next_payday_sensor.async_update()
 
 class NextPaydaySensor(BaseIsItPaydaySensor):
-    """Represents the Next Payday sensor."""
+    """Repræsenterer en Next Payday-sensor."""
 
     def __init__(self, entry_id, country_id, timezone, hass):
         super().__init__(entry_id, "payday_next", "sensor.payday_next")
@@ -88,7 +88,7 @@ class NextPaydaySensor(BaseIsItPaydaySensor):
 
     @property
     def state(self):
-        """Return the next payday as a date from the API."""
+        """Returnerer næste payday som dato fra API'et."""
         return self._state
 
     @property
@@ -96,17 +96,17 @@ class NextPaydaySensor(BaseIsItPaydaySensor):
         return "mdi:cash-clock"
 
     async def async_update(self):
-        """Fetch data from the API on each polling cycle."""
+        """Henter data fra API ved hver polling."""
         days_in_month = calendar.monthrange(datetime.now().year, datetime.now().month)[1]
         url = API_URL_TEMPLATE.format(days=days_in_month, country=self._country_id, tz=self._timezone)
 
-        _LOGGER.debug(f"NextPayday: Fetching data from {url}")
+        _LOGGER.debug(f"NextPayday: Henter data fra {url}")
 
         try:
             async with aiohttp.ClientSession() as session:
                 async with session.get(url, timeout=10) as response:
                     if response.status != 200:
-                        _LOGGER.error(f"NextPayday: API error {response.status}")
+                        _LOGGER.error(f"NextPayday: API-fejl {response.status}")
                         return
 
                     data = await response.json()
@@ -114,17 +114,17 @@ class NextPaydaySensor(BaseIsItPaydaySensor):
 
                     next_payday_str = data.get("nextPayDay", None)
                     if next_payday_str:
-                        self._state = next_payday_str.split("T")[0]  # Remove time portion
-                        _LOGGER.info(f"NextPayday: Updated to {self._state}")
+                        self._state = next_payday_str.split("T")[0]  # Fjerner klokkeslæt
+                        _LOGGER.info(f"NextPayday: Opdateret til {self._state}")
                     else:
                         self._state = "Unknown"
-                        _LOGGER.warning("NextPayday: API returned no nextPayDay")
+                        _LOGGER.warning("NextPayday: API returnerede ingen nextPayDay")
         except aiohttp.ClientError as err:
-            _LOGGER.error(f"NextPayday: API request failed - {err}")
+            _LOGGER.error(f"NextPayday: API-kald fejlede - {err}")
             self._state = "Unknown"
 
 class TimezoneSensor(BaseIsItPaydaySensor):
-    """Sensor to display the timezone being used."""
+    """Sensor til at vise hvilken tidszone der bliver brugt."""
 
     def __init__(self, entry_id, timezone):
         super().__init__(entry_id, "payday_timezone", "sensor.payday_timezone")

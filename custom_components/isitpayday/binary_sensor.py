@@ -20,7 +20,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry, async_add_e
     async_add_entities([IsItPaydayBinarySensor(entry.entry_id, country_id, timezone)], True)
 
 class IsItPaydayBinarySensor(BinarySensorEntity):
-    """Repræsenterer en Is It Payday-sensor."""
+    """Repræsenterer en Is It Payday?-sensor."""
 
     def __init__(self, entry_id, country_id, timezone):
         self._entry_id = entry_id
@@ -56,7 +56,7 @@ class IsItPaydayBinarySensor(BinarySensorEntity):
         """Gør alle enheder til en del af samme device."""
         return DeviceInfo(
             identifiers={(DOMAIN, self._entry_id)},
-            name="Is It Payday",
+            name="Is It Payday?",
             manufacturer="IsItPayday API",
             model="Payday Checker",
             sw_version=VERSION,

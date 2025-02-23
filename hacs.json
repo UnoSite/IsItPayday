@@ -1,5 +1,5 @@
 {
     "name": "Is It Payday",
-    "homeassistant": "2025.1.0",
+    "homeassistant": "2025.1.0b0",
     "country": ["DK", "NO", "SE","US"]
 }

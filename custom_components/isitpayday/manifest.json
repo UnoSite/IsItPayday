@@ -9,5 +9,5 @@
   "issue_tracker": "https://github.com/UnoSite/IsItPayday/issues",
   "requirements": ["aiohttp"],
   "single_config_entry": true,
-  "version": "0.7.3"
+  "version": "0.7.4"
 }

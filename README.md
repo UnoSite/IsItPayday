@@ -3,6 +3,8 @@
 ![HA Integration](https://img.shields.io/badge/Home%20Assistant-Custom%20Integration-blue)
 ![License](https://img.shields.io/github/license/UnoSite/IsItPayday)
 
+![LOGO](https://github.com/UnoSite/IsItPayday/blob/main/logo.png)
+
 ## **Overview**
 The **Is It Payday?** integration allows Home Assistant users to check whether today is a payday based on their country. It retrieves payday information from the **IsItPayday API** and provides relevant sensors to monitor the next payday, country, and timezone.
 

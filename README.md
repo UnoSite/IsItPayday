@@ -17,15 +17,12 @@ The **Is It Payday?** integration allows Home Assistant users to check whether t
 ---
 
 ## **Installation**
-### **1. Manual Installation**
-1. Download the latest version from the [GitHub releases](https://github.com/UnoSite/IsItPayday/releases).
-2. Copy the `isitpayday` folder into your Home Assistant `custom_components` directory.
-3. Restart Home Assistant.
-
-### **2. HACS Installation (Recommended)**
+### **HACS Installation**
 1. Add this repository as a **custom repository** in [HACS](https://hacs.xyz/).
 2. Search for **Is It Payday?** in HACS and install the integration.
 3. Restart Home Assistant.
+
+[![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=UnoSite&repository=IsItPayday&category=Integration)
 
 ---
 

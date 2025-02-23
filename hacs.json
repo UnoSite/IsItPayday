@@ -2,5 +2,4 @@
     "name": "Is It Payday",
     "homeassistant": "2025.1.0",
     "country": ["DK", "NO", "SE","US"]
-    "zip_release": true
 }

@@ -1,7 +1,8 @@
 # Is It Payday? - Home Assistant Integration
 
-![HA Integration](https://img.shields.io/badge/Home%20Assistant-Custom%20Integration-blue)
-![License](https://img.shields.io/github/license/UnoSite/IsItPayday)
+![HA Integration](https://img.shields.io/badge/Home%20Assistant-Custom%20Integration-blue?style=for-the-badge)
+![License](https://img.shields.io/github/license/UnoSite/IsItPayday?style=for-the-badge)
+![GitHub last commit](https://img.shields.io/github/last-commit/UnoSite/IsItPayday?style=for-the-badge)
 
 ![LOGO](https://github.com/UnoSite/IsItPayday/blob/main/logo.png)
 

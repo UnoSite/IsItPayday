@@ -1,6 +1,5 @@
 # Is It Payday? - Home Assistant Integration
 
-![Is It Payday?](https://img.shields.io/github/v/release/UnoSite/IsItPayday?label=version)
 ![HA Integration](https://img.shields.io/badge/Home%20Assistant-Custom%20Integration-blue)
 ![License](https://img.shields.io/github/license/UnoSite/IsItPayday)
 

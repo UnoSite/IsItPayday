@@ -2,6 +2,5 @@
     "name": "Is It Payday",
     "homeassistant": "2025.1.0",
     "country": ["DK", "NO", "SE","US"]
-    "render_readme": true,
     "zip_release": true
 }

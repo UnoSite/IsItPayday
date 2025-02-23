@@ -7,7 +7,7 @@ from homeassistant.helpers.device_registry import DeviceInfo
 from homeassistant.helpers.entity import EntityCategory
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
-from .const import DOMAIN, CONF_COUNTRY, CONF_COUNTRY_ID, VERSION
+from .const import DOMAIN, CONF_COUNTRY, CONF_COUNTRY_ID, CONF_PAYDAY_TYPE, CONF_CUSTOM_DAY, VERSION
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -60,9 +60,11 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry, async_add_e
     """Set up sensors based on configuration."""
     country_name = entry.data.get(CONF_COUNTRY, "Unknown")
     country_id = entry.data.get(CONF_COUNTRY_ID, "DK")
+    payday_type = entry.data.get(CONF_PAYDAY_TYPE, "last_day")
+    custom_day = entry.data.get(CONF_CUSTOM_DAY, None)
     timezone = hass.config.time_zone
 
-    next_payday_sensor = NextPaydaySensor(entry.entry_id, country_id, timezone, hass)
+    next_payday_sensor = NextPaydaySensor(entry.entry_id, country_id, payday_type, custom_day, timezone, hass)
 
     async_add_entities([
         next_payday_sensor,
@@ -75,10 +77,12 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry, async_add_e
 class NextPaydaySensor(BaseIsItPaydaySensor):
     """Represents a Next Payday sensor."""
 
-    def __init__(self, entry_id, country_id, timezone, hass):
+    def __init__(self, entry_id, country_id, payday_type, custom_day, timezone, hass):
         super().__init__(entry_id, "payday_next", "sensor.payday_next")
         self._state = "Unknown"
         self._country_id = country_id
+        self._payday_type = payday_type
+        self._custom_day = custom_day
         self._timezone = timezone
         self._hass = hass
 
@@ -97,7 +101,16 @@ class NextPaydaySensor(BaseIsItPaydaySensor):
 
     async def async_update(self):
         """Fetch data from the API on each polling cycle."""
-        days_in_month = calendar.monthrange(datetime.now().year, datetime.now().month)[1]
+        today = datetime.now()
+        if self._payday_type == "last_day":
+            days_in_month = calendar.monthrange(today.year, today.month)[1]
+        elif self._payday_type == "first_day":
+            days_in_month = 1
+        elif self._payday_type == "custom_day" and self._custom_day:
+            days_in_month = min(self._custom_day, calendar.monthrange(today.year, today.month)[1])
+        else:
+            days_in_month = calendar.monthrange(today.year, today.month)[1]  # Default to last day
+
         url = API_URL_TEMPLATE.format(days=days_in_month, country=self._country_id, tz=self._timezone)
 
         _LOGGER.debug(f"NextPayday: Fetching data from {url}")

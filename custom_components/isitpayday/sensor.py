@@ -30,7 +30,7 @@ class BaseIsItPaydaySensor(SensorEntity):
 
     @property
     def extra_state_attributes(self):
-        """Return API-link as an attribute."""
+        """Return API-link as an attribute for all sensors."""
         return {"API-link": self._api_url} if self._api_url else {}
 
     @property
@@ -48,9 +48,10 @@ class BaseIsItPaydaySensor(SensorEntity):
 class CountrySensor(BaseIsItPaydaySensor):
     """Sensor to display the selected country."""
 
-    def __init__(self, entry_id, country_name):
+    def __init__(self, entry_id, country_name, api_url):
         super().__init__(entry_id, "payday_country", "sensor.payday_country")
         self._state = country_name
+        self._api_url = api_url
 
     @property
     def name(self):
@@ -71,10 +72,11 @@ class CountrySensor(BaseIsItPaydaySensor):
 class PaydayTypeSensor(BaseIsItPaydaySensor):
     """Sensor to display the selected payday type in a user-friendly format."""
 
-    def __init__(self, entry_id, payday_type, custom_day):
+    def __init__(self, entry_id, payday_type, custom_day, api_url):
         super().__init__(entry_id, "payday_type", "sensor.payday_type")
         self._payday_type = payday_type
         self._custom_day = custom_day
+        self._api_url = api_url
 
     @property
     def name(self):
@@ -98,9 +100,10 @@ class PaydayTypeSensor(BaseIsItPaydaySensor):
 class TimezoneSensor(BaseIsItPaydaySensor):
     """Sensor to display the timezone being used."""
 
-    def __init__(self, entry_id, timezone):
+    def __init__(self, entry_id, timezone, api_url):
         super().__init__(entry_id, "payday_timezone", "sensor.payday_timezone")
         self._state = timezone
+        self._api_url = api_url
 
     @property
     def name(self):
@@ -129,6 +132,7 @@ class NextPaydaySensor(BaseIsItPaydaySensor):
         self._custom_day = custom_day
         self._timezone = timezone
         self._hass = hass
+        self._api_url = None
 
     @property
     def name(self):
@@ -189,13 +193,21 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry, async_add_e
     custom_day = entry.data.get(CONF_CUSTOM_DAY, None)
     timezone = hass.config.time_zone
 
+    # Generate API URL
+    today = datetime.now()
+    payday_day = (
+        custom_day if payday_type == "custom_day" else
+        (1 if payday_type == "first_day" else calendar.monthrange(today.year, today.month)[1])
+    )
+    api_url = API_URL_TEMPLATE.format(day=payday_day, country=country_id, tz=timezone)
+
     next_payday_sensor = NextPaydaySensor(entry.entry_id, country_id, payday_type, custom_day, timezone, hass)
 
     async_add_entities([
         next_payday_sensor,
-        CountrySensor(entry.entry_id, country_name),
-        TimezoneSensor(entry.entry_id, timezone),
-        PaydayTypeSensor(entry.entry_id, payday_type, custom_day)
+        CountrySensor(entry.entry_id, country_name, api_url),
+        TimezoneSensor(entry.entry_id, timezone, api_url),
+        PaydayTypeSensor(entry.entry_id, payday_type, custom_day, api_url)
     ], True)
 
     await next_payday_sensor.async_update()

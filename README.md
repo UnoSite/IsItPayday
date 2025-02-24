@@ -16,6 +16,8 @@
 ## **Overview**
 The **Is It Payday?** integration allows Home Assistant users to check whether today is a payday based on their country and payday preference. It retrieves payday information from the **IsItPayday API** and provides relevant sensors to monitor the next payday, country, timezone, and payday type.
 
+---
+
 ## **Features**
 - ✅ **Binary Sensor:** `binary_sensor.payday` - Indicates whether today is a payday (`on` or `off`).
 - ✅ **Sensor:** `sensor.payday_next` - Displays the date of the next payday.
@@ -72,6 +74,30 @@ Each sensor now includes an attribute called `API-link`, which displays the exac
 
 ---
 
+## **Example Card for Dashboard (Lovelace)**
+You can add a **Payday Info Card** to your existing Home Assistant dashboard by using the following Lovelace YAML configuration:
+
+```yaml
+type: vertical-stack
+cards:
+  - type: entities
+    title: Payday Info
+    show_header_toggle: false
+    entities:
+      - entity: binary_sensor.payday
+        name: "Is It Payday?"
+      - entity: sensor.payday_next
+        name: "Next Payday"
+  - type: markdown
+    content: |
+      **API Request Used:**
+      ```
+      {{ state_attr('sensor.payday_next', 'API-link') }}
+      ```
+```
+
+---
+
 ## **Example Automation**
 You can create an automation to send a notification on payday:
 
@@ -86,3 +112,10 @@ action:
     data:
       title: "It's Payday!"
       message: "Today is payday! 🎉"
+```
+
+---
+
+## **Support & Issues**
+If you encounter any issues or have feature requests, please create an issue on GitHub:  
+👉 **[Issue Tracker](https://github.com/UnoSite/IsItPayday/issues)**

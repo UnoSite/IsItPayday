@@ -13,7 +13,7 @@ PAYDAY_OPTIONS = {
     "custom_day": "Custom day of the month"
 }
 
-DAYS_OPTIONS = {str(i): f"Day {i}" for i in range(1, 32)}  # Dropdown labels "Day 1" to "Day 31"
+DAYS_OPTIONS = {str(i): f"Day {i}" for i in range(1, 32)}
 
 class IsItPaydayConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     """Config flow for IsItPayday integration."""
@@ -43,8 +43,7 @@ class IsItPaydayConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         return self.async_show_form(
             step_id="user",
             data_schema=data_schema,
-            errors=errors,
-            description_placeholders={"country_label": "🌍 Select your country"}
+            errors=errors
         )
 
     async def async_step_payday_type(self, user_input=None):
@@ -63,7 +62,7 @@ class IsItPaydayConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                     CONF_COUNTRY: self.selected_country_name,
                     CONF_COUNTRY_ID: self.selected_country_id,
                     CONF_PAYDAY_TYPE: self.payday_type,
-                    CONF_CUSTOM_DAY: None  # No custom day selected
+                    CONF_CUSTOM_DAY: None
                 }
             )
 
@@ -74,8 +73,7 @@ class IsItPaydayConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         return self.async_show_form(
             step_id="payday_type",
             data_schema=data_schema,
-            errors=errors,
-            description_placeholders={"payday_label": "📆 Select your preferred payday type"}
+            errors=errors
         )
 
     async def async_step_custom_day(self, user_input=None):
@@ -102,8 +100,7 @@ class IsItPaydayConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         return self.async_show_form(
             step_id="custom_day",
             data_schema=data_schema,
-            errors=errors,
-            description_placeholders={"custom_day_label": "🔢 Select the exact payday (1-31)"}
+            errors=errors
         )
 
     async def _fetch_supported_countries(self):

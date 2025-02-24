@@ -2,7 +2,6 @@ import voluptuous as vol
 import aiohttp
 import logging
 from homeassistant import config_entries
-from homeassistant.const import CONF_NAME
 from .const import DOMAIN, CONF_COUNTRY, CONF_COUNTRY_ID, CONF_PAYDAY_TYPE, CONF_CUSTOM_DAY
 
 _LOGGER = logging.getLogger(__name__)
@@ -22,14 +21,10 @@ class IsItPaydayConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     VERSION = 1
 
     async def async_step_user(self, user_input=None):
-        """Prevent multiple installations."""
+        """Step 1: Select country."""
         if self._async_current_entries():
             return self.async_abort(reason="Only one installation is allowed.")
 
-        return await self._show_country_form(user_input)
-
-    async def _show_country_form(self, user_input):
-        """Step 1: Select country."""
         errors = {}
 
         country_options = await self._fetch_supported_countries()
@@ -80,7 +75,7 @@ class IsItPaydayConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             step_id="payday_type",
             data_schema=data_schema,
             errors=errors,
-            description_placeholders={"payday_label": "📆 Select your preferred payday"}
+            description_placeholders={"payday_label": "📆 Select your preferred payday type"}
         )
 
     async def async_step_custom_day(self, user_input=None):

@@ -62,6 +62,29 @@ class CountrySensor(BaseIsItPaydaySensor):
     def icon(self):
         return "mdi:flag"
 
+class PaydayTypeSensor(BaseIsItPaydaySensor):
+    """Sensor to display the selected payday type."""
+
+    def __init__(self, entry_id, payday_type):
+        super().__init__(entry_id, "payday_type", "sensor.payday_type")
+        self._state = payday_type
+
+    @property
+    def name(self):
+        return "Payday Type"
+
+    @property
+    def state(self):
+        return self._state
+
+    @property
+    def entity_category(self):
+        return EntityCategory.DIAGNOSTIC
+
+    @property
+    def icon(self):
+        return "mdi:calendar"
+
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry, async_add_entities):
     """Set up sensors based on configuration."""
     country_name = entry.data.get(CONF_COUNTRY, "Unknown")
@@ -75,7 +98,8 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry, async_add_e
     async_add_entities([
         next_payday_sensor,
         CountrySensor(entry.entry_id, country_name),
-        TimezoneSensor(entry.entry_id, timezone)
+        TimezoneSensor(entry.entry_id, timezone),
+        PaydayTypeSensor(entry.entry_id, payday_type)  # Ny sensor
     ], True)
 
     await next_payday_sensor.async_update()

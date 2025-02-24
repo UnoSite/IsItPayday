@@ -13,6 +13,8 @@ PAYDAY_OPTIONS = {
     "custom_day": "Custom day of the month"
 }
 
+DAYS_OPTIONS = {str(i): str(i) for i in range(1, 32)}  # Dropdown med værdier fra 1 til 31
+
 class IsItPaydayConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     """Config flow for IsItPayday integration."""
 
@@ -75,29 +77,26 @@ class IsItPaydayConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         )
 
     async def async_step_custom_day(self, user_input=None):
-        """Step 3: Select a custom day of the month."""
+        """Step 3: Select a custom day of the month from a dropdown."""
         errors = {}
 
         if user_input is not None:
-            custom_day = user_input[CONF_CUSTOM_DAY]
+            custom_day = int(user_input[CONF_CUSTOM_DAY])
 
-            if not (1 <= custom_day <= 31):
-                errors["base"] = "Invalid day. Choose between 1 and 31."
-            else:
-                return self.async_create_entry(
-                    title="Is It Payday?",
-                    data={
-                        CONF_COUNTRY: self.selected_country_name,
-                        CONF_COUNTRY_ID: self.selected_country_id,
-                        CONF_PAYDAY_TYPE: self.payday_type,
-                        CONF_CUSTOM_DAY: custom_day
-                    }
-                )
+            return self.async_create_entry(
+                title="Is It Payday?",
+                data={
+                    CONF_COUNTRY: self.selected_country_name,
+                    CONF_COUNTRY_ID: self.selected_country_id,
+                    CONF_PAYDAY_TYPE: self.payday_type,
+                    CONF_CUSTOM_DAY: custom_day
+                }
+            )
 
         return self.async_show_form(
             step_id="custom_day",
             data_schema=vol.Schema({
-                vol.Required(CONF_CUSTOM_DAY, default=15): vol.All(vol.Coerce(int), vol.Range(min=1, max=31))
+                vol.Required(CONF_CUSTOM_DAY, default="15"): vol.In(DAYS_OPTIONS)
             }),
             errors=errors,
         )

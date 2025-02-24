@@ -11,7 +11,7 @@ from .const import DOMAIN, CONF_COUNTRY, CONF_COUNTRY_ID, CONF_PAYDAY_TYPE, CONF
 
 _LOGGER = logging.getLogger(__name__)
 
-API_URL_TEMPLATE = "https://api.isitpayday.com/monthly?payday={days}&country={country}&timezone={tz}"
+API_URL_TEMPLATE = "https://api.isitpayday.com/monthly?payday={day}&country={country}&timezone={tz}"
 
 class BaseIsItPaydaySensor(SensorEntity):
     """Base class for all sensors, ensuring they share device_info."""
@@ -102,16 +102,17 @@ class NextPaydaySensor(BaseIsItPaydaySensor):
     async def async_update(self):
         """Fetch data from the API on each polling cycle."""
         today = datetime.now()
-        if self._payday_type == "last_day":
-            days_in_month = calendar.monthrange(today.year, today.month)[1]
-        elif self._payday_type == "first_day":
-            days_in_month = 1
-        elif self._payday_type == "custom_day" and self._custom_day:
-            days_in_month = min(self._custom_day, calendar.monthrange(today.year, today.month)[1])
-        else:
-            days_in_month = calendar.monthrange(today.year, today.month)[1]  # Default to last day
 
-        url = API_URL_TEMPLATE.format(days=days_in_month, country=self._country_id, tz=self._timezone)
+        if self._payday_type == "last_day":
+            payday_day = calendar.monthrange(today.year, today.month)[1]
+        elif self._payday_type == "first_day":
+            payday_day = 1
+        elif self._payday_type == "custom_day" and self._custom_day:
+            payday_day = min(self._custom_day, calendar.monthrange(today.year, today.month)[1])
+        else:
+            payday_day = calendar.monthrange(today.year, today.month)[1]  # Default to last day
+
+        url = API_URL_TEMPLATE.format(day=payday_day, country=self._country_id, tz=self._timezone)
 
         _LOGGER.debug(f"NextPayday: Fetching data from {url}")
 

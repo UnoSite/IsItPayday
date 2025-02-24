@@ -1,11 +1,11 @@
 # Is It Payday? - Home Assistant Integration
 
-![Is It Payday?](https://img.shields.io/github/v/release/UnoSite/IsItPayday?label=version&style=for-the-badge)
-![HA Integration](https://img.shields.io/badge/Home%20Assistant-Custom%20Integration-blue?style=for-the-badge)
-![License](https://img.shields.io/github/license/UnoSite/IsItPayday?style=for-the-badge)
-![GitHub last commit](https://img.shields.io/github/last-commit/UnoSite/IsItPayday?style=for-the-badge)
+[![Is It Payday?](https://img.shields.io/github/v/release/UnoSite/IsItPayday?label=version&style=for-the-badge)](https://github.com/UnoSite/IsItPayday/releases/latest)
+[![HA Integration](https://img.shields.io/badge/Home%20Assistant-Custom%20Integration-blue?style=for-the-badge)](#)
+[![License](https://img.shields.io/github/license/UnoSite/IsItPayday?style=for-the-badge)](https://github.com/UnoSite/IsItPayday/blob/main/LICENSE.md)
+[![GitHub last commit](https://img.shields.io/github/last-commit/UnoSite/IsItPayday?style=for-the-badge)](https://github.com/UnoSite/IsItPayday/commits/main/)
 
-![LOGO](https://github.com/UnoSite/IsItPayday/blob/main/logo.png)
+[![LOGO](https://github.com/UnoSite/IsItPayday/blob/main/logo.png)](https://github.com/UnoSite/IsItPayday)
 
 ## **Overview**
 The **Is It Payday?** integration allows Home Assistant users to check whether today is a payday based on their country and payday preference. It retrieves payday information from the **IsItPayday API** and provides relevant sensors to monitor the next payday, country, and timezone.

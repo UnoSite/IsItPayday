@@ -8,12 +8,12 @@ _LOGGER = logging.getLogger(__name__)
 API_URL = "https://api.isitpayday.com/countries"
 
 PAYDAY_OPTIONS = {
-    "last_day": "📅 Last day of the month",
-    "first_day": "📅 First day of the month",
-    "custom_day": "📅 Custom day of the month"
+    "last_day": "Last day of the month",
+    "first_day": "First day of the month",
+    "custom_day": "Custom day of the month"
 }
 
-DAYS_OPTIONS = {str(i): f"Day {i}" for i in range(1, 32)}  # Dropdown med labels fra "Day 1" til "Day 31"
+DAYS_OPTIONS = {str(i): f"Day {i}" for i in range(1, 32)}  # Dropdown labels "Day 1" to "Day 31"
 
 class IsItPaydayConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     """Config flow for IsItPayday integration."""
@@ -45,7 +45,7 @@ class IsItPaydayConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             data_schema=vol.Schema({
                 vol.Required(CONF_COUNTRY, default="Denmark"): vol.In(country_options.values())
             }),
-            description_placeholders={"label": "🌍 Select your country"},
+            description_placeholders={"label": "Select your country"},
             errors=errors,
         )
 
@@ -74,7 +74,7 @@ class IsItPaydayConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             data_schema=vol.Schema({
                 vol.Required(CONF_PAYDAY_TYPE, default="last_day"): vol.In(PAYDAY_OPTIONS)
             }),
-            description_placeholders={"label": "📆 Choose your payday type"},
+            description_placeholders={"label": "Select your preferred payday"},
             errors=errors,
         )
 
@@ -100,7 +100,7 @@ class IsItPaydayConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             data_schema=vol.Schema({
                 vol.Required(CONF_CUSTOM_DAY, default="15"): vol.In(DAYS_OPTIONS)
             }),
-            description_placeholders={"label": "🔢 Select a specific payday"},
+            description_placeholders={"label": "Select the exact payday (1-31)"},
             errors=errors,
         )
 

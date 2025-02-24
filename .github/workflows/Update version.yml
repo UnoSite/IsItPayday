@@ -1,0 +1,55 @@
+name: Update Manifest on Release
+
+on:
+  release:
+    types: [published, prereleased]
+
+jobs:
+  update-manifest:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Update manifest.json version
+        run: |
+          TAG="${{ github.event.release.tag_name }}"
+          TAG=${TAG#v} # Remove "v" if the release tag starts with it
+          MANIFEST_FILE="custom_components/isitpayday/manifest.json"
+
+          # Get current version from manifest.json
+          CURRENT_VERSION=$(jq -r '.version' "$MANIFEST_FILE")
+
+          # Split versions into major, minor, patch
+          IFS='.' read -r TAG_MAJOR TAG_MINOR TAG_PATCH <<< "$TAG"
+          IFS='.' read -r CUR_MAJOR CUR_MINOR CUR_PATCH <<< "$CURRENT_VERSION"
+
+          # Use release tag as base
+          NEW_MAJOR=$TAG_MAJOR
+          NEW_MINOR=$TAG_MINOR
+          NEW_PATCH=$TAG_PATCH
+
+          if [[ "${{ github.event.release.prerelease }}" == "true" ]]; then
+            # Pre-release -> Increment patch version
+            NEW_PATCH=$((TAG_PATCH + 1))
+          else
+            # Normal release -> Increment minor version and reset patch
+            NEW_MINOR=$((TAG_MINOR + 1))
+            NEW_PATCH=0
+          fi
+
+          NEW_VERSION="$NEW_MAJOR.$NEW_MINOR.$NEW_PATCH"
+
+          # Update version in manifest.json
+          jq --arg version "$NEW_VERSION" '.version = $version' "$MANIFEST_FILE" > tmp.json && mv tmp.json "$MANIFEST_FILE"
+
+      - name: Commit changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add custom_components/isitpayday/manifest.json
+          git commit -m "Updated manifest.json to version $NEW_VERSION"
+          git push

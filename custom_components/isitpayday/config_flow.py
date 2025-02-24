@@ -2,6 +2,7 @@ import voluptuous as vol
 import aiohttp
 import logging
 from homeassistant import config_entries
+from homeassistant.const import CONF_NAME
 from .const import DOMAIN, CONF_COUNTRY, CONF_COUNTRY_ID, CONF_PAYDAY_TYPE, CONF_CUSTOM_DAY
 
 _LOGGER = logging.getLogger(__name__)
@@ -40,13 +41,15 @@ class IsItPaydayConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             self.selected_country_id = {v: k for k, v in country_options.items()}[self.selected_country_name]
             return await self.async_step_payday_type()
 
+        data_schema = vol.Schema({
+            vol.Required(CONF_COUNTRY, default="Denmark"): vol.In(country_options.values())
+        })
+
         return self.async_show_form(
             step_id="user",
-            data_schema=vol.Schema({
-                vol.Required(CONF_COUNTRY, default="Denmark"): vol.In(country_options.values())
-            }),
-            description_placeholders={"label": "Select your country"},
+            data_schema=data_schema,
             errors=errors,
+            description_placeholders={"country_label": "🌍 Select your country"}
         )
 
     async def async_step_payday_type(self, user_input=None):
@@ -69,13 +72,15 @@ class IsItPaydayConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                 }
             )
 
+        data_schema = vol.Schema({
+            vol.Required(CONF_PAYDAY_TYPE, default="last_day"): vol.In(PAYDAY_OPTIONS)
+        })
+
         return self.async_show_form(
             step_id="payday_type",
-            data_schema=vol.Schema({
-                vol.Required(CONF_PAYDAY_TYPE, default="last_day"): vol.In(PAYDAY_OPTIONS)
-            }),
-            description_placeholders={"label": "Select your preferred payday"},
+            data_schema=data_schema,
             errors=errors,
+            description_placeholders={"payday_label": "📆 Select your preferred payday"}
         )
 
     async def async_step_custom_day(self, user_input=None):
@@ -95,13 +100,15 @@ class IsItPaydayConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                 }
             )
 
+        data_schema = vol.Schema({
+            vol.Required(CONF_CUSTOM_DAY, default="15"): vol.In(DAYS_OPTIONS)
+        })
+
         return self.async_show_form(
             step_id="custom_day",
-            data_schema=vol.Schema({
-                vol.Required(CONF_CUSTOM_DAY, default="15"): vol.In(DAYS_OPTIONS)
-            }),
-            description_placeholders={"label": "Select the exact payday (1-31)"},
+            data_schema=data_schema,
             errors=errors,
+            description_placeholders={"custom_day_label": "🔢 Select the exact payday (1-31)"}
         )
 
     async def _fetch_supported_countries(self):

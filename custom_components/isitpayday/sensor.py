@@ -13,6 +13,12 @@ _LOGGER = logging.getLogger(__name__)
 
 API_URL_TEMPLATE = "https://api.isitpayday.com/monthly?payday={day}&country={country}&timezone={tz}"
 
+PAYDAY_TYPE_MAPPING = {
+    "last_day": "Last day of the month",
+    "first_day": "First day of the month",
+    "custom_day": "Custom day of the month"
+}
+
 class BaseIsItPaydaySensor(SensorEntity):
     """Base class for all sensors, ensuring they share device_info and API attribute."""
 
@@ -63,15 +69,42 @@ class CountrySensor(BaseIsItPaydaySensor):
         return "mdi:flag"
 
 class PaydayTypeSensor(BaseIsItPaydaySensor):
-    """Sensor to display the selected payday type."""
+    """Sensor to display the selected payday type in a user-friendly format."""
 
-    def __init__(self, entry_id, payday_type):
+    def __init__(self, entry_id, payday_type, custom_day):
         super().__init__(entry_id, "payday_type", "sensor.payday_type")
-        self._state = payday_type
+        self._payday_type = payday_type
+        self._custom_day = custom_day
 
     @property
     def name(self):
         return "Payday Type"
+
+    @property
+    def state(self):
+        """Return a human-readable payday type."""
+        if self._payday_type == "custom_day" and self._custom_day:
+            return f"Custom day: {self._custom_day}"
+        return PAYDAY_TYPE_MAPPING.get(self._payday_type, "Unknown")
+
+    @property
+    def entity_category(self):
+        return EntityCategory.DIAGNOSTIC
+
+    @property
+    def icon(self):
+        return "mdi:calendar"
+
+class TimezoneSensor(BaseIsItPaydaySensor):
+    """Sensor to display the timezone being used."""
+
+    def __init__(self, entry_id, timezone):
+        super().__init__(entry_id, "payday_timezone", "sensor.payday_timezone")
+        self._state = timezone
+
+    @property
+    def name(self):
+        return "Timezone"
 
     @property
     def state(self):
@@ -83,26 +116,7 @@ class PaydayTypeSensor(BaseIsItPaydaySensor):
 
     @property
     def icon(self):
-        return "mdi:calendar"
-
-async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry, async_add_entities):
-    """Set up sensors based on configuration."""
-    country_name = entry.data.get(CONF_COUNTRY, "Unknown")
-    country_id = entry.data.get(CONF_COUNTRY_ID, "DK")
-    payday_type = entry.data.get(CONF_PAYDAY_TYPE, "last_day")
-    custom_day = entry.data.get(CONF_CUSTOM_DAY, None)
-    timezone = hass.config.time_zone
-
-    next_payday_sensor = NextPaydaySensor(entry.entry_id, country_id, payday_type, custom_day, timezone, hass)
-
-    async_add_entities([
-        next_payday_sensor,
-        CountrySensor(entry.entry_id, country_name),
-        TimezoneSensor(entry.entry_id, timezone),
-        PaydayTypeSensor(entry.entry_id, payday_type)  # Ny sensor
-    ], True)
-
-    await next_payday_sensor.async_update()
+        return "mdi:earth"
 
 class NextPaydaySensor(BaseIsItPaydaySensor):
     """Represents a Next Payday sensor."""
@@ -167,25 +181,21 @@ class NextPaydaySensor(BaseIsItPaydaySensor):
             _LOGGER.error(f"NextPayday: API request failed - {err}")
             self._state = "Unknown"
 
-class TimezoneSensor(BaseIsItPaydaySensor):
-    """Sensor to display the timezone being used."""
+async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry, async_add_entities):
+    """Set up sensors based on configuration."""
+    country_name = entry.data.get(CONF_COUNTRY, "Unknown")
+    country_id = entry.data.get(CONF_COUNTRY_ID, "DK")
+    payday_type = entry.data.get(CONF_PAYDAY_TYPE, "last_day")
+    custom_day = entry.data.get(CONF_CUSTOM_DAY, None)
+    timezone = hass.config.time_zone
 
-    def __init__(self, entry_id, timezone):
-        super().__init__(entry_id, "payday_timezone", "sensor.payday_timezone")
-        self._state = timezone
+    next_payday_sensor = NextPaydaySensor(entry.entry_id, country_id, payday_type, custom_day, timezone, hass)
 
-    @property
-    def name(self):
-        return "Timezone"
+    async_add_entities([
+        next_payday_sensor,
+        CountrySensor(entry.entry_id, country_name),
+        TimezoneSensor(entry.entry_id, timezone),
+        PaydayTypeSensor(entry.entry_id, payday_type, custom_day)
+    ], True)
 
-    @property
-    def state(self):
-        return self._state
-
-    @property
-    def entity_category(self):
-        return EntityCategory.DIAGNOSTIC
-
-    @property
-    def icon(self):
-        return "mdi:earth"
+    await next_payday_sensor.async_update()

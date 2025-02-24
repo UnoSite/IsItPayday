@@ -21,13 +21,13 @@ The **Is It Payday?** integration allows Home Assistant users to check whether t
 - ✅ **Sensor:** `sensor.payday_next` - Displays the date of the next payday.
 - ✅ **Sensor:** `sensor.payday_country` - Shows the selected country for payday calculations.
 - ✅ **Sensor:** `sensor.payday_timezone` - Displays the timezone used for payday calculations.
-- ✅ **Sensor:** `sensor.payday_type` - Shows the selected payday type (`last_day`, `first_day`, or `custom_day`).
+- ✅ **Sensor:** `sensor.payday_type` - Shows the selected payday type (`Last day`, `First day`, or `Custom day: X`).
 - ✅ **Custom Payday Selection:** Choose between:
   - 📅 **Last day of the month** → Uses the last day in API calculations.
   - 📅 **First day of the month** → Uses the first day in API calculations.
   - 📅 **Custom day of the month** → Select a specific day (dropdown menu: Day 1 - Day 31).
 - ✅ **Automatic Updates:** The integration fetches new data periodically to ensure accuracy.
-- ✅ **Simple Setup:** Uses Home Assistant’s **Config Flow** for easy installation.
+- ✅ **All Sensors Include API URL Attribute:** Every sensor includes the `API-link` attribute showing the exact API request used.
 
 ---
 
@@ -67,12 +67,8 @@ The **Is It Payday?** integration allows Home Assistant users to check whether t
 | `sensor.payday_timezone`| Timezone         | Displays the timezone in use.        |
 | `sensor.payday_type`    | Payday Type      | Displays the selected payday type.   |
 
-### **3. API Usage**
-The integration uses the following API endpoints:
-- **Supported Countries:** `https://api.isitpayday.com/countries`
-- **Payday Data:** `https://api.isitpayday.com/monthly?payday={day}&country={country_id}&timezone={tz}`
-
-The API link is also available as an **attribute** in `binary_sensor.payday` and all sensors.
+#### **API URL Attribute**
+Each sensor now includes an attribute called `API-link`, which displays the exact API request used to fetch payday data.
 
 ---
 

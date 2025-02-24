@@ -16,9 +16,9 @@ The **Is It Payday?** integration allows Home Assistant users to check whether t
 - ✅ **Sensor:** `sensor.payday_country` - Shows the selected country for payday calculations.
 - ✅ **Sensor:** `sensor.payday_timezone` - Displays the timezone used for payday calculations.
 - ✅ **Custom Payday Selection:** Choose between:
-  - **Last day of the month**
-  - **First day of the month**
-  - **A custom day (1-31)**
+  - **Last day of the month** → Uses the last day of each month in API calculations.
+  - **First day of the month** → Uses the first day of each month in API calculations.
+  - **A custom day (1-31)** → Uses the exact selected day of the month.
 - ✅ **Automatic Updates:** The integration fetches new data periodically to ensure accuracy.
 - ✅ **Simple Setup:** Uses Home Assistant’s **Config Flow** for easy installation.
 
@@ -45,9 +45,9 @@ The **Is It Payday?** integration allows Home Assistant users to check whether t
 2. Click **Add Integration** and search for **Is It Payday?**.
 3. **Step 1:** Select your country from the dropdown list.
 4. **Step 2:** Choose your payday type:
-   - **Last day of the month**
-   - **First day of the month**
-   - **Custom day of the month**
+   - **Last day of the month** → Uses the last day in API calculations.
+   - **First day of the month** → Uses the first day in API calculations.
+   - **Custom day of the month** → Allows you to specify an exact day.
 5. **Step 3 (If Custom Day is selected):** Enter a number between **1-31**.
 6. Click **Submit** to complete the setup.
 
@@ -62,7 +62,7 @@ The **Is It Payday?** integration allows Home Assistant users to check whether t
 ### **3. API Usage**
 The integration uses the following API endpoints:
 - **Supported Countries:** `https://api.isitpayday.com/countries`
-- **Payday Data:** `https://api.isitpayday.com/monthly?payday={days}&country={country_id}&timezone={tz}`
+- **Payday Data:** `https://api.isitpayday.com/monthly?payday={day}&country={country_id}&timezone={tz}`
 
 The API link is also available as an **attribute** in `binary_sensor.payday`.
 

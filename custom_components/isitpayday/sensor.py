@@ -14,12 +14,18 @@ _LOGGER = logging.getLogger(__name__)
 API_URL_TEMPLATE = "https://api.isitpayday.com/monthly?payday={day}&country={country}&timezone={tz}"
 
 class BaseIsItPaydaySensor(SensorEntity):
-    """Base class for all sensors, ensuring they share device_info."""
+    """Base class for all sensors, ensuring they share device_info and API attribute."""
 
     def __init__(self, entry_id, unique_id, entity_id):
         self._entry_id = entry_id
         self._attr_unique_id = unique_id
         self.entity_id = entity_id
+        self._api_url = None  # API-link attribute
+
+    @property
+    def extra_state_attributes(self):
+        """Return API-link as an attribute."""
+        return {"API-link": self._api_url} if self._api_url else {}
 
     @property
     def device_info(self) -> DeviceInfo:
@@ -112,13 +118,13 @@ class NextPaydaySensor(BaseIsItPaydaySensor):
         else:
             payday_day = calendar.monthrange(today.year, today.month)[1]  # Default to last day
 
-        url = API_URL_TEMPLATE.format(day=payday_day, country=self._country_id, tz=self._timezone)
+        self._api_url = API_URL_TEMPLATE.format(day=payday_day, country=self._country_id, tz=self._timezone)
 
-        _LOGGER.debug(f"NextPayday: Fetching data from {url}")
+        _LOGGER.debug(f"NextPayday: Fetching data from {self._api_url}")
 
         try:
             async with aiohttp.ClientSession() as session:
-                async with session.get(url, timeout=10) as response:
+                async with session.get(self._api_url, timeout=10) as response:
                     if response.status != 200:
                         _LOGGER.error(f"NextPayday: API error {response.status}")
                         return

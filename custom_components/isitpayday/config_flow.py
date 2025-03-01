@@ -6,16 +6,20 @@ import voluptuous as vol
 from homeassistant import config_entries
 from homeassistant.core import HomeAssistant
 from homeassistant.data_entry_flow import FlowResult
-from homeassistant.helpers.selector import (
-    SelectSelector,
-    SelectSelectorConfig,
-    SelectSelectorMode,
-    DateSelector,
-)
+from homeassistant.helpers.selector import SelectSelector, SelectSelectorConfig, SelectSelectorMode, DateSelector
 
 from .const import *
 
 _LOGGER = logging.getLogger(__name__)
+
+WEEKDAY_MAP = {
+    "Monday": 0,
+    "Tuesday": 1,
+    "Wednesday": 2,
+    "Thursday": 3,
+    "Friday": 4
+}
+
 
 async def async_get_homeassistant_country(hass: HomeAssistant) -> str | None:
     _LOGGER.debug("Henter Home Assistant country fra konfiguration.")
@@ -31,18 +35,14 @@ async def async_get_homeassistant_country(hass: HomeAssistant) -> str | None:
         _LOGGER.warning("Landet '%s' er ikke blandt de understøttede lande.", country)
         return None
 
-    _LOGGER.info("Home Assistant country '%s' er understøttet.", country)
     return country
 
 
 async def async_fetch_supported_countries() -> dict[str, str]:
-    _LOGGER.info("Henter liste over understøttede lande fra Nager.Date API.")
     async with aiohttp.ClientSession() as session:
         async with session.get(API_COUNTRIES) as response:
             data = await response.json()
-            countries = {country["countryCode"]: country["name"] for country in data}
-            _LOGGER.info("Hentede %d understøttede lande.", len(countries))
-            return countries
+            return {country["countryCode"]: country["name"] for country in data}
 
 
 class IsItPayday2ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
@@ -52,97 +52,75 @@ class IsItPayday2ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         self.country = None
         self.pay_frequency = None
         self.pay_day = None
-        self.weekday = None
         self.last_pay_date = None
         self.bank_offset = 0
+        self.weekday = None
         self.country_list = {}
 
-    async def async_step_user(self, user_input: dict | None = None) -> FlowResult:
+    async def async_step_user(self, user_input=None):
         if user_input is None:
             self.country_list = await async_fetch_supported_countries()
             current_country = await async_get_homeassistant_country(self.hass) or "DK"
-            return self.async_show_form(
-                step_id="user",
-                data_schema=self._create_country_schema(current_country),
-            )
+            return self.async_show_form(step_id="user", data_schema=self._create_country_schema(current_country))
 
         self.country = user_input[CONF_COUNTRY]
         return await self.async_step_frequency()
 
-    async def async_step_frequency(self, user_input: dict | None = None) -> FlowResult:
+    async def async_step_frequency(self, user_input=None):
         if user_input is None:
-            return self.async_show_form(
-                step_id="frequency",
-                data_schema=self._create_pay_frequency_schema(),
-            )
+            return self.async_show_form(step_id="frequency", data_schema=self._create_pay_frequency_schema())
 
         self.pay_frequency = user_input[CONF_PAY_FREQ]
 
-        if self.pay_frequency == "monthly":
+        if self.pay_frequency == PAY_FREQ_MONTHLY:
             return await self.async_step_monthly_day()
-        elif self.pay_frequency in ["28_days", "14_days"]:
+        elif self.pay_frequency in [PAY_FREQ_28_DAYS, PAY_FREQ_14_DAYS]:
             return await self.async_step_cycle_last_paydate()
-        elif self.pay_frequency == "weekly":
+        elif self.pay_frequency == PAY_FREQ_WEEKLY:
             return await self.async_step_weekly()
 
         return self._create_entry()
 
-    async def async_step_monthly_day(self, user_input: dict | None = None) -> FlowResult:
+    async def async_step_monthly_day(self, user_input=None):
         if user_input is None:
-            return self.async_show_form(
-                step_id="monthly_day",
-                data_schema=self._create_monthly_day_schema(),
-            )
+            return self.async_show_form(step_id="monthly_day", data_schema=self._create_monthly_day_schema())
 
         self.pay_day = user_input[CONF_PAY_DAY]
 
-        if self.pay_day == "last_bank_day":
+        if self.pay_day == PAY_DAY_LAST_BANK_DAY:
             return await self.async_step_bank_offset()
-        elif self.pay_day == "specific_day":
+        elif self.pay_day == PAY_DAY_SPECIFIC_DAY:
             return await self.async_step_specific_day()
 
         return self._create_entry()
 
-    async def async_step_bank_offset(self, user_input: dict | None = None) -> FlowResult:
+    async def async_step_bank_offset(self, user_input=None):
         if user_input is None:
-            return self.async_show_form(
-                step_id="bank_offset",
-                data_schema=self._create_bank_offset_schema(),
-            )
+            return self.async_show_form(step_id="bank_offset", data_schema=self._create_bank_offset_schema())
 
-        self.bank_offset = user_input[CONF_BANK_OFFSET]
+        self.bank_offset = int(user_input[CONF_BANK_OFFSET])
         return self._create_entry()
 
-    async def async_step_specific_day(self, user_input: dict | None = None) -> FlowResult:
+    async def async_step_specific_day(self, user_input=None):
         if user_input is None:
-            return self.async_show_form(
-                step_id="specific_day",
-                data_schema=self._create_specific_day_schema(),
-            )
+            return self.async_show_form(step_id="specific_day", data_schema=self._create_specific_day_schema())
 
-        self.pay_day = user_input[CONF_PAY_DAY]
+        self.pay_day = int(user_input[CONF_PAY_DAY])
         return self._create_entry()
 
-    async def async_step_cycle_last_paydate(self, user_input: dict | None = None) -> FlowResult:
+    async def async_step_cycle_last_paydate(self, user_input=None):
         if user_input is None:
-            return self.async_show_form(
-                step_id="cycle_last_paydate",
-                data_schema=self._create_last_paydate_schema(),
-            )
+            return self.async_show_form(step_id="cycle_last_paydate", data_schema=self._create_last_paydate_schema())
 
         self.last_pay_date = user_input[CONF_LAST_PAY_DATE]
-        self.pay_day = None  # Ingen pay_day i disse frekvenser
         return self._create_entry()
 
-    async def async_step_weekly(self, user_input: dict | None = None) -> FlowResult:
+    async def async_step_weekly(self, user_input=None):
         if user_input is None:
-            return self.async_show_form(
-                step_id="weekly",
-                data_schema=self._create_weekly_schema(),
-            )
+            return self.async_show_form(step_id="weekly", data_schema=self._create_weekly_schema())
 
-        self.weekday = user_input[CONF_PAY_DAY]
-        self.pay_day = None  # Ingen pay_day i weekly
+        self.pay_day = user_input[CONF_PAY_DAY]
+        self.weekday = WEEKDAY_MAP[self.pay_day]
         return self._create_entry()
 
     def _create_entry(self) -> FlowResult:
@@ -155,7 +133,7 @@ class IsItPayday2ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                 CONF_LAST_PAY_DATE: self.last_pay_date,
                 CONF_BANK_OFFSET: self.bank_offset,
                 CONF_WEEKDAY: self.weekday,
-            },
+            }
         )
 
     def _create_country_schema(self, default_country: str) -> vol.Schema:

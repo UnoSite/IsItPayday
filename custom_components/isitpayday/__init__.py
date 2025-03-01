@@ -12,6 +12,7 @@ from .payday_calculator import async_calculate_next_payday
 
 _LOGGER = logging.getLogger(__name__)
 
+
 async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
     """
     Setup via configuration.yaml - unused for this integration.
@@ -27,6 +28,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 
     Initializes the DataUpdateCoordinator which handles periodic data fetching and updates.
     """
+    _LOGGER.info("Setting up IsItPayday entry: %s", entry.entry_id)
 
     data = entry.data
 
@@ -39,6 +41,18 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         _LOGGER.debug("Updating payday data for entry: %s", entry.entry_id)
 
         try:
+            # Log the configuration used for calculation (for debugging purposes)
+            _LOGGER.debug(
+                "Calculating next payday with country=%s, frequency=%s, pay_day=%s, "
+                "last_pay_date=%s, weekday=%s, bank_offset=%d",
+                data.get(CONF_COUNTRY),
+                data.get(CONF_PAY_FREQ),
+                data.get(CONF_PAY_DAY),
+                data.get(CONF_LAST_PAY_DATE),
+                data.get(CONF_WEEKDAY),
+                data.get(CONF_BANK_OFFSET, 0),
+            )
+
             # Beregn næste lønningsdag baseret på konfigurationsdata
             next_payday = await async_calculate_next_payday(
                 data[CONF_COUNTRY],
@@ -62,7 +76,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     coordinator = DataUpdateCoordinator(
         hass,
         _LOGGER,
-        name="IsItPayday Coordinator",
+        name=f"IsItPayday Coordinator ({entry.entry_id})",
         update_method=async_update_data,
         update_interval=timedelta(minutes=5),  # Opdaterer hver 5. minut
     )
@@ -70,6 +84,8 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     # Gemmer coordinatoren i Home Assistants data-lager
     hass.data.setdefault(DOMAIN, {})
     hass.data[DOMAIN][entry.entry_id] = {"coordinator": coordinator}
+
+    _LOGGER.debug("Initial data fetch starting for entry: %s", entry.entry_id)
 
     # Henter initial data
     await coordinator.async_refresh()

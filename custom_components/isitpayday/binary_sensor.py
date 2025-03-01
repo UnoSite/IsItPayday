@@ -8,47 +8,34 @@ from .const import *
 
 _LOGGER = logging.getLogger(__name__)
 
-# Ikoner til visning af om det er lønningsdag eller ej
 ICON_FALSE = "mdi:cash-clock"
 ICON_TRUE = "mdi:cash-fast"
 
 
 async def async_setup_entry(hass, entry, async_add_entities):
-    """
-    Opsætning af binary sensor-platformen.
-    Henter coordinator fra hass.data og opretter sensoren.
-    """
+    """Opsætning af binary sensor-platformen."""
     _LOGGER.debug("Setting up IsItPayday binary sensor for entry: %s", entry.entry_id)
 
-    # Henter coordinator (DataUpdateCoordinator) fra hass data
     coordinator: DataUpdateCoordinator = hass.data[DOMAIN][entry.entry_id]["coordinator"]
 
-    # Tilføjer binary sensor til Home Assistant
     async_add_entities([IsItPaydaySensor(coordinator)])
 
     _LOGGER.info("IsItPayday binary sensor added for entry: %s", entry.entry_id)
 
 
 class IsItPaydaySensor(CoordinatorEntity, BinarySensorEntity):
-    """
-    Binary sensor der viser om det er lønningsdag.
-    """
+    """Binary sensor der viser om det er lønningsdag."""
 
     _attr_name = "Is It Payday"
-    _attr_device_class = None  # Ingen specifik device class
+    _attr_device_class = None
 
     def __init__(self, coordinator: DataUpdateCoordinator):
-        """
-        Initialisering af sensoren.
-        """
         super().__init__(coordinator)
         self._attr_unique_id = "payday"
 
     @property
     def is_on(self) -> bool:
-        """
-        Returnerer True hvis i dag er lønningsdag.
-        """
+        """Returnerer True hvis i dag er lønningsdag."""
         if not self.coordinator.data:
             _LOGGER.warning("Coordinator data is missing or None.")
             return False
@@ -76,19 +63,23 @@ class IsItPaydaySensor(CoordinatorEntity, BinarySensorEntity):
 
     @property
     def icon(self) -> str:
-        """
-        Returnerer ikon afhængigt af om det er lønningsdag.
-        """
+        """Returnerer ikon afhængigt af om det er lønningsdag."""
         return ICON_TRUE if self.is_on else ICON_FALSE
 
     @property
+    def extra_state_attributes(self) -> dict:
+        """Returnerer eventuelle ekstra attributter for debugging."""
+        return {
+            "source": "IsItPayday DataUpdateCoordinator",
+            "raw_data": str(self.coordinator.data),
+        }
+
+    @property
     def device_info(self) -> dict:
-        """
-        Returnerer device info, så sensoren vises som en del af enheden i Home Assistant.
-        """
+        """Returnerer enhedsinfo for visning i Home Assistant."""
         return {
             "identifiers": {(DOMAIN, "isitpayday_device")},
             "name": "IsItPayday",
             "manufacturer": CONF_MANUFACTURER,
             "model": CONF_MODEL,
-}
+        }

@@ -35,6 +35,7 @@ async def async_get_homeassistant_country(hass: HomeAssistant) -> str | None:
     _LOGGER.info("Home Assistant country '%s' er understoettet.", country)
     return country
 
+
 # Hent liste over understoettede lande fra Nager.Date API
 async def async_fetch_supported_countries() -> dict[str, str]:
     _LOGGER.info("Henter liste over understoettede lande fra Nager.Date API.")
@@ -49,7 +50,7 @@ async def async_fetch_supported_countries() -> dict[str, str]:
                 _LOGGER.error("Fejl ved behandling af lande-data: Manglende noegle %s", e)
                 raise
 
-# Hovedklasse for Config Flow
+
 class IsItPayday2ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     VERSION = 1
 
@@ -209,26 +210,21 @@ class IsItPayday2ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         })
 
     def _create_bank_offset_schema(self) -> vol.Schema:
-    	"""Opret schema for valg af dage foer sidste bankdag. Default sættes til 0."""
-    	_LOGGER.debug("Opretter schema for dage foer sidste bankdag med default 0.")
-    	return vol.Schema({
-	        vol.Required(CONF_BANK_OFFSET, default=0): SelectSelector(
-	            SelectSelectorConfig(
-	                options=[{"value": v, "label": str(v)} for v in DAYS_BEFORE_OPTIONS],
-	                mode=SelectSelectorMode.DROPDOWN,
-	            )
-	        )
+        return vol.Schema({
+            vol.Required(CONF_BANK_OFFSET, default=0): vol.In(DAYS_BEFORE_OPTIONS)
         })
 
     def _create_specific_day_schema(self) -> vol.Schema:
         return vol.Schema({
-            vol.Required(CONF_PAY_DAY, default=1): SelectSelector(
-                SelectSelectorConfig(
-                    options=[{"value": v, "label": str(v)} for v in SPECIFIC_DAY_OPTIONS],
-                    mode=SelectSelectorMode.DROPDOWN,
-                )
-            )
+            vol.Required(CONF_PAY_DAY, default=1): vol.In(range(1, 32))
         })
 
     def _create_last_paydate_schema(self) -> vol.Schema:
-        return vol.Schema({vol.Required(CONF_LAST_PAY_DATE): DateSelector()})
+        return vol.Schema({
+            vol.Required(CONF_LAST_PAY_DATE): DateSelector(),
+        })
+
+    def _create_weekly_schema(self) -> vol.Schema:
+        return vol.Schema({
+            vol.Required(CONF_PAY_DAY): vol.In(WEEKDAY_OPTIONS)
+        })

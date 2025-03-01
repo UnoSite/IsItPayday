@@ -1,38 +1,81 @@
-from homeassistant.core import HomeAssistant
+"""Initialization file for the IsItPayday integration."""
+
+import logging
+from datetime import timedelta
 from homeassistant.config_entries import ConfigEntry
+from homeassistant.core import HomeAssistant
+from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
 from homeassistant.helpers.typing import ConfigType
-from .const import DOMAIN, VERSION
+
+from .const import *
+from .payday_calculator import async_calculate_next_payday
+
+_LOGGER = logging.getLogger(__name__)
+
 
 async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
-    """Setup the integration."""
-    hass.data.setdefault(DOMAIN, {})
+    """Set up via configuration.yaml - unused."""
     return True
+
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
-    """Set up the integration via config flow."""
+    """Set up IsItPayday from a config entry."""
+
+    data = entry.data
+
+    async def async_update_data():
+        """Fetch and calculate next payday data."""
+        _LOGGER.debug("Updating payday data for entry: %s", entry.entry_id)
+        try:
+            next_payday = await async_calculate_next_payday(
+                data[CONF_COUNTRY],
+                data[CONF_PAY_FREQ],
+                data.get(CONF_PAY_DAY),
+                data.get(CONF_LAST_PAY_DATE),
+                data.get(CONF_WEEKDAY),
+                data.get(CONF_BANK_OFFSET, 0)
+            )
+
+            _LOGGER.info("Calculated next payday: %s", next_payday)
+
+            return {
+                "payday_next": next_payday
+            }
+
+        except Exception as err:
+            _LOGGER.error("Error calculating next payday: %s", err)
+            raise UpdateFailed(f"Error calculating next payday: {err}") from err
+
+    coordinator = DataUpdateCoordinator(
+        hass,
+        _LOGGER,
+        name="IsItPayday Coordinator",
+        update_method=async_update_data,
+        update_interval=timedelta(minutes=5),
+    )
+
     hass.data.setdefault(DOMAIN, {})
+    hass.data[DOMAIN][entry.entry_id] = {"coordinator": coordinator}
 
-    # Update the version correctly
-    if entry.version != VERSION:
-        hass.config_entries.async_update_entry(entry, version=VERSION)
+    await coordinator.async_refresh()
 
-    # Use the new method 'await async_forward_entry_setups'
-    await hass.config_entries.async_forward_entry_setups(entry, ["binary_sensor", "sensor"])
+    if not coordinator.last_update_success:
+        _LOGGER.error("Initial data could not be fetched for entry: %s", entry.entry_id)
 
+    await hass.config_entries.async_forward_entry_setups(entry, ["sensor", "binary_sensor"])
+
+    _LOGGER.info("IsItPayday setup complete for entry: %s", entry.entry_id)
     return True
+
 
 async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
-    """Remove the integration correctly without errors."""
-    unload_ok = await hass.config_entries.async_forward_entry_unload(entry, "binary_sensor")
-    unload_ok &= await hass.config_entries.async_forward_entry_unload(entry, "sensor")
+    """Unload IsItPayday config entry."""
+    _LOGGER.debug("Unloading entry: %s", entry.entry_id)
+
+    unload_ok = await hass.config_entries.async_unload_platforms(entry, ["sensor", "binary_sensor"])
 
     if unload_ok:
-        hass.data[DOMAIN].pop(entry.entry_id, None)
+        hass.data[DOMAIN].pop(entry.entry_id)
+        _LOGGER.info("Unloaded entry: %s", entry.entry_id)
 
     return unload_ok
-
-async def async_migrate_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
-    """Handle migration of configuration data."""
-    if entry.version != VERSION:
-        hass.config_entries.async_update_entry(entry, version=VERSION)
-    return True

@@ -12,21 +12,34 @@ from .payday_calculator import async_calculate_next_payday
 
 _LOGGER = logging.getLogger(__name__)
 
-
 async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
-    """Set up via configuration.yaml - unused."""
+    """
+    Setup via configuration.yaml - unused for this integration.
+    Required for Home Assistant to load the integration.
+    """
+    _LOGGER.debug("async_setup called - no YAML configuration used.")
     return True
 
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
-    """Set up IsItPayday from a config entry."""
+    """
+    Setup IsItPayday integration from a config entry.
+
+    Initializes the DataUpdateCoordinator which handles periodic data fetching and updates.
+    """
 
     data = entry.data
 
     async def async_update_data():
-        """Fetch and calculate next payday data."""
+        """
+        Fetch and calculate next payday data.
+
+        This method will be called periodically by the DataUpdateCoordinator.
+        """
         _LOGGER.debug("Updating payday data for entry: %s", entry.entry_id)
+
         try:
+            # Beregn næste lønningsdag baseret på konfigurationsdata
             next_payday = await async_calculate_next_payday(
                 data[CONF_COUNTRY],
                 data[CONF_PAY_FREQ],
@@ -36,32 +49,35 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
                 data.get(CONF_BANK_OFFSET, 0)
             )
 
-            _LOGGER.info("Calculated next payday: %s", next_payday)
+            _LOGGER.info("Calculated next payday for entry %s: %s", entry.entry_id, next_payday)
 
-            return {
-                "payday_next": next_payday
-            }
+            # Returnerer data i et format som sensorer og binary sensorer kan bruge
+            return {"payday_next": next_payday}
 
         except Exception as err:
-            _LOGGER.error("Error calculating next payday: %s", err)
+            _LOGGER.exception("Error calculating next payday for entry %s: %s", entry.entry_id, err)
             raise UpdateFailed(f"Error calculating next payday: {err}") from err
 
+    # Opretter DataUpdateCoordinator til at håndtere periodiske opdateringer
     coordinator = DataUpdateCoordinator(
         hass,
         _LOGGER,
         name="IsItPayday Coordinator",
         update_method=async_update_data,
-        update_interval=timedelta(minutes=5),
+        update_interval=timedelta(minutes=5),  # Opdaterer hver 5. minut
     )
 
+    # Gemmer coordinatoren i Home Assistants data-lager
     hass.data.setdefault(DOMAIN, {})
     hass.data[DOMAIN][entry.entry_id] = {"coordinator": coordinator}
 
+    # Henter initial data
     await coordinator.async_refresh()
 
     if not coordinator.last_update_success:
         _LOGGER.error("Initial data could not be fetched for entry: %s", entry.entry_id)
 
+    # Videregiver entry til sensor og binary_sensor platformene
     await hass.config_entries.async_forward_entry_setups(entry, ["sensor", "binary_sensor"])
 
     _LOGGER.info("IsItPayday setup complete for entry: %s", entry.entry_id)
@@ -69,13 +85,17 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 
 
 async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
-    """Unload IsItPayday config entry."""
-    _LOGGER.debug("Unloading entry: %s", entry.entry_id)
+    """
+    Unload IsItPayday config entry.
+
+    Cleans up all data related to the entry and removes sensors/binary_sensors.
+    """
+    _LOGGER.debug("Unloading IsItPayday entry: %s", entry.entry_id)
 
     unload_ok = await hass.config_entries.async_unload_platforms(entry, ["sensor", "binary_sensor"])
 
     if unload_ok:
-        hass.data[DOMAIN].pop(entry.entry_id)
-        _LOGGER.info("Unloaded entry: %s", entry.entry_id)
+        hass.data[DOMAIN].pop(entry.entry_id, None)
+        _LOGGER.info("Successfully unloaded entry: %s", entry.entry_id)
 
     return unload_ok

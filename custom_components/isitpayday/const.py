@@ -12,7 +12,7 @@ CONF_PAY_FREQ = "pay_frequency"
 CONF_PAY_DAY = "pay_day"
 CONF_LAST_PAY_DATE = "last_pay_date"
 CONF_BANK_OFFSET = "bank_offset"
-CONF_WEEKDAY = "weekday"
+CONF_WEEKDAY = "weekday"  # Bruges kun til ugentlig betaling
 
 # Labels used in config flow (visible to user)
 LABEL_SELECT_COUNTRY = "Select country"
@@ -50,8 +50,17 @@ PAY_MONTHLY_OPTIONS = {
 DAYS_BEFORE_OPTIONS = [str(i) for i in range(11)]  # 0 til 10 som tekst
 SPECIFIC_DAY_OPTIONS = [str(i) for i in range(1, 32)]  # 1 til 31 som tekst
 
-# Weekday options for 28-day, 14-day and weekly pay frequency
+# Weekday options (used for weekly pay frequency)
 WEEKDAY_OPTIONS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
+
+# Mapping weekday strings to integer (Python weekday format: Monday = 0, ..., Sunday = 6)
+WEEKDAY_MAP = {
+    "Monday": 0,
+    "Tuesday": 1,
+    "Wednesday": 2,
+    "Thursday": 3,
+    "Friday": 4,
+}
 
 # Default values
 DEFAULT_COUNTRY = "DK"
@@ -81,7 +90,7 @@ ICON_NEXT_PAYDAY = "mdi:calendar-clock"
 ICON_IS_IT_PAYDAY_TRUE = "mdi:cash-fast"
 ICON_IS_IT_PAYDAY_FALSE = "mdi:cash-clock"
 
-# Log messages (standardized to use in all files)
+# Log messages (standardized to use across all files)
 LOG_INIT = "Initializing IsItPayday integration."
 LOG_SETUP = "Setting up IsItPayday integration."
 LOG_FETCH_COUNTRIES = "Fetching supported countries from API."
@@ -95,3 +104,7 @@ LOG_FALLBACK_NO_HOLIDAYS = "No holidays could be fetched. Using empty list."
 # Error messages (for logging and debugging)
 ERROR_INVALID_COUNTRY = "Invalid country selected ({country}). Cannot calculate payday."
 ERROR_INVALID_PAYDAY = "Unable to calculate valid payday. Returning 'Unknown'."
+
+# Validation errors
+ERROR_WEEKDAY_REQUIRED_FOR_WEEKLY = "Weekly frequency requires weekday to be set."
+ERROR_LAST_PAYDATE_REQUIRED = "Last payday date is required for 14-day or 28-day pay frequencies."

@@ -60,12 +60,22 @@ class IsItPaydayNextSensor(CoordinatorEntity, SensorEntity):
             return payday.strftime("%Y-%m-%d")
 
         try:
-            # Håndterer dato hvis den kommer som en ISO8601 string
+            # Hvis datoen er en string, konverter til date objekt
             payday_date = date.fromisoformat(payday)
             return payday_date.strftime("%Y-%m-%d")
         except (ValueError, TypeError) as err:
             _LOGGER.error("Payday data har ugyldigt format: %s (error: %s)", payday, err)
             return "Unknown"
+
+    @property
+    def extra_state_attributes(self):
+        """
+        Returnerer ekstra attributter (kan udvides hvis nødvendigt).
+        """
+        return {
+            "source": "IsItPayday2 DataUpdateCoordinator",
+            "debug_info": str(self.coordinator.data),
+        }
 
     @property
     def device_info(self):

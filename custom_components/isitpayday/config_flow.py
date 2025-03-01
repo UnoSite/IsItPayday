@@ -17,9 +17,7 @@ from .const import *
 
 _LOGGER = logging.getLogger(__name__)
 
-
 async def async_get_homeassistant_country(hass: HomeAssistant) -> str | None:
-    """Henter Home Assistant country fra konfiguration og validerer mod understøttede lande."""
     _LOGGER.debug("Henter Home Assistant country fra konfiguration.")
     country = getattr(hass.config, "country", None)
 
@@ -38,7 +36,6 @@ async def async_get_homeassistant_country(hass: HomeAssistant) -> str | None:
 
 
 async def async_fetch_supported_countries() -> dict[str, str]:
-    """Henter liste over understøttede lande fra Nager.Date API."""
     _LOGGER.info("Henter liste over understøttede lande fra Nager.Date API.")
     async with aiohttp.ClientSession() as session:
         async with session.get(API_COUNTRIES) as response:
@@ -55,9 +52,9 @@ class IsItPayday2ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         self.country = None
         self.pay_frequency = None
         self.pay_day = None
+        self.weekday = None
         self.last_pay_date = None
         self.bank_offset = 0
-        self.weekday = None
         self.country_list = {}
 
     async def async_step_user(self, user_input: dict | None = None) -> FlowResult:
@@ -134,6 +131,7 @@ class IsItPayday2ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             )
 
         self.last_pay_date = user_input[CONF_LAST_PAY_DATE]
+        self.pay_day = None  # Ingen pay_day i disse frekvenser
         return self._create_entry()
 
     async def async_step_weekly(self, user_input: dict | None = None) -> FlowResult:
@@ -144,6 +142,7 @@ class IsItPayday2ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             )
 
         self.weekday = user_input[CONF_PAY_DAY]
+        self.pay_day = None  # Ingen pay_day i weekly
         return self._create_entry()
 
     def _create_entry(self) -> FlowResult:

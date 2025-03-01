@@ -47,7 +47,7 @@ PAY_MONTHLY_OPTIONS = {
     PAY_DAY_SPECIFIC_DAY: "Specific day"
 }
 
-DAYS_BEFORE_OPTIONS = [str(i) for i in range(11)]  # 0 til 10 som tekst
+DAYS_BEFORE_OPTIONS = [str(i) for i in range(0, 11)]  # 0 til 10 som tekst
 SPECIFIC_DAY_OPTIONS = [str(i) for i in range(1, 32)]  # 1 til 31 som tekst
 
 # Weekday options (used for weekly pay frequency)

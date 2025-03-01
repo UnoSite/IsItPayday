@@ -1,118 +1,232 @@
-import voluptuous as vol
-import aiohttp
+"""Config flow for IsItPayday integration."""
+
 import logging
+import aiohttp
+import voluptuous as vol
 from homeassistant import config_entries
-from .const import DOMAIN, CONF_COUNTRY, CONF_COUNTRY_ID, CONF_PAYDAY_TYPE, CONF_CUSTOM_DAY
+from homeassistant.core import HomeAssistant
+from homeassistant.data_entry_flow import FlowResult
+from homeassistant.helpers.selector import (
+    SelectSelector,
+    SelectSelectorConfig,
+    SelectSelectorMode,
+    DateSelector,
+)
+
+from .const import *
 
 _LOGGER = logging.getLogger(__name__)
-API_URL = "https://api.isitpayday.com/countries"
 
-PAYDAY_OPTIONS = {
-    "last_day": "Last day of the month",
-    "first_day": "First day of the month",
-    "custom_day": "Custom day of the month"
-}
+# Hent Home Assistant country fra konfiguration og valider mod understoettede lande
+async def async_get_homeassistant_country(hass: HomeAssistant) -> str | None:
+    _LOGGER.debug("Henter Home Assistant country fra konfiguration.")
+    country = getattr(hass.config, "country", None)
 
-DAYS_OPTIONS = {str(i): f"Day {i}" for i in range(1, 32)}
+    if not country:
+        _LOGGER.warning("Home Assistant country er ikke sat.")
+        return None
 
-class IsItPaydayConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
-    """Config flow for IsItPayday integration."""
+    supported_countries = await async_fetch_supported_countries()
 
+    if country not in supported_countries:
+        _LOGGER.warning("Landet '%s' er ikke blandt de understoettede lande.", country)
+        return None
+
+    _LOGGER.info("Home Assistant country '%s' er understoettet.", country)
+    return country
+
+# Hent liste over understoettede lande fra Nager.Date API
+async def async_fetch_supported_countries() -> dict[str, str]:
+    _LOGGER.info("Henter liste over understoettede lande fra Nager.Date API.")
+    async with aiohttp.ClientSession() as session:
+        async with session.get(API_COUNTRIES) as response:
+            data = await response.json()
+            try:
+                countries = {country["countryCode"]: country["name"] for country in data}
+                _LOGGER.info("Hentede %d understoettede lande.", len(countries))
+                return countries
+            except KeyError as e:
+                _LOGGER.error("Fejl ved behandling af lande-data: Manglende noegle %s", e)
+                raise
+
+# Hovedklasse for Config Flow
+class IsItPayday2ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     VERSION = 1
 
-    async def async_step_user(self, user_input=None):
-        """Step 1: Select country."""
-        if self._async_current_entries():
-            return self.async_abort(reason="Only one installation is allowed.")
+    def __init__(self) -> None:
+        self.country = None
+        self.pay_frequency = None
+        self.pay_day = None
+        self.last_pay_date = None
+        self.bank_offset = 0
+        self.country_list = {}
 
-        errors = {}
+    async def async_step_user(self, user_input: dict | None = None) -> FlowResult:
+        _LOGGER.info("Starter config flow - Trin 1 (Vaelg land).")
 
-        country_options = await self._fetch_supported_countries()
-        if not country_options:
-            errors["base"] = "API error. Please try again later."
+        if user_input is None:
+            self.country_list = await async_fetch_supported_countries()
+            current_country = await async_get_homeassistant_country(self.hass)
 
-        if user_input is not None:
-            self.selected_country_name = user_input[CONF_COUNTRY]
-            self.selected_country_id = {v: k for k, v in country_options.items()}[self.selected_country_name]
-            return await self.async_step_payday_type()
+            if not current_country:
+                _LOGGER.warning("Ingen gyldig Home Assistant country fundet. Fallback til 'DK'.")
+                current_country = "DK"
 
-        data_schema = vol.Schema({
-            vol.Required(CONF_COUNTRY, default="Denmark"): vol.In(country_options.values())
-        })
+            _LOGGER.info("Standardland sat til: %s", current_country)
 
-        return self.async_show_form(
-            step_id="user",
-            data_schema=data_schema,
-            errors=errors
-        )
-
-    async def async_step_payday_type(self, user_input=None):
-        """Step 2: Select payday type."""
-        errors = {}
-
-        if user_input is not None:
-            self.payday_type = user_input[CONF_PAYDAY_TYPE]
-
-            if self.payday_type == "custom_day":
-                return await self.async_step_custom_day()
-
-            return self.async_create_entry(
-                title="Is It Payday?",
-                data={
-                    CONF_COUNTRY: self.selected_country_name,
-                    CONF_COUNTRY_ID: self.selected_country_id,
-                    CONF_PAYDAY_TYPE: self.payday_type,
-                    CONF_CUSTOM_DAY: None
-                }
+            return self.async_show_form(
+                step_id="user",
+                data_schema=self._create_country_schema(current_country),
             )
 
-        data_schema = vol.Schema({
-            vol.Required(CONF_PAYDAY_TYPE, default="last_day"): vol.In(PAYDAY_OPTIONS)
-        })
+        self.country = user_input[CONF_COUNTRY]
+        _LOGGER.info("Land valgt: %s", self.country)
+        return await self.async_step_frequency()
 
-        return self.async_show_form(
-            step_id="payday_type",
-            data_schema=data_schema,
-            errors=errors
-        )
+    async def async_step_frequency(self, user_input: dict | None = None) -> FlowResult:
+        _LOGGER.info("Starter config flow - Trin 2 (Vaelg udbetalingsfrekvens).")
 
-    async def async_step_custom_day(self, user_input=None):
-        """Step 3: Select a custom day of the month from a dropdown."""
-        errors = {}
-
-        if user_input is not None:
-            custom_day = int(user_input[CONF_CUSTOM_DAY])
-
-            return self.async_create_entry(
-                title="Is It Payday?",
-                data={
-                    CONF_COUNTRY: self.selected_country_name,
-                    CONF_COUNTRY_ID: self.selected_country_id,
-                    CONF_PAYDAY_TYPE: self.payday_type,
-                    CONF_CUSTOM_DAY: custom_day
-                }
+        if user_input is None:
+            return self.async_show_form(
+                step_id="frequency",
+                data_schema=self._create_pay_frequency_schema(),
             )
 
-        data_schema = vol.Schema({
-            vol.Required(CONF_CUSTOM_DAY, default="15"): vol.In(DAYS_OPTIONS)
-        })
+        self.pay_frequency = user_input[CONF_PAY_FREQ]
+        _LOGGER.info("Udbetalingsfrekvens valgt: %s", self.pay_frequency)
 
-        return self.async_show_form(
-            step_id="custom_day",
-            data_schema=data_schema,
-            errors=errors
+        if self.pay_frequency == "monthly":
+            return await self.async_step_monthly_day()
+        if self.pay_frequency in ["28_days", "14_days"]:
+            return await self.async_step_cycle_last_paydate()
+        if self.pay_frequency == "weekly":
+            return await self.async_step_weekly()
+
+        return self._create_entry()
+
+    async def async_step_monthly_day(self, user_input: dict | None = None) -> FlowResult:
+        if user_input is None:
+            return self.async_show_form(
+                step_id="monthly_day",
+                data_schema=self._create_monthly_day_schema(),
+            )
+
+        self.pay_day = user_input[CONF_PAY_DAY]
+        _LOGGER.info("Maanedlig udbetalingsdag valgt: %s", self.pay_day)
+
+        if self.pay_day == "last_bank_day":
+            return await self.async_step_bank_offset()
+        if self.pay_day == "specific_day":
+            return await self.async_step_specific_day()
+
+        return self._create_entry()
+
+    async def async_step_bank_offset(self, user_input: dict | None = None) -> FlowResult:
+        if user_input is None:
+            return self.async_show_form(
+                step_id="bank_offset",
+                data_schema=self._create_bank_offset_schema(),
+            )
+
+        self.bank_offset = int(user_input[CONF_BANK_OFFSET])
+        _LOGGER.info("Dage foer sidste bankdag: %d", self.bank_offset)
+        return self._create_entry()
+
+    async def async_step_specific_day(self, user_input: dict | None = None) -> FlowResult:
+        if user_input is None:
+            return self.async_show_form(
+                step_id="specific_day",
+                data_schema=self._create_specific_day_schema(),
+            )
+
+        self.pay_day = int(user_input[CONF_PAY_DAY])
+        _LOGGER.info("Specifik dag valgt: %d", self.pay_day)
+        return self._create_entry()
+
+    async def async_step_cycle_last_paydate(self, user_input: dict | None = None) -> FlowResult:
+        if user_input is None:
+            return self.async_show_form(
+                step_id="cycle_last_paydate",
+                data_schema=self._create_last_paydate_schema(),
+            )
+
+        self.last_pay_date = user_input[CONF_LAST_PAY_DATE]
+        _LOGGER.info("Sidste udbetalingsdato valgt: %s", self.last_pay_date)
+        return self._create_entry()
+
+    async def async_step_weekly(self, user_input: dict | None = None) -> FlowResult:
+        if user_input is None:
+            return self.async_show_form(
+                step_id="weekly",
+                data_schema=self._create_weekly_schema(),
+            )
+
+        self.pay_day = user_input[CONF_PAY_DAY]
+        _LOGGER.info("Ugeloensdag valgt: %s", self.pay_day)
+        return self._create_entry()
+
+    def _create_entry(self) -> FlowResult:
+        _LOGGER.info("Opretter konfigurationsindgang.")
+        return self.async_create_entry(
+            title=CONF_TITLE,
+            data={
+                CONF_COUNTRY: self.country,
+                CONF_PAY_FREQ: self.pay_frequency,
+                CONF_PAY_DAY: self.pay_day,
+                CONF_LAST_PAY_DATE: self.last_pay_date,
+                CONF_BANK_OFFSET: self.bank_offset,
+            },
         )
 
-    async def _fetch_supported_countries(self):
-        """Fetch supported countries from the API."""
-        try:
-            async with aiohttp.ClientSession() as session:
-                async with session.get(API_URL, timeout=10) as response:
-                    if response.status != 200:
-                        return None
+    def _create_country_schema(self, default_country: str) -> vol.Schema:
+        return vol.Schema({
+            vol.Required(CONF_COUNTRY, default=default_country): SelectSelector(
+                SelectSelectorConfig(
+                    options=[{"value": k, "label": v} for k, v in self.country_list.items()],
+                    mode=SelectSelectorMode.DROPDOWN,
+                )
+            )
+        })
 
-                    data = await response.json()
-                    return {country["id"]: country["name"] for country in data}
+    def _create_pay_frequency_schema(self) -> vol.Schema:
+        return vol.Schema({
+            vol.Required(CONF_PAY_FREQ): SelectSelector(
+                SelectSelectorConfig(
+                    options=[{"value": k, "label": v} for k, v in PAY_FREQ_OPTIONS.items()],
+                    mode=SelectSelectorMode.DROPDOWN,
+                )
+            )
+        })
 
-        except aiohttp.ClientError:
-            return None
+    def _create_monthly_day_schema(self) -> vol.Schema:
+        return vol.Schema({
+            vol.Required(CONF_PAY_DAY): SelectSelector(
+                SelectSelectorConfig(
+                    options=[{"value": k, "label": v} for k, v in PAY_MONTHLY_OPTIONS.items()],
+                    mode=SelectSelectorMode.DROPDOWN,
+                )
+            )
+        })
+
+    def _create_bank_offset_schema(self) -> vol.Schema:
+        return vol.Schema({
+            vol.Required(CONF_BANK_OFFSET, default=0): SelectSelector(
+                SelectSelectorConfig(
+                    options=[{"value": v, "label": str(v)} for v in DAYS_BEFORE_OPTIONS],
+                    mode=SelectSelectorMode.DROPDOWN,
+                )
+            )
+        })
+
+    def _create_specific_day_schema(self) -> vol.Schema:
+        return vol.Schema({
+            vol.Required(CONF_PAY_DAY, default=1): SelectSelector(
+                SelectSelectorConfig(
+                    options=[{"value": v, "label": str(v)} for v in SPECIFIC_DAY_OPTIONS],
+                    mode=SelectSelectorMode.DROPDOWN,
+                )
+            )
+        })
+
+    def _create_last_paydate_schema(self) -> vol.Schema:
+        return vol.Schema({vol.Required(CONF_LAST_PAY_DATE): DateSelector()})

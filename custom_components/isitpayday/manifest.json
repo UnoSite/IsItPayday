@@ -1,17 +1,13 @@
 {
   "domain": "isitpayday",
-  "name": "Is It Payday?",
-  "codeowners": [
-    "@UnoSite"
-  ],
+  "name": "Is It Payday",
+  "codeowners": ["@UnoSite"],
   "config_flow": true,
   "dependencies": [],
   "documentation": "https://github.com/UnoSite/IsItPayday",
   "iot_class": "cloud_polling",
-  "issue_tracker": "https://github.com/UnoSite/IsItPayday/issues",
-  "requirements": [
-    "aiohttp"
-  ],
+  "loggers": ["custom_components.isitpayday"],
+  "requirements": [],
   "single_config_entry": true,
-  "version": "0.8.1"
+  "version": "1.0.0"
 }

@@ -73,7 +73,6 @@ DEFAULT_SPECIFIC_DAY = 31
 DEVICE_NAME = CONF_TITLE
 DEVICE_MANUFACTURER = CONF_MANUFACTURER
 DEVICE_MODEL = CONF_MODEL
-INS_NAME = "Name"
 
 # API endpoints (dynamic year handling is done in payday_calculator.py)
 API_COUNTRIES = "https://date.nager.at/api/v3/AvailableCountries"

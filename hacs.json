@@ -1,4 +1,7 @@
 {
     "name": "Is It Payday",
-    "homeassistant": "2025.1.0"
+    "render_readme": true,
+    "homeassistant": "2025.1.0",
+    "zip_release": true,
+    "filename": "isitpayday.zip"
 }

@@ -209,16 +209,16 @@ class IsItPayday2ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         })
 
     def _create_bank_offset_schema(self) -> vol.Schema:
-    	"""Opret schema for valg af dage foer sidste bankdag."""
-    	_LOGGER.debug("Opretter schema for dage foer sidste bankdag.")
+    	"""Opret schema for valg af dage foer sidste bankdag. Default sættes til 0."""
+    	_LOGGER.debug("Opretter schema for dage foer sidste bankdag med default 0.")
     	return vol.Schema({
-        	vol.Required(CONF_BANK_OFFSET, default=0): SelectSelector(
-            	SelectSelectorConfig(
-                	options=[{"value": v, "label": str(v)} for v in DAYS_BEFORE_OPTIONS],
-                	mode=SelectSelectorMode.DROPDOWN,
-            	)
-            )
-    	})
+	        vol.Required(CONF_BANK_OFFSET, default=0): SelectSelector(
+	            SelectSelectorConfig(
+	                options=[{"value": v, "label": str(v)} for v in DAYS_BEFORE_OPTIONS],
+	                mode=SelectSelectorMode.DROPDOWN,
+	            )
+	        )
+        })
 
     def _create_specific_day_schema(self) -> vol.Schema:
         return vol.Schema({

@@ -1,100 +1,64 @@
-import aiohttp
+"""Binary sensor platform for IsItPayday."""
+
 import logging
-import calendar
-from datetime import datetime
+from datetime import date
 from homeassistant.components.binary_sensor import BinarySensorEntity
-from homeassistant.helpers.device_registry import DeviceInfo
-from homeassistant.config_entries import ConfigEntry
-from homeassistant.core import HomeAssistant
-from .const import DOMAIN, CONF_COUNTRY_ID, CONF_PAYDAY_TYPE, CONF_CUSTOM_DAY, VERSION
+from homeassistant.helpers.update_coordinator import CoordinatorEntity
+from .const import *
 
 _LOGGER = logging.getLogger(__name__)
 
-API_URL_TEMPLATE = "https://api.isitpayday.com/monthly?payday={day}&country={country}&timezone={tz}"
+ICON_FALSE = "mdi:cash-clock"
+ICON_TRUE = "mdi:cash-fast"
 
-async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry, async_add_entities):
-    """Set up binary sensor based on configuration."""
-    country_id = entry.data.get(CONF_COUNTRY_ID, "DK")
-    payday_type = entry.data.get(CONF_PAYDAY_TYPE, "last_day")
-    custom_day = entry.data.get(CONF_CUSTOM_DAY, None)
-    timezone = hass.config.time_zone
 
-    async_add_entities([IsItPaydayBinarySensor(entry.entry_id, country_id, payday_type, custom_day, timezone)], True)
+async def async_setup_entry(hass, entry, async_add_entities):
+    """Opsaetning af binary sensor-platformen."""
+    coordinator = hass.data[DOMAIN][entry.entry_id]["coordinator"]
 
-class IsItPaydayBinarySensor(BinarySensorEntity):
-    """Represents an Is It Payday? sensor."""
+    async_add_entities([IsItPaydaySensor(coordinator)])
 
-    def __init__(self, entry_id, country_id, payday_type, custom_day, timezone):
-        self._entry_id = entry_id
-        self._state = False
-        self._country_id = country_id
-        self._payday_type = payday_type
-        self._custom_day = custom_day
-        self._timezone = timezone
-        self._api_url = None  # API-link attribute
+
+class IsItPaydaySensor(CoordinatorEntity, BinarySensorEntity):
+    """Binary sensor der viser om det er loenningsdag."""
+
+    _attr_name = "Is It Payday"
+    _attr_device_class = None
+
+    def __init__(self, coordinator):
+        """Initialisering."""
+        super().__init__(coordinator)
         self._attr_unique_id = "payday"
-        self.entity_id = "binary_sensor.payday"
-
-    @property
-    def name(self):
-        return "Is It Payday?"
 
     @property
     def is_on(self):
-        return self._state
+        """Returnerer True hvis i dag er loenningsdag."""
+        payday_next = self.coordinator.data.get("payday_next")
 
-    @property
-    def device_class(self):
-        return None
+        if not payday_next:
+            return False
+
+        if isinstance(payday_next, date):
+            return payday_next == date.today()
+
+        try:
+            payday_next_date = date.fromisoformat(payday_next)
+            return payday_next_date == date.today()
+        except (ValueError, TypeError):
+            _LOGGER.error("Ugyldig datoformat for payday_next: %s", payday_next)
+            return False
 
     @property
     def icon(self):
-        return "mdi:cash" if self._state else "mdi:cash-remove"
+        """Returnerer ikon afhaengigt af om det er loenningsdag."""
+        return ICON_TRUE if self.is_on else ICON_FALSE
 
     @property
-    def extra_state_attributes(self):
-        """Return API-link as an attribute."""
-        return {"API-link": self._api_url} if self._api_url else {}
-
-    @property
-    def device_info(self) -> DeviceInfo:
-        """Ensure all entities belong to the same device."""
-        return DeviceInfo(
-            identifiers={(DOMAIN, self._entry_id)},
-            name="Is It Payday?",
-            manufacturer="IsItPayday API",
-            model="Payday Checker",
-            sw_version=VERSION,
-            entry_type="service"
-        )
-
-    async def async_update(self):
-        """Fetch data from the API on each polling cycle."""
-        today = datetime.now()
-
-        if self._payday_type == "last_day":
-            payday_day = calendar.monthrange(today.year, today.month)[1]
-        elif self._payday_type == "first_day":
-            payday_day = 1
-        elif self._payday_type == "custom_day" and self._custom_day:
-            payday_day = min(self._custom_day, calendar.monthrange(today.year, today.month)[1])
-        else:
-            payday_day = calendar.monthrange(today.year, today.month)[1]  # Default to last day
-
-        self._api_url = API_URL_TEMPLATE.format(day=payday_day, country=self._country_id, tz=self._timezone)
-
-        _LOGGER.debug(f"IsItPayday: Fetching data from {self._api_url}")
-
-        try:
-            async with aiohttp.ClientSession() as session:
-                async with session.get(self._api_url, timeout=10) as response:
-                    if response.status != 200:
-                        _LOGGER.error(f"IsItPayday: API error {response.status}")
-                        return
-
-                    data = await response.json()
-                    _LOGGER.debug(f"IsItPayday: API response: {data}")
-                    self._state = data.get("isPayDay", False)
-        except aiohttp.ClientError as err:
-            _LOGGER.error(f"IsItPayday: API request failed - {err}")
-            self._state = False
+    def device_info(self):
+        """Returnerer device info saa den vises som enhed i Home Assistant."""
+        return {
+            "identifiers": {(DOMAIN, "isitpayday_device")},
+            "name": "IsItPayday",
+            "manufacturer": CONF_MANUFACTURER,
+            "model": CONF_MODEL,
+        }

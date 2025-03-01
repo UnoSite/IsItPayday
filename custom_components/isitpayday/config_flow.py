@@ -146,10 +146,10 @@ class IsItPayday2ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         return vol.Schema({vol.Required(CONF_PAY_DAY): vol.In(PAY_MONTHLY_OPTIONS)})
 
     def _create_bank_offset_schema(self) -> vol.Schema:
-        return vol.Schema({vol.Required(CONF_BANK_OFFSET, default=0): vol.In(range(0, 11))})
+        return vol.Schema({vol.Required(CONF_BANK_OFFSET, default=0): vol.In(range(0, 11))}) # Offset 0 to 10 days
 
     def _create_specific_day_schema(self) -> vol.Schema:
-        return vol.Schema({vol.Required(CONF_PAY_DAY, default=31): vol.In(range(1, 32))})
+        return vol.Schema({vol.Required(CONF_PAY_DAY, default=31): vol.In(range(1, 32))}) # Day of month (Day 1 to 31)
 
     def _create_last_paydate_schema(self) -> vol.Schema:
         return vol.Schema({vol.Required(CONF_LAST_PAY_DATE): DateSelector()})

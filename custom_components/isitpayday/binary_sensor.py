@@ -3,7 +3,7 @@
 import logging
 from datetime import date
 from homeassistant.components.binary_sensor import BinarySensorEntity
-from homeassistant.helpers.update_coordinator import CoordinatorEntity
+from homeassistant.helpers.update_coordinator import CoordinatorEntity, DataUpdateCoordinator
 from .const import *
 
 _LOGGER = logging.getLogger(__name__)
@@ -21,7 +21,7 @@ async def async_setup_entry(hass, entry, async_add_entities):
     _LOGGER.debug("Setting up IsItPayday binary sensor for entry: %s", entry.entry_id)
 
     # Henter coordinator (DataUpdateCoordinator) fra hass data
-    coordinator = hass.data[DOMAIN][entry.entry_id]["coordinator"]
+    coordinator: DataUpdateCoordinator = hass.data[DOMAIN][entry.entry_id]["coordinator"]
 
     # Tilføjer binary sensor til Home Assistant
     async_add_entities([IsItPaydaySensor(coordinator)])
@@ -37,7 +37,7 @@ class IsItPaydaySensor(CoordinatorEntity, BinarySensorEntity):
     _attr_name = "Is It Payday"
     _attr_device_class = None  # Ingen specifik device class
 
-    def __init__(self, coordinator):
+    def __init__(self, coordinator: DataUpdateCoordinator):
         """
         Initialisering af sensoren.
         """
@@ -45,36 +45,44 @@ class IsItPaydaySensor(CoordinatorEntity, BinarySensorEntity):
         self._attr_unique_id = "payday"
 
     @property
-    def is_on(self):
+    def is_on(self) -> bool:
         """
         Returnerer True hvis i dag er lønningsdag.
         """
+        if not self.coordinator.data:
+            _LOGGER.warning("Coordinator data is missing or None.")
+            return False
+
         payday_next = self.coordinator.data.get("payday_next")
 
         if not payday_next:
             _LOGGER.debug("No payday_next data available in coordinator.")
             return False
 
-        if isinstance(payday_next, date):
-            return payday_next == date.today()
+        today = date.today()
 
-        try:
-            # Håndterer dato som string (ISO-format)
-            payday_next_date = date.fromisoformat(payday_next)
-            return payday_next_date == date.today()
-        except (ValueError, TypeError) as err:
-            _LOGGER.error("Invalid date format for payday_next: %s (error: %s)", payday_next, err)
-            return False
+        if isinstance(payday_next, date):
+            is_payday = payday_next == today
+        else:
+            try:
+                payday_next_date = date.fromisoformat(payday_next)
+                is_payday = payday_next_date == today
+            except (ValueError, TypeError) as err:
+                _LOGGER.error("Invalid date format for payday_next: %s (error: %s)", payday_next, err)
+                return False
+
+        _LOGGER.debug("Payday check: today=%s, next_payday=%s, is_payday=%s", today, payday_next, is_payday)
+        return is_payday
 
     @property
-    def icon(self):
+    def icon(self) -> str:
         """
         Returnerer ikon afhængigt af om det er lønningsdag.
         """
         return ICON_TRUE if self.is_on else ICON_FALSE
 
     @property
-    def device_info(self):
+    def device_info(self) -> dict:
         """
         Returnerer device info, så sensoren vises som en del af enheden i Home Assistant.
         """
@@ -83,4 +91,4 @@ class IsItPaydaySensor(CoordinatorEntity, BinarySensorEntity):
             "name": "IsItPayday",
             "manufacturer": CONF_MANUFACTURER,
             "model": CONF_MODEL,
-        }
+}

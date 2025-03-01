@@ -1,0 +1,34 @@
+name: Create ZIP on Draft Release
+
+on:
+  release:
+    types: [prereleased]
+
+jobs:
+  create-zip:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check if release is draft
+      run: |
+        if [[ "${{ github.event.release.draft }}" != "true" ]]; then
+          echo "Not a draft release. Skipping workflow."
+          exit 1
+        fi
+
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Create zip file
+      run: |
+        cd custom_components/isitpayday
+        zip -r ../../isitpayday.zip ./
+
+    - name: Upload release asset
+      uses: softprops/action-gh-release@v2
+      with:
+        files: isitpayday.zip
+        fail_on_unmatched_files: true
+        token: ${{ secrets.GITHUB_TOKEN }}
+        tag_name: ${{ github.event.release.tag_name }}
+        draft: true

@@ -43,18 +43,12 @@ async def async_fetch_supported_countries() -> dict[str, str]:
     async with aiohttp.ClientSession() as session:
         async with session.get(API_COUNTRIES) as response:
             data = await response.json()
-            try:
-                countries = {country["countryCode"]: country["name"] for country in data}
-                _LOGGER.info("Hentede %d understøttede lande.", len(countries))
-                return countries
-            except KeyError as e:
-                _LOGGER.error("Fejl ved behandling af lande-data: Manglende nøgle %s", e)
-                raise
+            countries = {country["countryCode"]: country["name"] for country in data}
+            _LOGGER.info("Hentede %d understøttede lande.", len(countries))
+            return countries
 
 
 class IsItPayday2ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
-    """Config flow til IsItPayday."""
-
     VERSION = 1
 
     def __init__(self) -> None:
@@ -63,35 +57,22 @@ class IsItPayday2ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         self.pay_day = None
         self.last_pay_date = None
         self.bank_offset = 0
+        self.weekday = None
         self.country_list = {}
 
     async def async_step_user(self, user_input: dict | None = None) -> FlowResult:
-        """Trin 1: Vælg land."""
-        _LOGGER.info("Starter config flow - Trin 1 (Vælg land).")
-
         if user_input is None:
             self.country_list = await async_fetch_supported_countries()
-            current_country = await async_get_homeassistant_country(self.hass)
-
-            if not current_country:
-                _LOGGER.warning("Ingen gyldig Home Assistant country fundet. Fallback til 'DK'.")
-                current_country = "DK"
-
-            _LOGGER.info("Standardland sat til: %s", current_country)
-
+            current_country = await async_get_homeassistant_country(self.hass) or "DK"
             return self.async_show_form(
                 step_id="user",
                 data_schema=self._create_country_schema(current_country),
             )
 
         self.country = user_input[CONF_COUNTRY]
-        _LOGGER.info("Land valgt: %s", self.country)
         return await self.async_step_frequency()
 
     async def async_step_frequency(self, user_input: dict | None = None) -> FlowResult:
-        """Trin 2: Vælg udbetalingsfrekvens."""
-        _LOGGER.info("Starter config flow - Trin 2 (Vælg udbetalingsfrekvens).")
-
         if user_input is None:
             return self.async_show_form(
                 step_id="frequency",
@@ -99,19 +80,17 @@ class IsItPayday2ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             )
 
         self.pay_frequency = user_input[CONF_PAY_FREQ]
-        _LOGGER.info("Udbetalingsfrekvens valgt: %s", self.pay_frequency)
 
         if self.pay_frequency == "monthly":
             return await self.async_step_monthly_day()
-        if self.pay_frequency in ["28_days", "14_days"]:
+        elif self.pay_frequency in ["28_days", "14_days"]:
             return await self.async_step_cycle_last_paydate()
-        if self.pay_frequency == "weekly":
+        elif self.pay_frequency == "weekly":
             return await self.async_step_weekly()
 
         return self._create_entry()
 
     async def async_step_monthly_day(self, user_input: dict | None = None) -> FlowResult:
-        """Trin 3: Vælg dag i måneden."""
         if user_input is None:
             return self.async_show_form(
                 step_id="monthly_day",
@@ -119,41 +98,35 @@ class IsItPayday2ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             )
 
         self.pay_day = user_input[CONF_PAY_DAY]
-        _LOGGER.info("Månedlig udbetalingsdag valgt: %s", self.pay_day)
 
         if self.pay_day == "last_bank_day":
             return await self.async_step_bank_offset()
-        if self.pay_day == "specific_day":
+        elif self.pay_day == "specific_day":
             return await self.async_step_specific_day()
 
         return self._create_entry()
 
     async def async_step_bank_offset(self, user_input: dict | None = None) -> FlowResult:
-        """Trin 4: Vælg dage før sidste bankdag."""
         if user_input is None:
             return self.async_show_form(
                 step_id="bank_offset",
                 data_schema=self._create_bank_offset_schema(),
             )
 
-        self.bank_offset = int(user_input[CONF_BANK_OFFSET])
-        _LOGGER.info("Dage før sidste bankdag: %d", self.bank_offset)
+        self.bank_offset = user_input[CONF_BANK_OFFSET]
         return self._create_entry()
 
     async def async_step_specific_day(self, user_input: dict | None = None) -> FlowResult:
-        """Trin 4: Vælg specifik dag."""
         if user_input is None:
             return self.async_show_form(
                 step_id="specific_day",
                 data_schema=self._create_specific_day_schema(),
             )
 
-        self.pay_day = int(user_input[CONF_PAY_DAY])
-        _LOGGER.info("Specifik dag valgt: %d", self.pay_day)
+        self.pay_day = user_input[CONF_PAY_DAY]
         return self._create_entry()
 
     async def async_step_cycle_last_paydate(self, user_input: dict | None = None) -> FlowResult:
-        """Trin 3: Vælg sidste udbetalingsdato."""
         if user_input is None:
             return self.async_show_form(
                 step_id="cycle_last_paydate",
@@ -161,24 +134,19 @@ class IsItPayday2ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             )
 
         self.last_pay_date = user_input[CONF_LAST_PAY_DATE]
-        _LOGGER.info("Sidste udbetalingsdato valgt: %s", self.last_pay_date)
         return self._create_entry()
 
     async def async_step_weekly(self, user_input: dict | None = None) -> FlowResult:
-        """Trin 3: Vælg ugedag for ugeløn."""
         if user_input is None:
             return self.async_show_form(
                 step_id="weekly",
                 data_schema=self._create_weekly_schema(),
             )
 
-        self.pay_day = user_input[CONF_PAY_DAY]
-        _LOGGER.info("Ugelønsdag valgt: %s", self.pay_day)
+        self.weekday = user_input[CONF_PAY_DAY]
         return self._create_entry()
 
     def _create_entry(self) -> FlowResult:
-        """Opret konfigurationsindgang."""
-        _LOGGER.info("Opretter konfigurationsindgang.")
         return self.async_create_entry(
             title=CONF_TITLE,
             data={
@@ -187,6 +155,7 @@ class IsItPayday2ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                 CONF_PAY_DAY: self.pay_day,
                 CONF_LAST_PAY_DATE: self.last_pay_date,
                 CONF_BANK_OFFSET: self.bank_offset,
+                CONF_WEEKDAY: self.weekday,
             },
         )
 

@@ -67,7 +67,5 @@
             }
         }
     },
-    "system_options": {
-        "reconfigured": "Configuration updated successfully"
-    }
+    "reconfigured": "Configuration updated successfully"
 }

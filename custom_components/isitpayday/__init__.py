@@ -11,20 +11,24 @@ from .payday_calculator import async_calculate_next_payday
 _LOGGER = logging.getLogger(__name__)
 
 async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
+    """Setup via configuration.yaml - not used for this integration."""
     return True
 
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
+    """Setup IsItPayday instance from a config entry."""
     data = entry.data
+    instance_name = data.get(CONF_NAME, "IsItPayday")
 
     async def async_update_data():
+        """Fetch and calculate next payday."""
         try:
             next_payday = await async_calculate_next_payday(
                 data[CONF_COUNTRY],
                 data[CONF_PAY_FREQ],
                 data.get(CONF_PAY_DAY),
                 data.get(CONF_LAST_PAY_DATE),
-                data.get(CONF_WEEKDAY),  # Henter weekday fra config_entry
+                data.get(CONF_WEEKDAY),
                 data.get(CONF_BANK_OFFSET, 0)
             )
             return {"payday_next": next_payday}
@@ -34,12 +38,15 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     coordinator = DataUpdateCoordinator(
         hass,
         _LOGGER,
-        name=f"IsItPayday Coordinator ({entry.entry_id})",
+        name=f"{instance_name} Coordinator ({entry.entry_id})",
         update_method=async_update_data,
         update_interval=timedelta(minutes=5),
     )
 
-    hass.data.setdefault(DOMAIN, {})[entry.entry_id] = {"coordinator": coordinator}
+    hass.data.setdefault(DOMAIN, {})[entry.entry_id] = {
+        "coordinator": coordinator,
+        "name": instance_name  # Gemmer instansens navn til senere brug
+    }
 
     await coordinator.async_refresh()
 
@@ -51,9 +58,10 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 
 
 async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
+    """Unload IsItPayday instance."""
     unload_ok = await hass.config_entries.async_unload_platforms(entry, ["sensor", "binary_sensor"])
 
     if unload_ok:
-        hass.data[DOMAIN].pop(entry.entry_id)
+        hass.data[DOMAIN].pop(entry.entry_id, None)
 
     return unload_ok

@@ -16,9 +16,11 @@ async def async_setup_entry(hass, entry, async_add_entities):
     """Opsætning af binary sensor-platformen."""
     _LOGGER.debug("Setting up IsItPayday binary sensor for entry: %s", entry.entry_id)
 
-    coordinator: DataUpdateCoordinator = hass.data[DOMAIN][entry.entry_id]["coordinator"]
+    data = hass.data[DOMAIN][entry.entry_id]
+    coordinator: DataUpdateCoordinator = data["coordinator"]
+    instance_name = data.get("name", "IsItPayday")
 
-    async_add_entities([IsItPaydaySensor(coordinator)])
+    async_add_entities([IsItPaydaySensor(coordinator, instance_name)])
 
     _LOGGER.info("IsItPayday binary sensor added for entry: %s", entry.entry_id)
 
@@ -26,12 +28,12 @@ async def async_setup_entry(hass, entry, async_add_entities):
 class IsItPaydaySensor(CoordinatorEntity, BinarySensorEntity):
     """Binary sensor der viser om det er lønningsdag."""
 
-    _attr_name = "Is It Payday"
     _attr_device_class = None
 
-    def __init__(self, coordinator: DataUpdateCoordinator):
+    def __init__(self, coordinator: DataUpdateCoordinator, instance_name: str):
         super().__init__(coordinator)
-        self._attr_unique_id = "payday"
+        self._attr_unique_id = f"{instance_name}_is_it_payday"
+        self._attr_name = f"{instance_name} - Is It Payday"
 
     @property
     def is_on(self) -> bool:
@@ -76,10 +78,10 @@ class IsItPaydaySensor(CoordinatorEntity, BinarySensorEntity):
 
     @property
     def device_info(self) -> dict:
-        """Returnerer enhedsinfo for visning i Home Assistant."""
+        """Returnerer enhedsinfo."""
         return {
-            "identifiers": {(DOMAIN, "isitpayday_device")},
-            "name": "IsItPayday",
+            "identifiers": {(DOMAIN, self._attr_unique_id)},
+            "name": self._attr_name,
             "manufacturer": CONF_MANUFACTURER,
             "model": CONF_MODEL,
         }

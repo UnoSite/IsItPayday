@@ -22,6 +22,7 @@ WEEKDAY_MAP = {
 
 
 async def async_get_homeassistant_country(hass: HomeAssistant) -> str | None:
+    """Henter Home Assistant country fra konfiguration."""
     _LOGGER.debug("Henter Home Assistant country fra konfiguration.")
     country = getattr(hass.config, "country", None)
 
@@ -57,26 +58,32 @@ class IsItPayday2ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         self.bank_offset = 0
         self.weekday = None
         self.country_list = {}
-        self.reconfig_entry = None  # Holder reference til den instans vi genkonfigurerer
+        self.reconfig_entry = None
 
-    async def async_step_reconfigure(self, user_input=None) -> FlowResult:
+    async def async_step_reconfigure(self, user_input=None):
         """Start reconfiguration flow."""
-        self.reconfig_entry = self.context.get("entry")
+        _LOGGER.info("Starting reconfiguration flow")
 
-        if not self.reconfig_entry:
-            _LOGGER.error("Reconfiguration started without valid entry context.")
+        entry_id = self.context.get("entry_id")
+        if not entry_id:
+            _LOGGER.error("Reconfiguration started without valid entry_id in context.")
             return self.async_abort(reason="missing_entry")
 
-        entry = self.reconfig_entry
-        _LOGGER.info("Starting reconfiguration flow for entry: %s", entry.entry_id)
+        entry = self.hass.config_entries.async_get_entry(entry_id)
+        if not entry:
+            _LOGGER.error("Could not find entry with id %s", entry_id)
+            return self.async_abort(reason="entry_not_found")
 
-        self.name = entry.data.get(CONF_NAME)
-        self.country = entry.data.get(CONF_COUNTRY)
-        self.pay_frequency = entry.data.get(CONF_PAY_FREQ)
-        self.pay_day = entry.data.get(CONF_PAY_DAY)
-        self.last_pay_date = entry.data.get(CONF_LAST_PAY_DATE)
-        self.bank_offset = entry.data.get(CONF_BANK_OFFSET, 0)
-        self.weekday = entry.data.get(CONF_WEEKDAY)
+        self.reconfig_entry = entry
+        data = entry.data
+
+        self.name = data.get(CONF_NAME, "")
+        self.country = data.get(CONF_COUNTRY)
+        self.pay_frequency = data.get(CONF_PAY_FREQ)
+        self.pay_day = data.get(CONF_PAY_DAY)
+        self.last_pay_date = data.get(CONF_LAST_PAY_DATE)
+        self.bank_offset = data.get(CONF_BANK_OFFSET, 0)
+        self.weekday = data.get(CONF_WEEKDAY)
 
         self.country_list = await async_fetch_supported_countries()
 

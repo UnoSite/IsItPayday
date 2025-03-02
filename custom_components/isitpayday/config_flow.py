@@ -17,7 +17,7 @@ WEEKDAY_MAP = {
     "Tuesday": 1,
     "Wednesday": 2,
     "Thursday": 3,
-    "Friday": 4,
+    "Friday": 4
 }
 
 
@@ -205,7 +205,7 @@ class IsItPayday2ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 
     def _create_pay_frequency_schema(self) -> vol.Schema:
         return vol.Schema({
-            vol.Required(CONF_PAY_FREQ, default=self.pay_frequency): vol.In(PAY_FREQ_OPTIONS)
+            vol.Required(CONF_PAY_FREQ, default=self.pay_frequency or PAY_FREQ_MONTHLY): vol.In(PAY_FREQ_OPTIONS)
         })
 
     def _create_monthly_day_schema(self) -> vol.Schema:
@@ -215,7 +215,7 @@ class IsItPayday2ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 
     def _create_bank_offset_schema(self) -> vol.Schema:
         return vol.Schema({
-            vol.Required(CONF_BANK_OFFSET, default=self.bank_offset): vol.In(range(0, 11))
+            vol.Required(CONF_BANK_OFFSET, default=self.bank_offset or 0): vol.In(range(0, 11))
         })
 
     def _create_specific_day_schema(self) -> vol.Schema:

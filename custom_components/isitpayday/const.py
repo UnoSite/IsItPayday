@@ -8,6 +8,7 @@ CONF_MODEL = "Payday Tracker"
 
 # Configuration keys (stored in config entry)
 CONF_COUNTRY = "country"
+CONF_NAME = "name"
 CONF_PAY_FREQ = "pay_frequency"
 CONF_PAY_DAY = "pay_day"
 CONF_LAST_PAY_DATE = "last_pay_date"

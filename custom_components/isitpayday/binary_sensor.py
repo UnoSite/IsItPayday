@@ -77,11 +77,11 @@ class IsItPaydaySensor(CoordinatorEntity, BinarySensorEntity):
         }
 
     @property
-    def device_info(self) -> dict:
-        """Returnerer enhedsinfo."""
-        return {
-            "identifiers": {(DOMAIN, self._attr_unique_id)},
-            "name": self._attr_name,
-            "manufacturer": CONF_MANUFACTURER,
-            "model": CONF_MODEL,
-        }
+	def device_info(self) -> dict:
+    	"""Return device information so both entities are grouped under the same device."""
+    	return {
+        	"identifiers": {(DOMAIN, f"isitpayday_{self.coordinator.config_entry.entry_id}")},
+        	"name": self.coordinator.config_entry.data.get(CONF_NAME, "IsItPayday"),
+        	"manufacturer": CONF_MANUFACTURER,
+        	"model": CONF_MODEL,
+    	}

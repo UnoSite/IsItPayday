@@ -13,6 +13,6 @@
         "custom_components.isitpayday"
     ],
     "requirements": [],
-    "single_config_entry": true,
+    "supports_options": true,
     "version": "1.2.1"
 }

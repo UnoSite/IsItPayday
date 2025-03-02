@@ -49,6 +49,7 @@ class IsItPayday2ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     VERSION = 1
 
     def __init__(self) -> None:
+        self.name = None
         self.country = None
         self.pay_frequency = None
         self.pay_day = None
@@ -61,8 +62,9 @@ class IsItPayday2ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         if user_input is None:
             self.country_list = await async_fetch_supported_countries()
             current_country = await async_get_homeassistant_country(self.hass) or "DK"
-            return self.async_show_form(step_id="user", data_schema=self._create_country_schema(current_country))
+            return self.async_show_form(step_id="user", data_schema=self._create_user_schema(current_country))
 
+        self.name = user_input[CONF_NAME]
         self.country = user_input[CONF_COUNTRY]
         return await self.async_step_frequency()
 
@@ -125,8 +127,9 @@ class IsItPayday2ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 
     def _create_entry(self) -> FlowResult:
         return self.async_create_entry(
-            title=CONF_TITLE,
+            title=self.name,
             data={
+                CONF_NAME: self.name,
                 CONF_COUNTRY: self.country,
                 CONF_PAY_FREQ: self.pay_frequency,
                 CONF_PAY_DAY: self.pay_day,
@@ -136,8 +139,11 @@ class IsItPayday2ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             }
         )
 
-    def _create_country_schema(self, default_country: str) -> vol.Schema:
-        return vol.Schema({vol.Required(CONF_COUNTRY, default=default_country): vol.In(self.country_list)})
+    def _create_user_schema(self, default_country: str) -> vol.Schema:
+        return vol.Schema({
+            vol.Required(CONF_NAME): str,
+            vol.Required(CONF_COUNTRY, default=default_country): vol.In(self.country_list)
+        })
 
     def _create_pay_frequency_schema(self) -> vol.Schema:
         return vol.Schema({vol.Required(CONF_PAY_FREQ): vol.In(PAY_FREQ_OPTIONS)})
@@ -146,10 +152,10 @@ class IsItPayday2ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         return vol.Schema({vol.Required(CONF_PAY_DAY): vol.In(PAY_MONTHLY_OPTIONS)})
 
     def _create_bank_offset_schema(self) -> vol.Schema:
-        return vol.Schema({vol.Required(CONF_BANK_OFFSET, default=0): vol.In(range(0, 11))}) # Offset 0 to 10 days
+        return vol.Schema({vol.Required(CONF_BANK_OFFSET, default=0): vol.In(range(0, 11))})
 
     def _create_specific_day_schema(self) -> vol.Schema:
-        return vol.Schema({vol.Required(CONF_PAY_DAY, default=31): vol.In(range(1, 32))}) # Day of month (Day 1 to 31)
+        return vol.Schema({vol.Required(CONF_PAY_DAY, default=31): vol.In(range(1, 32))})
 
     def _create_last_paydate_schema(self) -> vol.Schema:
         return vol.Schema({vol.Required(CONF_LAST_PAY_DATE): DateSelector()})

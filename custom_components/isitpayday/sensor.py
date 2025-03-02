@@ -1,8 +1,9 @@
+"""Sensor platform for IsItPayday."""
+
 import logging
 from datetime import date
 from homeassistant.components.sensor import SensorEntity
 from homeassistant.helpers.update_coordinator import CoordinatorEntity, DataUpdateCoordinator
-from homeassistant.config_entries import ConfigEntry
 from .const import *
 
 _LOGGER = logging.getLogger(__name__)
@@ -10,23 +11,22 @@ _LOGGER = logging.getLogger(__name__)
 ICON = "mdi:calendar-clock"
 
 
-async def async_setup_entry(hass, entry: ConfigEntry, async_add_entities):
-    _LOGGER.debug("Setting up IsItPayday sensor for entry: %s", entry.entry_id)
+async def async_setup_entry(hass, entry, async_add_entities):
+    data = hass.data[DOMAIN][entry.entry_id]
+    coordinator: DataUpdateCoordinator = data["coordinator"]
+    instance_name = data["name"]
 
-    coordinator: DataUpdateCoordinator = hass.data[DOMAIN][entry.entry_id]["coordinator"]
-    instance_name = entry.data.get(CONF_NAME, "IsItPayday")
-
-    async_add_entities([IsItPaydayNextSensor(coordinator, entry, instance_name)])
-
-    _LOGGER.info("IsItPayday sensor added for entry: %s", entry.entry_id)
+    async_add_entities([IsItPaydayNextSensor(coordinator, instance_name)])
 
 
 class IsItPaydayNextSensor(CoordinatorEntity, SensorEntity):
-    def __init__(self, coordinator: DataUpdateCoordinator, entry: ConfigEntry, instance_name: str):
+    _attr_device_class = None
+
+    def __init__(self, coordinator: DataUpdateCoordinator, instance_name: str):
         super().__init__(coordinator)
-        self._entry = entry
-        self._attr_unique_id = f"{entry.entry_id}_payday_next"
-        self._attr_name = f"{instance_name} - Next Payday"
+        self._instance_name = instance_name
+        self._attr_unique_id = f"{coordinator.config_entry.entry_id}_payday_next"
+        self._attr_name = f"{self._instance_name} - Next Payday"
         self._attr_icon = ICON
 
     @property
@@ -40,15 +40,16 @@ class IsItPaydayNextSensor(CoordinatorEntity, SensorEntity):
             return payday.strftime("%Y-%m-%d")
 
         try:
-            return date.fromisoformat(payday).strftime("%Y-%m-%d")
+            payday_date = date.fromisoformat(payday)
+            return payday_date.strftime("%Y-%m-%d")
         except (ValueError, TypeError):
             return "Unknown"
 
     @property
     def device_info(self) -> dict:
         return {
-            "identifiers": {(DOMAIN, f"isitpayday_{self._entry.entry_id}")},
-            "name": self._entry.data.get(CONF_NAME, "IsItPayday"),
+            "identifiers": {(DOMAIN, self.coordinator.config_entry.entry_id)},
+            "name": self._instance_name,
             "manufacturer": CONF_MANUFACTURER,
             "model": CONF_MODEL,
         }

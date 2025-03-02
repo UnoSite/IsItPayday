@@ -6,6 +6,7 @@
                 "title": "Select Country",
                 "description": "Select the country used to check public holidays.",
                 "data": {
+                    "name": "Instance Name",
                     "country": "Country"
                 }
             },

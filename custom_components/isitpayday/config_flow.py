@@ -7,7 +7,6 @@ from homeassistant import config_entries
 from homeassistant.core import HomeAssistant
 from homeassistant.data_entry_flow import FlowResult
 from homeassistant.helpers.selector import DateSelector
-from homeassistant.helpers import persistent_notification
 
 from .const import *
 
@@ -195,12 +194,15 @@ class IsItPayday2ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             self.hass.config_entries.async_update_entry(self.reconfig_entry, data=data)
             self.hass.async_create_task(self.hass.config_entries.async_reload(self.reconfig_entry.entry_id))
 
-            # Send notification after successful reconfiguration
-            persistent_notification.async_create(
-                self.hass,
-                f"The configuration for '{self.name}' has been successfully updated.",
-                title="IsItPayday"
-            )
+            # Use service call instead of direct import
+            self.hass.async_create_task(self.hass.services.async_call(
+                "persistent_notification",
+                "create",
+                {
+                    "title": "IsItPayday",
+                    "message": f"The configuration for '{self.name}' has been successfully updated."
+                }
+            ))
 
             return self.async_abort(reason="reconfigured")
 

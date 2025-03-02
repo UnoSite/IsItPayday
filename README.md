@@ -21,13 +21,14 @@
 
 ## Features
 
-- **Binary Sensor:** `binary_sensor.is_it_payday`
+- **Device-based integration:** All sensors are grouped under a single device for each configured instance.
+- **Binary Sensor:** `binary_sensor.<instance_name>_is_it_payday`
   - Indicates whether today is a payday (`on` or `off`).
   - Icons:
     - `mdi:cash-fast` if it is payday.
     - `mdi:cash-clock` if it is not payday.
 
-- **Sensor:** `sensor.next_payday`
+- **Sensor:** `sensor.<instance_name>_next_payday`
   - Displays the date of the next payday.
   - Icon: `mdi:calendar-clock`.
 
@@ -44,6 +45,12 @@
 - **Automatic Adjustment for Holidays and Weekends:**
   - Fetches public holidays from the [Nager.Date API](https://date.nager.at).
   - Adjusts payday if it falls on a weekend or public holiday.
+
+- **Reconfiguration Support:**
+  - After initial setup, you can adjust all settings via the **Configure** button in the **Devices & Services** section.
+
+- **Persistent Notification After Reconfiguration:**
+  - When settings are updated, you will see a persistent notification confirming the change.
 
 ---
 
@@ -115,10 +122,19 @@
 
 ## Sensors
 
-| Entity ID                   | Name             | Description                                  |
-|-----------------------------|------------------|----------------------------------------------|
-| `binary_sensor.is_it_payday`| Is It Payday?    | Indicates if today is a payday (`on`/`off`). |
-| `sensor.next_payday`        | Next Payday      | Displays the date of the next payday.        |
+| Entity ID                                  | Name                  | Description                                  |
+|--------------------------------------------|-----------------------|----------------------------------------------|
+| `binary_sensor.<instance_name>_is_it_payday` | Is It Payday?        | Indicates if today is a payday (`on`/`off`). |
+| `sensor.<instance_name>_next_payday`       | Next Payday          | Displays the date of the next payday.        |
+
+- All entities are grouped under a single device, named after your chosen **Instance Name** during setup.
+
+---
+
+## Reconfiguration
+
+- After the integration is set up, you can change the settings (country, pay frequency, day, etc.) directly from **Settings > Devices & Services > Is It Payday > Configure**.
+- Once saved, a **persistent notification** will appear confirming the update.
 
 ---
 
@@ -130,8 +146,9 @@ You can add a **Payday Info Card** to your Home Assistant dashboard using the fo
 type: entities
 title: Payday Information
 entities:
-  - entity: binary_sensor.is_it_payday
+  - entity: binary_sensor.my_payday_instance_is_it_payday
     name: Is It Payday Today?
-  - entity: sensor.next_payday
+  - entity: sensor.my_payday_instance_next_payday
     name: Next Payday Date
 ```
+

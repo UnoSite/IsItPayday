@@ -6,6 +6,7 @@
                 "title": "Vælg land",
                 "description": "Vælg det land, der skal bruges til at tjekke helligdage.",
                 "data": {
+                    "name": "Instans navn",
                     "country": "Land"
                 }
             },

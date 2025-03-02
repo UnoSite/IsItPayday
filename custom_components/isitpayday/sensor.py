@@ -62,8 +62,8 @@ class IsItPaydayNextSensor(CoordinatorEntity, SensorEntity):
             "raw_data": str(self.coordinator.data),
         }
 
-	@property
-	def device_info(self) -> dict:
+    @property
+    def device_info(self) -> dict:
     	"""Return device information so both entities are grouped under the same device."""
     	return {
         	"identifiers": {(DOMAIN, f"isitpayday_{self.coordinator.config_entry.entry_id}")},

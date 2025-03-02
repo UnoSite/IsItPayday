@@ -16,7 +16,7 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     data = entry.data
-    instance_name = data.get(CONF_NAME" - Is It Payday", "IsItPayday")
+    instance_name = data.get(CONF_NAME, "IsItPayday")
 
     async def async_update_data():
         try:

@@ -1,3 +1,5 @@
+"""Initialization file for the IsItPayday integration."""
+
 import logging
 from datetime import timedelta
 from homeassistant.config_entries import ConfigEntry
@@ -9,6 +11,7 @@ from .const import *
 from .payday_calculator import async_calculate_next_payday
 
 _LOGGER = logging.getLogger(__name__)
+
 
 async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
     return True

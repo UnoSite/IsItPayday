@@ -66,5 +66,8 @@
                 "description": "Ændr indstillingerne for denne lønsporing."
             }
         }
+    },
+    "system_options": {
+        "reconfigured": "Konfiguration opdateret"
     }
 }

@@ -66,5 +66,8 @@
                 "description": "Modify the settings for this payday tracker."
             }
         }
+    },
+    "system_options": {
+        "reconfigured": "Configuration updated successfully"
     }
 }

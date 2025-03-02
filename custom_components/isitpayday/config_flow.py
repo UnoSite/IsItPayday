@@ -22,7 +22,6 @@ WEEKDAY_MAP = {
 
 
 async def async_get_homeassistant_country(hass: HomeAssistant) -> str | None:
-    """Henter Home Assistant country fra konfiguration."""
     _LOGGER.debug("Henter Home Assistant country fra konfiguration.")
     country = getattr(hass.config, "country", None)
 
@@ -60,11 +59,17 @@ class IsItPayday2ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         self.country_list = {}
         self.reconfig_entry = None  # Holder reference til den instans vi genkonfigurerer
 
-    async def async_step_reconfigure(self, entry: config_entries.ConfigEntry) -> FlowResult:
+    async def async_step_reconfigure(self, user_input=None) -> FlowResult:
         """Start reconfiguration flow."""
+        self.reconfig_entry = self.context.get("entry")
+
+        if not self.reconfig_entry:
+            _LOGGER.error("Reconfiguration started without valid entry context.")
+            return self.async_abort(reason="missing_entry")
+
+        entry = self.reconfig_entry
         _LOGGER.info("Starting reconfiguration flow for entry: %s", entry.entry_id)
 
-        self.reconfig_entry = entry
         self.name = entry.data.get(CONF_NAME)
         self.country = entry.data.get(CONF_COUNTRY)
         self.pay_frequency = entry.data.get(CONF_PAY_FREQ)

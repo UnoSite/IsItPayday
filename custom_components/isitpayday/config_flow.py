@@ -180,6 +180,7 @@ class IsItPayday2ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         if self.reconfig_entry:
             _LOGGER.info("Updating existing entry: %s", self.reconfig_entry.entry_id)
             self.hass.config_entries.async_update_entry(self.reconfig_entry, data=data)
+            self.hass.async_create_task(self.hass.config_entries.async_reload(self.reconfig_entry.entry_id))
             return self.async_abort(reason="reconfigured")
 
         return self.async_create_entry(title=self.name, data=data)

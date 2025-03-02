@@ -11,17 +11,14 @@ from .payday_calculator import async_calculate_next_payday
 _LOGGER = logging.getLogger(__name__)
 
 async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
-    """Setup via configuration.yaml - not used for this integration."""
     return True
 
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
-    """Setup IsItPayday instance from a config entry."""
     data = entry.data
     instance_name = data.get(CONF_NAME, "IsItPayday")
 
     async def async_update_data():
-        """Fetch and calculate next payday."""
         try:
             next_payday = await async_calculate_next_payday(
                 data[CONF_COUNTRY],
@@ -45,7 +42,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 
     hass.data.setdefault(DOMAIN, {})[entry.entry_id] = {
         "coordinator": coordinator,
-        "name": instance_name  # Gemmer instansens navn til senere brug
+        "name": instance_name
     }
 
     await coordinator.async_refresh()
@@ -58,7 +55,6 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 
 
 async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
-    """Unload IsItPayday instance."""
     unload_ok = await hass.config_entries.async_unload_platforms(entry, ["sensor", "binary_sensor"])
 
     if unload_ok:

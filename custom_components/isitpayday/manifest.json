@@ -12,7 +12,7 @@
     "loggers": [
         "custom_components.isitpayday"
     ],
+    "options_flow": true,
     "requirements": [],
-    "supports_options": true,
     "version": "2.2.1"
 }

@@ -12,7 +12,6 @@
     "loggers": [
         "custom_components.isitpayday"
     ],
-    "options_flow": true,
     "requirements": [],
     "version": "2.2.1"
 }

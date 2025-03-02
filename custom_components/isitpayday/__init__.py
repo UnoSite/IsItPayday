@@ -1,5 +1,3 @@
-"""Initialization file for the IsItPayday integration."""
-
 import logging
 from datetime import timedelta
 from homeassistant.config_entries import ConfigEntry
@@ -12,16 +10,17 @@ from .payday_calculator import async_calculate_next_payday
 
 _LOGGER = logging.getLogger(__name__)
 
-
 async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
+    """Setup via configuration.yaml - not used for this integration."""
     return True
 
-
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
+    """Setup IsItPayday instance from a config entry."""
     data = entry.data
-    instance_name = data.get(CONF_NAME, "IsItPayday")
+    instance_name = entry.title  # Use entry.title for naming across the integration
 
     async def async_update_data():
+        """Fetch and calculate next payday."""
         try:
             next_payday = await async_calculate_next_payday(
                 data[CONF_COUNTRY],
@@ -45,7 +44,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 
     hass.data.setdefault(DOMAIN, {})[entry.entry_id] = {
         "coordinator": coordinator,
-        "name": instance_name
+        "name": instance_name  # Save the name for entity naming
     }
 
     await coordinator.async_refresh()
@@ -56,8 +55,8 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     await hass.config_entries.async_forward_entry_setups(entry, ["sensor", "binary_sensor"])
     return True
 
-
 async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
+    """Unload IsItPayday instance."""
     unload_ok = await hass.config_entries.async_unload_platforms(entry, ["sensor", "binary_sensor"])
 
     if unload_ok:

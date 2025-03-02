@@ -1,6 +1,6 @@
 name-template: 'Version $RESOLVED_VERSION'
 tag-template: 'v$RESOLVED_VERSION'
-change-template: '- #$NUMBER $TITLE @$AUTHOR'
+change-template: '- #$NUMBER: `$TITLE` by @$AUTHOR'
 sort-direction: ascending
 exclude-labels:
   - 'skip-changelog'

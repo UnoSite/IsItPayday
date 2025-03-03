@@ -152,3 +152,5 @@ entities:
     name: Next Payday Date
 ```
 
+## Issues?
+[![Static Badge](https://img.shields.io/badge/Report%20issues-E00000?style=for-the-badge)](https://github.com/UnoSite/IsItPayday/issues)

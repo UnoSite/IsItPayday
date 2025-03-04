@@ -1,13 +1,12 @@
 name: Feature request
-description: Make a request for a new feature in the Strømligning integration
+description: Make a request for a new feature in the IsItPayday integration
 title: "[FR]: "
 labels: ["enhancement"]
 body:
   - type: markdown
     attributes:
       value: |
-        This form is only for requesting new features to the integration.
-
+        This form is only for requesting new features to the integration.<br/>
         Remember to add a descriptive title after the predefined text.
   - type: textarea
     validations:
@@ -15,7 +14,7 @@ body:
     attributes:
       label: Describe the feature you wish to make a request for
       description: >-
-        Provide a clear and concise description of what you wish for.
+        Provide a clear and concise description of what you wish for.<br/>
         The more precise and detailed the more likely it is to be accepted and made.
   - type: textarea
     attributes:

@@ -22,7 +22,7 @@ body:
     attributes:
       value: |
         
-        # Environment:
+        ## Environment:
   - type: input
     id: version
     validations:
@@ -58,7 +58,7 @@ body:
     attributes:
       value: |
         
-        # Details
+        ## Details
   - type: textarea
     attributes:
       label: Anything in the logs that might be useful for us?

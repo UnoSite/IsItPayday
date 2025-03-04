@@ -5,6 +5,7 @@
 [![License](https://img.shields.io/github/license/UnoSite/IsItPayday?style=for-the-badge)](https://github.com/UnoSite/IsItPayday/blob/main/LICENSE.md)
 [![Code Size](https://img.shields.io/github/languages/code-size/UnoSite/IsItPayday?style=for-the-badge)](#)
 [![Stars](https://img.shields.io/github/stars/UnoSite/IsItPayday?style=for-the-badge)](#)
+[![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/UnoSite/IsItPayday/total?style=for-the-badge)](#)
 
 ![Logo](https://github.com/UnoSite/IsItPayday/blob/main/logo.png)
 
@@ -153,4 +154,4 @@ entities:
 ```
 
 ## Issues?
-[![Static Badge](https://img.shields.io/badge/Report%20issues-E00000?style=for-the-badge)](https://github.com/UnoSite/IsItPayday/issues)
+[![Static Badge](https://img.shields.io/badge/Report-issues-E00000?style=for-the-badge)](https://github.com/UnoSite/IsItPayday/issues)

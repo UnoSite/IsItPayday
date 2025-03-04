@@ -12,16 +12,17 @@ body:
     validations:
       required: true
     attributes:
-      label: Describe the issue
+      label: Describe the issue 
+      render: txt
       description: >-
         Describe the issue you are experiencing here.
-        Describe what you were trying to do and what happened.
-
+        Describe what you were trying to do and what happened.<br/>
         Provide a clear and concise description of what the problem is.
   - type: markdown
     attributes:
       value: |
-        ## Environment
+        ---
+        ## Environment:
   - type: input
     id: version
     validations:
@@ -56,22 +57,8 @@ body:
   - type: markdown
     attributes:
       value: |
-        # Details
-#  - type: textarea
-#    validations:
-#      required: true
-#    attributes:
-#      label: Diagnostics information
-#      placeholder: "drag-and-drop the diagnostics data file here (do not copy-and-paste the content)"
-#      description: >-
-#        This integrations provide the ability to [download diagnostic data](https://www.home-assistant.io/docs/configuration/troubleshooting/#debug-logs-and-diagnostics).
-
-#         **It would really help if you could download the diagnostics data for the device you are having issues with,
-#         and <ins>drag-and-drop that file into the textbox below.</ins>**
-
-#         It generally allows pinpointing defects and thus resolving issues faster.
-
-#         If you are unable to provide the diagnostics (ie. you cannot add the integration), please write **None** in this field.
+        ---
+        ## Details
   - type: textarea
     attributes:
       label: Anything in the logs that might be useful for us?
@@ -79,6 +66,7 @@ body:
       render: txt
   - type: textarea
     attributes:
-      label: Additional information
+      label: Additional information 
+      render: txt
       description: >
         If you have any additional information for us, use the field below.

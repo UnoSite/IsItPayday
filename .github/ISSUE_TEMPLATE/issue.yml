@@ -1,5 +1,5 @@
 name: Report a bug / issue
-description: Report an issue with the Strømligning integration
+description: Report an issue with the IsItPayday integration
 labels: ["bug"]
 assignees:
   - UnoSite
@@ -15,7 +15,7 @@ body:
       label: Describe the issue 
       render: txt
       description: >-
-        Describe the issue you are experiencing here.
+        Describe the issue you are experiencing here.<br/>
         Describe what you were trying to do and what happened.<br/>
         Provide a clear and concise description of what the problem is.
   - type: markdown

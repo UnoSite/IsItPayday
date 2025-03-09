@@ -15,12 +15,12 @@ jobs:
       - uses: dessant/lock-threads@v5.0.1
         with:
           github-token: ${{ secrets.PAT_TOKEN }}
-          add-issue-labels: 'Locked'
+          add-issue-labels: 'LOCKED'
           issue-comment: >
             This issue has been automatically locked since there
             has not been any recent activity after it was closed.
             Please open a new issue for related bugs.
-          add-pr-labels: 'Locked'
+          add-pr-labels: 'LOCKED'
           pr-comment: >
             This pull request has been automatically locked since there
             has not been any recent activity after it was closed.

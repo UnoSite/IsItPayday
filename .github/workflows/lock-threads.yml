@@ -1,0 +1,27 @@
+name: 'Lock Threads'
+
+on:
+  schedule:
+    - cron: '0 * * * *'
+  workflow_dispatch:
+
+concurrency:
+  group: lock-threads
+
+jobs:
+  action:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: dessant/lock-threads@v5.0.1
+        with:
+          github-token: ${{ secrets.PAT_TOKEN }}
+          add-issue-labels: 'Locked'
+          issue-comment: >
+            This issue has been automatically locked since there
+            has not been any recent activity after it was closed.
+            Please open a new issue for related bugs.
+          add-pr-labels: 'Locked'
+          pr-comment: >
+						This pull request has been automatically locked since there
+      			has not been any recent activity after it was closed.
+            Please open a new pull request for related bugs.

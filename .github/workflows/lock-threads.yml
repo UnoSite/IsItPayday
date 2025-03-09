@@ -23,5 +23,5 @@ jobs:
           add-pr-labels: 'Locked'
           pr-comment: >
 						This pull request has been automatically locked since there
-      			has not been any recent activity after it was closed.
+            has not been any recent activity after it was closed.
             Please open a new pull request for related bugs.

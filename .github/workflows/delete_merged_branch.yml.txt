@@ -1,0 +1,31 @@
+name: Delete Merged Branch
+
+on:
+  pull_request:
+    types:
+      - closed
+      - locked
+
+jobs:
+  delete-branch:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+#      - name: Get branch name
+#        run: echo "Branch to delete: ${{ github.event.pull_request.head.ref }}"
+
+      - name: Sleep for 30 seconds
+        run: sleep 30s
+        shell: bash
+
+      - name: delete-branch
+        uses: breningham/delete-branch@v1.0.0
+        with:
+          github_token: ${{ secrets.PAT_TOKEN }}
+          # The owner of the repository
+          repo_owner: ${{ github.repository_owner }}
+          # The name of the repository
+          repo_name: ${{ github.event.repository.name }}
+          # The name of the branch to delete
+          branch_name: ${{ github.event.pull_request.head.ref }}
+          

@@ -153,5 +153,14 @@ entities:
     name: Next Payday Date
 ```
 
-## Issues?
-[![Static Badge](https://img.shields.io/badge/Report-issues-E00000?style=for-the-badge)](https://github.com/UnoSite/IsItPayday/issues)
+---
+
+## ❓ **Issues & Support**
+If you encounter any issues or have feature requests, please open an issue on GitHub:
+
+[![ Badge](https://img.shields.io/badge/Report-issues-E00000?style=for-the-badge)](https://github.com/UnoSite/IsItPayday/issues)
+
+---
+
+## 📜 **License**
+This integration is licensed under the [MIT License](https://github.com/UnoSite/IsItPayday/blob/main/LICENSE.md).

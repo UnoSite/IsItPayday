@@ -22,7 +22,7 @@ class IsItPaydayNextSensor(CoordinatorEntity, SensorEntity):
     def __init__(self, coordinator: DataUpdateCoordinator, entry_id: str, instance_name: str):
         super().__init__(coordinator)
         self._attr_unique_id = f"{entry_id}_payday_next"
-        self._attr_name = f"{instance_name} - Next Payday"
+        self._attr_name = f"{instance_name} Next Payday"
         self._attr_icon = ICON
         self._instance_name = instance_name
         self._entry_id = entry_id

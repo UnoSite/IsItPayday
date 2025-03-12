@@ -10,6 +10,7 @@ on:
 
 env:
   COMPONENT_DIR: isitpayday
+  GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
 
 jobs:
   release_zip_file:
@@ -18,20 +19,19 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
-      - name: Update manifest.json version to ${{ github.event.release.tag_name }}
-        run: |
-          python3 ${{ github.workspace }}/.github/scripts/update_hacs_manifest.py --version ${{ github.event.release.tag_name }} --path /custom_components/isitpayday/
-      - name: Commit manifest update
-        run: |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
-          git add ./custom_components/isitpayday/manifest.json
-          git commit -m "Updated manifest.json"
-          git push origin HEAD:main
+        
+      - name: Update manifest.json to ${{ github.event.release.tag_name }}
+        uses: jossef/action-set-json-field@v2.2
+        with:
+          file: custom_components/isitpayday/manifest.json
+          field: version
+          value: ${{ github.event.release.tag_name }}
+          
       - name: Create zip
         run: |
           cd custom_components/isitpayday
           zip isitpayday.zip -r ./
+          
       - name: Upload zip to release
         uses: svenstaro/upload-release-action@2.9.0
         with:

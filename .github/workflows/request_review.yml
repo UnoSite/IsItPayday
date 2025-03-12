@@ -12,9 +12,12 @@ env:
 jobs:
   request_review:
     runs-on: ubuntu-latest
-    if: ${{ !contains(fromJSON(env.PR_REVIEWERS), github.actor) }}
     steps:
-      - name: Request a review
+      - name: Sæt miljøvariabel for reviewers
+        run: echo "PR_REVIEWERS_JSON=${{ env.PR_REVIEWERS }}" >> $GITHUB_ENV
+
+      - name: Anmod om et review
+        if: ${{ !contains(fromJSON(env.PR_REVIEWERS_JSON), github.actor) }}
         uses: octokit/request-action@v2.x
         env:
           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}

@@ -10,6 +10,7 @@ on:
 
 env:
   COMPONENT_DIR: isitpayday
+  GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
 
 jobs:
   release_zip_file:

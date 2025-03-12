@@ -11,6 +11,7 @@ on:
 env:
   COMPONENT_DIR: isitpayday
   GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
+  TAG_NAME: ${{ github.event.release.tag_name }}
 
 jobs:
   release_zip_file:
@@ -20,11 +21,11 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
         
-      - name: Update manifest.json to ${{ github.event.release.tag_name }}
+      - name: Update manifest.json to $TAG_NAME
         uses: restackio/update-json-values-action@v1.2.0
         with:
           file: custom_components/isitpayday/manifest.json
-          fields: "{\"version\": \"$\{\{ github.event.release.tag_name \}\}\"}"
+          fields: "{\"version\": \"$TAG_NAME\"}"
           
       - name: Create zip
         run: |

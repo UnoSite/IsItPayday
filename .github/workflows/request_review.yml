@@ -7,7 +7,7 @@ on:
       - synchronize
 
 env:
-  PR_REVIEWERS: ["UnoSite"]
+  PR_REVIEWERS: '["UnoSite"]'
 
 jobs:
   request_review:
@@ -23,4 +23,4 @@ jobs:
           owner: ${{ github.repository_owner }}
           repo: ${{ github.event.repository.name }}
           pull_number: ${{ github.event.pull_request.number }}
-          reviewers: '$PR_REVIEWERS'
+          reviewers: ${{ env.PR_REVIEWERS }}

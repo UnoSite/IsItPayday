@@ -1,6 +1,6 @@
-# MIT License
+MIT License
 
-> Copyright © 2025 UnoSite
+Copyright © 2025 UnoSite
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

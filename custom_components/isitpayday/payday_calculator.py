@@ -110,7 +110,7 @@ async def async_calculate_weekly(today, weekday, bank_holidays):
 
 
 async def async_find_last_bank_day(year, month, bank_holidays, bank_offset):
-    """Finder sidste bankdag i måneden."""
+    """Finder sidste bankdag i maaneden."""
     day = 31
     while True:
         try:
@@ -124,7 +124,7 @@ async def async_find_last_bank_day(year, month, bank_holidays, bank_offset):
 
 
 async def async_find_first_bank_day(year, month, bank_holidays):
-    """Finder første bankdag i måneden."""
+    """Finder foerste bankdag i maaneden."""
     day = 1
     while True:
         payday = date(year, month, day)
@@ -134,7 +134,7 @@ async def async_find_first_bank_day(year, month, bank_holidays):
 
 
 async def async_find_specific_day(year, month, day, bank_holidays):
-    """Finder specifik dag i måneden og flytter bagud ved helligdag/weekend."""
+    """Finder specifik dag i maaneden og flytter bagud ved helligdag/weekend."""
     while True:
         try:
             payday = date(year, month, day)
@@ -146,7 +146,7 @@ async def async_find_specific_day(year, month, day, bank_holidays):
 
 
 async def async_adjust_for_bank_holidays_and_weekends(payday, bank_holidays):
-    """Flytter dato bagud hvis den falder på weekend eller banklukket dag."""
+    """Flytter dato bagud hvis den falder paa weekend eller banklukket dag."""
     while payday.weekday() >= 5 or payday in bank_holidays:
         payday -= timedelta(days=1)
 

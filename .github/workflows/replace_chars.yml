@@ -18,8 +18,8 @@ jobs:
 
       - name: Replace æ, ø, å in files (excluding translations/)
         run: |
-          TARGET_DIR="custom_components/braendstofpriser"
-          EXCLUDE_DIR="custom_components/braendstofpriser/translations"
+          TARGET_DIR="custom_components/isitpayday"
+          EXCLUDE_DIR="custom_components/isitpayday/translations"
 
           if [ -d "$TARGET_DIR" ]; then
             find "$TARGET_DIR" -type f ! -path "$EXCLUDE_DIR/*" -exec sed -i 's/æ/ae/g; s/ø/oe/g; s/å/aa/g' {} +

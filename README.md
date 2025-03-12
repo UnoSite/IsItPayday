@@ -14,13 +14,13 @@
 
 ---
 
-## Overview
+## 📌 Overview
 
 **IsItPayday** is a custom integration for Home Assistant that calculates and displays your next payday based on your country's holidays and your specified pay frequency.
 
 ---
 
-## Features
+## 🚀 Features
 
 - **Device-based integration:** All sensors are grouped under a single device for each configured instance.
 - **Binary Sensor:** `binary_sensor.<instance_name>_is_it_payday`
@@ -55,7 +55,7 @@
 
 ---
 
-## Installation
+## 📥 Installation
 
 ### **1. Manual Installation**
 1. **Download the latest release** from the [GitHub releases](https://github.com/UnoSite/IsItPayday/releases).
@@ -74,7 +74,7 @@
 
 ---
 
-## Configuration
+## ⚙️ Configuration
 
 ### Step 1: Select Country
 
@@ -121,7 +121,7 @@
 
 ---
 
-## Sensors
+## 📡 Sensors
 
 | Entity ID                                  | Name                  | Description                                  |
 |--------------------------------------------|-----------------------|----------------------------------------------|
@@ -132,14 +132,14 @@
 
 ---
 
-## Reconfiguration
+## 🔧 Reconfiguration
 
 - After the integration is set up, you can change the settings (country, pay frequency, day, etc.) directly from **Settings > Devices & Services > Is It Payday > Configure**.
 - Once saved, a **persistent notification** will appear confirming the update.
 
 ---
 
-## Example Dashboard Card (Lovelace)
+## 📋 Example Dashboard Card (Lovelace)
 
 You can add a **Payday Info Card** to your Home Assistant dashboard using the following Lovelace YAML configuration:
 
@@ -155,7 +155,7 @@ entities:
 
 ---
 
-## ❓ **Issues & Support**
+## ⁉️ **Issues & Support**
 If you encounter any issues or have feature requests, please open an issue on GitHub:
 
 [![ Badge](https://img.shields.io/badge/Report-issues-E00000?style=for-the-badge)](https://github.com/UnoSite/IsItPayday/issues)

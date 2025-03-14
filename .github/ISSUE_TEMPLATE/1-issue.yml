@@ -1,5 +1,5 @@
 name: Report a bug / issue
-description: Report an issue with the IsItPayday integration
+description: Report an issue with the integration
 labels: ["bug"]
 assignees:
   - UnoSite

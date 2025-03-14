@@ -1,7 +1,4 @@
 name: Check if PR is on hold
-permissions:
-  contents: read
-  pull-requests: write
 
 on:
   pull_request:

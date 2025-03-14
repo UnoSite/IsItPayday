@@ -30,12 +30,12 @@ jobs:
       - name: Create zip
         run: |
           cd custom_components/isitpayday
-          zip stromligning.zip -r ./
+          zip isitpayday.zip -r ./
       - name: Upload zip to release
         uses: svenstaro/upload-release-action@2.9.0
         with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: ./custom_components/isitpayday/stromligning.zip
+          repo_token: ${{ secrets.PAT_TOKEN }}
+          file: ./custom_components/isitpayday/isitpayday.zip
           asset_name: isitpayday.zip
           tag: ${{ github.ref }}
           overwrite: true

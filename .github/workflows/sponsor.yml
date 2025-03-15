@@ -1,0 +1,18 @@
+name: Sponsor labeler
+on: [issues, pull_request]
+
+jobs:
+  sponsor:
+    runs-on: ubuntu-latest
+    if: ${{ !endsWith(github.event.sender.login, '[bot]') && !endsWith(github.event.sender.login, 'bot') }}      
+    steps:
+      - name: 🤘 checkout
+        uses: actions/checkout@v2
+
+      - name: 💜 sponsor 
+        uses: devlooped/actions-sponsor@v1
+        with:
+          label: 💖 SPONSOR
+          gold-label: 🚩 PRIORITIZE
+          gold-amount: 15
+          token: ${{ secrets.PAT_TOKEN }}

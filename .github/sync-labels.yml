@@ -71,3 +71,11 @@
 - name: "size/XXL"
   color: b8bab8
   description: "Denotes a PR that changes 1000+ lines"
+
+- name: "💖 SPONSOR"
+  color: e75a70
+  description: "Get this if you sponsor me"
+- name: "🚩 PRIORITIZE"
+  color: e900ff
+  description: "This issue or pull request first"
+  

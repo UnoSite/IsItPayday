@@ -7,30 +7,23 @@ exclude-labels:
 categories:
   - title: '⚒️ Breaking Changes'
     labels:
-      - breaking-change
+      - 'breaking-change'
+
+  - title: '📋 Documentation'
+    labels:
+      - 'documentation'
 
   - title: '🚀 Features'
     labels:
-      - 'feature request'
       - 'enhancement'
 
   - title: '🐛 Bug Fixes'
     labels:
-      - 'fix'
-      - 'bugfix'
+      - 'bug-fix'
       - 'bug'
 
-  - title: '🧬 Changes to Charge Owner informations'
-    labels:
-      - chargeowner
-      - chargeowners
-
-  - title: '🧬 New Charge Owner(s) added'
-    labels:
-      - 'new chargeowner'
-
   - title: '🧰 Maintenance'
-    label: 'chore'
+    label: 'patch'
 
   - title: '📦 Dependencies'
     labels:
@@ -56,11 +49,3 @@ template: |
 
   [![Sponsor Buy Me a Coffee](https://img.shields.io/badge/Sponsor-Buy_Me_a_Coffee-yellow?style=for-the-badge)](https://buymeacoffee.com/UnoSite)
   [![Sponsor PayPal.Me](https://img.shields.io/badge/Sponsor-PayPal.me-blue?style=for-the-badge)](https://paypal.me/UnoSite)
-
-autolabeler:
-  - label: 'bug'
-    branch:
-      - '/fix\/.+/'
-  - label: 'feature request'
-    branch:
-      - '/feature\/.+/'

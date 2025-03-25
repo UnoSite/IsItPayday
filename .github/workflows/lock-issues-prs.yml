@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Close inactive issues and pull requests
-        uses: actions/stale@v9
+        uses: actions/stale@v9.1.0
         with:
           repo-token: ${{ secrets.PAT_TOKEN }}
           days-before-stale: 30
@@ -30,7 +30,7 @@ jobs:
     needs: close_stale  # Vent på at stale-issues bliver lukket
     steps:
       - name: Lock closed issues and pull requests
-        uses: actions/github-script@v7
+        uses: actions/github-script@v7.0.1
         with:
           github-token: ${{ secrets.PAT_TOKEN }}
           script: |
@@ -83,7 +83,7 @@ jobs:
     needs: close_stale
     steps:
       - name: Lock issues and PRs closed due to inactivity
-        uses: actions/github-script@v7
+        uses: actions/github-script@v7.0.1
         with:
           github-token: ${{ secrets.PAT_TOKEN }}
           script: |

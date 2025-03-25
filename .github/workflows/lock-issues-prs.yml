@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Close inactive issues and pull requests
-        uses: actions/stale@v9.0.0
+        uses: actions/stale@v9.1.0
         with:
           repo-token: ${{ secrets.PAT_TOKEN }}
           days-before-stale: 30

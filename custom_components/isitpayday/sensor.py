@@ -1,5 +1,5 @@
 import logging
-from datetime import date
+from datetime import date, timedelta
 from homeassistant.components.sensor import SensorEntity
 from homeassistant.helpers.update_coordinator import CoordinatorEntity, DataUpdateCoordinator
 from .const import *
@@ -22,7 +22,7 @@ class IsItPaydayNextSensor(CoordinatorEntity, SensorEntity):
     def __init__(self, coordinator: DataUpdateCoordinator, entry_id: str, instance_name: str):
         super().__init__(coordinator)
         self._attr_unique_id = f"{entry_id}_payday_next"
-        self._attr_name = f"{instance_name} Next Payday"
+        self._attr_name = f"{instance_name}: Next payday"
         self._attr_icon = ICON
         self._instance_name = instance_name
         self._entry_id = entry_id
@@ -33,12 +33,21 @@ class IsItPaydayNextSensor(CoordinatorEntity, SensorEntity):
         if not payday:
             return "Unknown"
 
-        if isinstance(payday, date):
-            return payday.strftime("%Y-%m-%d")
+        today = date.today()
 
-        try:
-            return date.fromisoformat(payday).strftime("%Y-%m-%d")
-        except (ValueError, TypeError):
+        # Parse to date if it's a string
+        if not isinstance(payday, date):
+            try:
+                payday = date.fromisoformat(payday)
+            except (ValueError, TypeError):
+                return "Unknown"
+
+        # If payday is today, we want to keep it until the day ends
+        if payday > today:
+            return payday.strftime("%Y-%m-%d")
+        elif payday == today:
+            return payday.strftime("%Y-%m-%d")
+        else:
             return "Unknown"
 
     @property

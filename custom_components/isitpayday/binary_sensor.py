@@ -9,6 +9,7 @@ _LOGGER = logging.getLogger(__name__)
 ICON_FALSE = "mdi:cash-clock"
 ICON_TRUE = "mdi:cash-fast"
 
+
 async def async_setup_entry(hass, entry, async_add_entities):
     data = hass.data[DOMAIN][entry.entry_id]
     coordinator: DataUpdateCoordinator = data["coordinator"]
@@ -23,7 +24,7 @@ class IsItPaydaySensor(CoordinatorEntity, BinarySensorEntity):
     def __init__(self, coordinator: DataUpdateCoordinator, entry_id: str, instance_name: str):
         super().__init__(coordinator)
         self._attr_unique_id = f"{entry_id}_is_it_payday"
-        self._attr_name = f"{instance_name} Is It Payday"
+        self._attr_name = f"{instance_name}: Is it payday"
         self._instance_name = instance_name
         self._entry_id = entry_id
 

@@ -71,7 +71,7 @@ async def async_calculate_monthly(pay_day, bank_holidays, today, bank_offset):
         _LOGGER.error("Ugyldig pay_day vaerdi: %s", pay_day)
         return None
 
-    if payday <= today:
+    if payday < today:  # Rettet fra <= til <
         month += 1
         if month > 12:
             month = 1
@@ -91,7 +91,7 @@ async def async_calculate_recurring(last_pay_date, interval, bank_holidays):
     payday = last_date + timedelta(days=interval)
 
     today = date.today()
-    while payday <= today:
+    while payday < today:  # Rettet fra <= til <
         payday += timedelta(days=interval)
 
     _LOGGER.info("Naeste tilbagevendende loenningsdag beregnet til: %s", payday)

@@ -49,6 +49,9 @@
 - name: "skip-changelog"
   color: f1a7f4
   description: "Skips changelog on release"
+- name: "work-in-progress"
+  color: ffcc00
+  description: "It’s being worked on"
 - name: "wontfix"
   color: 424742
   description: "This will not be worked on"

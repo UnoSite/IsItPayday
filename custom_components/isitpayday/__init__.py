@@ -1,5 +1,5 @@
 import logging
-from datetime import timedelta
+from datetime import date, timedelta
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
@@ -18,9 +18,18 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     data = entry.data
     instance_name = data.get(CONF_NAME, "IsItPayday")
 
+    last_known_payday = None
+
     async def async_update_data():
+        nonlocal last_known_payday
+        today = date.today()
+
         try:
-            next_payday = await async_calculate_next_payday(
+            if last_known_payday and isinstance(last_known_payday, date):
+                if last_known_payday >= today:
+                    return {"payday_next": last_known_payday}
+
+            new_payday = await async_calculate_next_payday(
                 data[CONF_COUNTRY],
                 data[CONF_PAY_FREQ],
                 data.get(CONF_PAY_DAY),
@@ -28,7 +37,10 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
                 data.get(CONF_WEEKDAY),
                 data.get(CONF_BANK_OFFSET, 0)
             )
-            return {"payday_next": next_payday}
+
+            last_known_payday = new_payday
+            return {"payday_next": new_payday}
+
         except Exception as err:
             raise UpdateFailed(f"Error calculating next payday: {err}")
 

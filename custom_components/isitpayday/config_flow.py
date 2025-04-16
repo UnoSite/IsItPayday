@@ -102,15 +102,16 @@ class IsItPayday2ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 
         self.pay_frequency = user_input[CONF_PAY_FREQ]
 
-        if self.pay_frequency in [
-            PAY_FREQ_MONTHLY,
+        if self.pay_frequency == PAY_FREQ_MONTHLY:
+            return await self.async_step_monthly_day()
+        elif self.pay_frequency in [
             PAY_FREQ_BIMONTHLY,
             PAY_FREQ_QUARTERLY,
             PAY_FREQ_SEMIANNUAL,
-            PAY_FREQ_ANNUAL
+            PAY_FREQ_ANNUAL,
+            PAY_FREQ_28_DAYS,
+            PAY_FREQ_14_DAYS
         ]:
-            return await self.async_step_monthly_day()
-        elif self.pay_frequency in [PAY_FREQ_28_DAYS, PAY_FREQ_14_DAYS]:
             return await self.async_step_cycle_last_paydate()
         elif self.pay_frequency == PAY_FREQ_WEEKLY:
             return await self.async_step_weekly()

@@ -66,5 +66,15 @@
                 "description": "Modify the settings for this payday tracker."
             }
         }
+    },
+    "translation_key": {
+        "monthly": "Monthly",
+        "28_days": "Every 28 days",
+        "14_days": "Every 14 days",
+        "weekly": "Weekly",
+        "every_2_months": "Every 2 months",
+        "quarterly": "Quarterly",
+        "semi_annual": "Semi-annual",
+        "annual": "Annual"
     }
 }

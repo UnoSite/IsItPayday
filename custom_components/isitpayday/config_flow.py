@@ -22,24 +22,18 @@ WEEKDAY_MAP = {
 
 
 async def async_get_homeassistant_country(hass: HomeAssistant) -> str | None:
-    """Get Home Assistant configured country."""
     country = getattr(hass.config, "country", None)
-
     if not country:
         _LOGGER.warning("Home Assistant country is not set.")
         return None
-
     supported_countries = await async_fetch_supported_countries()
-
     if country not in supported_countries:
         _LOGGER.warning("Country '%s' is not supported.", country)
         return None
-
     return country
 
 
 async def async_fetch_supported_countries() -> dict[str, str]:
-    """Fetch supported countries from Nager.Date API."""
     async with aiohttp.ClientSession() as session:
         async with session.get(API_COUNTRIES) as response:
             data = await response.json()
@@ -61,9 +55,7 @@ class IsItPayday2ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         self.reconfig_entry = None
 
     async def async_step_reconfigure(self, user_input=None):
-        """Start reconfiguration flow."""
         _LOGGER.info("Starting reconfiguration flow")
-
         entry_id = self.context.get("entry_id")
         if not entry_id:
             _LOGGER.error("Reconfiguration started without valid entry_id in context.")
@@ -84,7 +76,6 @@ class IsItPayday2ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         self.last_pay_date = data.get(CONF_LAST_PAY_DATE)
         self.bank_offset = data.get(CONF_BANK_OFFSET, 0)
         self.weekday = data.get(CONF_WEEKDAY)
-
         self.country_list = await async_fetch_supported_countries()
 
         return await self.async_step_user()
@@ -93,7 +84,6 @@ class IsItPayday2ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         if user_input is None:
             self.country_list = await async_fetch_supported_countries()
             current_country = self.country or await async_get_homeassistant_country(self.hass) or "DK"
-
             return self.async_show_form(
                 step_id="user",
                 data_schema=self._create_user_schema(current_country)
@@ -112,7 +102,13 @@ class IsItPayday2ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 
         self.pay_frequency = user_input[CONF_PAY_FREQ]
 
-        if self.pay_frequency == PAY_FREQ_MONTHLY:
+        if self.pay_frequency in [
+            PAY_FREQ_MONTHLY,
+            PAY_FREQ_BIMONTHLY,
+            PAY_FREQ_QUARTERLY,
+            PAY_FREQ_SEMIANNUAL,
+            PAY_FREQ_ANNUAL
+        ]:
             return await self.async_step_monthly_day()
         elif self.pay_frequency in [PAY_FREQ_28_DAYS, PAY_FREQ_14_DAYS]:
             return await self.async_step_cycle_last_paydate()
@@ -194,7 +190,6 @@ class IsItPayday2ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             self.hass.config_entries.async_update_entry(self.reconfig_entry, data=data)
             self.hass.async_create_task(self.hass.config_entries.async_reload(self.reconfig_entry.entry_id))
 
-            # Use service call instead of direct import
             self.hass.async_create_task(self.hass.services.async_call(
                 "persistent_notification",
                 "create",

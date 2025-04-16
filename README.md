@@ -36,14 +36,14 @@
 
 - **Custom Payday Calculation:**
   - Supports various pay frequencies:
+    - **Weekly**
+    - **Every 14 days**
+    - **Every 28 days**
     - **Monthly**
     - **Every 2 months**
     - **Quarterly (every 3 months)**
     - **Semi-annually (every 6 months)**
     - **Annually**
-    - **Every 28 days**
-    - **Every 14 days**
-    - **Weekly**
 
 - **Automatic Adjustment for Holidays and Weekends:**
   - Fetches public holidays from the [Nager.Date API](https://date.nager.at).
@@ -87,25 +87,25 @@
 
 - **Label:** Select the payout frequency
 - **Options:**
+  - `weekly`: Weekly
+  - `14_days`: Every 14th day
+  - `28_days`: Every 28th day
   - `monthly`: Monthly
   - `bimonthly`: Every 2 months
   - `quarterly`: Every 3 months
   - `semiannual`: Every 6 months
   - `annual`: Every year
-  - `28_days`: Every 28th day
-  - `14_days`: Every 14th day
-  - `weekly`: Weekly
 
 ### Step 3: Depending on the Selected Frequency
 
-- **Monthly / Bimonthly / Quarterly / Semiannual / Annual:**
+- **Monthly:**
   - **Label:** Select day of month
   - **Options:**
     - `last_bank_day`: Last bank day
     - `first_bank_day`: First bank day
     - `specific_day`: Specific day
 
-- **Every 28th or 14th day:**
+- **Every 14th or 28th day / Bimonthly / Quarterly / Semiannual / Annual:**
   - **Label:** Select last payday
   - **Description:** Choose the date of your last payday. The integration will calculate future paydays based on this date.
 

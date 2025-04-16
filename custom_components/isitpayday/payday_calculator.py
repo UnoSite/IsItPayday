@@ -32,23 +32,19 @@ async def async_calculate_next_payday(country: str, pay_frequency: str, pay_day=
     year = today.year
     bank_holidays = await async_get_bank_holidays(country, year)
 
-    if pay_frequency in (
-        PAY_FREQ_MONTHLY, PAY_FREQ_BIMONTHLY,
-        PAY_FREQ_QUARTERLY, PAY_FREQ_SEMIANNUAL,
-        PAY_FREQ_ANNUAL
-    ):
-        months = {
-            PAY_FREQ_MONTHLY: 1,
-            PAY_FREQ_BIMONTHLY: 2,
-            PAY_FREQ_QUARTERLY: 3,
-            PAY_FREQ_SEMIANNUAL: 6,
-            PAY_FREQ_ANNUAL: 12,
-        }[pay_frequency]
-        payday = await async_calculate_month_based(today, months, pay_day, bank_offset, bank_holidays)
+    if pay_frequency == PAY_FREQ_MONTHLY:
+        payday = await async_calculate_month_based(today, 1, pay_day, bank_offset, bank_holidays)
 
-    elif pay_frequency in (PAY_FREQ_28_DAYS, PAY_FREQ_14_DAYS):
-        interval = 28 if pay_frequency == PAY_FREQ_28_DAYS else 14
-        payday = await async_calculate_recurring(last_pay_date, interval, bank_holidays)
+    elif pay_frequency in (PAY_FREQ_28_DAYS, PAY_FREQ_14_DAYS, PAY_FREQ_BIMONTHLY, PAY_FREQ_QUARTERLY, PAY_FREQ_SEMIANNUAL, PAY_FREQ_ANNUAL):
+        interval_days = {
+            PAY_FREQ_14_DAYS: 14,
+            PAY_FREQ_28_DAYS: 28,
+            PAY_FREQ_BIMONTHLY: 60,
+            PAY_FREQ_QUARTERLY: 90,
+            PAY_FREQ_SEMIANNUAL: 182,
+            PAY_FREQ_ANNUAL: 365,
+        }[pay_frequency]
+        payday = await async_calculate_recurring(last_pay_date, interval_days, bank_holidays)
 
     elif pay_frequency == PAY_FREQ_WEEKLY:
         if weekday is None:

@@ -29,12 +29,20 @@ PAY_FREQ_MONTHLY = "monthly"
 PAY_FREQ_28_DAYS = "28_days"
 PAY_FREQ_14_DAYS = "14_days"
 PAY_FREQ_WEEKLY = "weekly"
+PAY_FREQ_BIMONTHLY = "bimonthly"
+PAY_FREQ_QUARTERLY = "quarterly"
+PAY_FREQ_SEMIANNUAL = "semiannual"
+PAY_FREQ_ANNUAL = "annual"
 
 PAY_FREQ_OPTIONS = {
     PAY_FREQ_MONTHLY: "Monthly",
     PAY_FREQ_28_DAYS: "Every 28th day",
     PAY_FREQ_14_DAYS: "Every 14th day",
     PAY_FREQ_WEEKLY: "Weekly",
+    PAY_FREQ_BIMONTHLY: "Every 2 months",
+    PAY_FREQ_QUARTERLY: "Every 3 months",
+    PAY_FREQ_SEMIANNUAL: "Every 6 months",
+    PAY_FREQ_ANNUAL: "Every year",
 }
 
 # Monthly pay day options (only for monthly frequency)

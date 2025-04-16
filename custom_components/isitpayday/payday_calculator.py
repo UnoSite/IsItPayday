@@ -47,6 +47,15 @@ async def async_calculate_next_payday(country: str, pay_frequency: str, pay_day=
             raise ValueError("Ugedag (weekday) mangler for weekly betaling.")
         payday = await async_calculate_weekly(today, weekday, bank_holidays)
 
+    elif pay_frequency in (PAY_FREQ_BIMONTHLY, PAY_FREQ_QUARTERLY, PAY_FREQ_SEMIANNUAL, PAY_FREQ_ANNUAL):
+        interval_months = {
+            PAY_FREQ_BIMONTHLY: 2,
+            PAY_FREQ_QUARTERLY: 3,
+            PAY_FREQ_SEMIANNUAL: 6,
+            PAY_FREQ_ANNUAL: 12,
+        }.get(pay_frequency)
+        payday = await async_calculate_month_interval(last_pay_date, interval_months, pay_day, bank_holidays)
+
     else:
         _LOGGER.error("Ugyldig betalingsfrekvens: %s", pay_frequency)
         return None
@@ -71,7 +80,7 @@ async def async_calculate_monthly(pay_day, bank_holidays, today, bank_offset):
         _LOGGER.error("Ugyldig pay_day vaerdi: %s", pay_day)
         return None
 
-    if payday < today:  # Rettet fra <= til <
+    if payday < today:
         month += 1
         if month > 12:
             month = 1
@@ -91,7 +100,7 @@ async def async_calculate_recurring(last_pay_date, interval, bank_holidays):
     payday = last_date + timedelta(days=interval)
 
     today = date.today()
-    while payday < today:  # Rettet fra <= til <
+    while payday < today:
         payday += timedelta(days=interval)
 
     _LOGGER.info("Naeste tilbagevendende loenningsdag beregnet til: %s", payday)
@@ -103,9 +112,33 @@ async def async_calculate_weekly(today, weekday, bank_holidays):
     days_ahead = (weekday - today.weekday()) % 7
     payday = today + timedelta(days=days_ahead)
 
-    payday = await async_adjust_for_bank_holidays_and_weekends(payday, bank_holidays)
-
     _LOGGER.info("Naeste ugentlige loenningsdag beregnet til: %s", payday)
+    return payday
+
+
+async def async_calculate_month_interval(last_pay_date, interval_months, day, bank_holidays):
+    """Beregner naeste loenningsdag baseret paa maaneinterval (fx hvert kvartal)."""
+    if not last_pay_date or not isinstance(day, int):
+        _LOGGER.error("Mangler sidste loenningsdato eller ugyldig dag.")
+        return None
+
+    last_date = date.fromisoformat(last_pay_date)
+    next_month = last_date.month + interval_months
+    year = last_date.year + (next_month - 1) // 12
+    month = (next_month - 1) % 12 + 1
+
+    try:
+        payday = date(year, month, day)
+    except ValueError:
+        # fallback til sidste dag i måneden
+        for d in range(31, 27, -1):
+            try:
+                payday = date(year, month, d)
+                break
+            except ValueError:
+                continue
+
+    _LOGGER.info("Maanedsbaseret loenningsdag: %s", payday)
     return payday
 
 
@@ -149,5 +182,4 @@ async def async_adjust_for_bank_holidays_and_weekends(payday, bank_holidays):
     """Flytter dato bagud hvis den falder paa weekend eller banklukket dag."""
     while payday.weekday() >= 5 or payday in bank_holidays:
         payday -= timedelta(days=1)
-
     return payday

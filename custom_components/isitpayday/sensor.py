@@ -2,6 +2,7 @@ import logging
 from datetime import date, datetime, timedelta
 from math import ceil
 from homeassistant.components.sensor import SensorEntity, SensorDeviceClass
+from homeassistant.helpers.entity import EntityCategory
 from homeassistant.helpers.update_coordinator import CoordinatorEntity, DataUpdateCoordinator
 from .const import *
 
@@ -71,6 +72,7 @@ class IsItPaydayDaysToSensor(CoordinatorEntity, SensorEntity):
     _attr_device_class = SensorDeviceClass.DURATION
     _attr_native_unit_of_measurement = "d"
     _attr_state_class = "measurement"
+    _attr_entity_category = EntityCategory.DIAGNOSTIC
 
     def __init__(self, coordinator: DataUpdateCoordinator, entry_id: str, instance_name: str):
         super().__init__(coordinator)
@@ -94,9 +96,8 @@ class IsItPaydayDaysToSensor(CoordinatorEntity, SensorEntity):
             if payday <= now:
                 return 0
 
-            # Rund op til hele dage baseret på tidspunkt
-            delta_days = (payday - now).days
-            return delta_days
+            delta = payday - now
+            return delta.days
         except Exception as e:
             _LOGGER.exception("Error calculating days to payday: %s", e)
             return None
@@ -115,4 +116,4 @@ class IsItPaydayDaysToSensor(CoordinatorEntity, SensorEntity):
             "name": self._instance_name,
             "manufacturer": CONF_MANUFACTURER,
             "model": CONF_MODEL,
-        }
+            }

@@ -10,7 +10,6 @@ from .payday_calculator import async_calculate_next_payday
 
 _LOGGER = logging.getLogger(__name__)
 
-
 async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
     return True
 

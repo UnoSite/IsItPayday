@@ -93,11 +93,13 @@ LOGGER_NAME = DOMAIN
 # Sensor and binary sensor entity names (fixed to required format)
 SENSOR_NEXT_PAYDAY = "sensor.payday_next"
 BINARY_SENSOR_IS_IT_PAYDAY = "binary_sensor.payday"
+SENSOR_DAYS_TO_PAYDAY = "sensor.days_to_payday"
 
 # Sensor icons
 ICON_NEXT_PAYDAY = "mdi:calendar-clock"
 ICON_IS_IT_PAYDAY_TRUE = "mdi:cash-fast"
 ICON_IS_IT_PAYDAY_FALSE = "mdi:cash-clock"
+ICON_DAYS_TO = "mdi:calendar-end"
 
 # Log messages (standardized to use across all files)
 LOG_INIT = "Initializing IsItPayday integration."

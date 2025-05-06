@@ -35,12 +35,19 @@ async def async_calculate_next_payday(country: str, pay_frequency: str, pay_day=
     if pay_frequency == PAY_FREQ_MONTHLY:
         payday = await async_calculate_month_based(today, 1, pay_day, bank_offset, bank_holidays)
 
-    elif pay_frequency in (PAY_FREQ_28_DAYS, PAY_FREQ_14_DAYS, PAY_FREQ_BIMONTHLY, PAY_FREQ_QUARTERLY, PAY_FREQ_SEMIANNUAL, PAY_FREQ_ANNUAL):
+    elif pay_frequency in (
+        PAY_FREQ_28_DAYS,
+        PAY_FREQ_14_DAYS,
+        PAY_FREQ_BIMONTHLY,
+        PAY_FREQ_QUARTERLY,
+        PAY_FREQ_SEMIANNUAL,
+        PAY_FREQ_ANNUAL,
+    ):
         interval_days = {
             PAY_FREQ_14_DAYS: 14,
             PAY_FREQ_28_DAYS: 28,
             PAY_FREQ_BIMONTHLY: 60,
-            PAY_FREQ_QUARTERLY: 90,
+            PAY_FREQ_QUARTERLY: 91,
             PAY_FREQ_SEMIANNUAL: 182,
             PAY_FREQ_ANNUAL: 365,
         }[pay_frequency]

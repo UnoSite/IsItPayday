@@ -3,67 +3,67 @@
     "config": {
         "step": {
             "user": {
-                "title": "Select Country",
-                "description": "Select the country used to check public holidays.",
+                "title": "Vælg land",
+                "description": "Vælg det land, der bruges til at kontrollere helligdage.",
                 "data": {
-                    "name": "Instance Name",
-                    "country": "Country"
+                    "name": "Instans-navn",
+                    "country": "Land"
                 }
             },
             "frequency": {
-                "title": "Select Payout Frequency",
-                "description": "Choose how often you get paid.",
+                "title": "Vælg udbetalingsfrekvens",
+                "description": "Vælg hvor ofte du får løn.",
                 "data": {
-                    "pay_frequency": "Payout Frequency"
+                    "pay_frequency": "Udbetalingsfrekvens"
                 }
             },
             "monthly_day": {
-                "title": "Select Day of Month",
-                "description": "Choose which day of the month you are paid.",
+                "title": "Vælg dag i måneden",
+                "description": "Vælg hvilken dag i måneden du får løn.",
                 "data": {
-                    "pay_day": "Day of Month"
+                    "pay_day": "Dag i måneden"
                 }
             },
             "bank_offset": {
-                "title": "Days Before Last Bank Day",
-                "description": "If you are paid a few days before the last bank day, choose how many days before.",
+                "title": "Antal dage før sidste bankdag",
+                "description": "Hvis du får løn nogle dage før sidste bankdag, vælg hvor mange dage før.",
                 "data": {
-                    "bank_offset": "Days Before"
+                    "bank_offset": "Dage før"
                 }
             },
             "specific_day": {
-                "title": "Select Specific Day",
-                "description": "Select the exact day you are paid each month.",
+                "title": "Vælg En Specifik Dag",
+                "description": "Vælg den præcise dag, du får løn hver måned.",
                 "data": {
-                    "pay_day": "Specific Day"
+                    "pay_day": "Specifik Dag"
                 }
             },
             "cycle_last_paydate": {
-                "title": "Select Last Payday",
-                "description": "Select the last date you were paid. This will be used to calculate the next payday.",
+                "title": "Vælg Sidste Lønningsdag",
+                "description": "Vælg den sidste dato, du fik løn. Dette vil blive brugt til at beregne næste lønningsdag.",
                 "data": {
-                    "last_pay_date": "Last Payday"
+                    "last_pay_date": "Sidste Lønningsdag"
                 }
             },
             "weekly": {
-                "title": "Select Weekly Payday",
-                "description": "Choose which weekday you are paid each week.",
+                "title": "Vælg Ugentlig Lønningsdag",
+                "description": "Vælg hvilken ugedag du får løn hver uge.",
                 "data": {
-                    "pay_day": "Payday Weekday"
+                    "pay_day": "Lønnings-ugedag"
                 }
             }
         },
         "error": {
-            "cannot_connect": "Failed to connect to IsItPayday service.",
-            "invalid_country": "The selected country is not supported.",
-            "invalid_response": "Invalid response from IsItPayday service."
+            "cannot_connect": "Kunne ikke oprette forbindelse til IsItPayday-tjenesten.",
+            "invalid_country": "Det valgte land understøttes ikke.",
+            "invalid_response": "Ugyldigt svar fra IsItPayday-tjenesten."
         }
     },
     "options": {
         "step": {
             "init": {
-                "title": "Adjust IsItPayday Settings",
-                "description": "Modify the settings for this payday tracker."
+                "title": "Juster IsItPayday Indstillinger",
+                "description": "Rediger indstillingerne for denne lønningsdag tracker."
             }
         }
     }

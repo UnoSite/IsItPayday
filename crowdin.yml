@@ -1,0 +1,3 @@
+files:
+  - source: /custom_components/isitpayday/translations/en.json
+    translation: /custom_components/battery_notes/translations/%two_letters_code%.json

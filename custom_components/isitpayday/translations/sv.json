@@ -1,69 +1,69 @@
 {
-    "title": "Is It Payday",
+    "title": "Är det löneutbetalningsdag",
     "config": {
         "step": {
             "user": {
-                "title": "Select Country",
-                "description": "Select the country used to check public holidays.",
+                "title": "Välj land",
+                "description": "Välj landet som används för att kontrollera helgdagar.",
                 "data": {
-                    "name": "Instance Name",
-                    "country": "Country"
+                    "name": "Instansnamn",
+                    "country": "Land"
                 }
             },
             "frequency": {
-                "title": "Select Payout Frequency",
-                "description": "Choose how often you get paid.",
+                "title": "Välj utbetalningsfrekvens",
+                "description": "Välj hur ofta du får lön.",
                 "data": {
-                    "pay_frequency": "Payout Frequency"
+                    "pay_frequency": "Utbetalningsfrekvens"
                 }
             },
             "monthly_day": {
-                "title": "Select Day of Month",
-                "description": "Choose which day of the month you are paid.",
+                "title": "Välj dag i månaden",
+                "description": "Välj vilken dag i månaden du får lön.",
                 "data": {
-                    "pay_day": "Day of Month"
+                    "pay_day": "Dag i månaden"
                 }
             },
             "bank_offset": {
-                "title": "Days Before Last Bank Day",
-                "description": "If you are paid a few days before the last bank day, choose how many days before.",
+                "title": "Dagar före sista bankdag",
+                "description": "Om du betalas några dagar före sista bankdagen, välj hur många dagar före.",
                 "data": {
-                    "bank_offset": "Days Before"
+                    "bank_offset": "Dagar före"
                 }
             },
             "specific_day": {
-                "title": "Select Specific Day",
-                "description": "Select the exact day you are paid each month.",
+                "title": "Välj specifik dag",
+                "description": "Välj den exakta dagen du får betalt varje månad.",
                 "data": {
-                    "pay_day": "Specific Day"
+                    "pay_day": "Specifik dag"
                 }
             },
             "cycle_last_paydate": {
-                "title": "Select Last Payday",
-                "description": "Select the last date you were paid. This will be used to calculate the next payday.",
+                "title": "Välj sista löneutbetalningsdagen",
+                "description": "Välj det senaste datumet du fick betalt. Detta används för att beräkna nästa löneutbetalningsdag.",
                 "data": {
-                    "last_pay_date": "Last Payday"
+                    "last_pay_date": "Sista löneutbetalningsdagen"
                 }
             },
             "weekly": {
-                "title": "Select Weekly Payday",
-                "description": "Choose which weekday you are paid each week.",
+                "title": "Välj veckovisa löneutbetalningsdagen",
+                "description": "Välj vilken veckodag du får betalt varje vecka.",
                 "data": {
-                    "pay_day": "Payday Weekday"
+                    "pay_day": "Veckodagens löneutbetalning"
                 }
             }
         },
         "error": {
-            "cannot_connect": "Failed to connect to IsItPayday service.",
-            "invalid_country": "The selected country is not supported.",
-            "invalid_response": "Invalid response from IsItPayday service."
+            "cannot_connect": "Misslyckades med att ansluta till IsItPayday-tjänsten.",
+            "invalid_country": "Det valda landet stöds inte.",
+            "invalid_response": "Ogiltigt svar från IsItPayday-tjänsten."
         }
     },
     "options": {
         "step": {
             "init": {
-                "title": "Adjust IsItPayday Settings",
-                "description": "Modify the settings for this payday tracker."
+                "title": "Justera IsItPayday-inställningarna",
+                "description": "Ändra inställningarna för denna löneutbetalningsspårare."
             }
         }
     }

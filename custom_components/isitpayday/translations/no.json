@@ -1,69 +1,69 @@
 {
-    "title": "Is It Payday",
+    "title": "Er det lønningsdag",
     "config": {
         "step": {
             "user": {
-                "title": "Select Country",
-                "description": "Select the country used to check public holidays.",
+                "title": "Velg land",
+                "description": "Velg landet som brukes for å sjekke offentlige høytidsdager.",
                 "data": {
-                    "name": "Instance Name",
-                    "country": "Country"
+                    "name": "Instansnavn",
+                    "country": "Land"
                 }
             },
             "frequency": {
-                "title": "Select Payout Frequency",
-                "description": "Choose how often you get paid.",
+                "title": "Velg utbetalingsfrekvens",
+                "description": "Velg hvor ofte du får lønn.",
                 "data": {
-                    "pay_frequency": "Payout Frequency"
+                    "pay_frequency": "Utbetalingsfrekvens"
                 }
             },
             "monthly_day": {
-                "title": "Select Day of Month",
-                "description": "Choose which day of the month you are paid.",
+                "title": "Velg dag i måneden",
+                "description": "Velg hvilken dag i måneden du blir betalt.",
                 "data": {
-                    "pay_day": "Day of Month"
+                    "pay_day": "Dag i måneden"
                 }
             },
             "bank_offset": {
-                "title": "Days Before Last Bank Day",
-                "description": "If you are paid a few days before the last bank day, choose how many days before.",
+                "title": "Dager før den siste bankdagen",
+                "description": "Hvis du blir betalt noen dager før den siste bankdagen, velg hvor mange dager før.",
                 "data": {
-                    "bank_offset": "Days Before"
+                    "bank_offset": "Dager før"
                 }
             },
             "specific_day": {
-                "title": "Select Specific Day",
-                "description": "Select the exact day you are paid each month.",
+                "title": "Velg spesifikk dag",
+                "description": "Velg nøyaktig dato du får lønn hver måned.",
                 "data": {
-                    "pay_day": "Specific Day"
+                    "pay_day": "Spesifikk dag"
                 }
             },
             "cycle_last_paydate": {
-                "title": "Select Last Payday",
-                "description": "Select the last date you were paid. This will be used to calculate the next payday.",
+                "title": "Velg siste lønningsdag",
+                "description": "Velg den siste dagen du ble betalt. Dette vil brukes til å beregne neste lønningsdag.",
                 "data": {
-                    "last_pay_date": "Last Payday"
+                    "last_pay_date": "Siste lønningsdag"
                 }
             },
             "weekly": {
-                "title": "Select Weekly Payday",
-                "description": "Choose which weekday you are paid each week.",
+                "title": "Velg ukentlig lønningsdag",
+                "description": "Velg hvilken ukedag du blir betalt hver uke.",
                 "data": {
-                    "pay_day": "Payday Weekday"
+                    "pay_day": "Lønningsdag ukedag"
                 }
             }
         },
         "error": {
-            "cannot_connect": "Failed to connect to IsItPayday service.",
-            "invalid_country": "The selected country is not supported.",
-            "invalid_response": "Invalid response from IsItPayday service."
+            "cannot_connect": "Kunne ikke koble til IsItPayday tjenesten.",
+            "invalid_country": "Det valgte landet støttes ikke.",
+            "invalid_response": "Ugyldig respons fra IsItPayday tjenesten."
         }
     },
     "options": {
         "step": {
             "init": {
-                "title": "Adjust IsItPayday Settings",
-                "description": "Modify the settings for this payday tracker."
+                "title": "Justér IsItPayday-innstillinger",
+                "description": "Endre innstillingene for denne lønningsdagsporeren."
             }
         }
     }

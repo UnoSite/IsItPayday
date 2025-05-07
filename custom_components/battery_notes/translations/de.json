@@ -1,0 +1,70 @@
+{
+    "title": "Is It Payday",
+    "config": {
+        "step": {
+            "user": {
+                "title": "Select Country",
+                "description": "Select the country used to check public holidays.",
+                "data": {
+                    "name": "Instance Name",
+                    "country": "Country"
+                }
+            },
+            "frequency": {
+                "title": "Select Payout Frequency",
+                "description": "Choose how often you get paid.",
+                "data": {
+                    "pay_frequency": "Payout Frequency"
+                }
+            },
+            "monthly_day": {
+                "title": "Select Day of Month",
+                "description": "Choose which day of the month you are paid.",
+                "data": {
+                    "pay_day": "Day of Month"
+                }
+            },
+            "bank_offset": {
+                "title": "Days Before Last Bank Day",
+                "description": "If you are paid a few days before the last bank day, choose how many days before.",
+                "data": {
+                    "bank_offset": "Days Before"
+                }
+            },
+            "specific_day": {
+                "title": "Select Specific Day",
+                "description": "Select the exact day you are paid each month.",
+                "data": {
+                    "pay_day": "Specific Day"
+                }
+            },
+            "cycle_last_paydate": {
+                "title": "Select Last Payday",
+                "description": "Select the last date you were paid. This will be used to calculate the next payday.",
+                "data": {
+                    "last_pay_date": "Last Payday"
+                }
+            },
+            "weekly": {
+                "title": "Select Weekly Payday",
+                "description": "Choose which weekday you are paid each week.",
+                "data": {
+                    "pay_day": "Payday Weekday"
+                }
+            }
+        },
+        "error": {
+            "cannot_connect": "Failed to connect to IsItPayday service.",
+            "invalid_country": "The selected country is not supported.",
+            "invalid_response": "Invalid response from IsItPayday service."
+        }
+    },
+    "options": {
+        "step": {
+            "init": {
+                "title": "Adjust IsItPayday Settings",
+                "description": "Modify the settings for this payday tracker."
+            }
+        }
+    }
+}

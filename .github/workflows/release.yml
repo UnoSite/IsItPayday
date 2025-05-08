@@ -16,7 +16,7 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4.2.2
         with:
-          token: ${{ secrets.PAT_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
       - name: Update manifest.json version to ${{ github.event.release.tag_name }}
         run: |
           python3 ${{ github.workspace }}/.github/scripts/update_hacs_manifest.py --version ${{ github.event.release.tag_name }} --path /custom_components/isitpayday/
@@ -34,7 +34,7 @@ jobs:
       - name: Upload zip to release
         uses: svenstaro/upload-release-action@2.9.0
         with:
-          repo_token: ${{ secrets.PAT_TOKEN }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: ./custom_components/isitpayday/isitpayday.zip
           asset_name: isitpayday.zip
           tag: ${{ github.ref }}

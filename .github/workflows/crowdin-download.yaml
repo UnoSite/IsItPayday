@@ -26,7 +26,9 @@ jobs:
           create_pull_request: true
           pull_request_title: "Update translations"
           pull_request_body: "New Crowdin translations submitted"
-          pull_request_base_branch_name: "main"
+          pull_request_assignees: crowdin-bot
+          pull_request_base_branch_name: main
+          pull_request_labels: localization
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}

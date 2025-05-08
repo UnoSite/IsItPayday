@@ -1,0 +1,70 @@
+{
+    "title": "Onko palkkapäivä",
+    "config": {
+        "step": {
+            "user": {
+                "title": "Valitse maa",
+                "description": "Valitse maa, jota käytetään julkisten vapaapäivien tarkistamiseen.",
+                "data": {
+                    "name": "Tilin nimi",
+                    "country": "Maa"
+                }
+            },
+            "frequency": {
+                "title": "Valitse palkanmaksun tiheys",
+                "description": "Valitse, kuinka usein saat palkkasi.",
+                "data": {
+                    "pay_frequency": "Palkanmaksun tiheys"
+                }
+            },
+            "monthly_day": {
+                "title": "Valitse kuukauden päivä",
+                "description": "Valitse, mikä päivä kuukaudesta saat palkkaa.",
+                "data": {
+                    "pay_day": "Kuukauden päivä"
+                }
+            },
+            "bank_offset": {
+                "title": "Päivät ennen viimeistä pankkipäivää",
+                "description": "Jos saat palkkaa muutama päivä ennen viimeistä pankkipäivää, valitse kuinka monta päivää ennen.",
+                "data": {
+                    "bank_offset": "Päivät ennen"
+                }
+            },
+            "specific_day": {
+                "title": "Valitse tietty päivä",
+                "description": "Valitse tarkka päivä, jona saat palkkasi joka kuukausi.",
+                "data": {
+                    "pay_day": "Erityinen päivä"
+                }
+            },
+            "cycle_last_paydate": {
+                "title": "Valitse viimeinen palkkapäivä",
+                "description": "Valitse viimeinen päivä, jona sait palkkaa. Tätä käytetään seuraavan palkkapäivän laskemiseen.",
+                "data": {
+                    "last_pay_date": "Viimeinen palkkapäivä"
+                }
+            },
+            "weekly": {
+                "title": "Valitse viikoittainen palkkapäivä",
+                "description": "Valitse, mikä viikonpäivä saat palkkasi joka viikko.",
+                "data": {
+                    "pay_day": "Palkkapäivän viikonpäivä"
+                }
+            }
+        },
+        "error": {
+            "cannot_connect": "Yhteys palveluun IsItPayday epäonnistui.",
+            "invalid_country": "Valittua maata ei tueta.",
+            "invalid_response": "Kelvoton vastaus palvelusta IsItPayday."
+        }
+    },
+    "options": {
+        "step": {
+            "init": {
+                "title": "Säädä IsItPayday-asetuksia",
+                "description": "Muokkaa tämän palkkajäljittimen asetuksia."
+            }
+        }
+    }
+}

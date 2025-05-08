@@ -32,21 +32,21 @@
                 }
             },
             "specific_day": {
-                "title": "Vælg En Specifik Dag",
+                "title": "Vælg en specifik dag",
                 "description": "Vælg den præcise dag, du får løn hver måned.",
                 "data": {
-                    "pay_day": "Specifik Dag"
+                    "pay_day": "Specifik dag"
                 }
             },
             "cycle_last_paydate": {
-                "title": "Vælg Sidste Lønningsdag",
+                "title": "Vælg sidste lønningsdag",
                 "description": "Vælg den sidste dato, du fik løn. Dette vil blive brugt til at beregne næste lønningsdag.",
                 "data": {
-                    "last_pay_date": "Sidste Lønningsdag"
+                    "last_pay_date": "Sidste lønningsdag"
                 }
             },
             "weekly": {
-                "title": "Vælg Ugentlig Lønningsdag",
+                "title": "Vælg ugentlig lønningsdag",
                 "description": "Vælg hvilken ugedag du får løn hver uge.",
                 "data": {
                     "pay_day": "Lønnings-ugedag"

@@ -2,8 +2,8 @@ name: Lock Inactive Issues and Pull Requests
 
 on:
   schedule:
-    - cron: "0 0 * * *"  # Kører dagligt ved midnat UTC
-  workflow_dispatch:  # Giver mulighed for manuel kørsel
+    - cron: "0 0 * * *"
+  workflow_dispatch:
 
 jobs:
   close_stale:
@@ -13,11 +13,11 @@ jobs:
       - name: Close inactive issues and pull requests
         uses: actions/stale@v9.1.0
         with:
-          repo-token: ${{ secrets.PAT_TOKEN }}
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
           days-before-stale: 30
           days-before-close: 0
-          stale-issue-message: "Denne issue er blevet inaktiv i 30 dage og bliver nu lukket."
-          stale-pr-message: "Denne pull request er blevet inaktiv i 30 dage og bliver nu lukket."
+          stale-issue-message: "Denne issue har været inaktiv i 30 dage og bliver nu lukket."
+          stale-pr-message: "Denne pull request har været inaktiv i 30 dage og bliver nu lukket."
           close-issue-message: "Lukket pga. inaktivitet."
           close-pr-message: "Lukket pga. inaktivitet."
           stale-issue-label: "Stale"
@@ -27,12 +27,12 @@ jobs:
   lock_closed:
     name: Lock Closed Issues & PRs (7+ days)
     runs-on: ubuntu-latest
-    needs: close_stale  # Vent på at stale-issues bliver lukket
+    needs: close_stale
     steps:
       - name: Lock closed issues and pull requests
         uses: actions/github-script@v7.0.1
         with:
-          github-token: ${{ secrets.PAT_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const daysSinceClosed = 7;
             const labelName = "LOCKED";
@@ -85,7 +85,7 @@ jobs:
       - name: Lock issues and PRs closed due to inactivity
         uses: actions/github-script@v7.0.1
         with:
-          github-token: ${{ secrets.PAT_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const labelName = "LOCKED";
 

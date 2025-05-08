@@ -1,7 +1,5 @@
----
 name: Sync labels
 
-# yamllint disable-line rule:truthy
 on:
   push:
     branches:
@@ -21,6 +19,6 @@ jobs:
       - name: 🚀 Run Label Syncer
         uses: micnncim/action-label-syncer@v1.3.0
         env:
-          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           manifest: .github/sync-labels.yml

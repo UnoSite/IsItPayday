@@ -4,58 +4,58 @@
         "step": {
             "user": {
                 "title": "Land auswählen",
-                "description": "Wählen Sie das Land aus, das zur Überprüfung der Feiertage verwendet wird.",
+                "description": "Wählen Sie das Land, das zur Überprüfung der Feiertage verwendet wird.",
                 "data": {
                     "name": "Instanzname",
                     "country": "Land"
                 }
             },
             "frequency": {
-                "title": "Auszahlungsfrequenz auswählen",
+                "title": "Payout-Frequenz wählen",
                 "description": "Wählen Sie aus, wie oft Sie bezahlt werden.",
                 "data": {
-                    "pay_frequency": "Auszahlungsfrequenz"
+                    "pay_frequency": "Payout-Frequenz"
                 }
             },
             "monthly_day": {
-                "title": "Monatstag auswählen",
-                "description": "Wählen Sie den Tag des Monats, an dem Sie bezahlt werden.",
+                "title": "Tag des Monats auswählen",
+                "description": "Wählen Sie aus, an welchem Tag des Monats Sie bezahlt werden.",
                 "data": {
-                    "pay_day": "Monatstag"
+                    "pay_day": "Tag des Monats"
                 }
             },
             "bank_offset": {
                 "title": "Tage vor dem letzten Banktag",
-                "description": "Wenn Sie einige Tage vor dem letzten Banktag bezahlt werden, wählen Sie, wie viele Tage vorher.",
+                "description": "Wenn Sie ein paar Tage vor dem letzten Banktag bezahlt werden, wählen Sie aus, wie viele Tage vorher.",
                 "data": {
-                    "bank_offset": "Tage vorher"
+                    "bank_offset": "Tage davor"
                 }
             },
             "specific_day": {
-                "title": "Bestimmten Tag auswählen",
+                "title": "Speziellen Tag auswählen",
                 "description": "Wählen Sie den genauen Tag aus, an dem Sie jeden Monat bezahlt werden.",
                 "data": {
-                    "pay_day": "Bestimmter Tag"
+                    "pay_day": "Spezieller Tag"
                 }
             },
             "cycle_last_paydate": {
                 "title": "Letzten Zahltag auswählen",
                 "description": "Wählen Sie das letzte Datum aus, an dem Sie bezahlt wurden. Dies wird verwendet, um den nächsten Zahltag zu berechnen.",
                 "data": {
-                    "last_pay_date": "Letzten Zahltag"
+                    "last_pay_date": "Letzter Zahltag"
                 }
             },
             "weekly": {
                 "title": "Wöchentlichen Zahltag auswählen",
-                "description": "Wählen Sie aus, an welchem Wochentag Sie jede Woche bezahlt werden.",
+                "description": "Wählen Sie, an welchem Wochentag Sie jede Woche bezahlt werden.",
                 "data": {
                     "pay_day": "Zahltagswochentag"
                 }
             }
         },
         "error": {
-            "cannot_connect": "Verbindung zum IsItPayday-Dienst fehlgeschlagen.",
-            "invalid_country": "Das ausgewählte Land wird nicht unterstützt.",
+            "cannot_connect": "Fehler beim Verbinden mit dem IsItPayday-Dienst.",
+            "invalid_country": "Das gewählte Land wird nicht unterstützt.",
             "invalid_response": "Ungültige Antwort vom IsItPayday-Dienst."
         }
     },
@@ -63,7 +63,7 @@
         "step": {
             "init": {
                 "title": "IsItPayday-Einstellungen anpassen",
-                "description": "Ändern Sie die Einstellungen für diesen Zahltags-Tracker."
+                "description": "Einstellungen für diesen Zahltags-Tracker ändern."
             }
         }
     }

@@ -1,69 +1,69 @@
 {
-    "title": "Onko palkkapäivä",
+    "title": "Onko Palkkapäivä",
     "config": {
         "step": {
             "user": {
-                "title": "Valitse maa",
-                "description": "Valitse maa, jota käytetään julkisten vapaapäivien tarkistamiseen.",
+                "title": "Valitse Maa",
+                "description": "Valitse maa, jota käytetään tarkistettaessa pyhäpäiviä.",
                 "data": {
-                    "name": "Tilin nimi",
+                    "name": "Instanssin Nimi",
                     "country": "Maa"
                 }
             },
             "frequency": {
-                "title": "Valitse palkanmaksun tiheys",
-                "description": "Valitse, kuinka usein saat palkkasi.",
+                "title": "Valitse Maksuaikataulu",
+                "description": "Valitse, kuinka usein sinulle maksetaan.",
                 "data": {
-                    "pay_frequency": "Palkanmaksun tiheys"
+                    "pay_frequency": "Maksuaikataulu"
                 }
             },
             "monthly_day": {
-                "title": "Valitse kuukauden päivä",
-                "description": "Valitse, mikä päivä kuukaudesta saat palkkaa.",
+                "title": "Valitse Kuukauden Päivä",
+                "description": "Valitse kuukauden päivä, jolloin saat palkan.",
                 "data": {
-                    "pay_day": "Kuukauden päivä"
+                    "pay_day": "Kuukauden Päivä"
                 }
             },
             "bank_offset": {
-                "title": "Päivät ennen viimeistä pankkipäivää",
-                "description": "Jos saat palkkaa muutama päivä ennen viimeistä pankkipäivää, valitse kuinka monta päivää ennen.",
+                "title": "Päiviä Ennen Viimeistä Pankkipäivää",
+                "description": "Jos sinulle maksetaan muutama päivä ennen viimeistä pankkipäivää, valitse kuinka monta päivää ennen.",
                 "data": {
-                    "bank_offset": "Päivät ennen"
+                    "bank_offset": "Päiviä Ennen"
                 }
             },
             "specific_day": {
-                "title": "Valitse tietty päivä",
-                "description": "Valitse tarkka päivä, jona saat palkkasi joka kuukausi.",
+                "title": "Valitse Tietty Päivä",
+                "description": "Valitse tarkka päivä, jolloin saat palkan joka kuukausi.",
                 "data": {
-                    "pay_day": "Erityinen päivä"
+                    "pay_day": "Tietty Päivä"
                 }
             },
             "cycle_last_paydate": {
-                "title": "Valitse viimeinen palkkapäivä",
-                "description": "Valitse viimeinen päivä, jona sait palkkaa. Tätä käytetään seuraavan palkkapäivän laskemiseen.",
+                "title": "Valitse Viimeinen Palkkapäivä",
+                "description": "Valitse viimeinen päivä, jolloin sinulle maksettiin. Tätä käytetään seuraavan palkkapäivän laskemiseen.",
                 "data": {
-                    "last_pay_date": "Viimeinen palkkapäivä"
+                    "last_pay_date": "Viimeinen Palkkapäivä"
                 }
             },
             "weekly": {
-                "title": "Valitse viikoittainen palkkapäivä",
-                "description": "Valitse, mikä viikonpäivä saat palkkasi joka viikko.",
+                "title": "Valitse Viikoittainen Palkkapäivä",
+                "description": "Valitse viikonpäivä, jolloin saat palkkasi joka viikko.",
                 "data": {
-                    "pay_day": "Palkkapäivän viikonpäivä"
+                    "pay_day": "Palkkapäivän Viikonpäivä"
                 }
             }
         },
         "error": {
-            "cannot_connect": "Yhteys palveluun IsItPayday epäonnistui.",
+            "cannot_connect": "Yhteyden muodostaminen IsItPayday-palveluun epäonnistui.",
             "invalid_country": "Valittua maata ei tueta.",
-            "invalid_response": "Kelvoton vastaus palvelusta IsItPayday."
+            "invalid_response": "Virheellinen vastaus IsItPayday-palvelusta."
         }
     },
     "options": {
         "step": {
             "init": {
-                "title": "Säädä IsItPayday-asetuksia",
-                "description": "Muokkaa tämän palkkajäljittimen asetuksia."
+                "title": "Säädä IsItPayday Asetukset",
+                "description": "Muokkaa tämän palkkapäivän seurantatyökalun asetuksia."
             }
         }
     }

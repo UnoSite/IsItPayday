@@ -1,0 +1,22 @@
+name: Download from Localazy
+on: 
+  push:
+    tags:
+    - 'v*'
+  workflow_dispatch:
+
+jobs:
+  localazy-download-test:
+    name: Download strings from Localazy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: localazy/download@v1
+        with:
+          read_key: ${{ secrets.LOCALAZY_READ_KEY }}
+          write_key: ${{ secrets.LOCALAZY_WRITE_KEY }}
+          
+      - run: |
+          # Test that localized files were downloaded by listing 
+          # the content of locales folder.
+          ls locales/*.json

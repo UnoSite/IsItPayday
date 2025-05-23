@@ -4,7 +4,7 @@
         "step": {
             "user": {
                 "title": "Vælg land",
-                "description": "Vælg det land, der bruges til at kontrollere helligdage.",
+                "description": "Vælg det land, der bruges til at tjekke offentlige helligdage.",
                 "data": {
                     "name": "Instans-navn",
                     "country": "Land"
@@ -33,7 +33,7 @@
             },
             "specific_day": {
                 "title": "Vælg en specifik dag",
-                "description": "Vælg den præcise dag, du får løn hver måned.",
+                "description": "Vælg den præcise dag du får løn hver måned.",
                 "data": {
                     "pay_day": "Specifik dag"
                 }
@@ -54,7 +54,7 @@
             }
         },
         "error": {
-            "cannot_connect": "Kunne ikke oprette forbindelse til IsItPayday-tjenesten.",
+            "cannot_connect": "Det lykkedes ikke at oprette forbindelse til IsItPayday-tjenesten.",
             "invalid_country": "Det valgte land understøttes ikke.",
             "invalid_response": "Ugyldigt svar fra IsItPayday-tjenesten."
         }
@@ -62,8 +62,8 @@
     "options": {
         "step": {
             "init": {
-                "title": "Juster IsItPayday Indstillinger",
-                "description": "Rediger indstillingerne for denne lønningsdag tracker."
+                "title": "Tilpas IsItPayday Indstillinger",
+                "description": "Ændre indstillingerne for denne lønningsdag tracker."
             }
         }
     }

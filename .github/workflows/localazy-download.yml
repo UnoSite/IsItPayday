@@ -8,7 +8,7 @@ on:
 jobs:
   localazy-download-test:
     name: Download strings from Localazy
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@v1
       - uses: localazy/download@v1

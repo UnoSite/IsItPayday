@@ -3,6 +3,7 @@ on:
   push:
     paths: 
       - 'custom_components/isitpayday/translations/en.json'
+  workflow_dispatch:
 
 jobs:
   localazy-upload:

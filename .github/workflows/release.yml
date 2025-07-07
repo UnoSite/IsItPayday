@@ -32,7 +32,7 @@ jobs:
           cd custom_components/isitpayday
           zip isitpayday.zip -r ./
       - name: Upload zip to release
-        uses: svenstaro/upload-release-action@2.10.0
+        uses: svenstaro/upload-release-action@2.11.2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: ./custom_components/isitpayday/isitpayday.zip

@@ -1,17 +1,17 @@
 # IsItPayday - Home Assistant Integration
 
-[![Version](https://img.shields.io/github/v/release/UnoSite/IsItPayday?label=version&style=for-the-badge)](https://github.com/UnoSite/IsItPayday/releases/latest)
-[![Last Commit](https://img.shields.io/github/last-commit/UnoSite/IsItPayday?style=for-the-badge)](https://github.com/UnoSite/IsItPayday/commits/main/)
-[![License](https://img.shields.io/github/license/UnoSite/IsItPayday?style=for-the-badge)](https://github.com/UnoSite/IsItPayday/blob/main/LICENSE.md)
-[![Code Size](https://img.shields.io/github/languages/code-size/UnoSite/IsItPayday?style=for-the-badge)](#)
-[![Stars](https://img.shields.io/github/stars/UnoSite/IsItPayday?style=for-the-badge)](#)
-[![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/UnoSite/IsItPayday/total?style=for-the-badge)](#)
+[![Version](https://img.shields.io/github/v/release/UnoSite/IsItPayday?label=version&style=for-the-badge&labelColor=333333&color=cad401)](https://github.com/UnoSite/IsItPayday/releases/latest)
+[![Last Commit](https://img.shields.io/github/last-commit/UnoSite/IsItPayday?style=for-the-badge&labelColor=333333&color=cad401)](https://github.com/UnoSite/IsItPayday/commits/main/)
+[![License](https://img.shields.io/github/license/UnoSite/IsItPayday?style=for-the-badge&labelColor=333333&color=cad401)](https://github.com/UnoSite/IsItPayday/blob/main/LICENSE.md)
+[![Code Size](https://img.shields.io/github/languages/code-size/UnoSite/IsItPayday?style=for-the-badge&labelColor=333333&color=cad401)](#)
+[![Stars](https://img.shields.io/github/stars/UnoSite/IsItPayday?style=for-the-badge&labelColor=333333&color=cad401)](#)
+[![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/UnoSite/IsItPayday/total?style=for-the-badge&labelColor=333333&color=cad401)](#)
 
 ![Logo](https://github.com/UnoSite/IsItPayday/blob/main/logo.png)
 
-[![Sponsor Github](https://img.shields.io/badge/Sponsor-Github-EA4AAA?style=for-the-badge&logo=githubsponsors)](https://github.com/sponsors/UnoSite)\
-[![Sponsor Buy Me a Coffee](https://img.shields.io/badge/Sponsor-By%20me%20a%20coffee-FFDD00?style=for-the-badge&logo=buymeacoffee)](https://buymeacoffee.com/UnoSite)\
-[![Sponsor PayPal.Me](https://img.shields.io/badge/Sponsor-paypal.me-003087?style=for-the-badge&logo=paypal)](https://paypal.me/UnoSite)
+[![Sponsor Github](https://img.shields.io/badge/Sponsor-Github-000?style=for-the-badge&logo=githubsponsors&labelColor=333333&color=cad401&logoColor=EA4AAA)](https://github.com/sponsors/UnoSite)\
+[![Sponsor Buy Me a Coffee](https://img.shields.io/badge/Sponsor-By%20me%20a%20coffee-000?style=for-the-badge&logo=buymeacoffee&labelColor=333333&color=cad401&logoColor=FFDD00)](https://buymeacoffee.com/UnoSite)\
+[![Sponsor PayPal.Me](https://img.shields.io/badge/Sponsor-paypal.me-000?style=for-the-badge&logo=paypal&labelColor=333333&color=cad401&logoColor=002991)](https://paypal.me/UnoSite)
 
 ---
 

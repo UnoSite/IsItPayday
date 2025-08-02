@@ -27,12 +27,12 @@
 - **Binary Sensor:** `binary_sensor.<instance_name>_is_it_payday`
   - Indicates whether today is a payday (`on` or `off`).
   - Icons:
-    - `mdi:cash-fast` if it is payday.
-    - `mdi:cash-clock` if it is not payday.
+    - `mdi:cash-fast` if it is payday. <sup><sup>([See icon](https://pictogrammers.com/library/mdi/icon/cash-fast/))</sup></sup>
+    - `mdi:cash-clock` if it is not payday. <sup><sup>([See icon](https://pictogrammers.com/library/mdi/icon/cash-clock/))</sup></sup>
 
 - **Sensor:** `sensor.<instance_name>_next_payday`
   - Displays the date of the next payday.
-  - Icon: `mdi:calendar-clock`.
+  - Icon: `mdi:calendar-clock`. <sup><sup>([See icon](https://pictogrammers.com/library/mdi/icon/calendar-clock/))</sup></sup>
 
 - **Custom Payday Calculation:**
   - Supports various pay frequencies:

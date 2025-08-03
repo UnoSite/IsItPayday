@@ -34,6 +34,10 @@
   - Displays the date of the next payday.
   - Icon: `mdi:calendar-clock`. <sup><sup>([See icon](https://pictogrammers.com/library/mdi/icon/calendar-clock/))</sup></sup>
 
+- **Sensor:** `senspr.<instance_name>_days_to`
+  - Displays how many days until next payday.
+  - Icon: `mdi:calendar-end`. <sup><sup>([See icon](https://pictogrammers.com/library/mdi/icon/calendar-end/))</sup></sup>
+
 - **Custom Payday Calculation:**
   - Supports various pay frequencies:
     - **Weekly**
@@ -129,10 +133,11 @@
 
 ## 📡 Sensors
 
-| Entity ID                                  | Name                  | Description                                  |
-|--------------------------------------------|-----------------------|----------------------------------------------|
+| Entity ID                                    | Name                 | Description                                  |
+|----------------------------------------------|----------------------|----------------------------------------------|
 | `binary_sensor.<instance_name>_is_it_payday` | Is It Payday?        | Indicates if today is a payday (`on`/`off`). |
-| `sensor.<instance_name>_next_payday`       | Next Payday          | Displays the date of the next payday.        |
+| `sensor.<instance_name>_next_payday`         | Next Payday          | Displays the date of the next payday.        |
+| `sensor.<instance_name>_days_to`             | Days until           | Displays how many days until next payday.    |
 
 - All entities are grouped under a single device, named after your chosen **Instance Name** during setup.
 
@@ -157,6 +162,8 @@ entities:
     name: Is It Payday Today?
   - entity: sensor.my_payday_instance_next_payday
     name: Next Payday Date
+  - entity: sensor.my_payday_instance_days_to
+    name: Days Until Payday
 ```
 
 ---

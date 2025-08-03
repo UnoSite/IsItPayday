@@ -77,7 +77,7 @@ class IsItPaydayDaysToSensor(CoordinatorEntity, SensorEntity):
     def __init__(self, coordinator: DataUpdateCoordinator, entry_id: str, instance_name: str):
         super().__init__(coordinator)
         self._attr_unique_id = f"{entry_id}_days_to"
-        self._attr_name = f"{instance_name}: Days to"
+        self._attr_name = f"{instance_name}: Days until"
         self._attr_icon = ICON_DAYS_TO
         self._instance_name = instance_name
         self._entry_id = entry_id

@@ -1,9 +1,14 @@
 import logging
 from datetime import date, datetime, timedelta
 from math import ceil
-from homeassistant.components.sensor import SensorEntity, SensorDeviceClass
+
+from homeassistant.components.sensor import SensorDeviceClass, SensorEntity
 from homeassistant.helpers.entity import EntityCategory
-from homeassistant.helpers.update_coordinator import CoordinatorEntity, DataUpdateCoordinator
+from homeassistant.helpers.update_coordinator import (
+    CoordinatorEntity,
+    DataUpdateCoordinator,
+)
+
 from .const import *
 
 _LOGGER = logging.getLogger(__name__)
@@ -11,21 +16,26 @@ _LOGGER = logging.getLogger(__name__)
 ICON = "mdi:calendar-clock"
 ICON_DAYS_TO = "mdi:calendar-end"
 
+
 async def async_setup_entry(hass, entry, async_add_entities):
     data = hass.data[DOMAIN][entry.entry_id]
     coordinator: DataUpdateCoordinator = data["coordinator"]
     instance_name = data.get("name", "IsItPayday")
 
-    async_add_entities([
-        IsItPaydayNextSensor(coordinator, entry.entry_id, instance_name),
-        IsItPaydayDaysToSensor(coordinator, entry.entry_id, instance_name)
-    ])
+    async_add_entities(
+        [
+            IsItPaydayNextSensor(coordinator, entry.entry_id, instance_name),
+            IsItPaydayDaysToSensor(coordinator, entry.entry_id, instance_name),
+        ]
+    )
 
 
 class IsItPaydayNextSensor(CoordinatorEntity, SensorEntity):
     _attr_device_class = None
 
-    def __init__(self, coordinator: DataUpdateCoordinator, entry_id: str, instance_name: str):
+    def __init__(
+        self, coordinator: DataUpdateCoordinator, entry_id: str, instance_name: str
+    ):
         super().__init__(coordinator)
         self._attr_unique_id = f"{entry_id}_payday_next"
         self._attr_name = f"{instance_name}: Next payday"
@@ -74,7 +84,9 @@ class IsItPaydayDaysToSensor(CoordinatorEntity, SensorEntity):
     _attr_state_class = "measurement"
     _attr_entity_category = EntityCategory.DIAGNOSTIC
 
-    def __init__(self, coordinator: DataUpdateCoordinator, entry_id: str, instance_name: str):
+    def __init__(
+        self, coordinator: DataUpdateCoordinator, entry_id: str, instance_name: str
+    ):
         super().__init__(coordinator)
         self._attr_unique_id = f"{entry_id}_days_to"
         self._attr_name = f"{instance_name}: Days until"
@@ -116,4 +128,4 @@ class IsItPaydayDaysToSensor(CoordinatorEntity, SensorEntity):
             "name": self._instance_name,
             "manufacturer": CONF_MANUFACTURER,
             "model": CONF_MODEL,
-            }
+        }

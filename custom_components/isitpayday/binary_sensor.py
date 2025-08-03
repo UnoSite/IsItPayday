@@ -1,7 +1,12 @@
 import logging
 from datetime import date
+
 from homeassistant.components.binary_sensor import BinarySensorEntity
-from homeassistant.helpers.update_coordinator import CoordinatorEntity, DataUpdateCoordinator
+from homeassistant.helpers.update_coordinator import (
+    CoordinatorEntity,
+    DataUpdateCoordinator,
+)
+
 from .const import *
 
 _LOGGER = logging.getLogger(__name__)
@@ -21,7 +26,9 @@ async def async_setup_entry(hass, entry, async_add_entities):
 class IsItPaydaySensor(CoordinatorEntity, BinarySensorEntity):
     _attr_device_class = None
 
-    def __init__(self, coordinator: DataUpdateCoordinator, entry_id: str, instance_name: str):
+    def __init__(
+        self, coordinator: DataUpdateCoordinator, entry_id: str, instance_name: str
+    ):
         super().__init__(coordinator)
         self._attr_unique_id = f"{entry_id}_is_it_payday"
         self._attr_name = f"{instance_name}: Is it payday"

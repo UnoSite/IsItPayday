@@ -1,14 +1,16 @@
 import logging
 from datetime import date, timedelta
+
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
-from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
 from homeassistant.helpers.typing import ConfigType
+from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
 
 from .const import *
 from .payday_calculator import async_calculate_next_payday
 
 _LOGGER = logging.getLogger(__name__)
+
 
 async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
     return True
@@ -35,7 +37,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
                 data.get(CONF_PAY_DAY),
                 data.get(CONF_LAST_PAY_DATE),
                 data.get(CONF_WEEKDAY),
-                data.get(CONF_BANK_OFFSET, 0)
+                data.get(CONF_BANK_OFFSET, 0),
             )
 
             last_known_payday = new_payday
@@ -54,7 +56,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 
     hass.data.setdefault(DOMAIN, {})[entry.entry_id] = {
         "coordinator": coordinator,
-        "name": instance_name
+        "name": instance_name,
     }
 
     await coordinator.async_refresh()
@@ -62,12 +64,16 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     if not coordinator.last_update_success:
         _LOGGER.error("Initial data could not be fetched for entry: %s", entry.entry_id)
 
-    await hass.config_entries.async_forward_entry_setups(entry, ["sensor", "binary_sensor"])
+    await hass.config_entries.async_forward_entry_setups(
+        entry, ["sensor", "binary_sensor"]
+    )
     return True
 
 
 async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
-    unload_ok = await hass.config_entries.async_unload_platforms(entry, ["sensor", "binary_sensor"])
+    unload_ok = await hass.config_entries.async_unload_platforms(
+        entry, ["sensor", "binary_sensor"]
+    )
 
     if unload_ok:
         hass.data[DOMAIN].pop(entry.entry_id, None)

@@ -53,7 +53,7 @@ PAY_DAY_SPECIFIC_DAY = "specific_day"
 PAY_MONTHLY_OPTIONS = {
     PAY_DAY_LAST_BANK_DAY: "Last bank day",
     PAY_DAY_FIRST_BANK_DAY: "First bank day",
-    PAY_DAY_SPECIFIC_DAY: "Specific day"
+    PAY_DAY_SPECIFIC_DAY: "Specific day",
 }
 
 DAYS_BEFORE_OPTIONS = [str(i) for i in range(0, 11)]  # 0 til 10 som tekst
@@ -118,4 +118,6 @@ ERROR_INVALID_PAYDAY = "Unable to calculate valid payday. Returning 'Unknown'."
 
 # Validation errors
 ERROR_WEEKDAY_REQUIRED_FOR_WEEKLY = "Weekly frequency requires weekday to be set."
-ERROR_LAST_PAYDATE_REQUIRED = "Last payday date is required for 14-day or 28-day pay frequencies."
+ERROR_LAST_PAYDATE_REQUIRED = (
+    "Last payday date is required for 14-day or 28-day pay frequencies."
+)

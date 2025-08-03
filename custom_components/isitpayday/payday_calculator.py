@@ -2,7 +2,9 @@
 
 import logging
 from datetime import date, timedelta
+
 import aiohttp
+
 from .const import *
 
 _LOGGER = logging.getLogger(__name__)
@@ -16,7 +18,9 @@ async def async_get_bank_holidays(country: str, year: int) -> list:
         async with aiohttp.ClientSession() as session:
             async with session.get(url) as response:
                 if response.status != 200:
-                    _LOGGER.error("Fejl ved hentning af banklukkedage: HTTP %s", response.status)
+                    _LOGGER.error(
+                        "Fejl ved hentning af banklukkedage: HTTP %s", response.status
+                    )
                     return []
                 holidays = await response.json()
                 return [date.fromisoformat(h["date"]) for h in holidays]
@@ -25,15 +29,28 @@ async def async_get_bank_holidays(country: str, year: int) -> list:
         return []
 
 
-async def async_calculate_next_payday(country: str, pay_frequency: str, pay_day=None, last_pay_date=None, weekday=None, bank_offset=0):
-    _LOGGER.info("Starter beregning af naeste loenningsdag for %s med frekvens: %s", country, pay_frequency)
+async def async_calculate_next_payday(
+    country: str,
+    pay_frequency: str,
+    pay_day=None,
+    last_pay_date=None,
+    weekday=None,
+    bank_offset=0,
+):
+    _LOGGER.info(
+        "Starter beregning af naeste loenningsdag for %s med frekvens: %s",
+        country,
+        pay_frequency,
+    )
 
     today = date.today()
     year = today.year
     bank_holidays = await async_get_bank_holidays(country, year)
 
     if pay_frequency == PAY_FREQ_MONTHLY:
-        payday = await async_calculate_month_based(today, 1, pay_day, bank_offset, bank_holidays)
+        payday = await async_calculate_month_based(
+            today, 1, pay_day, bank_offset, bank_holidays
+        )
 
     elif pay_frequency in (
         PAY_FREQ_28_DAYS,
@@ -51,7 +68,9 @@ async def async_calculate_next_payday(country: str, pay_frequency: str, pay_day=
             PAY_FREQ_SEMIANNUAL: 182,
             PAY_FREQ_ANNUAL: 365,
         }[pay_frequency]
-        payday = await async_calculate_recurring(last_pay_date, interval_days, bank_holidays)
+        payday = await async_calculate_recurring(
+            last_pay_date, interval_days, bank_holidays
+        )
 
     elif pay_frequency == PAY_FREQ_WEEKLY:
         if weekday is None:
@@ -67,12 +86,16 @@ async def async_calculate_next_payday(country: str, pay_frequency: str, pay_day=
     return payday
 
 
-async def async_calculate_month_based(today, month_interval, pay_day, bank_offset, bank_holidays):
+async def async_calculate_month_based(
+    today, month_interval, pay_day, bank_offset, bank_holidays
+):
     year, month = today.year, today.month
 
     while True:
         if pay_day == PAY_DAY_LAST_BANK_DAY:
-            payday = await async_find_last_bank_day(year, month, bank_holidays, bank_offset)
+            payday = await async_find_last_bank_day(
+                year, month, bank_holidays, bank_offset
+            )
         elif pay_day == PAY_DAY_FIRST_BANK_DAY:
             payday = await async_find_first_bank_day(year, month, bank_holidays)
         elif isinstance(pay_day, int):

@@ -1,6 +1,7 @@
 """Config flow for IsItPayday integration."""
 
 import logging
+
 import aiohttp
 import voluptuous as vol
 from homeassistant import config_entries
@@ -12,13 +13,7 @@ from .const import *
 
 _LOGGER = logging.getLogger(__name__)
 
-WEEKDAY_MAP = {
-    "Monday": 0,
-    "Tuesday": 1,
-    "Wednesday": 2,
-    "Thursday": 3,
-    "Friday": 4
-}
+WEEKDAY_MAP = {"Monday": 0, "Tuesday": 1, "Wednesday": 2, "Thursday": 3, "Friday": 4}
 
 
 async def async_get_homeassistant_country(hass: HomeAssistant) -> str | None:
@@ -83,10 +78,11 @@ class IsItPayday2ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     async def async_step_user(self, user_input=None):
         if user_input is None:
             self.country_list = await async_fetch_supported_countries()
-            current_country = self.country or await async_get_homeassistant_country(self.hass) or "DK"
+            current_country = (
+                self.country or await async_get_homeassistant_country(self.hass) or "DK"
+            )
             return self.async_show_form(
-                step_id="user",
-                data_schema=self._create_user_schema(current_country)
+                step_id="user", data_schema=self._create_user_schema(current_country)
             )
 
         self.name = user_input[CONF_NAME]
@@ -96,8 +92,7 @@ class IsItPayday2ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     async def async_step_frequency(self, user_input=None):
         if user_input is None:
             return self.async_show_form(
-                step_id="frequency",
-                data_schema=self._create_pay_frequency_schema()
+                step_id="frequency", data_schema=self._create_pay_frequency_schema()
             )
 
         self.pay_frequency = user_input[CONF_PAY_FREQ]
@@ -110,7 +105,7 @@ class IsItPayday2ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             PAY_FREQ_SEMIANNUAL,
             PAY_FREQ_ANNUAL,
             PAY_FREQ_28_DAYS,
-            PAY_FREQ_14_DAYS
+            PAY_FREQ_14_DAYS,
         ]:
             return await self.async_step_cycle_last_paydate()
         elif self.pay_frequency == PAY_FREQ_WEEKLY:
@@ -121,8 +116,7 @@ class IsItPayday2ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     async def async_step_monthly_day(self, user_input=None):
         if user_input is None:
             return self.async_show_form(
-                step_id="monthly_day",
-                data_schema=self._create_monthly_day_schema()
+                step_id="monthly_day", data_schema=self._create_monthly_day_schema()
             )
 
         self.pay_day = user_input[CONF_PAY_DAY]
@@ -137,8 +131,7 @@ class IsItPayday2ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     async def async_step_bank_offset(self, user_input=None):
         if user_input is None:
             return self.async_show_form(
-                step_id="bank_offset",
-                data_schema=self._create_bank_offset_schema()
+                step_id="bank_offset", data_schema=self._create_bank_offset_schema()
             )
 
         self.bank_offset = int(user_input[CONF_BANK_OFFSET])
@@ -147,8 +140,7 @@ class IsItPayday2ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     async def async_step_specific_day(self, user_input=None):
         if user_input is None:
             return self.async_show_form(
-                step_id="specific_day",
-                data_schema=self._create_specific_day_schema()
+                step_id="specific_day", data_schema=self._create_specific_day_schema()
             )
 
         self.pay_day = int(user_input[CONF_PAY_DAY])
@@ -158,7 +150,7 @@ class IsItPayday2ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         if user_input is None:
             return self.async_show_form(
                 step_id="cycle_last_paydate",
-                data_schema=self._create_last_paydate_schema()
+                data_schema=self._create_last_paydate_schema(),
             )
 
         self.last_pay_date = user_input[CONF_LAST_PAY_DATE]
@@ -167,8 +159,7 @@ class IsItPayday2ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     async def async_step_weekly(self, user_input=None):
         if user_input is None:
             return self.async_show_form(
-                step_id="weekly",
-                data_schema=self._create_weekly_schema()
+                step_id="weekly", data_schema=self._create_weekly_schema()
             )
 
         self.pay_day = user_input[CONF_PAY_DAY]
@@ -189,53 +180,85 @@ class IsItPayday2ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         if self.reconfig_entry:
             _LOGGER.info("Updating existing entry: %s", self.reconfig_entry.entry_id)
             self.hass.config_entries.async_update_entry(self.reconfig_entry, data=data)
-            self.hass.async_create_task(self.hass.config_entries.async_reload(self.reconfig_entry.entry_id))
+            self.hass.async_create_task(
+                self.hass.config_entries.async_reload(self.reconfig_entry.entry_id)
+            )
 
-            self.hass.async_create_task(self.hass.services.async_call(
-                "persistent_notification",
-                "create",
-                {
-                    "title": "IsItPayday",
-                    "message": f"The configuration for '{self.name}' has been successfully updated."
-                }
-            ))
+            self.hass.async_create_task(
+                self.hass.services.async_call(
+                    "persistent_notification",
+                    "create",
+                    {
+                        "title": "IsItPayday",
+                        "message": f"The configuration for '{self.name}' has been successfully updated.",
+                    },
+                )
+            )
 
             return self.async_abort(reason="reconfigured")
 
         return self.async_create_entry(title=self.name, data=data)
 
     def _create_user_schema(self, default_country: str) -> vol.Schema:
-        return vol.Schema({
-            vol.Required(CONF_NAME, default=self.name or ""): str,
-            vol.Required(CONF_COUNTRY, default=default_country): vol.In(self.country_list)
-        })
+        return vol.Schema(
+            {
+                vol.Required(CONF_NAME, default=self.name or ""): str,
+                vol.Required(CONF_COUNTRY, default=default_country): vol.In(
+                    self.country_list
+                ),
+            }
+        )
 
     def _create_pay_frequency_schema(self) -> vol.Schema:
-        return vol.Schema({
-            vol.Required(CONF_PAY_FREQ, default=self.pay_frequency or PAY_FREQ_MONTHLY): vol.In(PAY_FREQ_OPTIONS)
-        })
+        return vol.Schema(
+            {
+                vol.Required(
+                    CONF_PAY_FREQ, default=self.pay_frequency or PAY_FREQ_MONTHLY
+                ): vol.In(PAY_FREQ_OPTIONS)
+            }
+        )
 
     def _create_monthly_day_schema(self) -> vol.Schema:
-        return vol.Schema({
-            vol.Required(CONF_PAY_DAY, default=self.pay_day or PAY_DAY_LAST_BANK_DAY): vol.In(PAY_MONTHLY_OPTIONS)
-        })
+        return vol.Schema(
+            {
+                vol.Required(
+                    CONF_PAY_DAY, default=self.pay_day or PAY_DAY_LAST_BANK_DAY
+                ): vol.In(PAY_MONTHLY_OPTIONS)
+            }
+        )
 
     def _create_bank_offset_schema(self) -> vol.Schema:
-        return vol.Schema({
-            vol.Required(CONF_BANK_OFFSET, default=self.bank_offset or 0): vol.In(range(0, 11))
-        })
+        return vol.Schema(
+            {
+                vol.Required(CONF_BANK_OFFSET, default=self.bank_offset or 0): vol.In(
+                    range(0, 11)
+                )
+            }
+        )
 
     def _create_specific_day_schema(self) -> vol.Schema:
-        return vol.Schema({
-            vol.Required(CONF_PAY_DAY, default=self.pay_day or 31): vol.In(range(1, 32))
-        })
+        return vol.Schema(
+            {
+                vol.Required(CONF_PAY_DAY, default=self.pay_day or 31): vol.In(
+                    range(1, 32)
+                )
+            }
+        )
 
     def _create_last_paydate_schema(self) -> vol.Schema:
-        return vol.Schema({
-            vol.Required(CONF_LAST_PAY_DATE, default=self.last_pay_date): DateSelector()
-        })
+        return vol.Schema(
+            {
+                vol.Required(
+                    CONF_LAST_PAY_DATE, default=self.last_pay_date
+                ): DateSelector()
+            }
+        )
 
     def _create_weekly_schema(self) -> vol.Schema:
-        return vol.Schema({
-            vol.Required(CONF_PAY_DAY, default=self.pay_day or "Monday"): vol.In(WEEKDAY_OPTIONS)
-        })
+        return vol.Schema(
+            {
+                vol.Required(CONF_PAY_DAY, default=self.pay_day or "Monday"): vol.In(
+                    WEEKDAY_OPTIONS
+                )
+            }
+        )

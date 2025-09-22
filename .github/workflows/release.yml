@@ -1,35 +1,39 @@
 name: Release
 
 on:
+  workflow_dispatch:
   release:
-    types: 
-      - published
+    types: [published]
 
-permissions: {}
+env:
+  COMPONENT_DIR: isitpayday
 
 jobs:
   release_zip_file:
     name: Prepare release asset
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     steps:
       - name: Check out repository
         uses: actions/checkout@v5.0.0
-        
       - name: Update manifest.json version to ${{ github.event.release.tag_name }}
-        shell: bash
         run: |
-          yq -i -o json '.version="${{ github.event.release.tag_name }}"' \
-            "${{ github.workspace }}/custom_components/isitpayday/manifest.json"
-
-      - name: ZIP the integration directory
-        shell: bash
+          python3 ${{ github.workspace }}/.github/scripts/update_hacs_manifest.py --version ${{ github.event.release.tag_name }} --path /custom_components/isitpayday/
+      - name: Commit manifest update
         run: |
-          cd "${{ github.workspace }}/custom_components/isitpayday"
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add ./custom_components/isitpayday/manifest.json
+          git commit -m "Updated manifest.json"
+          git push origin HEAD:main
+      - name: Create zip
+        run: |
+          cd custom_components/isitpayday
           zip isitpayday.zip -r ./
-
-      - name: Upload the ZIP file to the release
-        uses: softprops/action-gh-release@v2.3.3
+      - name: Upload zip to release
+        uses: svenstaro/upload-release-action@2.11.2
         with:
-          files: ${{ github.workspace }}/custom_components/isitpayday/isitpayday.zip
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: ./custom_components/isitpayday/isitpayday.zip
+          asset_name: isitpayday.zip
+          tag: ${{ github.ref }}
+          overwrite: true

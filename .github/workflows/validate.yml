@@ -1,4 +1,6 @@
 name: Code validation
+permissions:
+  contents: read
 
 on:
   push:

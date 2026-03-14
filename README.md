@@ -50,7 +50,7 @@
     - **Annually**
 
 - **Automatic Adjustment for Holidays and Weekends:**
-  - Fetches public holidays from the [Nager.Date API](https://date.nager.at).
+  - Fetches public holidays from the [Nager.DatemAPI](https://date.nager.at).
   - Adjusts payday if it falls on a weekend or public holiday.
 
 - **Reconfiguration Support:**

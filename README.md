@@ -50,7 +50,7 @@
     - **Annually**
 
 - **Automatic Adjustment for Holidays and Weekends:**
-  - Fetches public holidays from the [Nager.DatemAPI](https://date.nager.at).
+  - Fetches public holidays from the [Nager.Date API](https://date.nager.at).
   - Adjusts payday if it falls on a weekend or public holiday.
 
 - **Reconfiguration Support:**
@@ -62,16 +62,8 @@
 ---
 
 ## 📥 Installation
-
-### **1. Manual Installation**
-1. **Download the latest release** from the [GitHub releases](https://github.com/UnoSite/IsItPayday/releases).
-2. **Copy the `isitpayday` folder** into your Home Assistant `custom_components` directory.
-3. **Restart Home Assistant.**
-4. **Add the integration:**
-   - Navigate to **Settings > Devices & Services > Integrations**.
-   - Click **Add Integration** and search for **IsItPayday**.
   
-### **2. HACS Installation (Recommended)**
+### **1. HACS Installation (Recommended)**
 1. Add this repository as a **custom repository** in [HACS](https://hacs.xyz/).
 2. Search for **Is It Payday?** in HACS and install the integration.
 3. Restart Home Assistant.

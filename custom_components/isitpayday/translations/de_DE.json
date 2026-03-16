@@ -1,5 +1,5 @@
 {
-  "config.error.cannot_connect": "Verbindung zum IsItPayday-Dienst fehlgeschlagen.",
+  "config.error.cannot_connect": "Verbindung zum IsItPayday-Dienst fehlgeschlagen",
   "config.error.invalid_country": "",
   "config.error.invalid_response": "",
   "config.step.bank_offset.data.bank_offset": "",

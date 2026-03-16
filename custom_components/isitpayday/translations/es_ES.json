@@ -1,5 +1,5 @@
 {
-  "config.error.cannot_connect": "",
+  "config.error.cannot_connect": "No se pudo conectar al servicio IsItPayday",
   "config.error.invalid_country": "",
   "config.error.invalid_response": "",
   "config.step.bank_offset.data.bank_offset": "",

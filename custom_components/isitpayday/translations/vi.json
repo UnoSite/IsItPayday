@@ -3,67 +3,67 @@
     "config": {
         "step": {
             "user": {
-                "title": "Select Country",
-                "description": "Select the country used to check public holidays",
+                "title": "Chọn quốc gia",
+                "description": "Chọn quốc gia được dùng để kiểm tra ngày lễ",
                 "data": {
-                    "name": "Instance Name",
-                    "country": "Country"
+                    "name": "Tên phiên bản",
+                    "country": "Quốc gia"
                 }
             },
             "frequency": {
-                "title": "Select Payout Frequency",
-                "description": "Choose how often you get paid",
+                "title": "Chọn tần suất trả lương",
+                "description": "Chọn tần suất bạn được trả lương",
                 "data": {
-                    "pay_frequency": "Payout Frequency"
+                    "pay_frequency": "Tần suất trả lương"
                 }
             },
             "monthly_day": {
-                "title": "Select Day of Month",
-                "description": "Choose which day of the month you are paid",
+                "title": "Chọn ngày trong tháng",
+                "description": "Chọn ngày trong tháng mà bạn được trả lương",
                 "data": {
-                    "pay_day": "Day of Month"
+                    "pay_day": "Ngày trong tháng"
                 }
             },
             "bank_offset": {
-                "title": "Days Before Last Bank Day",
-                "description": "If you are paid a few days before the last bank day, choose how many days before",
+                "title": "Số ngày trước ngày làm việc ngân hàng cuối cùng",
+                "description": "Nếu bạn được trả lương sớm hơn vài ngày trước ngày làm việc ngân hàng cuối cùng, hãy chọn số ngày trước đó",
                 "data": {
-                    "bank_offset": "Days Before"
+                    "bank_offset": "Số ngày trước"
                 }
             },
             "specific_day": {
-                "title": "Select Specific Day",
-                "description": "Select the exact day you are paid each month",
+                "title": "Chọn ngày cụ thể",
+                "description": "Chọn chính xác ngày bạn được trả lương mỗi tháng",
                 "data": {
-                    "pay_day": "Specific Day"
+                    "pay_day": "Ngày cụ thể"
                 }
             },
             "cycle_last_paydate": {
-                "title": "Select Last Payday",
-                "description": "Select the last date you were paid. This will be used to calculate the next payday",
+                "title": "Chọn ngày trả lương gần nhất",
+                "description": "Chọn ngày gần nhất bạn được trả lương. Thông tin này sẽ được dùng để tính ngày trả lương tiếp theo",
                 "data": {
-                    "last_pay_date": "Last Payday"
+                    "last_pay_date": "Ngày trả lương gần nhất"
                 }
             },
             "weekly": {
-                "title": "Select Weekly Payday",
-                "description": "Choose which weekday you are paid each week",
+                "title": "Chọn ngày trả lương hằng tuần",
+                "description": "Chọn thứ trong tuần mà bạn được trả lương mỗi tuần",
                 "data": {
-                    "pay_day": "Payday Weekday"
+                    "pay_day": "Thứ trả lương"
                 }
             }
         },
         "error": {
-            "cannot_connect": "Failed to connect to IsItPayday service",
-            "invalid_country": "The selected country is not supported",
-            "invalid_response": "Invalid response from IsItPayday service"
+            "cannot_connect": "Không thể kết nối tới dịch vụ IsItPayday",
+            "invalid_country": "Quốc gia đã chọn không được hỗ trợ",
+            "invalid_response": "Phản hồi không hợp lệ từ dịch vụ IsItPayday"
         }
     },
     "options": {
         "step": {
             "init": {
-                "title": "Adjust IsItPayday Settings",
-                "description": "Modify the settings for this payday tracker"
+                "title": "Điều chỉnh cài đặt IsItPayday",
+                "description": "Chỉnh sửa cài đặt cho trình theo dõi ngày trả lương này"
             }
         }
     }

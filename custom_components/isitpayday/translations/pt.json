@@ -12,42 +12,42 @@
             },
             "frequency": {
                 "title": "Selecionar frequência de pagamento",
-                "description": "Escolha com que frequência você recebe o pagamento",
+                "description": "Escolha com que frequência você recebe",
                 "data": {
                     "pay_frequency": "Frequência de pagamento"
                 }
             },
             "monthly_day": {
                 "title": "Selecionar dia do mês",
-                "description": "Escolha em que dia do mês você recebe o pagamento",
+                "description": "Escolha em que dia do mês você recebe",
                 "data": {
                     "pay_day": "Dia do mês"
                 }
             },
             "bank_offset": {
                 "title": "Dias antes do último dia bancário",
-                "description": "Se você recebe o pagamento alguns dias antes do último dia bancário, escolha quantos dias antes",
+                "description": "Se você recebe alguns dias antes do último dia bancário, escolha quantos dias antes",
                 "data": {
                     "bank_offset": "Dias antes"
                 }
             },
             "specific_day": {
                 "title": "Selecionar dia específico",
-                "description": "Selecione o dia exato em que você recebe o pagamento a cada mês",
+                "description": "Selecione o dia exato em que você recebe a cada mês",
                 "data": {
                     "pay_day": "Dia específico"
                 }
             },
             "cycle_last_paydate": {
-                "title": "Selecionar último dia de pagamento",
-                "description": "Selecione a última data em que você recebeu o pagamento. Isso será usado para calcular o próximo dia de pagamento",
+                "title": "Selecionar último pagamento",
+                "description": "Selecione a última data em que você recebeu. Isso será usado para calcular o próximo pagamento",
                 "data": {
-                    "last_pay_date": "Último dia de pagamento"
+                    "last_pay_date": "Último pagamento"
                 }
             },
             "weekly": {
                 "title": "Selecionar dia de pagamento semanal",
-                "description": "Escolha em que dia da semana você recebe o pagamento a cada semana",
+                "description": "Escolha em qual dia da semana você recebe a cada semana",
                 "data": {
                     "pay_day": "Dia da semana do pagamento"
                 }
@@ -63,7 +63,7 @@
         "step": {
             "init": {
                 "title": "Ajustar configurações do IsItPayday",
-                "description": "Modifique as configurações deste rastreador de dia de pagamento"
+                "description": "Modifique as configurações deste rastreador de pagamento"
             }
         }
     }

@@ -3,67 +3,67 @@
     "config": {
         "step": {
             "user": {
-                "title": "Select Country",
-                "description": "Select the country used to check public holidays",
+                "title": "Ülke Seçin",
+                "description": "Resmî tatilleri kontrol etmek için kullanılan ülkeyi seçin",
                 "data": {
-                    "name": "Instance Name",
-                    "country": "Country"
+                    "name": "Örnek Adı",
+                    "country": "Ülke"
                 }
             },
             "frequency": {
-                "title": "Select Payout Frequency",
-                "description": "Choose how often you get paid",
+                "title": "Ödeme Sıklığını Seçin",
+                "description": "Ne sıklıkta ödeme aldığınızı seçin",
                 "data": {
-                    "pay_frequency": "Payout Frequency"
+                    "pay_frequency": "Ödeme Sıklığı"
                 }
             },
             "monthly_day": {
-                "title": "Select Day of Month",
-                "description": "Choose which day of the month you are paid",
+                "title": "Ayın Gününü Seçin",
+                "description": "Ayın hangi gününde ödeme aldığınızı seçin",
                 "data": {
-                    "pay_day": "Day of Month"
+                    "pay_day": "Ayın Günü"
                 }
             },
             "bank_offset": {
-                "title": "Days Before Last Bank Day",
-                "description": "If you are paid a few days before the last bank day, choose how many days before",
+                "title": "Son Banka Gününden Önceki Gün Sayısı",
+                "description": "Son banka gününden birkaç gün önce ödeme alıyorsanız, kaç gün önce olduğunu seçin",
                 "data": {
-                    "bank_offset": "Days Before"
+                    "bank_offset": "Önceki Gün Sayısı"
                 }
             },
             "specific_day": {
-                "title": "Select Specific Day",
-                "description": "Select the exact day you are paid each month",
+                "title": "Belirli Günü Seçin",
+                "description": "Her ay ödeme aldığınız tam günü seçin",
                 "data": {
-                    "pay_day": "Specific Day"
+                    "pay_day": "Belirli Gün"
                 }
             },
             "cycle_last_paydate": {
-                "title": "Select Last Payday",
-                "description": "Select the last date you were paid. This will be used to calculate the next payday",
+                "title": "Son Ödeme Gününü Seçin",
+                "description": "En son ödeme aldığınız tarihi seçin. Bu, bir sonraki ödeme gününü hesaplamak için kullanılacaktır",
                 "data": {
-                    "last_pay_date": "Last Payday"
+                    "last_pay_date": "Son Ödeme Günü"
                 }
             },
             "weekly": {
-                "title": "Select Weekly Payday",
-                "description": "Choose which weekday you are paid each week",
+                "title": "Haftalık Ödeme Gününü Seçin",
+                "description": "Her hafta hangi hafta gününde ödeme aldığınızı seçin",
                 "data": {
-                    "pay_day": "Payday Weekday"
+                    "pay_day": "Ödeme Günü Hafta Günü"
                 }
             }
         },
         "error": {
-            "cannot_connect": "Failed to connect to IsItPayday service",
-            "invalid_country": "The selected country is not supported",
-            "invalid_response": "Invalid response from IsItPayday service"
+            "cannot_connect": "IsItPayday hizmetine bağlanılamadı",
+            "invalid_country": "Seçilen ülke desteklenmiyor",
+            "invalid_response": "IsItPayday hizmetinden geçersiz yanıt"
         }
     },
     "options": {
         "step": {
             "init": {
-                "title": "Adjust IsItPayday Settings",
-                "description": "Modify the settings for this payday tracker"
+                "title": "IsItPayday Ayarlarını Düzenleyin",
+                "description": "Bu ödeme günü takipçisinin ayarlarını değiştirin"
             }
         }
     }

@@ -1,0 +1,24 @@
+# Example configuration file for SimpleLocalize GitHub App
+# This file should be named simplelocalize.yml or simplelocalize.yaml
+# Documentation: https://simplelocalize.io/docs/integrations/github-app/
+
+pull-request:
+  title: "Update translations"
+  body: "This PR updates translations for the project."
+  labels:
+    - "translations"
+
+# What files should be uploaded on push
+upload:
+  files:
+    - path: "custom_components/isitpayday/translations/en.json"
+      format: "single-language-json"
+      language-key: "en"
+      options:
+        - REPLACE_TRANSLATION_IF_FOUND
+
+# Where we should commit translations files
+download:
+  files:
+    - path: "custom_components/isitpayday/translations/{lang}.json"
+      format: "single-language-json"

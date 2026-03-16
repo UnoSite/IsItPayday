@@ -3,67 +3,67 @@
     "config": {
         "step": {
             "user": {
-                "title": "Select Country",
-                "description": "Select the country used to check public holidays",
+                "title": "Επιλέξτε χώρα",
+                "description": "Επιλέξτε τη χώρα που χρησιμοποιείται για τον έλεγχο των δημόσιων αργιών",
                 "data": {
-                    "name": "Instance Name",
-                    "country": "Country"
+                    "name": "Όνομα παρουσίας",
+                    "country": "Χώρα"
                 }
             },
             "frequency": {
-                "title": "Select Payout Frequency",
-                "description": "Choose how often you get paid",
+                "title": "Επιλέξτε συχνότητα πληρωμής",
+                "description": "Επιλέξτε πόσο συχνά πληρώνεστε",
                 "data": {
-                    "pay_frequency": "Payout Frequency"
+                    "pay_frequency": "Συχνότητα πληρωμής"
                 }
             },
             "monthly_day": {
-                "title": "Select Day of Month",
-                "description": "Choose which day of the month you are paid",
+                "title": "Επιλέξτε ημέρα του μήνα",
+                "description": "Επιλέξτε ποια ημέρα του μήνα πληρώνεστε",
                 "data": {
-                    "pay_day": "Day of Month"
+                    "pay_day": "Ημέρα του μήνα"
                 }
             },
             "bank_offset": {
-                "title": "Days Before Last Bank Day",
-                "description": "If you are paid a few days before the last bank day, choose how many days before",
+                "title": "Ημέρες πριν από την τελευταία τραπεζική ημέρα",
+                "description": "Αν πληρώνεστε λίγες ημέρες πριν από την τελευταία τραπεζική ημέρα, επιλέξτε πόσες ημέρες πριν",
                 "data": {
-                    "bank_offset": "Days Before"
+                    "bank_offset": "Ημέρες πριν"
                 }
             },
             "specific_day": {
-                "title": "Select Specific Day",
-                "description": "Select the exact day you are paid each month",
+                "title": "Επιλέξτε συγκεκριμένη ημέρα",
+                "description": "Επιλέξτε την ακριβή ημέρα που πληρώνεστε κάθε μήνα",
                 "data": {
-                    "pay_day": "Specific Day"
+                    "pay_day": "Συγκεκριμένη ημέρα"
                 }
             },
             "cycle_last_paydate": {
-                "title": "Select Last Payday",
-                "description": "Select the last date you were paid. This will be used to calculate the next payday",
+                "title": "Επιλέξτε την τελευταία ημέρα πληρωμής",
+                "description": "Επιλέξτε την τελευταία ημερομηνία που πληρωθήκατε. Αυτή θα χρησιμοποιηθεί για τον υπολογισμό της επόμενης ημέρας πληρωμής",
                 "data": {
-                    "last_pay_date": "Last Payday"
+                    "last_pay_date": "Τελευταία ημέρα πληρωμής"
                 }
             },
             "weekly": {
-                "title": "Select Weekly Payday",
-                "description": "Choose which weekday you are paid each week",
+                "title": "Επιλέξτε εβδομαδιαία ημέρα πληρωμής",
+                "description": "Επιλέξτε ποια ημέρα της εβδομάδας πληρώνεστε κάθε εβδομάδα",
                 "data": {
-                    "pay_day": "Payday Weekday"
+                    "pay_day": "Ημέρα εβδομάδας πληρωμής"
                 }
             }
         },
         "error": {
-            "cannot_connect": "Failed to connect to IsItPayday service",
-            "invalid_country": "The selected country is not supported",
-            "invalid_response": "Invalid response from IsItPayday service"
+            "cannot_connect": "Αποτυχία σύνδεσης με την υπηρεσία IsItPayday",
+            "invalid_country": "Η επιλεγμένη χώρα δεν υποστηρίζεται",
+            "invalid_response": "Μη έγκυρη απόκριση από την υπηρεσία IsItPayday"
         }
     },
     "options": {
         "step": {
             "init": {
-                "title": "Adjust IsItPayday Settings",
-                "description": "Modify the settings for this payday tracker"
+                "title": "Προσαρμογή ρυθμίσεων IsItPayday",
+                "description": "Τροποποιήστε τις ρυθμίσεις για αυτό το εργαλείο παρακολούθησης ημέρας πληρωμής"
             }
         }
     }

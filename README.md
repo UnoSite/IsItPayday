@@ -1,4 +1,4 @@
-# IsItPayday - Home Assistant Integration
+# IsItPayday - Home Assistant Integration <a href="https://crwd.in/isitpayday/c7b3b620ffeb924f4b2b2c0449fce7bf2715590"><img align="right" src="https://img.shields.io/badge/Translate-This-000?style=for-the-badge&logo=crowdin&labelColor=333333&color=cad401"></a>
 
 [![Version](https://img.shields.io/github/v/release/UnoSite/IsItPayday?label=version&style=for-the-badge&labelColor=333333&color=cad401)](https://github.com/UnoSite/IsItPayday/releases/latest)
 [![Last Commit](https://img.shields.io/github/last-commit/UnoSite/IsItPayday?style=for-the-badge&labelColor=333333&color=cad401)](https://github.com/UnoSite/IsItPayday/commits/main/)

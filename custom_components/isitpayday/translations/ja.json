@@ -3,67 +3,67 @@
     "config": {
         "step": {
             "user": {
-                "title": "Vælg land",
-                "description": "Vælg det land, der bruges til at kontrollere helligdage",
+                "title": "国を選択",
+                "description": "Det valgte land bruges til, at kontrollere helligdage",
                 "data": {
-                    "name": "Instansnavn",
-                    "country": "Land"
+                    "name": "インスタンス名",
+                    "country": "国"
                 }
             },
             "frequency": {
-                "title": "Vælg udbetalingsfrekvens",
-                "description": "Vælg, hvor ofte du får løn",
+                "title": "支払い頻度を選択",
+                "description": "給与を受け取る頻度を選択してください",
                 "data": {
-                    "pay_frequency": "Udbetalingsfrekvens"
+                    "pay_frequency": "支給頻度"
                 }
             },
             "monthly_day": {
-                "title": "Vælg dag i måneden",
-                "description": "Vælg hvilken dag i måneden du får løn",
+                "title": "月の日付を選択",
+                "description": "毎月給与を受け取る日付を選択してください",
                 "data": {
-                    "pay_day": "Dag i måneden"
+                    "pay_day": "月の日付"
                 }
             },
             "bank_offset": {
-                "title": "Dage før sidste bankdag",
-                "description": "Hvis du får løn et par dage før den sidste bankdag, skal du vælge hvor mange dage før",
+                "title": "最終銀行営業日前の日数",
+                "description": "最終銀行営業日の数日前に給与を受け取る場合は、何日前かを選択してください",
                 "data": {
-                    "bank_offset": "Dage før"
+                    "bank_offset": "日前"
                 }
             },
             "specific_day": {
-                "title": "Vælg specifik dag",
-                "description": "Vælg den præcise dag, du får løn hver måned",
+                "title": "特定の日を選択",
+                "description": "毎月給与を受け取る正確な日を選択してください",
                 "data": {
-                    "pay_day": "Specifik dag"
+                    "pay_day": "特定の日"
                 }
             },
             "cycle_last_paydate": {
-                "title": "Vælg seneste lønningsdag",
-                "description": "Vælg den seneste dato, du fik løn. Dette bruges til at beregne den næste lønningsdag",
+                "title": "直近の給与支給日を選択",
+                "description": "直近で給与を受け取った日付を選択してください。これは次回の給与支給日を計算するために使用されます",
                 "data": {
-                    "last_pay_date": "Seneste lønningsdag"
+                    "last_pay_date": "直近の給与支給日"
                 }
             },
             "weekly": {
-                "title": "Vælg ugentlig lønningsdag",
-                "description": "Vælg hvilken ugedag du får løn hver uge",
+                "title": "毎週の給与支給曜日を選択",
+                "description": "毎週給与を受け取る曜日を選択してください",
                 "data": {
-                    "pay_day": "Ugedag for lønningsdag"
+                    "pay_day": "給与支給曜日"
                 }
             }
         },
         "error": {
-            "cannot_connect": "Kunne ikke oprette forbindelse til IsItPayday-tjenesten",
-            "invalid_country": "Det valgte land understøttes ikke",
-            "invalid_response": "Ugyldigt svar fra IsItPayday-tjenesten"
+            "cannot_connect": "IsItPaydayサービスに接続できませんでした",
+            "invalid_country": "選択した国はサポートされていません",
+            "invalid_response": "IsItPaydayサービスから無効な応答が返されました"
         }
     },
     "options": {
         "step": {
             "init": {
-                "title": "Juster indstillinger for IsItPayday",
-                "description": "Rediger indstillingerne for denne lønningsdagssporing"
+                "title": "IsItPaydayの設定を調整",
+                "description": "この給与支給日トラッキングの設定を編集"
             }
         }
     }

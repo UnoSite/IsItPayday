@@ -3,67 +3,67 @@
     "config": {
         "step": {
             "user": {
-                "title": "Vælg land",
-                "description": "Vælg det land, der bruges til at kontrollere helligdage",
+                "title": "Ülke seçin",
+                "description": "Det valgte land bruges til, at kontrollere helligdage",
                 "data": {
-                    "name": "Instansnavn",
-                    "country": "Land"
+                    "name": "Örnek adı",
+                    "country": "Ülke"
                 }
             },
             "frequency": {
-                "title": "Vælg udbetalingsfrekvens",
-                "description": "Vælg, hvor ofte du får løn",
+                "title": "Ödeme sıklığını seçin",
+                "description": "Maaşınızı ne sıklıkla aldığınızı seçin",
                 "data": {
-                    "pay_frequency": "Udbetalingsfrekvens"
+                    "pay_frequency": "Ödeme sıklığı"
                 }
             },
             "monthly_day": {
-                "title": "Vælg dag i måneden",
-                "description": "Vælg hvilken dag i måneden du får løn",
+                "title": "Ayın gününü seçin",
+                "description": "Maaşınızı ayın hangi gününde aldığınızı seçin",
                 "data": {
-                    "pay_day": "Dag i måneden"
+                    "pay_day": "Ayın günü"
                 }
             },
             "bank_offset": {
-                "title": "Dage før sidste bankdag",
-                "description": "Hvis du får løn et par dage før den sidste bankdag, skal du vælge hvor mange dage før",
+                "title": "Son banka gününden önceki günler",
+                "description": "Maaşınızı son banka gününden birkaç gün önce alıyorsanız, kaç gün önce olduğunu seçin",
                 "data": {
-                    "bank_offset": "Dage før"
+                    "bank_offset": "Önceki gün sayısı"
                 }
             },
             "specific_day": {
-                "title": "Vælg specifik dag",
-                "description": "Vælg den præcise dag, du får løn hver måned",
+                "title": "Belirli bir gün seçin",
+                "description": "Maaşınızı her ay aldığınız tam günü seçin",
                 "data": {
-                    "pay_day": "Specifik dag"
+                    "pay_day": "Belirli gün"
                 }
             },
             "cycle_last_paydate": {
-                "title": "Vælg seneste lønningsdag",
-                "description": "Vælg den seneste dato, du fik løn. Dette bruges til at beregne den næste lønningsdag",
+                "title": "Son maaş ödeme gününü seçin",
+                "description": "Maaşınızı en son aldığınız tarihi seçin. Bu, bir sonraki maaş ödeme gününü hesaplamak için kullanılır",
                 "data": {
-                    "last_pay_date": "Seneste lønningsdag"
+                    "last_pay_date": "Son maaş ödeme günü"
                 }
             },
             "weekly": {
-                "title": "Vælg ugentlig lønningsdag",
-                "description": "Vælg hvilken ugedag du får løn hver uge",
+                "title": "Haftalık maaş ödeme gününü seçin",
+                "description": "Maaşınızı her hafta haftanın hangi gününde aldığınızı seçin",
                 "data": {
-                    "pay_day": "Ugedag for lønningsdag"
+                    "pay_day": "Maaş ödeme haftasının günü"
                 }
             }
         },
         "error": {
-            "cannot_connect": "Kunne ikke oprette forbindelse til IsItPayday-tjenesten",
-            "invalid_country": "Det valgte land understøttes ikke",
-            "invalid_response": "Ugyldigt svar fra IsItPayday-tjenesten"
+            "cannot_connect": "IsItPayday hizmetine bağlanılamadı",
+            "invalid_country": "Seçilen ülke desteklenmiyor",
+            "invalid_response": "IsItPayday hizmetinden geçersiz yanıt"
         }
     },
     "options": {
         "step": {
             "init": {
-                "title": "Juster indstillinger for IsItPayday",
-                "description": "Rediger indstillingerne for denne lønningsdagssporing"
+                "title": "IsItPayday ayarlarını düzenleyin",
+                "description": "Bu maaş günü takibi için ayarları düzenleyin"
             }
         }
     }

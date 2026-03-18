@@ -3,67 +3,67 @@
     "config": {
         "step": {
             "user": {
-                "title": "Vælg land",
-                "description": "Vælg det land, der bruges til at kontrollere helligdage",
+                "title": "Ország kiválasztása",
+                "description": "Det valgte land bruges til, at kontrollere helligdage",
                 "data": {
-                    "name": "Instansnavn",
-                    "country": "Land"
+                    "name": "Példánynév",
+                    "country": "Ország"
                 }
             },
             "frequency": {
-                "title": "Vælg udbetalingsfrekvens",
-                "description": "Vælg, hvor ofte du får løn",
+                "title": "Kifizetési gyakoriság kiválasztása",
+                "description": "Válaszd ki, milyen gyakran kapsz fizetést",
                 "data": {
-                    "pay_frequency": "Udbetalingsfrekvens"
+                    "pay_frequency": "Kifizetés gyakorisága"
                 }
             },
             "monthly_day": {
-                "title": "Vælg dag i måneden",
-                "description": "Vælg hvilken dag i måneden du får løn",
+                "title": "Válaszd ki a hónap napját",
+                "description": "Válaszd ki, a hónap melyik napján kapsz fizetést",
                 "data": {
-                    "pay_day": "Dag i måneden"
+                    "pay_day": "A hónap napja"
                 }
             },
             "bank_offset": {
-                "title": "Dage før sidste bankdag",
-                "description": "Hvis du får løn et par dage før den sidste bankdag, skal du vælge hvor mange dage før",
+                "title": "Napok az utolsó banki munkanap előtt",
+                "description": "Ha a fizetésedet néhány nappal az utolsó banki munkanap előtt kapod meg, válaszd ki, hány nappal előtte",
                 "data": {
-                    "bank_offset": "Dage før"
+                    "bank_offset": "Napok előtte"
                 }
             },
             "specific_day": {
-                "title": "Vælg specifik dag",
-                "description": "Vælg den præcise dag, du får løn hver måned",
+                "title": "Válassz konkrét napot",
+                "description": "Válaszd ki a pontos napot, amikor minden hónapban megkapod a fizetésedet",
                 "data": {
-                    "pay_day": "Specifik dag"
+                    "pay_day": "Konkrét nap"
                 }
             },
             "cycle_last_paydate": {
-                "title": "Vælg seneste lønningsdag",
-                "description": "Vælg den seneste dato, du fik løn. Dette bruges til at beregne den næste lønningsdag",
+                "title": "Válaszd ki a legutóbbi fizetésnapot",
+                "description": "Válaszd ki a legutóbbi dátumot, amikor fizetést kaptál. Ezt a következő fizetésnap kiszámításához használjuk",
                 "data": {
-                    "last_pay_date": "Seneste lønningsdag"
+                    "last_pay_date": "Legutóbbi fizetésnap"
                 }
             },
             "weekly": {
-                "title": "Vælg ugentlig lønningsdag",
-                "description": "Vælg hvilken ugedag du får løn hver uge",
+                "title": "Válaszd ki a heti fizetésnapot",
+                "description": "Válaszd ki, a hét melyik napján kapsz fizetést minden héten",
                 "data": {
-                    "pay_day": "Ugedag for lønningsdag"
+                    "pay_day": "A fizetésnap hétköznapja"
                 }
             }
         },
         "error": {
-            "cannot_connect": "Kunne ikke oprette forbindelse til IsItPayday-tjenesten",
-            "invalid_country": "Det valgte land understøttes ikke",
-            "invalid_response": "Ugyldigt svar fra IsItPayday-tjenesten"
+            "cannot_connect": "Nem sikerült csatlakozni az IsItPayday szolgáltatáshoz",
+            "invalid_country": "A kiválasztott ország nem támogatott",
+            "invalid_response": "Érvénytelen válasz az IsItPayday szolgáltatástól"
         }
     },
     "options": {
         "step": {
             "init": {
-                "title": "Juster indstillinger for IsItPayday",
-                "description": "Rediger indstillingerne for denne lønningsdagssporing"
+                "title": "Az IsItPayday beállításainak módosítása",
+                "description": "Szerkeszd ennek a fizetésnap-követőnek a beállításait"
             }
         }
     }

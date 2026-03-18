@@ -3,67 +3,67 @@
     "config": {
         "step": {
             "user": {
-                "title": "Vælg land",
-                "description": "Vælg det land, der bruges til at kontrollere helligdage",
+                "title": "Wybierz kraj",
+                "description": "Det valgte land bruges til, at kontrollere helligdage",
                 "data": {
-                    "name": "Instansnavn",
-                    "country": "Land"
+                    "name": "Nazwa instancji",
+                    "country": "Kraj"
                 }
             },
             "frequency": {
-                "title": "Vælg udbetalingsfrekvens",
-                "description": "Vælg, hvor ofte du får løn",
+                "title": "Wybierz częstotliwość wypłat",
+                "description": "Wybierz, jak często otrzymujesz wynagrodzenie",
                 "data": {
-                    "pay_frequency": "Udbetalingsfrekvens"
+                    "pay_frequency": "Częstotliwość wypłaty"
                 }
             },
             "monthly_day": {
-                "title": "Vælg dag i måneden",
-                "description": "Vælg hvilken dag i måneden du får løn",
+                "title": "Wybierz dzień miesiąca",
+                "description": "Wybierz, którego dnia miesiąca otrzymujesz wynagrodzenie",
                 "data": {
-                    "pay_day": "Dag i måneden"
+                    "pay_day": "Dzień miesiąca"
                 }
             },
             "bank_offset": {
-                "title": "Dage før sidste bankdag",
-                "description": "Hvis du får løn et par dage før den sidste bankdag, skal du vælge hvor mange dage før",
+                "title": "Dni przed ostatnim dniem bankowym",
+                "description": "Jeśli otrzymujesz wynagrodzenie kilka dni przed ostatnim dniem bankowym, wybierz, ile dni wcześniej",
                 "data": {
-                    "bank_offset": "Dage før"
+                    "bank_offset": "Dni wcześniej"
                 }
             },
             "specific_day": {
-                "title": "Vælg specifik dag",
-                "description": "Vælg den præcise dag, du får løn hver måned",
+                "title": "Wybierz konkretny dzień",
+                "description": "Wybierz dokładny dzień, w którym co miesiąc otrzymujesz wynagrodzenie",
                 "data": {
-                    "pay_day": "Specifik dag"
+                    "pay_day": "Konkretny dzień"
                 }
             },
             "cycle_last_paydate": {
-                "title": "Vælg seneste lønningsdag",
-                "description": "Vælg den seneste dato, du fik løn. Dette bruges til at beregne den næste lønningsdag",
+                "title": "Wybierz datę ostatniej wypłaty",
+                "description": "Wybierz ostatnią datę, kiedy otrzymałeś(-aś) wynagrodzenie. Służy to do obliczenia następnego dnia wypłaty",
                 "data": {
-                    "last_pay_date": "Seneste lønningsdag"
+                    "last_pay_date": "Data ostatniej wypłaty"
                 }
             },
             "weekly": {
-                "title": "Vælg ugentlig lønningsdag",
-                "description": "Vælg hvilken ugedag du får løn hver uge",
+                "title": "Wybierz tygodniowy dzień wypłaty",
+                "description": "Wybierz, w który dzień tygodnia otrzymujesz wynagrodzenie co tydzień",
                 "data": {
-                    "pay_day": "Ugedag for lønningsdag"
+                    "pay_day": "Dzień tygodnia wypłaty"
                 }
             }
         },
         "error": {
-            "cannot_connect": "Kunne ikke oprette forbindelse til IsItPayday-tjenesten",
-            "invalid_country": "Det valgte land understøttes ikke",
-            "invalid_response": "Ugyldigt svar fra IsItPayday-tjenesten"
+            "cannot_connect": "Nie udało się połączyć z usługą IsItPayday",
+            "invalid_country": "Wybrany kraj nie jest obsługiwany",
+            "invalid_response": "Nieprawidłowa odpowiedź z usługi IsItPayday"
         }
     },
     "options": {
         "step": {
             "init": {
-                "title": "Juster indstillinger for IsItPayday",
-                "description": "Rediger indstillingerne for denne lønningsdagssporing"
+                "title": "Dostosuj ustawienia IsItPayday",
+                "description": "Edytuj ustawienia tego śledzenia dnia wypłaty"
             }
         }
     }

@@ -3,67 +3,67 @@
     "config": {
         "step": {
             "user": {
-                "title": "Vælg land",
-                "description": "Vælg det land, der bruges til at kontrollere helligdage",
+                "title": "국가 선택",
+                "description": "Det valgte land bruges til, at kontrollere helligdage",
                 "data": {
-                    "name": "Instansnavn",
-                    "country": "Land"
+                    "name": "인스턴스 이름",
+                    "country": "국가"
                 }
             },
             "frequency": {
-                "title": "Vælg udbetalingsfrekvens",
-                "description": "Vælg, hvor ofte du får løn",
+                "title": "급여 지급 빈도 선택",
+                "description": "급여를 받는 빈도를 선택하세요",
                 "data": {
-                    "pay_frequency": "Udbetalingsfrekvens"
+                    "pay_frequency": "급여 지급 빈도"
                 }
             },
             "monthly_day": {
-                "title": "Vælg dag i måneden",
-                "description": "Vælg hvilken dag i måneden du får løn",
+                "title": "월의 날짜를 선택하세요",
+                "description": "매월 급여를 받는 날짜를 선택하세요",
                 "data": {
-                    "pay_day": "Dag i måneden"
+                    "pay_day": "월의 날짜"
                 }
             },
             "bank_offset": {
-                "title": "Dage før sidste bankdag",
-                "description": "Hvis du får løn et par dage før den sidste bankdag, skal du vælge hvor mange dage før",
+                "title": "마지막 은행 영업일 전 일수",
+                "description": "마지막 은행 영업일보다 며칠 전에 급여를 받는 경우, 그 이전 일수를 선택하세요",
                 "data": {
-                    "bank_offset": "Dage før"
+                    "bank_offset": "이전 일수"
                 }
             },
             "specific_day": {
-                "title": "Vælg specifik dag",
-                "description": "Vælg den præcise dag, du får løn hver måned",
+                "title": "특정 날짜 선택",
+                "description": "매월 급여를 받는 정확한 날짜를 선택하세요",
                 "data": {
-                    "pay_day": "Specifik dag"
+                    "pay_day": "특정 날짜"
                 }
             },
             "cycle_last_paydate": {
-                "title": "Vælg seneste lønningsdag",
-                "description": "Vælg den seneste dato, du fik løn. Dette bruges til at beregne den næste lønningsdag",
+                "title": "최근 급여일 선택",
+                "description": "가장 최근에 급여를 받은 날짜를 선택하세요. 다음 급여일을 계산하는 데 사용됩니다",
                 "data": {
-                    "last_pay_date": "Seneste lønningsdag"
+                    "last_pay_date": "최근 급여일"
                 }
             },
             "weekly": {
-                "title": "Vælg ugentlig lønningsdag",
-                "description": "Vælg hvilken ugedag du får løn hver uge",
+                "title": "주간 급여일 선택",
+                "description": "매주 급여를 받는 요일을 선택하세요",
                 "data": {
-                    "pay_day": "Ugedag for lønningsdag"
+                    "pay_day": "급여일의 요일"
                 }
             }
         },
         "error": {
-            "cannot_connect": "Kunne ikke oprette forbindelse til IsItPayday-tjenesten",
-            "invalid_country": "Det valgte land understøttes ikke",
-            "invalid_response": "Ugyldigt svar fra IsItPayday-tjenesten"
+            "cannot_connect": "IsItPayday 서비스에 연결할 수 없습니다",
+            "invalid_country": "선택한 국가는 지원되지 않습니다",
+            "invalid_response": "IsItPayday 서비스의 응답이 올바르지 않습니다"
         }
     },
     "options": {
         "step": {
             "init": {
-                "title": "Juster indstillinger for IsItPayday",
-                "description": "Rediger indstillingerne for denne lønningsdagssporing"
+                "title": "IsItPayday 설정 조정",
+                "description": "이 급여일 추적의 설정을 수정하세요"
             }
         }
     }

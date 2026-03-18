@@ -3,67 +3,67 @@
     "config": {
         "step": {
             "user": {
-                "title": "Vælg land",
-                "description": "Vælg det land, der bruges til at kontrollere helligdage",
+                "title": "בחר מדינה",
+                "description": "Det valgte land bruges til, at kontrollere helligdage",
                 "data": {
-                    "name": "Instansnavn",
-                    "country": "Land"
+                    "name": "שם המופע",
+                    "country": "מדינה"
                 }
             },
             "frequency": {
-                "title": "Vælg udbetalingsfrekvens",
-                "description": "Vælg, hvor ofte du får løn",
+                "title": "בחר תדירות תשלום",
+                "description": "בחר באיזו תדירות אתה מקבל שכר",
                 "data": {
-                    "pay_frequency": "Udbetalingsfrekvens"
+                    "pay_frequency": "תדירות תשלום השכר"
                 }
             },
             "monthly_day": {
-                "title": "Vælg dag i måneden",
-                "description": "Vælg hvilken dag i måneden du får løn",
+                "title": "בחר יום בחודש",
+                "description": "בחר באיזה יום בחודש אתה מקבל שכר",
                 "data": {
-                    "pay_day": "Dag i måneden"
+                    "pay_day": "יום בחודש"
                 }
             },
             "bank_offset": {
-                "title": "Dage før sidste bankdag",
-                "description": "Hvis du får løn et par dage før den sidste bankdag, skal du vælge hvor mange dage før",
+                "title": "ימים לפני יום הבנק האחרון",
+                "description": "אם אתה מקבל שכר כמה ימים לפני יום הבנק האחרון, בחר כמה ימים לפני",
                 "data": {
-                    "bank_offset": "Dage før"
+                    "bank_offset": "ימים לפני"
                 }
             },
             "specific_day": {
-                "title": "Vælg specifik dag",
-                "description": "Vælg den præcise dag, du får løn hver måned",
+                "title": "בחר יום מסוים",
+                "description": "בחר את היום המדויק שבו אתה מקבל שכר בכל חודש",
                 "data": {
-                    "pay_day": "Specifik dag"
+                    "pay_day": "יום מסוים"
                 }
             },
             "cycle_last_paydate": {
-                "title": "Vælg seneste lønningsdag",
-                "description": "Vælg den seneste dato, du fik løn. Dette bruges til at beregne den næste lønningsdag",
+                "title": "בחר את יום התשלום האחרון",
+                "description": "בחר את התאריך האחרון שבו קיבלת שכר. זה משמש לחישוב יום התשלום הבא",
                 "data": {
-                    "last_pay_date": "Seneste lønningsdag"
+                    "last_pay_date": "יום התשלום האחרון"
                 }
             },
             "weekly": {
-                "title": "Vælg ugentlig lønningsdag",
-                "description": "Vælg hvilken ugedag du får løn hver uge",
+                "title": "בחר את יום התשלום השבועי",
+                "description": "בחר באיזה יום בשבוע אתה מקבל שכר בכל שבוע",
                 "data": {
-                    "pay_day": "Ugedag for lønningsdag"
+                    "pay_day": "יום השבוע של תשלום השכר"
                 }
             }
         },
         "error": {
-            "cannot_connect": "Kunne ikke oprette forbindelse til IsItPayday-tjenesten",
-            "invalid_country": "Det valgte land understøttes ikke",
-            "invalid_response": "Ugyldigt svar fra IsItPayday-tjenesten"
+            "cannot_connect": "לא ניתן היה להתחבר לשירות IsItPayday",
+            "invalid_country": "המדינה שנבחרה אינה נתמכת",
+            "invalid_response": "תגובה לא תקינה משירות IsItPayday"
         }
     },
     "options": {
         "step": {
             "init": {
-                "title": "Juster indstillinger for IsItPayday",
-                "description": "Rediger indstillingerne for denne lønningsdagssporing"
+                "title": "התאם את ההגדרות עבור IsItPayday",
+                "description": "ערוך את ההגדרות עבור מעקב יום התשלום הזה"
             }
         }
     }

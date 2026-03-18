@@ -3,67 +3,67 @@
     "config": {
         "step": {
             "user": {
-                "title": "Vælg land",
-                "description": "Vælg det land, der bruges til at kontrollere helligdage",
+                "title": "Виберіть країну",
+                "description": "Det valgte land bruges til, at kontrollere helligdage",
                 "data": {
-                    "name": "Instansnavn",
-                    "country": "Land"
+                    "name": "Назва екземпляра",
+                    "country": "Країна"
                 }
             },
             "frequency": {
-                "title": "Vælg udbetalingsfrekvens",
-                "description": "Vælg, hvor ofte du får løn",
+                "title": "Виберіть частоту виплат",
+                "description": "Виберіть, як часто ви отримуєте зарплату",
                 "data": {
-                    "pay_frequency": "Udbetalingsfrekvens"
+                    "pay_frequency": "Частота виплат"
                 }
             },
             "monthly_day": {
-                "title": "Vælg dag i måneden",
-                "description": "Vælg hvilken dag i måneden du får løn",
+                "title": "Виберіть день місяця",
+                "description": "Виберіть, у який день місяця ви отримуєте зарплату",
                 "data": {
-                    "pay_day": "Dag i måneden"
+                    "pay_day": "День місяця"
                 }
             },
             "bank_offset": {
-                "title": "Dage før sidste bankdag",
-                "description": "Hvis du får løn et par dage før den sidste bankdag, skal du vælge hvor mange dage før",
+                "title": "Днів до останнього банківського дня",
+                "description": "Якщо ви отримуєте зарплату за кілька днів до останнього банківського дня, виберіть, за скільки днів до нього",
                 "data": {
-                    "bank_offset": "Dage før"
+                    "bank_offset": "Днів до"
                 }
             },
             "specific_day": {
-                "title": "Vælg specifik dag",
-                "description": "Vælg den præcise dag, du får løn hver måned",
+                "title": "Виберіть конкретний день",
+                "description": "Виберіть точний день, коли ви отримуєте зарплату щомісяця",
                 "data": {
-                    "pay_day": "Specifik dag"
+                    "pay_day": "Конкретний день"
                 }
             },
             "cycle_last_paydate": {
-                "title": "Vælg seneste lønningsdag",
-                "description": "Vælg den seneste dato, du fik løn. Dette bruges til at beregne den næste lønningsdag",
+                "title": "Виберіть дату останньої виплати зарплати",
+                "description": "Виберіть останню дату, коли ви отримували зарплату. Це використовується для обчислення наступної дати виплати зарплати",
                 "data": {
-                    "last_pay_date": "Seneste lønningsdag"
+                    "last_pay_date": "Остання дата виплати зарплати"
                 }
             },
             "weekly": {
-                "title": "Vælg ugentlig lønningsdag",
-                "description": "Vælg hvilken ugedag du får løn hver uge",
+                "title": "Виберіть день тижня для щотижневої виплати зарплати",
+                "description": "Виберіть, у який день тижня ви отримуєте зарплату щотижня",
                 "data": {
-                    "pay_day": "Ugedag for lønningsdag"
+                    "pay_day": "День тижня виплати зарплати"
                 }
             }
         },
         "error": {
-            "cannot_connect": "Kunne ikke oprette forbindelse til IsItPayday-tjenesten",
-            "invalid_country": "Det valgte land understøttes ikke",
-            "invalid_response": "Ugyldigt svar fra IsItPayday-tjenesten"
+            "cannot_connect": "Не вдалося підключитися до служби IsItPayday",
+            "invalid_country": "Вибрана країна не підтримується",
+            "invalid_response": "Недійсна відповідь від служби IsItPayday"
         }
     },
     "options": {
         "step": {
             "init": {
-                "title": "Juster indstillinger for IsItPayday",
-                "description": "Rediger indstillingerne for denne lønningsdagssporing"
+                "title": "Налаштуйте параметри IsItPayday",
+                "description": "Змініть параметри для цього відстеження дня виплати зарплати"
             }
         }
     }

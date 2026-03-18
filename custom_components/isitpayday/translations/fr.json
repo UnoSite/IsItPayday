@@ -3,67 +3,67 @@
     "config": {
         "step": {
             "user": {
-                "title": "Vælg land",
-                "description": "Vælg det land, der bruges til at kontrollere helligdage",
+                "title": "Choisir un pays",
+                "description": "Det valgte land bruges til, at kontrollere helligdage",
                 "data": {
-                    "name": "Instansnavn",
-                    "country": "Land"
+                    "name": "Nom de l'instance",
+                    "country": "Pays"
                 }
             },
             "frequency": {
-                "title": "Vælg udbetalingsfrekvens",
-                "description": "Vælg, hvor ofte du får løn",
+                "title": "Choisir la fréquence de paiement",
+                "description": "Choisissez la fréquence à laquelle vous êtes payé",
                 "data": {
-                    "pay_frequency": "Udbetalingsfrekvens"
+                    "pay_frequency": "Fréquence de paiement"
                 }
             },
             "monthly_day": {
-                "title": "Vælg dag i måneden",
-                "description": "Vælg hvilken dag i måneden du får løn",
+                "title": "Choisir le jour du mois",
+                "description": "Choisissez le jour du mois où vous recevez votre salaire",
                 "data": {
-                    "pay_day": "Dag i måneden"
+                    "pay_day": "Jour du mois"
                 }
             },
             "bank_offset": {
-                "title": "Dage før sidste bankdag",
-                "description": "Hvis du får løn et par dage før den sidste bankdag, skal du vælge hvor mange dage før",
+                "title": "Jours avant le dernier jour bancaire",
+                "description": "Si vous recevez votre salaire quelques jours avant le dernier jour bancaire, choisissez combien de jours avant",
                 "data": {
-                    "bank_offset": "Dage før"
+                    "bank_offset": "Jours avant"
                 }
             },
             "specific_day": {
-                "title": "Vælg specifik dag",
-                "description": "Vælg den præcise dag, du får løn hver måned",
+                "title": "Choisir un jour spécifique",
+                "description": "Choisissez le jour exact où vous recevez votre salaire chaque mois",
                 "data": {
-                    "pay_day": "Specifik dag"
+                    "pay_day": "Jour spécifique"
                 }
             },
             "cycle_last_paydate": {
-                "title": "Vælg seneste lønningsdag",
-                "description": "Vælg den seneste dato, du fik løn. Dette bruges til at beregne den næste lønningsdag",
+                "title": "Choisir la dernière date de paie",
+                "description": "Choisissez la date la plus récente à laquelle vous avez reçu votre salaire. Cela est utilisé pour calculer la prochaine date de paie",
                 "data": {
-                    "last_pay_date": "Seneste lønningsdag"
+                    "last_pay_date": "Dernière date de paie"
                 }
             },
             "weekly": {
-                "title": "Vælg ugentlig lønningsdag",
-                "description": "Vælg hvilken ugedag du får løn hver uge",
+                "title": "Choisir le jour de paie hebdomadaire",
+                "description": "Choisissez le jour de la semaine où vous recevez votre salaire chaque semaine",
                 "data": {
-                    "pay_day": "Ugedag for lønningsdag"
+                    "pay_day": "Jour de la semaine du jour de paie"
                 }
             }
         },
         "error": {
-            "cannot_connect": "Kunne ikke oprette forbindelse til IsItPayday-tjenesten",
-            "invalid_country": "Det valgte land understøttes ikke",
-            "invalid_response": "Ugyldigt svar fra IsItPayday-tjenesten"
+            "cannot_connect": "Impossible de se connecter au service IsItPayday",
+            "invalid_country": "Le pays sélectionné n’est pas pris en charge",
+            "invalid_response": "Réponse invalide du service IsItPayday"
         }
     },
     "options": {
         "step": {
             "init": {
-                "title": "Juster indstillinger for IsItPayday",
-                "description": "Rediger indstillingerne for denne lønningsdagssporing"
+                "title": "Ajuster les paramètres d’IsItPayday",
+                "description": "Modifier les paramètres de ce suivi du jour de paie"
             }
         }
     }

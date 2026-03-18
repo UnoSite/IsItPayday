@@ -3,67 +3,67 @@
     "config": {
         "step": {
             "user": {
-                "title": "Vælg land",
-                "description": "Vælg det land, der bruges til at kontrollere helligdage",
+                "title": "Selecciona el país",
+                "description": "Det valgte land bruges til, at kontrollere helligdage",
                 "data": {
-                    "name": "Instansnavn",
-                    "country": "Land"
+                    "name": "Nom de la instància",
+                    "country": "País"
                 }
             },
             "frequency": {
-                "title": "Vælg udbetalingsfrekvens",
-                "description": "Vælg, hvor ofte du får løn",
+                "title": "Selecciona la freqüència de pagament",
+                "description": "Selecciona amb quina freqüència cobres",
                 "data": {
-                    "pay_frequency": "Udbetalingsfrekvens"
+                    "pay_frequency": "Freqüència de pagament"
                 }
             },
             "monthly_day": {
-                "title": "Vælg dag i måneden",
-                "description": "Vælg hvilken dag i måneden du får løn",
+                "title": "Tria el dia del mes",
+                "description": "Tria quin dia del mes cobres",
                 "data": {
-                    "pay_day": "Dag i måneden"
+                    "pay_day": "Dia del mes"
                 }
             },
             "bank_offset": {
-                "title": "Dage før sidste bankdag",
-                "description": "Hvis du får løn et par dage før den sidste bankdag, skal du vælge hvor mange dage før",
+                "title": "Dies abans de l'últim dia bancari",
+                "description": "Si cobres uns quants dies abans de l'últim dia bancari, tria quants dies abans",
                 "data": {
-                    "bank_offset": "Dage før"
+                    "bank_offset": "Dies abans"
                 }
             },
             "specific_day": {
-                "title": "Vælg specifik dag",
-                "description": "Vælg den præcise dag, du får løn hver måned",
+                "title": "Tria un dia específic",
+                "description": "Tria el dia exacte en què cobres cada mes",
                 "data": {
-                    "pay_day": "Specifik dag"
+                    "pay_day": "Dia específic"
                 }
             },
             "cycle_last_paydate": {
-                "title": "Vælg seneste lønningsdag",
-                "description": "Vælg den seneste dato, du fik løn. Dette bruges til at beregne den næste lønningsdag",
+                "title": "Tria l'últim dia de pagament",
+                "description": "Tria la data més recent en què vas cobrar. Això es fa servir per calcular el proper dia de pagament",
                 "data": {
-                    "last_pay_date": "Seneste lønningsdag"
+                    "last_pay_date": "Últim dia de pagament"
                 }
             },
             "weekly": {
-                "title": "Vælg ugentlig lønningsdag",
-                "description": "Vælg hvilken ugedag du får løn hver uge",
+                "title": "Tria el dia de pagament setmanal",
+                "description": "Tria quin dia de la setmana cobres",
                 "data": {
-                    "pay_day": "Ugedag for lønningsdag"
+                    "pay_day": "Dia de la setmana de pagament"
                 }
             }
         },
         "error": {
-            "cannot_connect": "Kunne ikke oprette forbindelse til IsItPayday-tjenesten",
-            "invalid_country": "Det valgte land understøttes ikke",
-            "invalid_response": "Ugyldigt svar fra IsItPayday-tjenesten"
+            "cannot_connect": "No s'ha pogut connectar al servei IsItPayday",
+            "invalid_country": "El país seleccionat no és compatible",
+            "invalid_response": "Resposta no vàlida del servei IsItPayday"
         }
     },
     "options": {
         "step": {
             "init": {
-                "title": "Juster indstillinger for IsItPayday",
-                "description": "Rediger indstillingerne for denne lønningsdagssporing"
+                "title": "Ajusta la configuració d'IsItPayday",
+                "description": "Edita la configuració d'aquest seguiment del dia de pagament"
             }
         }
     }

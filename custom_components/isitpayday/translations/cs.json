@@ -3,67 +3,67 @@
     "config": {
         "step": {
             "user": {
-                "title": "Vælg land",
-                "description": "Vælg det land, der bruges til at kontrollere helligdage",
+                "title": "Vyberte zemi",
+                "description": "Det valgte land bruges til, at kontrollere helligdage",
                 "data": {
-                    "name": "Instansnavn",
-                    "country": "Land"
+                    "name": "Název instance",
+                    "country": "Země"
                 }
             },
             "frequency": {
-                "title": "Vælg udbetalingsfrekvens",
-                "description": "Vælg, hvor ofte du får løn",
+                "title": "Vyberte frekvenci výplaty",
+                "description": "Vyberte, jak často dostáváte výplatu",
                 "data": {
-                    "pay_frequency": "Udbetalingsfrekvens"
+                    "pay_frequency": "Frekvence výplaty"
                 }
             },
             "monthly_day": {
-                "title": "Vælg dag i måneden",
-                "description": "Vælg hvilken dag i måneden du får løn",
+                "title": "Vyberte den v měsíci",
+                "description": "Vyberte, který den v měsíci dostáváte výplatu",
                 "data": {
-                    "pay_day": "Dag i måneden"
+                    "pay_day": "Den v měsíci"
                 }
             },
             "bank_offset": {
-                "title": "Dage før sidste bankdag",
-                "description": "Hvis du får løn et par dage før den sidste bankdag, skal du vælge hvor mange dage før",
+                "title": "Dny před posledním bankovním dnem",
+                "description": "Pokud dostáváte výplatu několik dní před posledním bankovním dnem, vyberte kolik dní předtím",
                 "data": {
-                    "bank_offset": "Dage før"
+                    "bank_offset": "Dny před"
                 }
             },
             "specific_day": {
-                "title": "Vælg specifik dag",
-                "description": "Vælg den præcise dag, du får løn hver måned",
+                "title": "Vyberte konkrétní den",
+                "description": "Vyberte přesný den, kdy každý měsíc dostáváte výplatu",
                 "data": {
-                    "pay_day": "Specifik dag"
+                    "pay_day": "Konkrétní den"
                 }
             },
             "cycle_last_paydate": {
-                "title": "Vælg seneste lønningsdag",
-                "description": "Vælg den seneste dato, du fik løn. Dette bruges til at beregne den næste lønningsdag",
+                "title": "Vyberte datum poslední výplaty",
+                "description": "Vyberte poslední datum, kdy jste dostali výplatu. To se používá k výpočtu dalšího dne výplaty",
                 "data": {
-                    "last_pay_date": "Seneste lønningsdag"
+                    "last_pay_date": "Datum poslední výplaty"
                 }
             },
             "weekly": {
-                "title": "Vælg ugentlig lønningsdag",
-                "description": "Vælg hvilken ugedag du får løn hver uge",
+                "title": "Vyberte den výplaty v týdnu",
+                "description": "Vyberte, který den v týdnu dostáváte výplatu každý týden",
                 "data": {
-                    "pay_day": "Ugedag for lønningsdag"
+                    "pay_day": "Den v týdnu pro výplatu"
                 }
             }
         },
         "error": {
-            "cannot_connect": "Kunne ikke oprette forbindelse til IsItPayday-tjenesten",
-            "invalid_country": "Det valgte land understøttes ikke",
-            "invalid_response": "Ugyldigt svar fra IsItPayday-tjenesten"
+            "cannot_connect": "Nepodařilo se připojit ke službě IsItPayday",
+            "invalid_country": "Vybraná země není podporována",
+            "invalid_response": "Neplatná odpověď ze služby IsItPayday"
         }
     },
     "options": {
         "step": {
             "init": {
-                "title": "Juster indstillinger for IsItPayday",
-                "description": "Rediger indstillingerne for denne lønningsdagssporing"
+                "title": "Upravte nastavení pro IsItPayday",
+                "description": "Upravte nastavení tohoto sledování dne výplaty"
             }
         }
     }

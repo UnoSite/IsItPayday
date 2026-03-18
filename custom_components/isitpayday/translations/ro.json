@@ -3,67 +3,67 @@
     "config": {
         "step": {
             "user": {
-                "title": "Vælg land",
-                "description": "Vælg det land, der bruges til at kontrollere helligdage",
+                "title": "Selectați țara",
+                "description": "Det valgte land bruges til, at kontrollere helligdage",
                 "data": {
-                    "name": "Instansnavn",
-                    "country": "Land"
+                    "name": "Numele instanței",
+                    "country": "Țară"
                 }
             },
             "frequency": {
-                "title": "Vælg udbetalingsfrekvens",
-                "description": "Vælg, hvor ofte du får løn",
+                "title": "Selectați frecvența plății salariului",
+                "description": "Selectați cât de des primiți salariul",
                 "data": {
-                    "pay_frequency": "Udbetalingsfrekvens"
+                    "pay_frequency": "Frecvența plății salariului"
                 }
             },
             "monthly_day": {
-                "title": "Vælg dag i måneden",
-                "description": "Vælg hvilken dag i måneden du får løn",
+                "title": "Selectează ziua din lună",
+                "description": "Selectează în ce zi din lună primești salariul",
                 "data": {
-                    "pay_day": "Dag i måneden"
+                    "pay_day": "Ziua din lună"
                 }
             },
             "bank_offset": {
-                "title": "Dage før sidste bankdag",
-                "description": "Hvis du får løn et par dage før den sidste bankdag, skal du vælge hvor mange dage før",
+                "title": "Zile înainte de ultima zi bancară",
+                "description": "Dacă primești salariul cu câteva zile înainte de ultima zi bancară, selectează cu câte zile înainte",
                 "data": {
-                    "bank_offset": "Dage før"
+                    "bank_offset": "Zile înainte"
                 }
             },
             "specific_day": {
-                "title": "Vælg specifik dag",
-                "description": "Vælg den præcise dag, du får løn hver måned",
+                "title": "Selectează o zi specifică",
+                "description": "Selectează ziua exactă în care primești salariul în fiecare lună",
                 "data": {
-                    "pay_day": "Specifik dag"
+                    "pay_day": "Zi specifică"
                 }
             },
             "cycle_last_paydate": {
-                "title": "Vælg seneste lønningsdag",
-                "description": "Vælg den seneste dato, du fik løn. Dette bruges til at beregne den næste lønningsdag",
+                "title": "Selectează cea mai recentă zi de salariu",
+                "description": "Selectează cea mai recentă dată la care ai primit salariul. Aceasta este folosită pentru a calcula următoarea zi de salariu",
                 "data": {
-                    "last_pay_date": "Seneste lønningsdag"
+                    "last_pay_date": "Cea mai recentă zi de salariu"
                 }
             },
             "weekly": {
-                "title": "Vælg ugentlig lønningsdag",
-                "description": "Vælg hvilken ugedag du får løn hver uge",
+                "title": "Selectează ziua săptămânală de salariu",
+                "description": "Selectează în ce zi a săptămânii primești salariul în fiecare săptămână",
                 "data": {
-                    "pay_day": "Ugedag for lønningsdag"
+                    "pay_day": "Ziua săptămânii pentru salariu"
                 }
             }
         },
         "error": {
-            "cannot_connect": "Kunne ikke oprette forbindelse til IsItPayday-tjenesten",
-            "invalid_country": "Det valgte land understøttes ikke",
-            "invalid_response": "Ugyldigt svar fra IsItPayday-tjenesten"
+            "cannot_connect": "Nu s-a putut realiza conexiunea la serviciul IsItPayday",
+            "invalid_country": "Țara selectată nu este acceptată",
+            "invalid_response": "Răspuns invalid de la serviciul IsItPayday"
         }
     },
     "options": {
         "step": {
             "init": {
-                "title": "Juster indstillinger for IsItPayday",
-                "description": "Rediger indstillingerne for denne lønningsdagssporing"
+                "title": "Ajustează setările pentru IsItPayday",
+                "description": "Editează setările pentru această urmărire a zilei de salariu"
             }
         }
     }

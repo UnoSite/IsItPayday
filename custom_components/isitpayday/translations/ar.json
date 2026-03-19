@@ -4,7 +4,7 @@
         "step": {
             "user": {
                 "title": "اختر البلد",
-                "description": "Det valgte land bruges til, at kontrollere helligdage",
+                "description": "تُستخدم الدولة المحددة للتحقق من العطلات الرسمية",
                 "data": {
                     "name": "اسم المثيل",
                     "country": "البلد"

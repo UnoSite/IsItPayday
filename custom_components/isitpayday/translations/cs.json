@@ -4,7 +4,7 @@
         "step": {
             "user": {
                 "title": "Vyberte zemi",
-                "description": "Det valgte land bruges til, at kontrollere helligdage",
+                "description": "Vybraná země se používá ke kontrole státních svátků",
                 "data": {
                     "name": "Název instance",
                     "country": "Země"

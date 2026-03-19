@@ -4,7 +4,7 @@
         "step": {
             "user": {
                 "title": "Seleziona paese",
-                "description": "Det valgte land bruges til, at kontrollere helligdage",
+                "description": "Il paese selezionato viene utilizzato per controllare i giorni festivi",
                 "data": {
                     "name": "Nome istanza",
                     "country": "Paese"

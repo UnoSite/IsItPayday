@@ -4,7 +4,7 @@
         "step": {
             "user": {
                 "title": "Ország kiválasztása",
-                "description": "Det valgte land bruges til, at kontrollere helligdage",
+                "description": "A kiválasztott országot az ünnepnapok ellenőrzésére használjuk",
                 "data": {
                     "name": "Példánynév",
                     "country": "Ország"

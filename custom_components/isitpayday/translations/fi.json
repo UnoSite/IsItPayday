@@ -4,7 +4,7 @@
         "step": {
             "user": {
                 "title": "Valitse maa",
-                "description": "Det valgte land bruges til, at kontrollere helligdage",
+                "description": "Valittua maata käytetään pyhäpäivien tarkistamiseen",
                 "data": {
                     "name": "Instanssin nimi",
                     "country": "Maa"

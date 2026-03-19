@@ -4,7 +4,7 @@
         "step": {
             "user": {
                 "title": "בחר מדינה",
-                "description": "Det valgte land bruges til, at kontrollere helligdage",
+                "description": "המדינה שנבחרה משמשת לקביעת חגים",
                 "data": {
                     "name": "שם המופע",
                     "country": "מדינה"

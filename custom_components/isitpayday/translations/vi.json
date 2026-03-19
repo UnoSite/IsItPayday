@@ -4,7 +4,7 @@
         "step": {
             "user": {
                 "title": "Chọn quốc gia",
-                "description": "Det valgte land bruges til, at kontrollere helligdage",
+                "description": "Quốc gia đã chọn được dùng để kiểm tra ngày lễ",
                 "data": {
                     "name": "Tên phiên bản",
                     "country": "Quốc gia"

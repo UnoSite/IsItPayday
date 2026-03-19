@@ -4,7 +4,7 @@
         "step": {
             "user": {
                 "title": "Kies land",
-                "description": "Det valgte land bruges til, at kontrollere helligdage",
+                "description": "Het geselecteerde land wordt gebruikt om feestdagen te controleren",
                 "data": {
                     "name": "Instantienaam",
                     "country": "Land"

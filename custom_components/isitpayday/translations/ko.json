@@ -4,7 +4,7 @@
         "step": {
             "user": {
                 "title": "국가 선택",
-                "description": "Det valgte land bruges til, at kontrollere helligdage",
+                "description": "선택한 국가는 공휴일을 확인하는 데 사용됩니다",
                 "data": {
                     "name": "인스턴스 이름",
                     "country": "국가"

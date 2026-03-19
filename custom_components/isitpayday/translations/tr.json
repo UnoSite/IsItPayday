@@ -4,7 +4,7 @@
         "step": {
             "user": {
                 "title": "Ülke seçin",
-                "description": "Det valgte land bruges til, at kontrollere helligdage",
+                "description": "Seçilen ülke, resmî tatilleri kontrol etmek için kullanılır",
                 "data": {
                     "name": "Örnek adı",
                     "country": "Ülke"

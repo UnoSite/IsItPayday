@@ -4,7 +4,7 @@
         "step": {
             "user": {
                 "title": "Επιλέξτε χώρα",
-                "description": "Det valgte land bruges til, at kontrollere helligdage",
+                "description": "Η επιλεγμένη χώρα χρησιμοποιείται για τον έλεγχο των αργιών",
                 "data": {
                     "name": "Όνομα παρουσίας",
                     "country": "Χώρα"

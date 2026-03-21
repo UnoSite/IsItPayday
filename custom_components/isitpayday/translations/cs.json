@@ -1,0 +1,70 @@
+{
+    "title": "Je výplata",
+    "config": {
+        "step": {
+            "user": {
+                "title": "Vyberte zemi",
+                "description": "Vybraná země se používá ke kontrole státních svátků",
+                "data": {
+                    "name": "Název instance",
+                    "country": "Země"
+                }
+            },
+            "frequency": {
+                "title": "Vyberte frekvenci výplaty",
+                "description": "Vyberte, jak často dostáváte výplatu",
+                "data": {
+                    "pay_frequency": "Frekvence výplaty"
+                }
+            },
+            "monthly_day": {
+                "title": "Vyberte den v měsíci",
+                "description": "Vyberte, který den v měsíci dostáváte výplatu",
+                "data": {
+                    "pay_day": "Den v měsíci"
+                }
+            },
+            "bank_offset": {
+                "title": "Dny před posledním bankovním dnem",
+                "description": "Pokud dostáváte výplatu několik dní před posledním bankovním dnem, vyberte kolik dní předtím",
+                "data": {
+                    "bank_offset": "Dny před"
+                }
+            },
+            "specific_day": {
+                "title": "Vyberte konkrétní den",
+                "description": "Vyberte přesný den, kdy každý měsíc dostáváte výplatu",
+                "data": {
+                    "pay_day": "Konkrétní den"
+                }
+            },
+            "cycle_last_paydate": {
+                "title": "Vyberte datum poslední výplaty",
+                "description": "Vyberte poslední datum, kdy jste dostali výplatu. To se používá k výpočtu dalšího dne výplaty",
+                "data": {
+                    "last_pay_date": "Datum poslední výplaty"
+                }
+            },
+            "weekly": {
+                "title": "Vyberte den výplaty v týdnu",
+                "description": "Vyberte, který den v týdnu dostáváte výplatu každý týden",
+                "data": {
+                    "pay_day": "Den v týdnu pro výplatu"
+                }
+            }
+        },
+        "error": {
+            "cannot_connect": "Nepodařilo se připojit ke službě IsItPayday",
+            "invalid_country": "Vybraná země není podporována",
+            "invalid_response": "Neplatná odpověď ze služby IsItPayday"
+        }
+    },
+    "options": {
+        "step": {
+            "init": {
+                "title": "Upravte nastavení pro IsItPayday",
+                "description": "Upravte nastavení tohoto sledování dne výplaty"
+            }
+        }
+    }
+}

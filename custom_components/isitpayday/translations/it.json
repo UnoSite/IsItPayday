@@ -1,0 +1,70 @@
+{
+    "title": "IsItPayday",
+    "config": {
+        "step": {
+            "user": {
+                "title": "Seleziona paese",
+                "description": "Il paese selezionato viene utilizzato per controllare i giorni festivi",
+                "data": {
+                    "name": "Nome istanza",
+                    "country": "Paese"
+                }
+            },
+            "frequency": {
+                "title": "Seleziona la frequenza di pagamento",
+                "description": "Seleziona con quale frequenza ricevi lo stipendio",
+                "data": {
+                    "pay_frequency": "Frequenza di pagamento"
+                }
+            },
+            "monthly_day": {
+                "title": "Seleziona il giorno del mese",
+                "description": "Seleziona in quale giorno del mese ricevi lo stipendio",
+                "data": {
+                    "pay_day": "Giorno del mese"
+                }
+            },
+            "bank_offset": {
+                "title": "Giorni prima dell'ultimo giorno bancabile",
+                "description": "Se ricevi lo stipendio un paio di giorni prima dell'ultimo giorno bancabile, seleziona quanti giorni prima",
+                "data": {
+                    "bank_offset": "Giorni prima"
+                }
+            },
+            "specific_day": {
+                "title": "Seleziona un giorno specifico",
+                "description": "Seleziona il giorno esatto in cui ricevi lo stipendio ogni mese",
+                "data": {
+                    "pay_day": "Giorno specifico"
+                }
+            },
+            "cycle_last_paydate": {
+                "title": "Seleziona la data dell'ultimo stipendio",
+                "description": "Seleziona la data più recente in cui hai ricevuto lo stipendio. Verrà usata per calcolare il prossimo giorno di pagamento",
+                "data": {
+                    "last_pay_date": "Data dell'ultimo stipendio"
+                }
+            },
+            "weekly": {
+                "title": "Seleziona il giorno di pagamento settimanale",
+                "description": "Seleziona in quale giorno della settimana ricevi lo stipendio ogni settimana",
+                "data": {
+                    "pay_day": "Giorno della settimana di pagamento"
+                }
+            }
+        },
+        "error": {
+            "cannot_connect": "Impossibile connettersi al servizio IsItPayday",
+            "invalid_country": "Il paese selezionato non è supportato",
+            "invalid_response": "Risposta non valida dal servizio IsItPayday"
+        }
+    },
+    "options": {
+        "step": {
+            "init": {
+                "title": "Modifica le impostazioni di IsItPayday",
+                "description": "Modifica le impostazioni di questo tracciamento del giorno di pagamento"
+            }
+        }
+    }
+}

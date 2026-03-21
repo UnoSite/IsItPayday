@@ -1,0 +1,70 @@
+{
+    "title": "IsItPayday",
+    "config": {
+        "step": {
+            "user": {
+                "title": "国を選択",
+                "description": "選択した国は祝日の判定に使用されます",
+                "data": {
+                    "name": "インスタンス名",
+                    "country": "国"
+                }
+            },
+            "frequency": {
+                "title": "支払い頻度を選択",
+                "description": "給与を受け取る頻度を選択してください",
+                "data": {
+                    "pay_frequency": "支給頻度"
+                }
+            },
+            "monthly_day": {
+                "title": "月の日付を選択",
+                "description": "毎月給与を受け取る日付を選択してください",
+                "data": {
+                    "pay_day": "月の日付"
+                }
+            },
+            "bank_offset": {
+                "title": "最終銀行営業日前の日数",
+                "description": "最終銀行営業日の数日前に給与を受け取る場合は、何日前かを選択してください",
+                "data": {
+                    "bank_offset": "日前"
+                }
+            },
+            "specific_day": {
+                "title": "特定の日を選択",
+                "description": "毎月給与を受け取る正確な日を選択してください",
+                "data": {
+                    "pay_day": "特定の日"
+                }
+            },
+            "cycle_last_paydate": {
+                "title": "直近の給与支給日を選択",
+                "description": "直近で給与を受け取った日付を選択してください。これは次回の給与支給日を計算するために使用されます",
+                "data": {
+                    "last_pay_date": "直近の給与支給日"
+                }
+            },
+            "weekly": {
+                "title": "毎週の給与支給曜日を選択",
+                "description": "毎週給与を受け取る曜日を選択してください",
+                "data": {
+                    "pay_day": "給与支給曜日"
+                }
+            }
+        },
+        "error": {
+            "cannot_connect": "IsItPaydayサービスに接続できませんでした",
+            "invalid_country": "選択した国はサポートされていません",
+            "invalid_response": "IsItPaydayサービスから無効な応答が返されました"
+        }
+    },
+    "options": {
+        "step": {
+            "init": {
+                "title": "IsItPaydayの設定を調整",
+                "description": "この給与支給日トラッキングの設定を編集"
+            }
+        }
+    }
+}

@@ -1,69 +1,69 @@
 {
-    "title": "发薪日到了吗？",
+    "title": "IsItPayday",
     "config": {
         "step": {
             "user": {
-                "title": "选择国家",
-                "description": "所选国家用于控制节假日",
+                "title": "選擇國家",
+                "description": "所選國家用於控制國定假日",
                 "data": {
-                    "name": "实例名称",
-                    "country": "国家"
+                    "name": "實例名稱",
+                    "country": "國家"
                 }
             },
             "frequency": {
-                "title": "选择发薪频率",
-                "description": "选择您的发薪频率",
+                "title": "選擇發薪頻率",
+                "description": "選擇您領薪的頻率",
                 "data": {
-                    "pay_frequency": "发薪频率"
+                    "pay_frequency": "發薪頻率"
                 }
             },
             "monthly_day": {
-                "title": "选择每月中的日期",
-                "description": "选择您每月发薪的日期",
+                "title": "選擇每月中的日期",
+                "description": "選擇您每月領薪的日期",
                 "data": {
                     "pay_day": "每月中的日期"
                 }
             },
             "bank_offset": {
-                "title": "最后一个银行工作日前的天数",
-                "description": "如果您在最后一个银行工作日前几天领薪，请选择提前多少天",
+                "title": "最後一個銀行營業日前幾天",
+                "description": "如果您在最後一個銀行營業日前幾天領薪，請選擇提前幾天",
                 "data": {
-                    "bank_offset": "提前天数"
+                    "bank_offset": "提前天數"
                 }
             },
             "specific_day": {
-                "title": "选择具体日期",
-                "description": "选择您每月发薪的具体日期",
+                "title": "選擇特定日期",
+                "description": "選擇您每月領薪的確切日期",
                 "data": {
-                    "pay_day": "具体日期"
+                    "pay_day": "特定日期"
                 }
             },
             "cycle_last_paydate": {
-                "title": "选择最近一次发薪日",
-                "description": "选择您最近一次领薪的日期。这将用于计算下一次发薪日",
+                "title": "選擇最近一次發薪日",
+                "description": "選擇您最近一次領薪的日期。這將用於計算下一個發薪日",
                 "data": {
-                    "last_pay_date": "最近一次发薪日"
+                    "last_pay_date": "最近一次發薪日"
                 }
             },
             "weekly": {
-                "title": "选择每周发薪日",
-                "description": "选择您每周发薪的星期几",
+                "title": "選擇每週發薪日",
+                "description": "選擇您每週領薪的星期幾",
                 "data": {
-                    "pay_day": "发薪日的星期几"
+                    "pay_day": "發薪日的星期"
                 }
             }
         },
         "error": {
-            "cannot_connect": "无法连接到 IsItPayday 服务",
-            "invalid_country": "所选国家/地区不受支持",
-            "invalid_response": "来自 IsItPayday 服务的响应无效"
+            "cannot_connect": "無法連線到 IsItPayday 服務",
+            "invalid_country": "不支援所選的國家",
+            "invalid_response": "來自 IsItPayday 服務的回應無效"
         }
     },
     "options": {
         "step": {
             "init": {
-                "title": "调整 IsItPayday 设置",
-                "description": "编辑此发薪日跟踪的设置"
+                "title": "調整 IsItPayday 設定",
+                "description": "編輯此發薪日追蹤的設定"
             }
         }
     }

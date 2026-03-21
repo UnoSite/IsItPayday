@@ -1,0 +1,70 @@
+{
+    "title": "IsItPayday",
+    "config": {
+        "step": {
+            "user": {
+                "title": "Velg land",
+                "description": "Det valgte landet brukes til å kontrollere helligdager",
+                "data": {
+                    "name": "Instansnavn",
+                    "country": "Land"
+                }
+            },
+            "frequency": {
+                "title": "Velg utbetalingsfrekvens",
+                "description": "Velg hvor ofte du får lønn",
+                "data": {
+                    "pay_frequency": "Utbetalingsfrekvens"
+                }
+            },
+            "monthly_day": {
+                "title": "Velg dag i måneden",
+                "description": "Velg hvilken dag i måneden du får lønn",
+                "data": {
+                    "pay_day": "Dag i måneden"
+                }
+            },
+            "bank_offset": {
+                "title": "Dager før siste bankdag",
+                "description": "Hvis du får lønn et par dager før den siste bankdagen, må du velge hvor mange dager før",
+                "data": {
+                    "bank_offset": "Dager før"
+                }
+            },
+            "specific_day": {
+                "title": "Velg spesifikk dag",
+                "description": "Velg den nøyaktige dagen du får lønn hver måned",
+                "data": {
+                    "pay_day": "Spesifikk dag"
+                }
+            },
+            "cycle_last_paydate": {
+                "title": "Velg siste lønningsdag",
+                "description": "Velg den siste datoen du fikk lønn. Dette brukes til å beregne neste lønningsdag",
+                "data": {
+                    "last_pay_date": "Siste lønningsdag"
+                }
+            },
+            "weekly": {
+                "title": "Velg ukentlig lønningsdag",
+                "description": "Velg hvilken ukedag du får lønn hver uke",
+                "data": {
+                    "pay_day": "Ukedag for lønningsdag"
+                }
+            }
+        },
+        "error": {
+            "cannot_connect": "Kunne ikke koble til IsItPayday-tjenesten",
+            "invalid_country": "Det valgte landet støttes ikke",
+            "invalid_response": "Ugyldig svar fra IsItPayday-tjenesten"
+        }
+    },
+    "options": {
+        "step": {
+            "init": {
+                "title": "Juster innstillinger for IsItPayday",
+                "description": "Rediger innstillingene for denne lønningsdagssporingen"
+            }
+        }
+    }
+}

@@ -1,0 +1,70 @@
+{
+    "title": "IsItPayday",
+    "config": {
+        "step": {
+            "user": {
+                "title": "Chọn quốc gia",
+                "description": "Quốc gia đã chọn được dùng để kiểm tra ngày lễ",
+                "data": {
+                    "name": "Tên phiên bản",
+                    "country": "Quốc gia"
+                }
+            },
+            "frequency": {
+                "title": "Chọn tần suất trả lương",
+                "description": "Chọn tần suất bạn nhận lương",
+                "data": {
+                    "pay_frequency": "Tần suất trả lương"
+                }
+            },
+            "monthly_day": {
+                "title": "Chọn ngày trong tháng",
+                "description": "Chọn ngày trong tháng mà bạn nhận lương",
+                "data": {
+                    "pay_day": "Ngày trong tháng"
+                }
+            },
+            "bank_offset": {
+                "title": "Số ngày trước ngày làm việc ngân hàng cuối cùng",
+                "description": "Nếu bạn nhận lương vài ngày trước ngày làm việc ngân hàng cuối cùng, hãy chọn số ngày trước đó",
+                "data": {
+                    "bank_offset": "Số ngày trước"
+                }
+            },
+            "specific_day": {
+                "title": "Chọn ngày cụ thể",
+                "description": "Chọn chính xác ngày bạn nhận lương mỗi tháng",
+                "data": {
+                    "pay_day": "Ngày cụ thể"
+                }
+            },
+            "cycle_last_paydate": {
+                "title": "Chọn ngày trả lương gần nhất",
+                "description": "Chọn ngày gần nhất bạn nhận lương. Thông tin này được dùng để tính ngày trả lương tiếp theo",
+                "data": {
+                    "last_pay_date": "Ngày trả lương gần nhất"
+                }
+            },
+            "weekly": {
+                "title": "Chọn ngày trả lương hằng tuần",
+                "description": "Chọn ngày trong tuần mà bạn nhận lương mỗi tuần",
+                "data": {
+                    "pay_day": "Ngày trong tuần trả lương"
+                }
+            }
+        },
+        "error": {
+            "cannot_connect": "Không thể kết nối tới dịch vụ IsItPayday",
+            "invalid_country": "Quốc gia đã chọn không được hỗ trợ",
+            "invalid_response": "Phản hồi không hợp lệ từ dịch vụ IsItPayday"
+        }
+    },
+    "options": {
+        "step": {
+            "init": {
+                "title": "Điều chỉnh cài đặt cho IsItPayday",
+                "description": "Chỉnh sửa cài đặt cho tính năng theo dõi ngày trả lương này"
+            }
+        }
+    }
+}

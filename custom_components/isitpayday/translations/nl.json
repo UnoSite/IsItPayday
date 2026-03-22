@@ -1,0 +1,70 @@
+{
+    "title": "IsItPayday",
+    "config": {
+        "step": {
+            "user": {
+                "title": "Kies land",
+                "description": "Het geselecteerde land wordt gebruikt om feestdagen te controleren",
+                "data": {
+                    "name": "Instantienaam",
+                    "country": "Land"
+                }
+            },
+            "frequency": {
+                "title": "Kies uitbetalingsfrequentie",
+                "description": "Kies hoe vaak je salaris ontvangt",
+                "data": {
+                    "pay_frequency": "Uitbetalingsfrequentie"
+                }
+            },
+            "monthly_day": {
+                "title": "Kies een dag van de maand",
+                "description": "Kies op welke dag van de maand je salaris ontvangt",
+                "data": {
+                    "pay_day": "Dag van de maand"
+                }
+            },
+            "bank_offset": {
+                "title": "Dagen vóór de laatste bankdag",
+                "description": "Als je een paar dagen vóór de laatste bankdag salaris ontvangt, kies dan hoeveel dagen ervoor",
+                "data": {
+                    "bank_offset": "Dagen vóór"
+                }
+            },
+            "specific_day": {
+                "title": "Kies een specifieke dag",
+                "description": "Kies de exacte dag waarop je elke maand salaris ontvangt",
+                "data": {
+                    "pay_day": "Specifieke dag"
+                }
+            },
+            "cycle_last_paydate": {
+                "title": "Kies de meest recente betaaldag",
+                "description": "Kies de meest recente datum waarop je salaris hebt ontvangen. Dit wordt gebruikt om de volgende betaaldag te berekenen",
+                "data": {
+                    "last_pay_date": "Meest recente betaaldag"
+                }
+            },
+            "weekly": {
+                "title": "Kies de wekelijkse betaaldag",
+                "description": "Kies op welke weekdag je elke week salaris ontvangt",
+                "data": {
+                    "pay_day": "Weekdag van betaaldag"
+                }
+            }
+        },
+        "error": {
+            "cannot_connect": "Kan geen verbinding maken met de IsItPayday-service",
+            "invalid_country": "Het geselecteerde land wordt niet ondersteund",
+            "invalid_response": "Ongeldig antwoord van de IsItPayday-service"
+        }
+    },
+    "options": {
+        "step": {
+            "init": {
+                "title": "Instellingen voor IsItPayday aanpassen",
+                "description": "Bewerk de instellingen voor deze betaaldag-tracker"
+            }
+        }
+    }
+}

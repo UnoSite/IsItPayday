@@ -1,0 +1,70 @@
+{
+    "title": "IsItPayday",
+    "config": {
+        "step": {
+            "user": {
+                "title": "Wybierz kraj",
+                "description": "Wybrany kraj jest używany do określania dni świątecznych",
+                "data": {
+                    "name": "Nazwa instancji",
+                    "country": "Kraj"
+                }
+            },
+            "frequency": {
+                "title": "Wybierz częstotliwość wypłat",
+                "description": "Wybierz, jak często otrzymujesz wynagrodzenie",
+                "data": {
+                    "pay_frequency": "Częstotliwość wypłaty"
+                }
+            },
+            "monthly_day": {
+                "title": "Wybierz dzień miesiąca",
+                "description": "Wybierz, którego dnia miesiąca otrzymujesz wynagrodzenie",
+                "data": {
+                    "pay_day": "Dzień miesiąca"
+                }
+            },
+            "bank_offset": {
+                "title": "Dni przed ostatnim dniem bankowym",
+                "description": "Jeśli otrzymujesz wynagrodzenie kilka dni przed ostatnim dniem bankowym, wybierz, ile dni wcześniej",
+                "data": {
+                    "bank_offset": "Dni wcześniej"
+                }
+            },
+            "specific_day": {
+                "title": "Wybierz konkretny dzień",
+                "description": "Wybierz dokładny dzień, w którym co miesiąc otrzymujesz wynagrodzenie",
+                "data": {
+                    "pay_day": "Konkretny dzień"
+                }
+            },
+            "cycle_last_paydate": {
+                "title": "Wybierz datę ostatniej wypłaty",
+                "description": "Wybierz ostatnią datę, kiedy otrzymałeś(-aś) wynagrodzenie. Służy to do obliczenia następnego dnia wypłaty",
+                "data": {
+                    "last_pay_date": "Data ostatniej wypłaty"
+                }
+            },
+            "weekly": {
+                "title": "Wybierz tygodniowy dzień wypłaty",
+                "description": "Wybierz, w który dzień tygodnia otrzymujesz wynagrodzenie co tydzień",
+                "data": {
+                    "pay_day": "Dzień tygodnia wypłaty"
+                }
+            }
+        },
+        "error": {
+            "cannot_connect": "Nie udało się połączyć z usługą IsItPayday",
+            "invalid_country": "Wybrany kraj nie jest obsługiwany",
+            "invalid_response": "Nieprawidłowa odpowiedź z usługi IsItPayday"
+        }
+    },
+    "options": {
+        "step": {
+            "init": {
+                "title": "Dostosuj ustawienia IsItPayday",
+                "description": "Edytuj ustawienia tego śledzenia dnia wypłaty"
+            }
+        }
+    }
+}

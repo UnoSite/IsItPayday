@@ -1,0 +1,70 @@
+{
+    "title": "IsItPayday",
+    "config": {
+        "step": {
+            "user": {
+                "title": "選擇國家",
+                "description": "所選國家用於控制國定假日",
+                "data": {
+                    "name": "實例名稱",
+                    "country": "國家"
+                }
+            },
+            "frequency": {
+                "title": "選擇發薪頻率",
+                "description": "選擇您領薪的頻率",
+                "data": {
+                    "pay_frequency": "發薪頻率"
+                }
+            },
+            "monthly_day": {
+                "title": "選擇每月中的日期",
+                "description": "選擇您每月領薪的日期",
+                "data": {
+                    "pay_day": "每月中的日期"
+                }
+            },
+            "bank_offset": {
+                "title": "最後一個銀行營業日前幾天",
+                "description": "如果您在最後一個銀行營業日前幾天領薪，請選擇提前幾天",
+                "data": {
+                    "bank_offset": "提前天數"
+                }
+            },
+            "specific_day": {
+                "title": "選擇特定日期",
+                "description": "選擇您每月領薪的確切日期",
+                "data": {
+                    "pay_day": "特定日期"
+                }
+            },
+            "cycle_last_paydate": {
+                "title": "選擇最近一次發薪日",
+                "description": "選擇您最近一次領薪的日期。這將用於計算下一個發薪日",
+                "data": {
+                    "last_pay_date": "最近一次發薪日"
+                }
+            },
+            "weekly": {
+                "title": "選擇每週發薪日",
+                "description": "選擇您每週領薪的星期幾",
+                "data": {
+                    "pay_day": "發薪日的星期"
+                }
+            }
+        },
+        "error": {
+            "cannot_connect": "無法連線到 IsItPayday 服務",
+            "invalid_country": "不支援所選的國家",
+            "invalid_response": "來自 IsItPayday 服務的回應無效"
+        }
+    },
+    "options": {
+        "step": {
+            "init": {
+                "title": "調整 IsItPayday 設定",
+                "description": "編輯此發薪日追蹤的設定"
+            }
+        }
+    }
+}

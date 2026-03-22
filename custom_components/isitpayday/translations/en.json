@@ -3,66 +3,66 @@
     "config": {
         "step": {
             "user": {
-                "title": "Select Country",
-                "description": "Select the country used to check public holidays",
+                "title": "Select country",
+                "description": "The selected country is used to check public holidays",
                 "data": {
-                    "name": "Instance Name",
+                    "name": "Instance name",
                     "country": "Country"
                 }
             },
             "frequency": {
-                "title": "Select Payout Frequency",
+                "title": "Select payout frequency",
                 "description": "Choose how often you get paid",
                 "data": {
-                    "pay_frequency": "Payout Frequency"
+                    "pay_frequency": "Payout frequency"
                 }
             },
             "monthly_day": {
-                "title": "Select Day of Month",
+                "title": "Select day of month",
                 "description": "Choose which day of the month you are paid",
                 "data": {
-                    "pay_day": "Day of Month"
+                    "pay_day": "Day of month"
                 }
             },
             "bank_offset": {
-                "title": "Days Before Last Bank Day",
-                "description": "If you are paid a few days before the last bank day, choose how many days before",
+                "title": "Days before the last banking day",
+                "description": "If you are paid a few days before the last banking day, choose how many days before",
                 "data": {
-                    "bank_offset": "Days Before"
+                    "bank_offset": "Days before"
                 }
             },
             "specific_day": {
-                "title": "Select Specific Day",
+                "title": "Select specific day",
                 "description": "Select the exact day you are paid each month",
                 "data": {
-                    "pay_day": "Specific Day"
+                    "pay_day": "Specific day"
                 }
             },
             "cycle_last_paydate": {
-                "title": "Select Last Payday",
+                "title": "Select last payday",
                 "description": "Select the last date you were paid. This will be used to calculate the next payday",
                 "data": {
-                    "last_pay_date": "Last Payday"
+                    "last_pay_date": "Last payday"
                 }
             },
             "weekly": {
-                "title": "Select Weekly Payday",
+                "title": "Select weekly payday",
                 "description": "Choose which weekday you are paid each week",
                 "data": {
-                    "pay_day": "Payday Weekday"
+                    "pay_day": "Payday weekday"
                 }
             }
         },
         "error": {
-            "cannot_connect": "Failed to connect to IsItPayday service",
+            "cannot_connect": "Failed to connect to the IsItPayday service",
             "invalid_country": "The selected country is not supported",
-            "invalid_response": "Invalid response from IsItPayday service"
+            "invalid_response": "Invalid response from the IsItPayday service"
         }
     },
     "options": {
         "step": {
             "init": {
-                "title": "Adjust IsItPayday Settings",
+                "title": "Adjust IsItPayday settings",
                 "description": "Modify the settings for this payday tracker"
             }
         }

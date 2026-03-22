@@ -1,3 +1,3 @@
 files:
-  - source: /custom_components/isitpayday/translations/en.json
+  - source: /custom_components/isitpayday/translations/da.json
     translation: /custom_components/isitpayday/translations/%two_letters_code%.json

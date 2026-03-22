@@ -1,0 +1,70 @@
+{
+    "title": "IsItPayday",
+    "config": {
+        "step": {
+            "user": {
+                "title": "Selectați țara",
+                "description": "Țara selectată este folosită pentru a determina sărbătorile legale",
+                "data": {
+                    "name": "Numele instanței",
+                    "country": "Țară"
+                }
+            },
+            "frequency": {
+                "title": "Selectați frecvența plății salariului",
+                "description": "Selectați cât de des primiți salariul",
+                "data": {
+                    "pay_frequency": "Frecvența plății salariului"
+                }
+            },
+            "monthly_day": {
+                "title": "Selectează ziua din lună",
+                "description": "Selectează în ce zi din lună primești salariul",
+                "data": {
+                    "pay_day": "Ziua din lună"
+                }
+            },
+            "bank_offset": {
+                "title": "Zile înainte de ultima zi bancară",
+                "description": "Dacă primești salariul cu câteva zile înainte de ultima zi bancară, selectează cu câte zile înainte",
+                "data": {
+                    "bank_offset": "Zile înainte"
+                }
+            },
+            "specific_day": {
+                "title": "Selectează o zi specifică",
+                "description": "Selectează ziua exactă în care primești salariul în fiecare lună",
+                "data": {
+                    "pay_day": "Zi specifică"
+                }
+            },
+            "cycle_last_paydate": {
+                "title": "Selectează cea mai recentă zi de salariu",
+                "description": "Selectează cea mai recentă dată la care ai primit salariul. Aceasta este folosită pentru a calcula următoarea zi de salariu",
+                "data": {
+                    "last_pay_date": "Cea mai recentă zi de salariu"
+                }
+            },
+            "weekly": {
+                "title": "Selectează ziua săptămânală de salariu",
+                "description": "Selectează în ce zi a săptămânii primești salariul în fiecare săptămână",
+                "data": {
+                    "pay_day": "Ziua săptămânii pentru salariu"
+                }
+            }
+        },
+        "error": {
+            "cannot_connect": "Nu s-a putut realiza conexiunea la serviciul IsItPayday",
+            "invalid_country": "Țara selectată nu este acceptată",
+            "invalid_response": "Răspuns invalid de la serviciul IsItPayday"
+        }
+    },
+    "options": {
+        "step": {
+            "init": {
+                "title": "Ajustează setările pentru IsItPayday",
+                "description": "Editează setările pentru această urmărire a zilei de salariu"
+            }
+        }
+    }
+}

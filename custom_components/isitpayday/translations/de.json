@@ -1,0 +1,70 @@
+{
+    "title": "IstHeuteZahltag",
+    "config": {
+        "step": {
+            "user": {
+                "title": "Land auswählen",
+                "description": "Das ausgewählte Land wird verwendet, um Feiertage zu kontrollieren",
+                "data": {
+                    "name": "Instanzname",
+                    "country": "Land"
+                }
+            },
+            "frequency": {
+                "title": "Auszahlungsfrequenz auswählen",
+                "description": "Wähle, wie oft du Gehalt bekommst",
+                "data": {
+                    "pay_frequency": "Auszahlungsfrequenz"
+                }
+            },
+            "monthly_day": {
+                "title": "Wähle den Tag im Monat",
+                "description": "Wähle, an welchem Tag im Monat du Gehalt bekommst",
+                "data": {
+                    "pay_day": "Tag im Monat"
+                }
+            },
+            "bank_offset": {
+                "title": "Tage vor dem letzten Bankarbeitstag",
+                "description": "Wenn du ein paar Tage vor dem letzten Bankarbeitstag Gehalt bekommst, wähle aus, wie viele Tage vorher",
+                "data": {
+                    "bank_offset": "Tage vorher"
+                }
+            },
+            "specific_day": {
+                "title": "Wähle einen bestimmten Tag",
+                "description": "Wähle den genauen Tag, an dem du jeden Monat Gehalt bekommst",
+                "data": {
+                    "pay_day": "Bestimmter Tag"
+                }
+            },
+            "cycle_last_paydate": {
+                "title": "Wähle den letzten Zahltag",
+                "description": "Wähle das letzte Datum aus, an dem du Gehalt bekommen hast. Dies wird verwendet, um den nächsten Zahltag zu berechnen",
+                "data": {
+                    "last_pay_date": "Letzter Zahltag"
+                }
+            },
+            "weekly": {
+                "title": "Wähle den wöchentlichen Zahltag",
+                "description": "Wähle, an welchem Wochentag du jede Woche Gehalt bekommst",
+                "data": {
+                    "pay_day": "Wochentag des Zahltags"
+                }
+            }
+        },
+        "error": {
+            "cannot_connect": "Verbindung zum IsItPayday-Dienst konnte nicht hergestellt werden",
+            "invalid_country": "Das ausgewählte Land wird nicht unterstützt",
+            "invalid_response": "Ungültige Antwort vom IsItPayday-Dienst"
+        }
+    },
+    "options": {
+        "step": {
+            "init": {
+                "title": "Einstellungen für IsItPayday anpassen",
+                "description": "Bearbeite die Einstellungen für diese Zahltagverfolgung"
+            }
+        }
+    }
+}

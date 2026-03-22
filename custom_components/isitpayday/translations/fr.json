@@ -1,0 +1,70 @@
+{
+    "title": "IsItPayday",
+    "config": {
+        "step": {
+            "user": {
+                "title": "Choisir un pays",
+                "description": "Le pays sélectionné est utilisé pour contrôler les jours fériés",
+                "data": {
+                    "name": "Nom de l'instance",
+                    "country": "Pays"
+                }
+            },
+            "frequency": {
+                "title": "Choisir la fréquence de paiement",
+                "description": "Choisissez la fréquence à laquelle vous êtes payé",
+                "data": {
+                    "pay_frequency": "Fréquence de paiement"
+                }
+            },
+            "monthly_day": {
+                "title": "Choisir le jour du mois",
+                "description": "Choisissez le jour du mois où vous recevez votre salaire",
+                "data": {
+                    "pay_day": "Jour du mois"
+                }
+            },
+            "bank_offset": {
+                "title": "Jours avant le dernier jour bancaire",
+                "description": "Si vous recevez votre salaire quelques jours avant le dernier jour bancaire, choisissez combien de jours avant",
+                "data": {
+                    "bank_offset": "Jours avant"
+                }
+            },
+            "specific_day": {
+                "title": "Choisir un jour spécifique",
+                "description": "Choisissez le jour exact où vous recevez votre salaire chaque mois",
+                "data": {
+                    "pay_day": "Jour spécifique"
+                }
+            },
+            "cycle_last_paydate": {
+                "title": "Choisir la dernière date de paie",
+                "description": "Choisissez la date la plus récente à laquelle vous avez reçu votre salaire. Cela est utilisé pour calculer la prochaine date de paie",
+                "data": {
+                    "last_pay_date": "Dernière date de paie"
+                }
+            },
+            "weekly": {
+                "title": "Choisir le jour de paie hebdomadaire",
+                "description": "Choisissez le jour de la semaine où vous recevez votre salaire chaque semaine",
+                "data": {
+                    "pay_day": "Jour de la semaine du jour de paie"
+                }
+            }
+        },
+        "error": {
+            "cannot_connect": "Impossible de se connecter au service IsItPayday",
+            "invalid_country": "Le pays sélectionné n’est pas pris en charge",
+            "invalid_response": "Réponse invalide du service IsItPayday"
+        }
+    },
+    "options": {
+        "step": {
+            "init": {
+                "title": "Ajuster les paramètres d’IsItPayday",
+                "description": "Modifier les paramètres de ce suivi du jour de paie"
+            }
+        }
+    }
+}

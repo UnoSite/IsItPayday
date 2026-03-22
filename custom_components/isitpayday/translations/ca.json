@@ -1,0 +1,70 @@
+{
+    "title": "IsItPayday",
+    "config": {
+        "step": {
+            "user": {
+                "title": "Selecciona el país",
+                "description": "El país seleccionat s’utilitza per controlar els dies festius",
+                "data": {
+                    "name": "Nom de la instància",
+                    "country": "País"
+                }
+            },
+            "frequency": {
+                "title": "Selecciona la freqüència de pagament",
+                "description": "Selecciona amb quina freqüència cobres",
+                "data": {
+                    "pay_frequency": "Freqüència de pagament"
+                }
+            },
+            "monthly_day": {
+                "title": "Tria el dia del mes",
+                "description": "Tria quin dia del mes cobres",
+                "data": {
+                    "pay_day": "Dia del mes"
+                }
+            },
+            "bank_offset": {
+                "title": "Dies abans de l'últim dia bancari",
+                "description": "Si cobres uns quants dies abans de l'últim dia bancari, tria quants dies abans",
+                "data": {
+                    "bank_offset": "Dies abans"
+                }
+            },
+            "specific_day": {
+                "title": "Tria un dia específic",
+                "description": "Tria el dia exacte en què cobres cada mes",
+                "data": {
+                    "pay_day": "Dia específic"
+                }
+            },
+            "cycle_last_paydate": {
+                "title": "Tria l'últim dia de pagament",
+                "description": "Tria la data més recent en què vas cobrar. Això es fa servir per calcular el proper dia de pagament",
+                "data": {
+                    "last_pay_date": "Últim dia de pagament"
+                }
+            },
+            "weekly": {
+                "title": "Tria el dia de pagament setmanal",
+                "description": "Tria quin dia de la setmana cobres",
+                "data": {
+                    "pay_day": "Dia de la setmana de pagament"
+                }
+            }
+        },
+        "error": {
+            "cannot_connect": "No s'ha pogut connectar al servei IsItPayday",
+            "invalid_country": "El país seleccionat no és compatible",
+            "invalid_response": "Resposta no vàlida del servei IsItPayday"
+        }
+    },
+    "options": {
+        "step": {
+            "init": {
+                "title": "Ajusta la configuració d'IsItPayday",
+                "description": "Edita la configuració d'aquest seguiment del dia de pagament"
+            }
+        }
+    }
+}

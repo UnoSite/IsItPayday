@@ -1,0 +1,70 @@
+{
+    "title": "IsItPayday",
+    "config": {
+        "step": {
+            "user": {
+                "title": "Ország kiválasztása",
+                "description": "A kiválasztott országot az ünnepnapok ellenőrzésére használjuk",
+                "data": {
+                    "name": "Példánynév",
+                    "country": "Ország"
+                }
+            },
+            "frequency": {
+                "title": "Kifizetési gyakoriság kiválasztása",
+                "description": "Válaszd ki, milyen gyakran kapsz fizetést",
+                "data": {
+                    "pay_frequency": "Kifizetés gyakorisága"
+                }
+            },
+            "monthly_day": {
+                "title": "Válaszd ki a hónap napját",
+                "description": "Válaszd ki, a hónap melyik napján kapsz fizetést",
+                "data": {
+                    "pay_day": "A hónap napja"
+                }
+            },
+            "bank_offset": {
+                "title": "Napok az utolsó banki munkanap előtt",
+                "description": "Ha a fizetésedet néhány nappal az utolsó banki munkanap előtt kapod meg, válaszd ki, hány nappal előtte",
+                "data": {
+                    "bank_offset": "Napok előtte"
+                }
+            },
+            "specific_day": {
+                "title": "Válassz konkrét napot",
+                "description": "Válaszd ki a pontos napot, amikor minden hónapban megkapod a fizetésedet",
+                "data": {
+                    "pay_day": "Konkrét nap"
+                }
+            },
+            "cycle_last_paydate": {
+                "title": "Válaszd ki a legutóbbi fizetésnapot",
+                "description": "Válaszd ki a legutóbbi dátumot, amikor fizetést kaptál. Ezt a következő fizetésnap kiszámításához használjuk",
+                "data": {
+                    "last_pay_date": "Legutóbbi fizetésnap"
+                }
+            },
+            "weekly": {
+                "title": "Válaszd ki a heti fizetésnapot",
+                "description": "Válaszd ki, a hét melyik napján kapsz fizetést minden héten",
+                "data": {
+                    "pay_day": "A fizetésnap hétköznapja"
+                }
+            }
+        },
+        "error": {
+            "cannot_connect": "Nem sikerült csatlakozni az IsItPayday szolgáltatáshoz",
+            "invalid_country": "A kiválasztott ország nem támogatott",
+            "invalid_response": "Érvénytelen válasz az IsItPayday szolgáltatástól"
+        }
+    },
+    "options": {
+        "step": {
+            "init": {
+                "title": "Az IsItPayday beállításainak módosítása",
+                "description": "Szerkeszd ennek a fizetésnap-követőnek a beállításait"
+            }
+        }
+    }
+}

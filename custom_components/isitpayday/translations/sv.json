@@ -1,0 +1,70 @@
+{
+    "title": "IsItPayday",
+    "config": {
+        "step": {
+            "user": {
+                "title": "Välj land",
+                "description": "Det valda landet används för att kontrollera helgdagar",
+                "data": {
+                    "name": "Instansnamn",
+                    "country": "Land"
+                }
+            },
+            "frequency": {
+                "title": "Välj utbetalningsfrekvens",
+                "description": "Välj hur ofta du får lön",
+                "data": {
+                    "pay_frequency": "Utbetalningsfrekvens"
+                }
+            },
+            "monthly_day": {
+                "title": "Välj dag i månaden",
+                "description": "Välj vilken dag i månaden du får lön",
+                "data": {
+                    "pay_day": "Dag i månaden"
+                }
+            },
+            "bank_offset": {
+                "title": "Dagar före sista bankdagen",
+                "description": "Om du får lön ett par dagar före den sista bankdagen ska du välja hur många dagar före",
+                "data": {
+                    "bank_offset": "Dagar före"
+                }
+            },
+            "specific_day": {
+                "title": "Välj specifik dag",
+                "description": "Välj den exakta dag du får lön varje månad",
+                "data": {
+                    "pay_day": "Specifik dag"
+                }
+            },
+            "cycle_last_paydate": {
+                "title": "Välj senaste lönedag",
+                "description": "Välj det senaste datumet du fick lön. Detta används för att beräkna nästa lönedag",
+                "data": {
+                    "last_pay_date": "Senaste lönedag"
+                }
+            },
+            "weekly": {
+                "title": "Välj veckovis lönedag",
+                "description": "Välj vilken veckodag du får lön varje vecka",
+                "data": {
+                    "pay_day": "Veckodag för lönedag"
+                }
+            }
+        },
+        "error": {
+            "cannot_connect": "Kunde inte ansluta till IsItPayday-tjänsten",
+            "invalid_country": "Det valda landet stöds inte",
+            "invalid_response": "Ogiltigt svar från IsItPayday-tjänsten"
+        }
+    },
+    "options": {
+        "step": {
+            "init": {
+                "title": "Justera inställningar för IsItPayday",
+                "description": "Redigera inställningarna för denna lönedagsspårning"
+            }
+        }
+    }
+}

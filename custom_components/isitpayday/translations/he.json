@@ -1,0 +1,70 @@
+{
+    "title": "?IsItPayday",
+    "config": {
+        "step": {
+            "user": {
+                "title": "בחר מדינה",
+                "description": "המדינה שנבחרה משמשת לקביעת חגים",
+                "data": {
+                    "name": "שם המופע",
+                    "country": "מדינה"
+                }
+            },
+            "frequency": {
+                "title": "בחר תדירות תשלום",
+                "description": "בחר באיזו תדירות אתה מקבל שכר",
+                "data": {
+                    "pay_frequency": "תדירות תשלום השכר"
+                }
+            },
+            "monthly_day": {
+                "title": "בחר יום בחודש",
+                "description": "בחר באיזה יום בחודש אתה מקבל שכר",
+                "data": {
+                    "pay_day": "יום בחודש"
+                }
+            },
+            "bank_offset": {
+                "title": "ימים לפני יום הבנק האחרון",
+                "description": "אם אתה מקבל שכר כמה ימים לפני יום הבנק האחרון, בחר כמה ימים לפני",
+                "data": {
+                    "bank_offset": "ימים לפני"
+                }
+            },
+            "specific_day": {
+                "title": "בחר יום מסוים",
+                "description": "בחר את היום המדויק שבו אתה מקבל שכר בכל חודש",
+                "data": {
+                    "pay_day": "יום מסוים"
+                }
+            },
+            "cycle_last_paydate": {
+                "title": "בחר את יום התשלום האחרון",
+                "description": "בחר את התאריך האחרון שבו קיבלת שכר. זה משמש לחישוב יום התשלום הבא",
+                "data": {
+                    "last_pay_date": "יום התשלום האחרון"
+                }
+            },
+            "weekly": {
+                "title": "בחר את יום התשלום השבועי",
+                "description": "בחר באיזה יום בשבוע אתה מקבל שכר בכל שבוע",
+                "data": {
+                    "pay_day": "יום השבוע של תשלום השכר"
+                }
+            }
+        },
+        "error": {
+            "cannot_connect": "לא ניתן היה להתחבר לשירות IsItPayday",
+            "invalid_country": "המדינה שנבחרה אינה נתמכת",
+            "invalid_response": "תגובה לא תקינה משירות IsItPayday"
+        }
+    },
+    "options": {
+        "step": {
+            "init": {
+                "title": "התאם את ההגדרות עבור IsItPayday",
+                "description": "ערוך את ההגדרות עבור מעקב יום התשלום הזה"
+            }
+        }
+    }
+}

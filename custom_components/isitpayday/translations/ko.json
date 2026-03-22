@@ -1,0 +1,70 @@
+{
+    "title": "급여일인가요?",
+    "config": {
+        "step": {
+            "user": {
+                "title": "국가 선택",
+                "description": "선택한 국가는 공휴일을 확인하는 데 사용됩니다",
+                "data": {
+                    "name": "인스턴스 이름",
+                    "country": "국가"
+                }
+            },
+            "frequency": {
+                "title": "급여 지급 빈도 선택",
+                "description": "급여를 받는 빈도를 선택하세요",
+                "data": {
+                    "pay_frequency": "급여 지급 빈도"
+                }
+            },
+            "monthly_day": {
+                "title": "월의 날짜를 선택하세요",
+                "description": "매월 급여를 받는 날짜를 선택하세요",
+                "data": {
+                    "pay_day": "월의 날짜"
+                }
+            },
+            "bank_offset": {
+                "title": "마지막 은행 영업일 전 일수",
+                "description": "마지막 은행 영업일보다 며칠 전에 급여를 받는 경우, 그 이전 일수를 선택하세요",
+                "data": {
+                    "bank_offset": "이전 일수"
+                }
+            },
+            "specific_day": {
+                "title": "특정 날짜 선택",
+                "description": "매월 급여를 받는 정확한 날짜를 선택하세요",
+                "data": {
+                    "pay_day": "특정 날짜"
+                }
+            },
+            "cycle_last_paydate": {
+                "title": "최근 급여일 선택",
+                "description": "가장 최근에 급여를 받은 날짜를 선택하세요. 다음 급여일을 계산하는 데 사용됩니다",
+                "data": {
+                    "last_pay_date": "최근 급여일"
+                }
+            },
+            "weekly": {
+                "title": "주간 급여일 선택",
+                "description": "매주 급여를 받는 요일을 선택하세요",
+                "data": {
+                    "pay_day": "급여일의 요일"
+                }
+            }
+        },
+        "error": {
+            "cannot_connect": "IsItPayday 서비스에 연결할 수 없습니다",
+            "invalid_country": "선택한 국가는 지원되지 않습니다",
+            "invalid_response": "IsItPayday 서비스의 응답이 올바르지 않습니다"
+        }
+    },
+    "options": {
+        "step": {
+            "init": {
+                "title": "IsItPayday 설정 조정",
+                "description": "이 급여일 추적의 설정을 수정하세요"
+            }
+        }
+    }
+}

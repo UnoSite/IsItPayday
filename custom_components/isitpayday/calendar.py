@@ -1,5 +1,5 @@
 import logging
-from datetime import datetime, timedelta
+from datetime import timedelta
 
 from homeassistant.components.calendar import CalendarEntity, CalendarEvent
 from homeassistant.helpers.update_coordinator import CoordinatorEntity, DataUpdateCoordinator
@@ -14,13 +14,13 @@ async def async_setup_entry(hass, entry, async_add_entities):
     coordinator: DataUpdateCoordinator = data["coordinator"]
     instance_name = data.get("name", "IsItPayday")
 
-    async_add_entities([
-        IsItPaydayCalendar(coordinator, entry.entry_id, instance_name)
-    ])
+    async_add_entities([IsItPaydayCalendar(coordinator, entry.entry_id, instance_name)])
 
 
 class IsItPaydayCalendar(CoordinatorEntity, CalendarEntity):
-    def __init__(self, coordinator: DataUpdateCoordinator, entry_id: str, instance_name: str):
+    def __init__(
+        self, coordinator: DataUpdateCoordinator, entry_id: str, instance_name: str
+    ):
         super().__init__(coordinator)
         self._attr_unique_id = f"{entry_id}_calendar"
         self._attr_name = f"{instance_name}: Payday"
@@ -35,16 +35,12 @@ class IsItPaydayCalendar(CoordinatorEntity, CalendarEntity):
 
         try:
             if isinstance(payday, str):
-                payday = datetime.fromisoformat(payday).date()
-
-            start = datetime.combine(payday, datetime.min.time())
-            end = start + timedelta(days=1)
+                payday = date.fromisoformat(payday)
 
             return CalendarEvent(
                 summary="Payday",
-                start=start,
-                end=end,
-                all_day=True,
+                start=payday,
+                end=payday + timedelta(days=1),
             )
         except Exception as e:
             _LOGGER.exception("Error creating calendar event: %s", e)
@@ -55,7 +51,11 @@ class IsItPaydayCalendar(CoordinatorEntity, CalendarEntity):
         if not event:
             return []
 
-        if event.start.date() >= start_date.date() and event.start.date() <= end_date.date():
+        event_start = event.start
+        if hasattr(event_start, "date"):
+            event_start = event_start.date()
+
+        if start_date.date() <= event_start <= end_date.date():
             return [event]
 
         return []
@@ -74,4 +74,4 @@ class IsItPaydayCalendar(CoordinatorEntity, CalendarEntity):
             "name": self._instance_name,
             "manufacturer": CONF_MANUFACTURER,
             "model": CONF_MODEL,
-                               }
+        }

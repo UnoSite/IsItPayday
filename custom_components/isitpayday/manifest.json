@@ -12,6 +12,7 @@
     "loggers": [
         "custom_components.isitpayday"
     ],
+    "platforms": ["sensor", "binary_sensor", "calendar"],
     "requirements": [],
     "version": "3.6.2"
 }

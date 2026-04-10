@@ -38,6 +38,11 @@
   - Displays how many days until next payday.
   - Icon: `mdi:calendar-end`. <sup><sup>([See icon](https://pictogrammers.com/library/mdi/icon/calendar-end/))</sup></sup>
 
+- **Calendar:** `calendar.<instance_name>_payday`
+  - Adds your next payday as a calendar event.
+  - All-day event.
+  - Automatically updates when payday changes.
+
 - **Custom Payday Calculation:**
   - Supports various pay frequencies:
     - **Weekly**

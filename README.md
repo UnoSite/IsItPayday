@@ -34,7 +34,7 @@
   - Displays the date of the next payday.
   - Icon: `mdi:calendar-clock`. <sup><sup>([See icon](https://pictogrammers.com/library/mdi/icon/calendar-clock/))</sup></sup>
 
-- **Sensor:** `senspr.<instance_name>_days_to`
+- **Sensor:** `sensor.<instance_name>_days_to`
   - Displays how many days until next payday.
   - Icon: `mdi:calendar-end`. <sup><sup>([See icon](https://pictogrammers.com/library/mdi/icon/calendar-end/))</sup></sup>
 

@@ -85,7 +85,7 @@ DEVICE_MODEL = CONF_MODEL
 
 # API endpoints (dynamic year handling is done in payday_calculator.py)
 API_COUNTRIES = "https://date.nager.at/api/v3/AvailableCountries"
-API_HOLIDAYS = "https://date.nager.at/api/v3/PublicHolidays/{year}/{country}"
+API_HOLIDAYS = "https://date.nager.at/api/v4/PublicHolidays/{year}/{country}"
 
 # Logger prefix
 LOGGER_NAME = DOMAIN

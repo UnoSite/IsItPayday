@@ -1,4 +1,4 @@
-# IsItPayday - Home Assistant Integration
+# IsItPayday - Home Assistant Integration <a href="https://translate.unosite.dk"><img align="right" src="https://img.shields.io/badge/Translate-This-000?style=for-the-badge&logo=crowdin&labelColor=333333&color=cad401"></a>
 
 [![Version](https://img.shields.io/github/v/release/UnoSite/IsItPayday?label=version&style=for-the-badge&labelColor=333333&color=cad401)](https://github.com/UnoSite/IsItPayday/releases/latest)
 [![Last Commit](https://img.shields.io/github/last-commit/UnoSite/IsItPayday?style=for-the-badge&labelColor=333333&color=cad401)](https://github.com/UnoSite/IsItPayday/commits/main/)
@@ -34,9 +34,14 @@
   - Displays the date of the next payday.
   - Icon: `mdi:calendar-clock`. <sup><sup>([See icon](https://pictogrammers.com/library/mdi/icon/calendar-clock/))</sup></sup>
 
-- **Sensor:** `senspr.<instance_name>_days_to`
+- **Sensor:** `sensor.<instance_name>_days_to`
   - Displays how many days until next payday.
   - Icon: `mdi:calendar-end`. <sup><sup>([See icon](https://pictogrammers.com/library/mdi/icon/calendar-end/))</sup></sup>
+
+- **Calendar:** `calendar.<instance_name>_payday`
+  - Adds your next payday as a calendar event.
+  - All-day event.
+  - Automatically updates when payday changes.
 
 - **Custom Payday Calculation:**
   - Supports various pay frequencies:
@@ -62,16 +67,8 @@
 ---
 
 ## 📥 Installation
-
-### **1. Manual Installation**
-1. **Download the latest release** from the [GitHub releases](https://github.com/UnoSite/IsItPayday/releases).
-2. **Copy the `isitpayday` folder** into your Home Assistant `custom_components` directory.
-3. **Restart Home Assistant.**
-4. **Add the integration:**
-   - Navigate to **Settings > Devices & Services > Integrations**.
-   - Click **Add Integration** and search for **IsItPayday**.
   
-### **2. HACS Installation (Recommended)**
+### **1. HACS Installation (Recommended)**
 1. Add this repository as a **custom repository** in [HACS](https://hacs.xyz/).
 2. Search for **Is It Payday?** in HACS and install the integration.
 3. Restart Home Assistant.

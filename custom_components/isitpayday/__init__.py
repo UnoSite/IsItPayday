@@ -65,14 +65,14 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         _LOGGER.error("Initial data could not be fetched for entry: %s", entry.entry_id)
 
     await hass.config_entries.async_forward_entry_setups(
-        entry, ["sensor", "binary_sensor"]
+        entry, ["sensor", "binary_sensor", "calendar"]
     )
     return True
 
 
 async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     unload_ok = await hass.config_entries.async_unload_platforms(
-        entry, ["sensor", "binary_sensor"]
+        entry, ["sensor", "binary_sensor", "calendar"]
     )
 
     if unload_ok:

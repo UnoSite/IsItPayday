@@ -1,5 +1,3 @@
-"""Beregner naeste loenningsdag for IsItPayday."""
-
 import logging
 from datetime import date, timedelta
 
@@ -12,7 +10,7 @@ _LOGGER = logging.getLogger(__name__)
 
 async def async_get_bank_holidays(country: str, year: int) -> list:
     url = API_HOLIDAYS.format(year=year, country=country)
-    _LOGGER.debug("Henter banklukkedage fra: %s", url)
+    _LOGGER.debug("Collecting bank holidays from: %s", url)
 
     try:
         async with aiohttp.ClientSession() as session:

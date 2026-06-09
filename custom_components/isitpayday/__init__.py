@@ -6,10 +6,21 @@ from homeassistant.core import HomeAssistant
 from homeassistant.helpers.typing import ConfigType
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
 
-from .const import *
+from .const import (
+    DOMAIN,
+    CONF_NAME,
+    CONF_COUNTRY,
+    CONF_PAY_FREQ,
+    CONF_PAY_DAY,
+    CONF_LAST_PAY_DATE,
+    CONF_WEEKDAY,
+    CONF_BANK_OFFSET,
+)
 from .payday_calculator import async_calculate_next_payday
 
 _LOGGER = logging.getLogger(__name__)
+
+_PLATFORMS = ["sensor", "binary_sensor", "calendar"]
 
 
 async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
@@ -20,15 +31,21 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     data = entry.data
     instance_name = data.get(CONF_NAME, "IsItPayday")
 
-    last_known_payday = None
+    # FIX #9: We track the payday and the date it was calculated, so that
+    # on payday itself the coordinator recalculates for the *next* payday
+    # (i.e. we only cache if payday is strictly in the future).
+    last_known_payday: date | None = None
 
-    async def async_update_data():
+    async def async_update_data() -> dict:
         nonlocal last_known_payday
         today = date.today()
 
         try:
+            # Only use the cached value if payday is strictly in the future.
+            # On payday itself (payday == today) we recalculate so the sensor
+            # immediately starts counting towards the next payday.
             if last_known_payday and isinstance(last_known_payday, date):
-                if last_known_payday >= today:
+                if last_known_payday > today:
                     return {"payday_next": last_known_payday}
 
             new_payday = await async_calculate_next_payday(
@@ -44,7 +61,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
             return {"payday_next": new_payday}
 
         except Exception as err:
-            raise UpdateFailed(f"Error calculating next payday: {err}")
+            raise UpdateFailed(f"Error calculating next payday: {err}") from err
 
     coordinator = DataUpdateCoordinator(
         hass,
@@ -62,20 +79,19 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     await coordinator.async_refresh()
 
     if not coordinator.last_update_success:
-        _LOGGER.error("Initial data could not be fetched for entry: %s", entry.entry_id)
+        _LOGGER.error(
+            "Initial data could not be fetched for entry: %s", entry.entry_id
+        )
 
-    await hass.config_entries.async_forward_entry_setups(
-        entry, ["sensor", "binary_sensor", "calendar"]
-    )
+    await hass.config_entries.async_forward_entry_setups(entry, _PLATFORMS)
     return True
 
 
 async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
-    unload_ok = await hass.config_entries.async_unload_platforms(
-        entry, ["sensor", "binary_sensor", "calendar"]
-    )
+    unload_ok = await hass.config_entries.async_unload_platforms(entry, _PLATFORMS)
 
     if unload_ok:
         hass.data[DOMAIN].pop(entry.entry_id, None)
 
     return unload_ok
+    

@@ -1,69 +1,69 @@
 {
-    "title": "?IsItPayday",
+    "title": "IsItPayday",
     "config": {
         "step": {
             "user": {
-                "title": "בחר מדינה",
-                "description": "המדינה שנבחרה משמשת לקביעת חגים",
+                "title": "Select country",
+                "description": "The selected country is used to check public holidays",
                 "data": {
-                    "name": "שם המופע",
-                    "country": "מדינה"
+                    "name": "Instance name",
+                    "country": "Country"
                 }
             },
             "frequency": {
-                "title": "בחר תדירות תשלום",
-                "description": "בחר באיזו תדירות אתה מקבל שכר",
+                "title": "Select payout frequency",
+                "description": "Choose how often you get paid",
                 "data": {
-                    "pay_frequency": "תדירות תשלום השכר"
+                    "pay_frequency": "Payout frequency"
                 }
             },
             "monthly_day": {
-                "title": "בחר יום בחודש",
-                "description": "בחר באיזה יום בחודש אתה מקבל שכר",
+                "title": "Select day of month",
+                "description": "Choose which day of the month you are paid",
                 "data": {
-                    "pay_day": "יום בחודש"
+                    "pay_day": "Day of month"
                 }
             },
             "bank_offset": {
-                "title": "ימים לפני יום הבנק האחרון",
-                "description": "אם אתה מקבל שכר כמה ימים לפני יום הבנק האחרון, בחר כמה ימים לפני",
+                "title": "Days before the last banking day",
+                "description": "If you are paid a few days before the last banking day, choose how many days before",
                 "data": {
-                    "bank_offset": "ימים לפני"
+                    "bank_offset": "Days before"
                 }
             },
             "specific_day": {
-                "title": "בחר יום מסוים",
-                "description": "בחר את היום המדויק שבו אתה מקבל שכר בכל חודש",
+                "title": "Select specific day",
+                "description": "Select the exact day you are paid each month",
                 "data": {
-                    "pay_day": "יום מסוים"
+                    "pay_day": "Specific day"
                 }
             },
             "cycle_last_paydate": {
-                "title": "בחר את יום התשלום האחרון",
-                "description": "בחר את התאריך האחרון שבו קיבלת שכר. זה משמש לחישוב יום התשלום הבא",
+                "title": "Select last payday",
+                "description": "Select the last date you were paid. This will be used to calculate the next payday",
                 "data": {
-                    "last_pay_date": "יום התשלום האחרון"
+                    "last_pay_date": "Last payday"
                 }
             },
             "weekly": {
-                "title": "בחר את יום התשלום השבועי",
-                "description": "בחר באיזה יום בשבוע אתה מקבל שכר בכל שבוע",
+                "title": "Select weekly payday",
+                "description": "Choose which weekday you are paid each week",
                 "data": {
-                    "pay_day": "יום השבוע של תשלום השכר"
+                    "pay_day": "Payday weekday"
                 }
             }
         },
         "error": {
-            "cannot_connect": "לא ניתן היה להתחבר לשירות IsItPayday",
-            "invalid_country": "המדינה שנבחרה אינה נתמכת",
-            "invalid_response": "תגובה לא תקינה משירות IsItPayday"
+            "cannot_connect": "Failed to connect to the IsItPayday service",
+            "invalid_country": "The selected country is not supported",
+            "invalid_response": "Invalid response from the IsItPayday service"
         }
     },
     "options": {
         "step": {
             "init": {
-                "title": "התאם את ההגדרות עבור IsItPayday",
-                "description": "ערוך את ההגדרות עבור מעקב יום התשלום הזה"
+                "title": "Adjust IsItPayday settings",
+                "description": "Modify the settings for this payday tracker"
             }
         }
     }

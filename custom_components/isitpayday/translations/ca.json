@@ -54,9 +54,15 @@
             }
         },
         "error": {
-            "cannot_connect": "No s’ha pogut connectar amb el servei IsItPayday",
-            "invalid_country": "El país seleccionat no és compatible",
-            "invalid_response": "Resposta no vàlida del servei IsItPayday"
+            "cannot_connect": "No s'ha pogut connectar amb l'API de dies festius públics (date.nager.at). Comproveu la connexió a Internet i torneu-ho a provar.",
+            "invalid_country": "El país seleccionat no és compatible amb l'API de dies festius públics",
+            "invalid_response": "S'ha rebut una resposta inesperada de l'API de dies festius públics"
+        },
+        "abort": {
+            "reconfigured": "La configuració s'ha actualitzat correctament.",
+            "missing_entry": "No s'ha pogut iniciar la reconfiguració: no s'ha trobat cap ID d'entrada.",
+            "entry_not_found": "No s'ha pogut iniciar la reconfiguració: l'entrada ja no existeix.",
+            "cannot_connect": "Could not connect to the public holidays API (date.nager.at). Please check your internet connection and try again."
         }
     },
     "options": {

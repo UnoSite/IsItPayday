@@ -15,15 +15,6 @@ CONF_LAST_PAY_DATE = "last_pay_date"
 CONF_BANK_OFFSET = "bank_offset"
 CONF_WEEKDAY = "weekday"
 
-# Labels used in config flow (visible to user)
-LABEL_SELECT_COUNTRY = "Select country"
-LABEL_SELECT_PAYOUT_FREQUENCY = "Select the payout frequency"
-LABEL_SELECT_DAY_OF_MONTH = "Select day of month"
-LABEL_DAYS_BEFORE_LAST_BANK_DAY = "Days before last bank day"
-LABEL_SELECT_SPECIFIC_DAY = "Select specific day"
-LABEL_SELECT_WEEKDAY = "Select weekday"
-LABEL_SELECT_LAST_PAYDAY = "Select last payday"
-
 # Pay frequency options shown to user
 PAY_FREQ_MONTHLY = "monthly"
 PAY_FREQ_28_DAYS = "28_days"
@@ -56,14 +47,10 @@ PAY_MONTHLY_OPTIONS = {
     PAY_DAY_SPECIFIC_DAY: "Specific day",
 }
 
-DAYS_BEFORE_OPTIONS = [str(i) for i in range(0, 11)]  # 0 to 10 as strings
-SPECIFIC_DAY_OPTIONS = [str(i) for i in range(1, 32)]  # 1 to 31 as strings
-
 # Weekday options (used for weekly pay frequency)
 WEEKDAY_OPTIONS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
 
-# FIX #6: WEEKDAY_MAP is defined only here in const.py.
-# config_flow.py imports it from here rather than redefining it.
+# WEEKDAY_MAP is defined only here; config_flow.py imports it from here.
 WEEKDAY_MAP = {
     "Monday": 0,
     "Tuesday": 1,
@@ -79,46 +66,12 @@ DEFAULT_MONTHLY_DAY = PAY_DAY_LAST_BANK_DAY
 DEFAULT_BANK_OFFSET = 0
 DEFAULT_SPECIFIC_DAY = 31
 
-# Device info
-DEVICE_NAME = CONF_TITLE
-DEVICE_MANUFACTURER = CONF_MANUFACTURER
-DEVICE_MODEL = CONF_MODEL
-
-# API endpoints (dynamic year handling is done in payday_calculator.py)
+# API endpoints (year is substituted in payday_calculator.py)
 API_COUNTRIES = "https://date.nager.at/api/v3/AvailableCountries"
 API_HOLIDAYS = "https://date.nager.at/api/v3/PublicHolidays/{year}/{country}"
-
-# Logger prefix
-LOGGER_NAME = DOMAIN
-
-# Sensor entity identifiers
-SENSOR_NEXT_PAYDAY = "sensor.payday_next"
-BINARY_SENSOR_IS_IT_PAYDAY = "binary_sensor.payday"
-SENSOR_DAYS_TO_PAYDAY = "sensor.days_to_payday"
 
 # Sensor icons
 ICON_NEXT_PAYDAY = "mdi:calendar-clock"
 ICON_IS_IT_PAYDAY_TRUE = "mdi:cash-fast"
 ICON_IS_IT_PAYDAY_FALSE = "mdi:cash-clock"
 ICON_DAYS_TO = "mdi:calendar-end"
-
-# Log messages
-LOG_INIT = "Initializing IsItPayday integration."
-LOG_SETUP = "Setting up IsItPayday integration."
-LOG_FETCH_COUNTRIES = "Fetching supported countries from API."
-LOG_FETCH_HOLIDAYS = "Fetching public holidays for {year} in {country}."
-LOG_CALCULATE_PAYDAY = "Calculating next payday using frequency {frequency}."
-LOG_PAYDAY_CALCULATED = "Next payday calculated: {payday}"
-LOG_API_ERROR = "Error fetching data from API: {error}"
-LOG_UNEXPECTED_ERROR = "Unexpected error: {error}"
-LOG_FALLBACK_NO_HOLIDAYS = "No holidays could be fetched. Using empty list."
-
-# Error messages
-ERROR_INVALID_COUNTRY = "Invalid country selected ({country}). Cannot calculate payday."
-ERROR_INVALID_PAYDAY = "Unable to calculate valid payday. Returning 'Unknown'."
-
-# Validation errors
-ERROR_WEEKDAY_REQUIRED_FOR_WEEKLY = "Weekly frequency requires weekday to be set."
-ERROR_LAST_PAYDATE_REQUIRED = (
-    "Last payday date is required for 14-day or 28-day pay frequencies."
-)

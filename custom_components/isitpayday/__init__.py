@@ -31,9 +31,6 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     data = entry.data
     instance_name = data.get(CONF_NAME, "IsItPayday")
 
-    # FIX #9: We track the payday and the date it was calculated, so that
-    # on payday itself the coordinator recalculates for the *next* payday
-    # (i.e. we only cache if payday is strictly in the future).
     last_known_payday: date | None = None
 
     async def async_update_data() -> dict:
@@ -42,11 +39,10 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 
         try:
             # Only use the cached value if payday is strictly in the future.
-            # On payday itself (payday == today) we recalculate so the sensor
-            # immediately starts counting towards the next payday.
-            if last_known_payday and isinstance(last_known_payday, date):
-                if last_known_payday > today:
-                    return {"payday_next": last_known_payday}
+            # On payday itself we recalculate so the sensors immediately
+            # start counting towards the next payday.
+            if isinstance(last_known_payday, date) and last_known_payday > today:
+                return {"payday_next": last_known_payday}
 
             new_payday = await async_calculate_next_payday(
                 data[CONF_COUNTRY],
@@ -71,17 +67,15 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         update_interval=timedelta(minutes=5),
     )
 
+    # FIX #7 from review: use async_config_entry_first_refresh() so that a
+    # failed initial update raises ConfigEntryNotReady and HA retries setup
+    # automatically, instead of loading dead sensors.
+    await coordinator.async_config_entry_first_refresh()
+
     hass.data.setdefault(DOMAIN, {})[entry.entry_id] = {
         "coordinator": coordinator,
         "name": instance_name,
     }
-
-    await coordinator.async_refresh()
-
-    if not coordinator.last_update_success:
-        _LOGGER.error(
-            "Initial data could not be fetched for entry: %s", entry.entry_id
-        )
 
     await hass.config_entries.async_forward_entry_setups(entry, _PLATFORMS)
     return True
@@ -94,4 +88,3 @@ async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         hass.data[DOMAIN].pop(entry.entry_id, None)
 
     return unload_ok
-    

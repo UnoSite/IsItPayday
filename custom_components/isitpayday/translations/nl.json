@@ -3,67 +3,67 @@
     "config": {
         "step": {
             "user": {
-                "title": "Kies land",
-                "description": "Het geselecteerde land wordt gebruikt om feestdagen te controleren",
+                "title": "Select country",
+                "description": "The selected country is used to check public holidays",
                 "data": {
-                    "name": "Instantienaam",
-                    "country": "Land"
+                    "name": "Instance name",
+                    "country": "Country"
                 }
             },
             "frequency": {
-                "title": "Kies uitbetalingsfrequentie",
-                "description": "Kies hoe vaak je salaris ontvangt",
+                "title": "Select payout frequency",
+                "description": "Choose how often you get paid",
                 "data": {
-                    "pay_frequency": "Uitbetalingsfrequentie"
+                    "pay_frequency": "Payout frequency"
                 }
             },
             "monthly_day": {
-                "title": "Kies een dag van de maand",
-                "description": "Kies op welke dag van de maand je salaris ontvangt",
+                "title": "Select day of month",
+                "description": "Choose which day of the month you are paid",
                 "data": {
-                    "pay_day": "Dag van de maand"
+                    "pay_day": "Day of month"
                 }
             },
             "bank_offset": {
-                "title": "Dagen vóór de laatste bankdag",
-                "description": "Als je een paar dagen vóór de laatste bankdag salaris ontvangt, kies dan hoeveel dagen ervoor",
+                "title": "Days before the last banking day",
+                "description": "If you are paid a few days before the last banking day, choose how many days before",
                 "data": {
-                    "bank_offset": "Dagen vóór"
+                    "bank_offset": "Days before"
                 }
             },
             "specific_day": {
-                "title": "Kies een specifieke dag",
-                "description": "Kies de exacte dag waarop je elke maand salaris ontvangt",
+                "title": "Select specific day",
+                "description": "Select the exact day you are paid each month",
                 "data": {
-                    "pay_day": "Specifieke dag"
+                    "pay_day": "Specific day"
                 }
             },
             "cycle_last_paydate": {
-                "title": "Kies de meest recente betaaldag",
-                "description": "Kies de meest recente datum waarop je salaris hebt ontvangen. Dit wordt gebruikt om de volgende betaaldag te berekenen",
+                "title": "Select last payday",
+                "description": "Select the last date you were paid. This will be used to calculate the next payday",
                 "data": {
-                    "last_pay_date": "Meest recente betaaldag"
+                    "last_pay_date": "Last payday"
                 }
             },
             "weekly": {
-                "title": "Kies de wekelijkse betaaldag",
-                "description": "Kies op welke weekdag je elke week salaris ontvangt",
+                "title": "Select weekly payday",
+                "description": "Choose which weekday you are paid each week",
                 "data": {
-                    "pay_day": "Weekdag van betaaldag"
+                    "pay_day": "Payday weekday"
                 }
             }
         },
         "error": {
-            "cannot_connect": "Kan geen verbinding maken met de IsItPayday-service",
-            "invalid_country": "Het geselecteerde land wordt niet ondersteund",
-            "invalid_response": "Ongeldig antwoord van de IsItPayday-service"
+            "cannot_connect": "Failed to connect to the IsItPayday service",
+            "invalid_country": "The selected country is not supported",
+            "invalid_response": "Invalid response from the IsItPayday service"
         }
     },
     "options": {
         "step": {
             "init": {
-                "title": "Instellingen voor IsItPayday aanpassen",
-                "description": "Bewerk de instellingen voor deze betaaldag-tracker"
+                "title": "Adjust IsItPayday settings",
+                "description": "Modify the settings for this payday tracker"
             }
         }
     }

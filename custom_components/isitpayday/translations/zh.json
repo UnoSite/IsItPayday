@@ -1,13 +1,13 @@
 {
-    "title": "IsItPayday",
+    "title": "發薪日到了嗎？",
     "config": {
         "step": {
             "user": {
-                "title": "选择国家",
-                "description": "所选国家将用于检查公共假日",
+                "title": "選擇國家",
+                "description": "所選國家用於檢查國定假日",
                 "data": {
-                    "name": "实例名称",
-                    "country": "国家"
+                    "name": "實例名稱",
+                    "country": "國家"
                 }
             },
             "frequency": {

@@ -54,15 +54,15 @@
             }
         },
         "error": {
-            "cannot_connect": "Could not connect to the public holidays API (date.nager.at). Please check your internet connection and try again.",
-            "invalid_country": "The selected country is not supported by the public holidays API",
-            "invalid_response": "Received an unexpected response from the public holidays API"
+            "cannot_connect": "Yhteyttä yleisten vapaapäivien APIin (date.nager.at) ei voitu muodostaa. Tarkista internetyhteytesi ja yritä uudelleen.",
+            "invalid_country": "Valittua maata ei tueta yleisten vapaapäivien APIssa",
+            "invalid_response": "Yleisten vapaapäivien API palautti odottamattoman vastauksen"
         },
         "abort": {
-            "reconfigured": "Configuration has been updated successfully.",
-            "missing_entry": "Reconfiguration could not start: no entry ID found.",
-            "entry_not_found": "Reconfiguration could not start: the entry no longer exists.",
-            "cannot_connect": "Could not connect to the public holidays API (date.nager.at). Please check your internet connection and try again."
+            "reconfigured": "Määritykset on päivitetty onnistuneesti.",
+            "missing_entry": "Uudelleenmääritystä ei voitu aloittaa: kohteen tunnusta ei löytynyt.",
+            "entry_not_found": "Uudelleenmääritystä ei voitu aloittaa: kohdetta ei enää ole olemassa.",
+            "cannot_connect": "Yhteyttä yleisten vapaapäivien APIin (date.nager.at) ei voitu muodostaa. Tarkista internetyhteytesi ja yritä uudelleen."
         }
     },
     "options": {

@@ -62,7 +62,7 @@
             "reconfigured": "De configuratie is succesvol bijgewerkt.",
             "missing_entry": "Herconfiguratie kon niet worden gestart: geen invoer-ID gevonden.",
             "entry_not_found": "Herconfiguratie kon niet worden gestart: de invoer bestaat niet meer.",
-            "cannot_connect": "Could not connect to the public holidays API (date.nager.at). Please check your internet connection and try again."
+            "cannot_connect": "Kon geen verbinding maken met de API voor feestdagen (date.nager.at). Controleer uw internetverbinding en probeer het opnieuw."
         }
     },
     "options": {

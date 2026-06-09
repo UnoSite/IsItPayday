@@ -62,7 +62,7 @@
             "reconfigured": "La configuració s'ha actualitzat correctament.",
             "missing_entry": "No s'ha pogut iniciar la reconfiguració: no s'ha trobat cap ID d'entrada.",
             "entry_not_found": "No s'ha pogut iniciar la reconfiguració: l'entrada ja no existeix.",
-            "cannot_connect": "Could not connect to the public holidays API (date.nager.at). Please check your internet connection and try again."
+            "cannot_connect": "No s'ha pogut connectar amb l'API de dies festius (date.nager.at). Comproveu la connexió a Internet i torneu-ho a provar."
         }
     },
     "options": {

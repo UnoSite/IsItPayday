@@ -1,69 +1,69 @@
 {
-    "title": "급여일인가요?",
+    "title": "IsItPayday",
     "config": {
         "step": {
             "user": {
-                "title": "국가 선택",
-                "description": "선택한 국가는 공휴일을 확인하는 데 사용됩니다",
+                "title": "Select country",
+                "description": "The selected country is used to check public holidays",
                 "data": {
-                    "name": "인스턴스 이름",
-                    "country": "국가"
+                    "name": "Instance name",
+                    "country": "Country"
                 }
             },
             "frequency": {
-                "title": "급여 지급 빈도 선택",
-                "description": "급여를 받는 빈도를 선택하세요",
+                "title": "Select payout frequency",
+                "description": "Choose how often you get paid",
                 "data": {
-                    "pay_frequency": "급여 지급 빈도"
+                    "pay_frequency": "Payout frequency"
                 }
             },
             "monthly_day": {
-                "title": "월의 날짜를 선택하세요",
-                "description": "매월 급여를 받는 날짜를 선택하세요",
+                "title": "Select day of month",
+                "description": "Choose which day of the month you are paid",
                 "data": {
-                    "pay_day": "월의 날짜"
+                    "pay_day": "Day of month"
                 }
             },
             "bank_offset": {
-                "title": "마지막 은행 영업일 전 일수",
-                "description": "마지막 은행 영업일보다 며칠 전에 급여를 받는 경우, 그 이전 일수를 선택하세요",
+                "title": "Days before the last banking day",
+                "description": "If you are paid a few days before the last banking day, choose how many days before",
                 "data": {
-                    "bank_offset": "이전 일수"
+                    "bank_offset": "Days before"
                 }
             },
             "specific_day": {
-                "title": "특정 날짜 선택",
-                "description": "매월 급여를 받는 정확한 날짜를 선택하세요",
+                "title": "Select specific day",
+                "description": "Select the exact day you are paid each month",
                 "data": {
-                    "pay_day": "특정 날짜"
+                    "pay_day": "Specific day"
                 }
             },
             "cycle_last_paydate": {
-                "title": "최근 급여일 선택",
-                "description": "가장 최근에 급여를 받은 날짜를 선택하세요. 다음 급여일을 계산하는 데 사용됩니다",
+                "title": "Select last payday",
+                "description": "Select the last date you were paid. This will be used to calculate the next payday",
                 "data": {
-                    "last_pay_date": "최근 급여일"
+                    "last_pay_date": "Last payday"
                 }
             },
             "weekly": {
-                "title": "주간 급여일 선택",
-                "description": "매주 급여를 받는 요일을 선택하세요",
+                "title": "Select weekly payday",
+                "description": "Choose which weekday you are paid each week",
                 "data": {
-                    "pay_day": "급여일의 요일"
+                    "pay_day": "Payday weekday"
                 }
             }
         },
         "error": {
-            "cannot_connect": "IsItPayday 서비스에 연결할 수 없습니다",
-            "invalid_country": "선택한 국가는 지원되지 않습니다",
-            "invalid_response": "IsItPayday 서비스의 응답이 올바르지 않습니다"
+            "cannot_connect": "Failed to connect to the IsItPayday service",
+            "invalid_country": "The selected country is not supported",
+            "invalid_response": "Invalid response from the IsItPayday service"
         }
     },
     "options": {
         "step": {
             "init": {
-                "title": "IsItPayday 설정 조정",
-                "description": "이 급여일 추적의 설정을 수정하세요"
+                "title": "Adjust IsItPayday settings",
+                "description": "Modify the settings for this payday tracker"
             }
         }
     }

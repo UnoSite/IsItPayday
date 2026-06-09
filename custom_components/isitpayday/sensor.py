@@ -1,20 +1,23 @@
 import logging
-from datetime import date, datetime, timedelta
-from math import ceil
+from datetime import date, datetime
 
 from homeassistant.components.sensor import SensorDeviceClass, SensorEntity
-from homeassistant.helpers.entity import EntityCategory
 from homeassistant.helpers.update_coordinator import (
     CoordinatorEntity,
     DataUpdateCoordinator,
 )
 
-from .const import *
+from .const import (
+    DOMAIN,
+    CONF_MANUFACTURER,
+    CONF_MODEL,
+    ICON_NEXT_PAYDAY,
+    ICON_DAYS_TO,
+)
 
 _LOGGER = logging.getLogger(__name__)
 
-ICON = "mdi:calendar-clock"
-ICON_DAYS_TO = "mdi:calendar-end"
+# FIX #12: Removed unused `from math import ceil` import.
 
 
 async def async_setup_entry(hass, entry, async_add_entities):
@@ -31,15 +34,20 @@ async def async_setup_entry(hass, entry, async_add_entities):
 
 
 class IsItPaydayNextSensor(CoordinatorEntity, SensorEntity):
+    """Sensor showing the date of the next payday."""
+
     _attr_device_class = None
 
     def __init__(
-        self, coordinator: DataUpdateCoordinator, entry_id: str, instance_name: str
-    ):
+        self,
+        coordinator: DataUpdateCoordinator,
+        entry_id: str,
+        instance_name: str,
+    ) -> None:
         super().__init__(coordinator)
         self._attr_unique_id = f"{entry_id}_payday_next"
         self._attr_name = f"{instance_name}: Next payday"
-        self._attr_icon = ICON
+        self._attr_icon = ICON_NEXT_PAYDAY
         self._instance_name = instance_name
         self._entry_id = entry_id
 
@@ -62,14 +70,7 @@ class IsItPaydayNextSensor(CoordinatorEntity, SensorEntity):
         return "Unknown"
 
     @property
-    def extra_state_attributes(self) -> dict:
-        return {
-            "source": "IsItPayday DataUpdateCoordinator",
-            "raw_data": str(self.coordinator.data),
-        }
-
-    @property
-    def device_info(self):
+    def device_info(self) -> dict:
         return {
             "identifiers": {(DOMAIN, self._entry_id)},
             "name": self._instance_name,
@@ -79,14 +80,22 @@ class IsItPaydayNextSensor(CoordinatorEntity, SensorEntity):
 
 
 class IsItPaydayDaysToSensor(CoordinatorEntity, SensorEntity):
+    """Sensor showing the number of days until the next payday.
+
+    FIX #13: Removed EntityCategory.DIAGNOSTIC — 'days until payday'
+    is a primary sensor for most users, not a diagnostic one.
+    """
+
     _attr_device_class = SensorDeviceClass.DURATION
     _attr_native_unit_of_measurement = "d"
     _attr_state_class = "measurement"
-    _attr_entity_category = EntityCategory.DIAGNOSTIC
 
     def __init__(
-        self, coordinator: DataUpdateCoordinator, entry_id: str, instance_name: str
-    ):
+        self,
+        coordinator: DataUpdateCoordinator,
+        entry_id: str,
+        instance_name: str,
+    ) -> None:
         super().__init__(coordinator)
         self._attr_unique_id = f"{entry_id}_days_to"
         self._attr_name = f"{instance_name}: Days until"
@@ -104,28 +113,21 @@ class IsItPaydayDaysToSensor(CoordinatorEntity, SensorEntity):
             if isinstance(payday, str):
                 payday = date.fromisoformat(payday)
 
-            now = datetime.now().date()
-            if payday <= now:
+            today = datetime.now().date()
+            if payday <= today:
                 return 0
 
-            delta = payday - now
-            return delta.days
+            return (payday - today).days
         except Exception as e:
             _LOGGER.exception("Error calculating days to payday: %s", e)
             return None
 
     @property
-    def extra_state_attributes(self) -> dict:
-        return {
-            "source": "IsItPayday DataUpdateCoordinator",
-            "raw_data": str(self.coordinator.data),
-        }
-
-    @property
-    def device_info(self):
+    def device_info(self) -> dict:
         return {
             "identifiers": {(DOMAIN, self._entry_id)},
             "name": self._instance_name,
             "manufacturer": CONF_MANUFACTURER,
             "model": CONF_MODEL,
         }
+        

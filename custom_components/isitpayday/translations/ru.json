@@ -3,67 +3,67 @@
     "config": {
         "step": {
             "user": {
-                "title": "Выберите страну",
-                "description": "Выбранная страна используется для определения праздничных дней",
+                "title": "Select country",
+                "description": "The selected country is used to check public holidays",
                 "data": {
-                    "name": "Название экземпляра",
-                    "country": "Страна"
+                    "name": "Instance name",
+                    "country": "Country"
                 }
             },
             "frequency": {
-                "title": "Выберите частоту выплат",
-                "description": "Выберите, как часто вы получаете зарплату",
+                "title": "Select payout frequency",
+                "description": "Choose how often you get paid",
                 "data": {
-                    "pay_frequency": "Частота выплаты"
+                    "pay_frequency": "Payout frequency"
                 }
             },
             "monthly_day": {
-                "title": "Выберите день месяца",
-                "description": "Выберите, в какой день месяца вы получаете зарплату",
+                "title": "Select day of month",
+                "description": "Choose which day of the month you are paid",
                 "data": {
-                    "pay_day": "День месяца"
+                    "pay_day": "Day of month"
                 }
             },
             "bank_offset": {
-                "title": "Дней до последнего банковского дня",
-                "description": "Если вы получаете зарплату за несколько дней до последнего банковского дня, выберите, за сколько дней до него",
+                "title": "Days before the last banking day",
+                "description": "If you are paid a few days before the last banking day, choose how many days before",
                 "data": {
-                    "bank_offset": "Дней до"
+                    "bank_offset": "Days before"
                 }
             },
             "specific_day": {
-                "title": "Выберите конкретный день",
-                "description": "Выберите точный день, когда вы получаете зарплату каждый месяц",
+                "title": "Select specific day",
+                "description": "Select the exact day you are paid each month",
                 "data": {
-                    "pay_day": "Конкретный день"
+                    "pay_day": "Specific day"
                 }
             },
             "cycle_last_paydate": {
-                "title": "Выберите последнюю дату выплаты зарплаты",
-                "description": "Выберите последнюю дату, когда вы получили зарплату. Это используется для расчёта следующей даты выплаты",
+                "title": "Select last payday",
+                "description": "Select the last date you were paid. This will be used to calculate the next payday",
                 "data": {
-                    "last_pay_date": "Последняя дата выплаты зарплаты"
+                    "last_pay_date": "Last payday"
                 }
             },
             "weekly": {
-                "title": "Выберите день недели для выплаты зарплаты",
-                "description": "Выберите, в какой день недели вы получаете зарплату каждую неделю",
+                "title": "Select weekly payday",
+                "description": "Choose which weekday you are paid each week",
                 "data": {
-                    "pay_day": "День недели выплаты зарплаты"
+                    "pay_day": "Payday weekday"
                 }
             }
         },
         "error": {
-            "cannot_connect": "Не удалось подключиться к сервису IsItPayday",
-            "invalid_country": "Выбранная страна не поддерживается",
-            "invalid_response": "Недопустимый ответ от сервиса IsItPayday"
+            "cannot_connect": "Failed to connect to the IsItPayday service",
+            "invalid_country": "The selected country is not supported",
+            "invalid_response": "Invalid response from the IsItPayday service"
         }
     },
     "options": {
         "step": {
             "init": {
-                "title": "Настройте параметры IsItPayday",
-                "description": "Измените настройки этого отслеживания дня выплаты зарплаты"
+                "title": "Adjust IsItPayday settings",
+                "description": "Modify the settings for this payday tracker"
             }
         }
     }

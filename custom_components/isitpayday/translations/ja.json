@@ -54,15 +54,15 @@
             }
         },
         "error": {
-            "cannot_connect": "Could not connect to the public holidays API (date.nager.at). Please check your internet connection and try again.",
-            "invalid_country": "The selected country is not supported by the public holidays API",
-            "invalid_response": "Received an unexpected response from the public holidays API"
+            "cannot_connect": "祝日API（date.nager.at）に接続できませんでした。インターネット接続を確認して、もう一度お試しください。",
+            "invalid_country": "選択した国は祝日APIでサポートされていません",
+            "invalid_response": "祝日APIから予期しない応答を受信しました"
         },
         "abort": {
-            "reconfigured": "Configuration has been updated successfully.",
-            "missing_entry": "Reconfiguration could not start: no entry ID found.",
-            "entry_not_found": "Reconfiguration could not start: the entry no longer exists.",
-            "cannot_connect": "Could not connect to the public holidays API (date.nager.at). Please check your internet connection and try again."
+            "reconfigured": "設定が正常に更新されました。",
+            "missing_entry": "再設定を開始できませんでした：エントリIDが見つかりません。",
+            "entry_not_found": "再設定を開始できませんでした：エントリはすでに存在しません。",
+            "cannot_connect": "祝日API（date.nager.at）に接続できませんでした。インターネット接続を確認して、もう一度お試しください。"
         }
     },
     "options": {

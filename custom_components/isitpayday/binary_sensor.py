@@ -7,12 +7,15 @@ from homeassistant.helpers.update_coordinator import (
     DataUpdateCoordinator,
 )
 
-from .const import *
+from .const import (
+    DOMAIN,
+    CONF_MANUFACTURER,
+    CONF_MODEL,
+    ICON_IS_IT_PAYDAY_TRUE,
+    ICON_IS_IT_PAYDAY_FALSE,
+)
 
 _LOGGER = logging.getLogger(__name__)
-
-ICON_FALSE = "mdi:cash-clock"
-ICON_TRUE = "mdi:cash-fast"
 
 
 async def async_setup_entry(hass, entry, async_add_entities):
@@ -20,15 +23,22 @@ async def async_setup_entry(hass, entry, async_add_entities):
     coordinator: DataUpdateCoordinator = data["coordinator"]
     instance_name = data.get("name", "IsItPayday")
 
-    async_add_entities([IsItPaydaySensor(coordinator, entry.entry_id, instance_name)])
+    async_add_entities(
+        [IsItPaydaySensor(coordinator, entry.entry_id, instance_name)]
+    )
 
 
 class IsItPaydaySensor(CoordinatorEntity, BinarySensorEntity):
+    """Binary sensor that is 'on' when today is payday."""
+
     _attr_device_class = None
 
     def __init__(
-        self, coordinator: DataUpdateCoordinator, entry_id: str, instance_name: str
-    ):
+        self,
+        coordinator: DataUpdateCoordinator,
+        entry_id: str,
+        instance_name: str,
+    ) -> None:
         super().__init__(coordinator)
         self._attr_unique_id = f"{entry_id}_is_it_payday"
         self._attr_name = f"{instance_name}: Is it payday"
@@ -51,20 +61,14 @@ class IsItPaydaySensor(CoordinatorEntity, BinarySensorEntity):
 
     @property
     def icon(self) -> str:
-        return ICON_TRUE if self.is_on else ICON_FALSE
+        return ICON_IS_IT_PAYDAY_TRUE if self.is_on else ICON_IS_IT_PAYDAY_FALSE
 
     @property
-    def extra_state_attributes(self):
-        return {
-            "source": "IsItPayday DataUpdateCoordinator",
-            "raw_data": str(self.coordinator.data),
-        }
-
-    @property
-    def device_info(self):
+    def device_info(self) -> dict:
         return {
             "identifiers": {(DOMAIN, self._entry_id)},
             "name": self._instance_name,
             "manufacturer": CONF_MANUFACTURER,
             "model": CONF_MODEL,
         }
+        

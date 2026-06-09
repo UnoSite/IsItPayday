@@ -54,9 +54,15 @@
             }
         },
         "error": {
-            "cannot_connect": "Nem sikerült csatlakozni az IsItPayday szolgáltatáshoz",
-            "invalid_country": "A kiválasztott ország nem támogatott",
-            "invalid_response": "Érvénytelen válasz érkezett az IsItPayday szolgáltatástól"
+            "cannot_connect": "Could not connect to the public holidays API (date.nager.at). Please check your internet connection and try again.",
+            "invalid_country": "The selected country is not supported by the public holidays API",
+            "invalid_response": "Received an unexpected response from the public holidays API"
+        },
+        "abort": {
+            "reconfigured": "Configuration has been updated successfully.",
+            "missing_entry": "Reconfiguration could not start: no entry ID found.",
+            "entry_not_found": "Reconfiguration could not start: the entry no longer exists.",
+            "cannot_connect": "Could not connect to the public holidays API (date.nager.at). Please check your internet connection and try again."
         }
     },
     "options": {

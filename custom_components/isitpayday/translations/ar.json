@@ -62,7 +62,7 @@
             "reconfigured": "تم تحديث الإعداد بنجاح.",
             "missing_entry": "تعذّر بدء إعادة الإعداد: لم يتم العثور على معرّف الإدخال.",
             "entry_not_found": "تعذّر بدء إعادة الإعداد: لم يعد الإدخال موجودًا.",
-            "cannot_connect": "Could not connect to the public holidays API (date.nager.at). Please check your internet connection and try again."
+            "cannot_connect": "تعذر الاتصال بواجهة برمجة تطبيقات العطلات الرسمية (date.nager.at). يُرجى التحقق من اتصالك بالإنترنت والمحاولة مرة أخرى."
         }
     },
     "options": {

@@ -54,15 +54,15 @@
             }
         },
         "error": {
-            "cannot_connect": "Could not connect to the public holidays API (date.nager.at). Please check your internet connection and try again.",
-            "invalid_country": "The selected country is not supported by the public holidays API",
-            "invalid_response": "Received an unexpected response from the public holidays API"
+            "cannot_connect": "Nu s-a putut realiza conexiunea la API-ul de sărbători legale (date.nager.at). Verificați conexiunea la internet și încercați din nou.",
+            "invalid_country": "Țara selectată nu este acceptată de API-ul de sărbători legale",
+            "invalid_response": "S-a primit un răspuns neașteptat de la API-ul de sărbători legale"
         },
         "abort": {
-            "reconfigured": "Configuration has been updated successfully.",
-            "missing_entry": "Reconfiguration could not start: no entry ID found.",
-            "entry_not_found": "Reconfiguration could not start: the entry no longer exists.",
-            "cannot_connect": "Could not connect to the public holidays API (date.nager.at). Please check your internet connection and try again."
+            "reconfigured": "Configurația a fost actualizată cu succes.",
+            "missing_entry": "Reconfigurarea nu a putut începe: nu a fost găsit niciun ID de intrare.",
+            "entry_not_found": "Reconfigurarea nu a putut începe: intrarea nu mai există.",
+            "cannot_connect": "Nu s-a putut conecta la API-ul de sărbători legale (date.nager.at). Verificați conexiunea la internet și încercați din nou."
         }
     },
     "options": {

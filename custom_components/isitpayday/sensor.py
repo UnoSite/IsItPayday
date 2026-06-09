@@ -1,7 +1,11 @@
 import logging
-from datetime import date, datetime
+from datetime import date
 
-from homeassistant.components.sensor import SensorDeviceClass, SensorEntity
+from homeassistant.components.sensor import (
+    SensorDeviceClass,
+    SensorEntity,
+    SensorStateClass,
+)
 from homeassistant.helpers.update_coordinator import (
     CoordinatorEntity,
     DataUpdateCoordinator,
@@ -16,8 +20,6 @@ from .const import (
 )
 
 _LOGGER = logging.getLogger(__name__)
-
-# FIX #12: Removed unused `from math import ceil` import.
 
 
 async def async_setup_entry(hass, entry, async_add_entities):
@@ -80,15 +82,12 @@ class IsItPaydayNextSensor(CoordinatorEntity, SensorEntity):
 
 
 class IsItPaydayDaysToSensor(CoordinatorEntity, SensorEntity):
-    """Sensor showing the number of days until the next payday.
-
-    FIX #13: Removed EntityCategory.DIAGNOSTIC — 'days until payday'
-    is a primary sensor for most users, not a diagnostic one.
-    """
+    """Sensor showing the number of days until the next payday."""
 
     _attr_device_class = SensorDeviceClass.DURATION
     _attr_native_unit_of_measurement = "d"
-    _attr_state_class = "measurement"
+    # FIX #8 from review: use the SensorStateClass enum instead of a string.
+    _attr_state_class = SensorStateClass.MEASUREMENT
 
     def __init__(
         self,
@@ -113,7 +112,7 @@ class IsItPaydayDaysToSensor(CoordinatorEntity, SensorEntity):
             if isinstance(payday, str):
                 payday = date.fromisoformat(payday)
 
-            today = datetime.now().date()
+            today = date.today()
             if payday <= today:
                 return 0
 
@@ -129,5 +128,4 @@ class IsItPaydayDaysToSensor(CoordinatorEntity, SensorEntity):
             "name": self._instance_name,
             "manufacturer": CONF_MANUFACTURER,
             "model": CONF_MODEL,
-            }
-                
+    }

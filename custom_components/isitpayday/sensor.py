@@ -129,5 +129,5 @@ class IsItPaydayDaysToSensor(CoordinatorEntity, SensorEntity):
             "name": self._instance_name,
             "manufacturer": CONF_MANUFACTURER,
             "model": CONF_MODEL,
-        }
-        
+            }
+                

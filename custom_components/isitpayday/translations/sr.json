@@ -3,67 +3,67 @@
     "config": {
         "step": {
             "user": {
-                "title": "Select country",
-                "description": "The selected country is used to check public holidays",
+                "title": "Изаберите земљу",
+                "description": "Изабрана земља се користи за проверу државних празника",
                 "data": {
-                    "name": "Instance name",
-                    "country": "Country"
+                    "name": "Назив инстанце",
+                    "country": "Земља"
                 }
             },
             "frequency": {
-                "title": "Select payout frequency",
-                "description": "Choose how often you get paid",
+                "title": "Изаберите учесталост исплате",
+                "description": "Изаберите колико често примате плату",
                 "data": {
-                    "pay_frequency": "Payout frequency"
+                    "pay_frequency": "Учесталост исплате"
                 }
             },
             "monthly_day": {
-                "title": "Select day of month",
-                "description": "Choose which day of the month you are paid",
+                "title": "Изаберите дан у месецу",
+                "description": "Изаберите ког дана у месецу примате плату",
                 "data": {
-                    "pay_day": "Day of month"
+                    "pay_day": "Дан у месецу"
                 }
             },
             "bank_offset": {
-                "title": "Days before the last banking day",
-                "description": "If you are paid a few days before the last banking day, choose how many days before",
+                "title": "Број дана пре последњег банкарског дана",
+                "description": "Ако примате плату неколико дана пре последњег банкарског дана, изаберите колико дана раније",
                 "data": {
-                    "bank_offset": "Days before"
+                    "bank_offset": "Број дана раније"
                 }
             },
             "specific_day": {
-                "title": "Select specific day",
-                "description": "Select the exact day you are paid each month",
+                "title": "Изаберите одређени дан",
+                "description": "Изаберите тачан дан када примате плату сваког месеца",
                 "data": {
-                    "pay_day": "Specific day"
+                    "pay_day": "Одређени дан"
                 }
             },
             "cycle_last_paydate": {
-                "title": "Select last payday",
-                "description": "Select the last date you were paid. This will be used to calculate the next payday",
+                "title": "Изаберите последњи дан исплате",
+                "description": "Изаберите последњи датум када сте примили плату. Ово ће се користити за израчунавање следећег дана исплате",
                 "data": {
-                    "last_pay_date": "Last payday"
+                    "last_pay_date": "Последњи дан исплате"
                 }
             },
             "weekly": {
-                "title": "Select weekly payday",
-                "description": "Choose which weekday you are paid each week",
+                "title": "Изаберите недељни дан исплате",
+                "description": "Изаберите ког дана у недељи примате плату",
                 "data": {
-                    "pay_day": "Payday weekday"
+                    "pay_day": "Дан исплате у недељи"
                 }
             }
         },
         "error": {
-            "cannot_connect": "Failed to connect to the IsItPayday service",
-            "invalid_country": "The selected country is not supported",
-            "invalid_response": "Invalid response from the IsItPayday service"
+            "cannot_connect": "Повезивање са услугом IsItPayday није успело",
+            "invalid_country": "Изабрана земља није подржана",
+            "invalid_response": "Неисправан одговор услуге IsItPayday"
         }
     },
     "options": {
         "step": {
             "init": {
-                "title": "Adjust IsItPayday settings",
-                "description": "Modify the settings for this payday tracker"
+                "title": "Прилагодите подешавања за IsItPayday",
+                "description": "Измените подешавања за овај пратилац дана исплате"
             }
         }
     }

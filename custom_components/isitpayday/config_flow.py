@@ -1,3 +1,5 @@
+"""Config flow for IsItPayday integration."""
+
 import logging
 
 import aiohttp
@@ -342,5 +344,5 @@ class IsItPayday2ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                     CONF_PAY_DAY, default=self.pay_day or "Monday"
                 ): vol.In(WEEKDAY_OPTIONS)
             }
-        )
-        
+                )
+                

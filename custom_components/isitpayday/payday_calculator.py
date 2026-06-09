@@ -19,6 +19,9 @@ from .const import (
 
 _LOGGER = logging.getLogger(__name__)
 
+# Safety limit for month-based search loops (FIX #4 from review).
+_MAX_MONTH_ITERATIONS = 24
+
 
 async def async_get_bank_holidays(country: str, year: int) -> list:
     """Fetch public holidays for a given country and year from Nager.Date API."""
@@ -27,7 +30,9 @@ async def async_get_bank_holidays(country: str, year: int) -> list:
 
     try:
         async with aiohttp.ClientSession() as session:
-            async with session.get(url, timeout=aiohttp.ClientTimeout(total=10)) as response:
+            async with session.get(
+                url, timeout=aiohttp.ClientTimeout(total=10)
+            ) as response:
                 if response.status != 200:
                     _LOGGER.error(
                         "Error: Can't collect bank holidays: HTTP %s", response.status
@@ -59,6 +64,21 @@ def _adjust_to_next_bank_day(d: date, bank_holidays: list) -> date:
     return d
 
 
+def _add_months(d: date, months: int) -> date:
+    """Add a number of months to a date, clamping the day to the month length."""
+    month_index = d.month - 1 + months
+    year = d.year + month_index // 12
+    month = month_index % 12 + 1
+    # Clamp day to last valid day of target month (handles e.g. Jan 31 -> Feb 28).
+    day = d.day
+    while day > 28:
+        try:
+            return date(year, month, day)
+        except ValueError:
+            day -= 1
+    return date(year, month, day)
+
+
 async def _get_holidays_for_years(country: str, years: set) -> list:
     """Fetch and combine bank holidays for multiple years."""
     all_holidays = []
@@ -84,22 +104,26 @@ async def async_calculate_next_payday(
     )
 
     today = date.today()
-
-    # FIX #3: Fetch holidays for both this year and next year so that
-    # paydays landing in January next year are checked correctly.
-    bank_holidays = await _get_holidays_for_years(country, {today.year, today.year + 1})
+    bank_holidays = await _get_holidays_for_years(
+        country, {today.year, today.year + 1}
+    )
 
     if pay_frequency == PAY_FREQ_MONTHLY:
-        # FIX #1: async_calculate_month_based already returns an adjusted date,
-        # so we do NOT call async_adjust_for_bank_holidays_and_weekends again.
+        # async_calculate_month_based already returns an adjusted date.
         payday = await async_calculate_month_based(
             today, 1, pay_day, bank_offset, bank_holidays
+        )
+
+    elif pay_frequency == PAY_FREQ_BIMONTHLY:
+        # FIX #1 from review: bimonthly is anchored to last_pay_date and uses
+        # real month arithmetic (not pay_day-based logic, and not fixed 60 days).
+        payday = await async_calculate_month_interval(
+            last_pay_date, 2, today, bank_holidays
         )
 
     elif pay_frequency in (
         PAY_FREQ_28_DAYS,
         PAY_FREQ_14_DAYS,
-        PAY_FREQ_BIMONTHLY,
         PAY_FREQ_QUARTERLY,
         PAY_FREQ_SEMIANNUAL,
         PAY_FREQ_ANNUAL,
@@ -107,30 +131,20 @@ async def async_calculate_next_payday(
         interval_days = {
             PAY_FREQ_14_DAYS: 14,
             PAY_FREQ_28_DAYS: 28,
-            # FIX #5: bimonthly uses month-based logic instead of fixed 60 days.
             PAY_FREQ_QUARTERLY: 91,
             PAY_FREQ_SEMIANNUAL: 182,
             PAY_FREQ_ANNUAL: 365,
-        }
-
-        if pay_frequency == PAY_FREQ_BIMONTHLY:
-            # FIX #5: Use month-based calculation for bimonthly to avoid date drift.
-            payday = await async_calculate_month_based(
-                today, 2, pay_day, bank_offset, bank_holidays
-            )
-        else:
-            days = interval_days[pay_frequency]
-            # FIX #1: async_calculate_recurring returns an unadjusted date,
-            # so we adjust it once here.
-            payday = await async_calculate_recurring(last_pay_date, days, bank_holidays)
-            if payday is not None:
-                payday = _adjust_to_previous_bank_day(payday, bank_holidays)
+        }[pay_frequency]
+        payday = await async_calculate_recurring(
+            last_pay_date, interval_days, bank_holidays
+        )
+        # FIX #3 from review: adjust, but never to a date before today.
+        if payday is not None:
+            payday = _adjust_not_before_today(payday, today, bank_holidays)
 
     elif pay_frequency == PAY_FREQ_WEEKLY:
         if weekday is None:
             raise ValueError("Weekday missing for weekly payday.")
-        # FIX #1 + #4: async_calculate_weekly returns a raw date.
-        # We adjust it once here — forwards, so we don't land in the past.
         payday = await async_calculate_weekly(today, weekday, bank_holidays)
         if payday is not None:
             payday = _adjust_to_next_bank_day(payday, bank_holidays)
@@ -139,8 +153,29 @@ async def async_calculate_next_payday(
         _LOGGER.error("Invalid payday frequency: %s", pay_frequency)
         return None
 
+    # FIX #6 from review: if the payday landed in a year we have no holiday
+    # data for, fetch that year's holidays and re-validate the date.
+    if payday is not None and payday.year > today.year + 1:
+        extra_holidays = await async_get_bank_holidays(country, payday.year)
+        if extra_holidays:
+            combined = bank_holidays + extra_holidays
+            payday = _adjust_not_before_today(payday, today, combined)
+
     _LOGGER.info("Next payday calculated: %s", payday)
     return payday
+
+
+def _adjust_not_before_today(
+    payday: date, today: date, bank_holidays: list
+) -> date:
+    """Adjust payday to the previous bank day, but never earlier than today.
+
+    If adjusting backwards would land before today, adjust forwards instead.
+    """
+    adjusted = _adjust_to_previous_bank_day(payday, bank_holidays)
+    if adjusted < today:
+        adjusted = _adjust_to_next_bank_day(payday, bank_holidays)
+    return adjusted
 
 
 async def async_calculate_month_based(
@@ -150,14 +185,14 @@ async def async_calculate_month_based(
     bank_offset: int,
     bank_holidays: list,
 ):
-    """Calculate next payday for month-based frequencies.
+    """Calculate next payday for monthly frequency (pay_day based).
 
     Already returns a fully adjusted (bank day) date.
-    Do NOT adjust again after calling this function.
     """
     year, month = today.year, today.month
 
-    while True:
+    # FIX #4 from review: bounded loop instead of `while True`.
+    for _ in range(_MAX_MONTH_ITERATIONS):
         if pay_day == PAY_DAY_LAST_BANK_DAY:
             payday = _find_last_bank_day(year, month, bank_holidays, bank_offset)
         elif pay_day == PAY_DAY_FIRST_BANK_DAY:
@@ -175,6 +210,42 @@ async def async_calculate_month_based(
         year += (month - 1) // 12
         month = (month - 1) % 12 + 1
 
+    _LOGGER.error(
+        "Could not find a valid payday within %s months.", _MAX_MONTH_ITERATIONS
+    )
+    return None
+
+
+async def async_calculate_month_interval(
+    last_pay_date: str,
+    month_interval: int,
+    today: date,
+    bank_holidays: list,
+) -> date | None:
+    """Calculate next payday for month-interval frequencies anchored to a date.
+
+    Used for bimonthly (every 2 months). Adds whole months to the last
+    payday date until the result is today or later, then adjusts to a
+    valid bank day (never before today).
+    """
+    if not last_pay_date:
+        _LOGGER.error("Missing last payday date for month-interval payout.")
+        return None
+
+    anchor = date.fromisoformat(last_pay_date)
+    payday = _add_months(anchor, month_interval)
+
+    # FIX #4 from review: bounded loop.
+    for _ in range(_MAX_MONTH_ITERATIONS):
+        if payday >= today:
+            return _adjust_not_before_today(payday, today, bank_holidays)
+        payday = _add_months(payday, month_interval)
+
+    _LOGGER.error(
+        "Could not find a valid payday within %s months.", _MAX_MONTH_ITERATIONS
+    )
+    return None
+
 
 async def async_calculate_recurring(
     last_pay_date: str,
@@ -183,8 +254,7 @@ async def async_calculate_recurring(
 ) -> date | None:
     """Calculate next payday for fixed-interval frequencies.
 
-    Returns an unadjusted date. The caller is responsible for adjusting
-    for weekends and bank holidays.
+    Returns an unadjusted date. The caller is responsible for adjusting.
     """
     if not last_pay_date:
         _LOGGER.error("Missing last payday date for recurring payout.")
@@ -206,12 +276,7 @@ async def async_calculate_weekly(
     weekday: int,
     bank_holidays: list,
 ) -> date:
-    """Return the next occurrence of the given weekday.
-
-    Returns an unadjusted date. If today is already the target weekday,
-    it returns today. The caller is responsible for adjusting for
-    bank holidays.
-    """
+    """Return the next occurrence of the given weekday (unadjusted)."""
     days_ahead = (weekday - today.weekday()) % 7
     payday = today + timedelta(days=days_ahead)
     return payday
@@ -222,15 +287,13 @@ def _find_last_bank_day(
 ) -> date | None:
     """Find the last bank day of the month, then apply bank_offset.
 
-    FIX #2: After applying bank_offset, we verify the resulting date
-    is also a valid bank day, adjusting backwards if necessary.
+    After applying bank_offset, the result is re-validated as a bank day.
     """
     day = 31
     while day > 0:
         try:
             candidate = date(year, month, day)
             if _is_bank_day(candidate, bank_holidays):
-                # Apply offset and re-validate
                 result = candidate - timedelta(days=bank_offset)
                 return _adjust_to_previous_bank_day(result, bank_holidays)
             day -= 1
@@ -258,7 +321,7 @@ def _find_first_bank_day(
 def _find_specific_day(
     year: int, month: int, day: int, bank_holidays: list
 ) -> date | None:
-    """Find a specific day of the month, adjusting backwards if it is not a bank day."""
+    """Find a specific day of the month, adjusting backwards if not a bank day."""
     while day > 0:
         try:
             candidate = date(year, month, day)
@@ -268,4 +331,3 @@ def _find_specific_day(
         except ValueError:
             day -= 1
     return None
-    

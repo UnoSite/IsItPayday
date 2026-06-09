@@ -3,67 +3,67 @@
     "config": {
         "step": {
             "user": {
-                "title": "Select country",
-                "description": "The selected country is used to check public holidays",
+                "title": "Ország kiválasztása",
+                "description": "A kiválasztott ország alapján történik a munkaszüneti napok ellenőrzése",
                 "data": {
-                    "name": "Instance name",
-                    "country": "Country"
+                    "name": "Példány neve",
+                    "country": "Ország"
                 }
             },
             "frequency": {
-                "title": "Select payout frequency",
-                "description": "Choose how often you get paid",
+                "title": "Kifizetési gyakoriság kiválasztása",
+                "description": "Válassza ki, milyen gyakran kap fizetést",
                 "data": {
-                    "pay_frequency": "Payout frequency"
+                    "pay_frequency": "Kifizetési gyakoriság"
                 }
             },
             "monthly_day": {
-                "title": "Select day of month",
-                "description": "Choose which day of the month you are paid",
+                "title": "A hónap napjának kiválasztása",
+                "description": "Válassza ki, a hónap melyik napján kap fizetést",
                 "data": {
-                    "pay_day": "Day of month"
+                    "pay_day": "A hónap napja"
                 }
             },
             "bank_offset": {
-                "title": "Days before the last banking day",
-                "description": "If you are paid a few days before the last banking day, choose how many days before",
+                "title": "Napok száma az utolsó banki nap előtt",
+                "description": "Ha az utolsó banki nap előtt néhány nappal kap fizetést, válassza ki, hány nappal előtte",
                 "data": {
-                    "bank_offset": "Days before"
+                    "bank_offset": "Napok száma előtte"
                 }
             },
             "specific_day": {
-                "title": "Select specific day",
-                "description": "Select the exact day you are paid each month",
+                "title": "Konkrét nap kiválasztása",
+                "description": "Válassza ki a pontos napot, amikor minden hónapban fizetést kap",
                 "data": {
-                    "pay_day": "Specific day"
+                    "pay_day": "Konkrét nap"
                 }
             },
             "cycle_last_paydate": {
-                "title": "Select last payday",
-                "description": "Select the last date you were paid. This will be used to calculate the next payday",
+                "title": "Legutóbbi fizetésnap kiválasztása",
+                "description": "Válassza ki azt a legutóbbi dátumot, amikor fizetést kapott. Ezt a rendszer a következő fizetésnap kiszámításához használja",
                 "data": {
-                    "last_pay_date": "Last payday"
+                    "last_pay_date": "Legutóbbi fizetésnap"
                 }
             },
             "weekly": {
-                "title": "Select weekly payday",
-                "description": "Choose which weekday you are paid each week",
+                "title": "Heti fizetésnap kiválasztása",
+                "description": "Válassza ki, a hét melyik napján kap fizetést",
                 "data": {
-                    "pay_day": "Payday weekday"
+                    "pay_day": "A fizetés napja a héten"
                 }
             }
         },
         "error": {
-            "cannot_connect": "Failed to connect to the IsItPayday service",
-            "invalid_country": "The selected country is not supported",
-            "invalid_response": "Invalid response from the IsItPayday service"
+            "cannot_connect": "Nem sikerült csatlakozni az IsItPayday szolgáltatáshoz",
+            "invalid_country": "A kiválasztott ország nem támogatott",
+            "invalid_response": "Érvénytelen válasz érkezett az IsItPayday szolgáltatástól"
         }
     },
     "options": {
         "step": {
             "init": {
-                "title": "Adjust IsItPayday settings",
-                "description": "Modify the settings for this payday tracker"
+                "title": "Az IsItPayday beállításainak módosítása",
+                "description": "Módosítsa ennek a fizetésnap-követőnek a beállításait"
             }
         }
     }

@@ -3,67 +3,67 @@
     "config": {
         "step": {
             "user": {
-                "title": "Select country",
-                "description": "The selected country is used to check public holidays",
+                "title": "Land auswählen",
+                "description": "Das ausgewählte Land wird verwendet, um gesetzliche Feiertage zu prüfen",
                 "data": {
-                    "name": "Instance name",
-                    "country": "Country"
+                    "name": "Instanzname",
+                    "country": "Land"
                 }
             },
             "frequency": {
-                "title": "Select payout frequency",
-                "description": "Choose how often you get paid",
+                "title": "Auszahlungsfrequenz auswählen",
+                "description": "Wählen Sie aus, wie oft Sie bezahlt werden",
                 "data": {
-                    "pay_frequency": "Payout frequency"
+                    "pay_frequency": "Auszahlungsfrequenz"
                 }
             },
             "monthly_day": {
-                "title": "Select day of month",
-                "description": "Choose which day of the month you are paid",
+                "title": "Tag des Monats auswählen",
+                "description": "Wählen Sie aus, an welchem Tag des Monats Sie bezahlt werden",
                 "data": {
-                    "pay_day": "Day of month"
+                    "pay_day": "Tag des Monats"
                 }
             },
             "bank_offset": {
-                "title": "Days before the last banking day",
-                "description": "If you are paid a few days before the last banking day, choose how many days before",
+                "title": "Tage vor dem letzten Bankarbeitstag",
+                "description": "Wenn Sie einige Tage vor dem letzten Bankarbeitstag bezahlt werden, wählen Sie aus, wie viele Tage vorher",
                 "data": {
-                    "bank_offset": "Days before"
+                    "bank_offset": "Tage vorher"
                 }
             },
             "specific_day": {
-                "title": "Select specific day",
-                "description": "Select the exact day you are paid each month",
+                "title": "Bestimmten Tag auswählen",
+                "description": "Wählen Sie den genauen Tag aus, an dem Sie jeden Monat bezahlt werden",
                 "data": {
-                    "pay_day": "Specific day"
+                    "pay_day": "Bestimmter Tag"
                 }
             },
             "cycle_last_paydate": {
-                "title": "Select last payday",
-                "description": "Select the last date you were paid. This will be used to calculate the next payday",
+                "title": "Letzten Zahltag auswählen",
+                "description": "Wählen Sie das letzte Datum aus, an dem Sie bezahlt wurden. Dieses wird verwendet, um den nächsten Zahltag zu berechnen",
                 "data": {
-                    "last_pay_date": "Last payday"
+                    "last_pay_date": "Letzter Zahltag"
                 }
             },
             "weekly": {
-                "title": "Select weekly payday",
-                "description": "Choose which weekday you are paid each week",
+                "title": "Wöchentlichen Zahltag auswählen",
+                "description": "Wählen Sie aus, an welchem Wochentag Sie jede Woche bezahlt werden",
                 "data": {
-                    "pay_day": "Payday weekday"
+                    "pay_day": "Wochentag des Zahltags"
                 }
             }
         },
         "error": {
-            "cannot_connect": "Failed to connect to the IsItPayday service",
-            "invalid_country": "The selected country is not supported",
-            "invalid_response": "Invalid response from the IsItPayday service"
+            "cannot_connect": "Verbindung zum IsItPayday-Dienst fehlgeschlagen",
+            "invalid_country": "Das ausgewählte Land wird nicht unterstützt",
+            "invalid_response": "Ungültige Antwort vom IsItPayday-Dienst"
         }
     },
     "options": {
         "step": {
             "init": {
-                "title": "Adjust IsItPayday settings",
-                "description": "Modify the settings for this payday tracker"
+                "title": "IsItPayday-Einstellungen anpassen",
+                "description": "Ändern Sie die Einstellungen für diesen Zahltag-Tracker"
             }
         }
     }

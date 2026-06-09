@@ -37,8 +37,17 @@ from .const import (
 
 _LOGGER = logging.getLogger(__name__)
 
-# FIX #6: WEEKDAY_MAP is now only defined in const.py and imported here.
-# The duplicate local definition has been removed.
+
+def _coerce_int(value, default: int) -> int:
+    """Safely convert a stored config value to int.
+
+    FIX #5 from review: older config entries may have stored numeric
+    values as strings (e.g. '31'). This normalizes them.
+    """
+    try:
+        return int(value)
+    except (TypeError, ValueError):
+        return default
 
 
 async def async_get_homeassistant_country(hass: HomeAssistant) -> str | None:
@@ -57,7 +66,7 @@ async def async_get_homeassistant_country(hass: HomeAssistant) -> str | None:
 async def async_fetch_supported_countries() -> dict[str, str] | None:
     """Fetch available countries from Nager.Date API.
 
-    FIX #7: Returns None on failure instead of raising an unhandled exception.
+    Returns None on failure instead of raising an unhandled exception.
     """
     try:
         async with aiohttp.ClientSession() as session:
@@ -112,34 +121,33 @@ class IsItPayday2ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         self.name = data.get(CONF_NAME, "")
         self.country = data.get(CONF_COUNTRY)
         self.pay_frequency = data.get(CONF_PAY_FREQ)
-        self.pay_day = data.get(CONF_PAY_DAY)
         self.last_pay_date = data.get(CONF_LAST_PAY_DATE)
-        self.bank_offset = data.get(CONF_BANK_OFFSET, 0)
+        # FIX #5 from review: normalize possibly string-typed stored values.
+        self.bank_offset = _coerce_int(data.get(CONF_BANK_OFFSET), 0)
         self.weekday = data.get(CONF_WEEKDAY)
 
-        # FIX #8: Fetch country list once here for reconfigure,
-        # async_step_user will reuse self.country_list if already populated.
+        # pay_day can be a string option (last_bank_day, weekday name) OR an
+        # int (specific day). Old entries may have ints stored as strings.
+        pay_day = data.get(CONF_PAY_DAY)
+        if isinstance(pay_day, str) and pay_day.isdigit():
+            pay_day = int(pay_day)
+        self.pay_day = pay_day
+
+        # Fetch country list once here; async_step_user reuses it.
         self.country_list = await async_fetch_supported_countries() or {}
 
         return await self.async_step_user()
 
     async def async_step_user(self, user_input=None) -> FlowResult:
         """Handle the initial user step (name + country)."""
-        errors: dict[str, str] = {}
-
         if user_input is None:
-            # FIX #8: Only fetch country list if not already populated
-            # (avoids double API call during reconfigure).
             if not self.country_list:
                 self.country_list = await async_fetch_supported_countries() or {}
 
+            # FIX #2 from review: abort cleanly when the API is unreachable
+            # instead of showing an empty form that would crash on submit.
             if not self.country_list:
-                errors["base"] = "cannot_connect"
-                return self.async_show_form(
-                    step_id="user",
-                    data_schema=vol.Schema({}),
-                    errors=errors,
-                )
+                return self.async_abort(reason="cannot_connect")
 
             current_country = (
                 self.country
@@ -149,7 +157,6 @@ class IsItPayday2ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             return self.async_show_form(
                 step_id="user",
                 data_schema=self._create_user_schema(current_country),
-                errors=errors,
             )
 
         self.name = user_input[CONF_NAME]
@@ -204,7 +211,7 @@ class IsItPayday2ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                 step_id="bank_offset", data_schema=self._create_bank_offset_schema()
             )
 
-        self.bank_offset = int(user_input[CONF_BANK_OFFSET])
+        self.bank_offset = _coerce_int(user_input[CONF_BANK_OFFSET], 0)
         return self._create_entry()
 
     async def async_step_specific_day(self, user_input=None) -> FlowResult:
@@ -214,7 +221,7 @@ class IsItPayday2ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                 step_id="specific_day", data_schema=self._create_specific_day_schema()
             )
 
-        self.pay_day = int(user_input[CONF_PAY_DAY])
+        self.pay_day = _coerce_int(user_input[CONF_PAY_DAY], 31)
         return self._create_entry()
 
     async def async_step_cycle_last_paydate(self, user_input=None) -> FlowResult:
@@ -302,47 +309,65 @@ class IsItPayday2ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         )
 
     def _create_monthly_day_schema(self) -> vol.Schema:
+        # If pay_day is an int (specific day) from a previous config, the
+        # sensible default for this step is "specific_day".
+        default = self.pay_day
+        if isinstance(default, int) or default not in PAY_MONTHLY_OPTIONS:
+            default = (
+                PAY_DAY_SPECIFIC_DAY
+                if isinstance(self.pay_day, int)
+                else PAY_DAY_LAST_BANK_DAY
+            )
         return vol.Schema(
             {
-                vol.Required(
-                    CONF_PAY_DAY, default=self.pay_day or PAY_DAY_LAST_BANK_DAY
-                ): vol.In(PAY_MONTHLY_OPTIONS)
+                vol.Required(CONF_PAY_DAY, default=default): vol.In(
+                    PAY_MONTHLY_OPTIONS
+                )
             }
         )
 
     def _create_bank_offset_schema(self) -> vol.Schema:
+        # FIX #5 from review: normalize to int so the default always matches
+        # the option list, even for entries stored with string values.
+        default = _coerce_int(self.bank_offset, 0)
+        if default not in range(0, 11):
+            default = 0
         return vol.Schema(
             {
-                vol.Required(
-                    CONF_BANK_OFFSET, default=self.bank_offset or 0
-                ): vol.In(range(0, 11))
+                vol.Required(CONF_BANK_OFFSET, default=default): vol.In(range(0, 11))
             }
         )
 
     def _create_specific_day_schema(self) -> vol.Schema:
+        # FIX #5 from review: same normalization for specific day.
+        default = _coerce_int(self.pay_day, 31)
+        if default not in range(1, 32):
+            default = 31
         return vol.Schema(
             {
-                vol.Required(
-                    CONF_PAY_DAY, default=self.pay_day or 31
-                ): vol.In(range(1, 32))
+                vol.Required(CONF_PAY_DAY, default=default): vol.In(range(1, 32))
             }
         )
 
     def _create_last_paydate_schema(self) -> vol.Schema:
+        if self.last_pay_date:
+            return vol.Schema(
+                {
+                    vol.Required(
+                        CONF_LAST_PAY_DATE, default=self.last_pay_date
+                    ): DateSelector()
+                }
+            )
         return vol.Schema(
             {
-                vol.Required(
-                    CONF_LAST_PAY_DATE, default=self.last_pay_date
-                ): DateSelector()
+                vol.Required(CONF_LAST_PAY_DATE): DateSelector()
             }
         )
 
     def _create_weekly_schema(self) -> vol.Schema:
+        default = self.pay_day if self.pay_day in WEEKDAY_OPTIONS else "Monday"
         return vol.Schema(
             {
-                vol.Required(
-                    CONF_PAY_DAY, default=self.pay_day or "Monday"
-                ): vol.In(WEEKDAY_OPTIONS)
+                vol.Required(CONF_PAY_DAY, default=default): vol.In(WEEKDAY_OPTIONS)
             }
                 )
-                

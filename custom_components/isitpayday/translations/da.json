@@ -54,15 +54,15 @@
             }
         },
         "error": {
-            "cannot_connect": "Could not connect to the public holidays API (date.nager.at). Please check your internet connection and try again.",
-            "invalid_country": "The selected country is not supported by the public holidays API",
-            "invalid_response": "Received an unexpected response from the public holidays API"
+            "cannot_connect": "Kunne ikke oprette forbindelse til API'et for helligdage (date.nager.at). Kontrollér din internetforbindelse, og prøv igen.",
+            "invalid_country": "Det valgte land understøttes ikke af API'et for helligdage",
+            "invalid_response": "Modtog et uventet svar fra API'et for helligdage"
         },
         "abort": {
-            "reconfigured": "Configuration has been updated successfully.",
-            "missing_entry": "Reconfiguration could not start: no entry ID found.",
-            "entry_not_found": "Reconfiguration could not start: the entry no longer exists.",
-            "cannot_connect": "Could not connect to the public holidays API (date.nager.at). Please check your internet connection and try again."
+            "reconfigured": "Konfigurationen er blevet opdateret.",
+            "missing_entry": "Omkonfigurationen kunne ikke starte: intet entry-ID blev fundet.",
+            "entry_not_found": "Omkonfigurationen kunne ikke starte: posten findes ikke længere.",
+            "cannot_connect": "Kunne ikke oprette forbindelse til API'et for offentlige helligdage (date.nager.at). Kontroller din internetforbindelse, og prøv igen."
         }
     },
     "options": {

@@ -54,15 +54,15 @@
             }
         },
         "error": {
-            "cannot_connect": "Could not connect to the public holidays API (date.nager.at). Please check your internet connection and try again.",
-            "invalid_country": "The selected country is not supported by the public holidays API",
-            "invalid_response": "Received an unexpected response from the public holidays API"
+            "cannot_connect": "Verbindung zur API für Feiertage (date.nager.at) konnte nicht hergestellt werden. Bitte überprüfen Sie Ihre Internetverbindung und versuchen Sie es erneut.",
+            "invalid_country": "Das ausgewählte Land wird von der API für Feiertage nicht unterstützt.",
+            "invalid_response": "Von der API für Feiertage wurde eine unerwartete Antwort empfangen."
         },
         "abort": {
-            "reconfigured": "Configuration has been updated successfully.",
-            "missing_entry": "Reconfiguration could not start: no entry ID found.",
-            "entry_not_found": "Reconfiguration could not start: the entry no longer exists.",
-            "cannot_connect": "Could not connect to the public holidays API (date.nager.at). Please check your internet connection and try again."
+            "reconfigured": "Die Konfiguration wurde erfolgreich aktualisiert.",
+            "missing_entry": "Die Neukonfiguration konnte nicht gestartet werden: Keine Eintrags-ID gefunden.",
+            "entry_not_found": "Die Neukonfiguration konnte nicht gestartet werden: Der Eintrag existiert nicht mehr.",
+            "cannot_connect": "Verbindung zur API für Feiertage (date.nager.at) konnte nicht hergestellt werden. Bitte überprüfen Sie Ihre Internetverbindung und versuchen Sie es erneut."
         }
     },
     "options": {

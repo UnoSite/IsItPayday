@@ -71,4 +71,4 @@ class IsItPaydaySensor(CoordinatorEntity, BinarySensorEntity):
             "manufacturer": CONF_MANUFACTURER,
             "model": CONF_MODEL,
         }
-            
+        

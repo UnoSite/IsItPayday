@@ -54,15 +54,15 @@
             }
         },
         "error": {
-            "cannot_connect": "Could not connect to the public holidays API (date.nager.at). Please check your internet connection and try again.",
-            "invalid_country": "The selected country is not supported by the public holidays API",
-            "invalid_response": "Received an unexpected response from the public holidays API"
+            "cannot_connect": "Không thể kết nối với API ngày nghỉ lễ (date.nager.at). Vui lòng kiểm tra kết nối internet của bạn và thử lại.",
+            "invalid_country": "Quốc gia đã chọn không được API ngày nghỉ lễ hỗ trợ",
+            "invalid_response": "Đã nhận được phản hồi không mong đợi từ API ngày nghỉ lễ"
         },
         "abort": {
-            "reconfigured": "Configuration has been updated successfully.",
-            "missing_entry": "Reconfiguration could not start: no entry ID found.",
-            "entry_not_found": "Reconfiguration could not start: the entry no longer exists.",
-            "cannot_connect": "Could not connect to the public holidays API (date.nager.at). Please check your internet connection and try again."
+            "reconfigured": "Cấu hình đã được cập nhật thành công.",
+            "missing_entry": "Không thể bắt đầu cấu hình lại: không tìm thấy ID mục nhập.",
+            "entry_not_found": "Không thể bắt đầu cấu hình lại: mục nhập không còn tồn tại.",
+            "cannot_connect": "Không thể kết nối với API ngày lễ công cộng (date.nager.at). Vui lòng kiểm tra kết nối internet của bạn và thử lại."
         }
     },
     "options": {

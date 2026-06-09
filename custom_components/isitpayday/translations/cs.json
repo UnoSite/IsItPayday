@@ -1,69 +1,69 @@
 {
-    "title": "Je výplata",
+    "title": "IsItPayday",
     "config": {
         "step": {
             "user": {
-                "title": "Vyberte zemi",
-                "description": "Vybraná země se používá ke kontrole státních svátků",
+                "title": "Select country",
+                "description": "The selected country is used to check public holidays",
                 "data": {
-                    "name": "Název instance",
-                    "country": "Země"
+                    "name": "Instance name",
+                    "country": "Country"
                 }
             },
             "frequency": {
-                "title": "Vyberte frekvenci výplaty",
-                "description": "Vyberte, jak často dostáváte výplatu",
+                "title": "Select payout frequency",
+                "description": "Choose how often you get paid",
                 "data": {
-                    "pay_frequency": "Frekvence výplaty"
+                    "pay_frequency": "Payout frequency"
                 }
             },
             "monthly_day": {
-                "title": "Vyberte den v měsíci",
-                "description": "Vyberte, který den v měsíci dostáváte výplatu",
+                "title": "Select day of month",
+                "description": "Choose which day of the month you are paid",
                 "data": {
-                    "pay_day": "Den v měsíci"
+                    "pay_day": "Day of month"
                 }
             },
             "bank_offset": {
-                "title": "Dny před posledním bankovním dnem",
-                "description": "Pokud dostáváte výplatu několik dní před posledním bankovním dnem, vyberte kolik dní předtím",
+                "title": "Days before the last banking day",
+                "description": "If you are paid a few days before the last banking day, choose how many days before",
                 "data": {
-                    "bank_offset": "Dny před"
+                    "bank_offset": "Days before"
                 }
             },
             "specific_day": {
-                "title": "Vyberte konkrétní den",
-                "description": "Vyberte přesný den, kdy každý měsíc dostáváte výplatu",
+                "title": "Select specific day",
+                "description": "Select the exact day you are paid each month",
                 "data": {
-                    "pay_day": "Konkrétní den"
+                    "pay_day": "Specific day"
                 }
             },
             "cycle_last_paydate": {
-                "title": "Vyberte datum poslední výplaty",
-                "description": "Vyberte poslední datum, kdy jste dostali výplatu. To se používá k výpočtu dalšího dne výplaty",
+                "title": "Select last payday",
+                "description": "Select the last date you were paid. This will be used to calculate the next payday",
                 "data": {
-                    "last_pay_date": "Datum poslední výplaty"
+                    "last_pay_date": "Last payday"
                 }
             },
             "weekly": {
-                "title": "Vyberte den výplaty v týdnu",
-                "description": "Vyberte, který den v týdnu dostáváte výplatu každý týden",
+                "title": "Select weekly payday",
+                "description": "Choose which weekday you are paid each week",
                 "data": {
-                    "pay_day": "Den v týdnu pro výplatu"
+                    "pay_day": "Payday weekday"
                 }
             }
         },
         "error": {
-            "cannot_connect": "Nepodařilo se připojit ke službě IsItPayday",
-            "invalid_country": "Vybraná země není podporována",
-            "invalid_response": "Neplatná odpověď ze služby IsItPayday"
+            "cannot_connect": "Failed to connect to the IsItPayday service",
+            "invalid_country": "The selected country is not supported",
+            "invalid_response": "Invalid response from the IsItPayday service"
         }
     },
     "options": {
         "step": {
             "init": {
-                "title": "Upravte nastavení pro IsItPayday",
-                "description": "Upravte nastavení tohoto sledování dne výplaty"
+                "title": "Adjust IsItPayday settings",
+                "description": "Modify the settings for this payday tracker"
             }
         }
     }

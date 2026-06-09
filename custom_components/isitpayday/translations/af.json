@@ -62,7 +62,7 @@
             "reconfigured": "Konfigurasie is suksesvol opgedateer.",
             "missing_entry": "Herkonfigurasie kon nie begin nie: geen inskrywing-ID gevind nie.",
             "entry_not_found": "Herkonfigurasie kon nie begin nie: die inskrywing bestaan nie meer nie.",
-            "cannot_connect": "Could not connect to the public holidays API (date.nager.at). Please check your internet connection and try again."
+            "cannot_connect": "Kon nie aan die openbare vakansiedae-API (date.nager.at) koppel nie. Gaan asseblief jou internetverbinding na en probeer weer."
         }
     },
     "options": {

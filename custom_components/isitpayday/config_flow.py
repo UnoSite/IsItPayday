@@ -1,5 +1,3 @@
-"""Config flow for IsItPayday integration."""
-
 import logging
 
 import aiohttp
@@ -9,47 +7,92 @@ from homeassistant.core import HomeAssistant
 from homeassistant.data_entry_flow import FlowResult
 from homeassistant.helpers.selector import DateSelector
 
-from .const import *
+from .const import (
+    DOMAIN,
+    CONF_NAME,
+    CONF_COUNTRY,
+    CONF_PAY_FREQ,
+    CONF_PAY_DAY,
+    CONF_LAST_PAY_DATE,
+    CONF_BANK_OFFSET,
+    CONF_WEEKDAY,
+    API_COUNTRIES,
+    PAY_FREQ_MONTHLY,
+    PAY_FREQ_BIMONTHLY,
+    PAY_FREQ_QUARTERLY,
+    PAY_FREQ_SEMIANNUAL,
+    PAY_FREQ_ANNUAL,
+    PAY_FREQ_28_DAYS,
+    PAY_FREQ_14_DAYS,
+    PAY_FREQ_WEEKLY,
+    PAY_FREQ_OPTIONS,
+    PAY_MONTHLY_OPTIONS,
+    PAY_DAY_LAST_BANK_DAY,
+    PAY_DAY_SPECIFIC_DAY,
+    WEEKDAY_MAP,
+    WEEKDAY_OPTIONS,
+)
 
 _LOGGER = logging.getLogger(__name__)
 
-WEEKDAY_MAP = {"Monday": 0, "Tuesday": 1, "Wednesday": 2, "Thursday": 3, "Friday": 4}
+# FIX #6: WEEKDAY_MAP is now only defined in const.py and imported here.
+# The duplicate local definition has been removed.
 
 
 async def async_get_homeassistant_country(hass: HomeAssistant) -> str | None:
+    """Return HA's configured country if it is supported by Nager.Date API."""
     country = getattr(hass.config, "country", None)
     if not country:
         _LOGGER.warning("Home Assistant country is not set.")
         return None
     supported_countries = await async_fetch_supported_countries()
-    if country not in supported_countries:
+    if supported_countries is None or country not in supported_countries:
         _LOGGER.warning("Country '%s' is not supported.", country)
         return None
     return country
 
 
-async def async_fetch_supported_countries() -> dict[str, str]:
-    async with aiohttp.ClientSession() as session:
-        async with session.get(API_COUNTRIES) as response:
-            data = await response.json()
-            return {country["countryCode"]: country["name"] for country in data}
+async def async_fetch_supported_countries() -> dict[str, str] | None:
+    """Fetch available countries from Nager.Date API.
+
+    FIX #7: Returns None on failure instead of raising an unhandled exception.
+    """
+    try:
+        async with aiohttp.ClientSession() as session:
+            async with session.get(
+                API_COUNTRIES, timeout=aiohttp.ClientTimeout(total=10)
+            ) as response:
+                if response.status != 200:
+                    _LOGGER.error(
+                        "Failed to fetch supported countries: HTTP %s", response.status
+                    )
+                    return None
+                data = await response.json()
+                return {country["countryCode"]: country["name"] for country in data}
+    except aiohttp.ClientError as e:
+        _LOGGER.error("Network error fetching supported countries: %s", e)
+        return None
+    except Exception as e:
+        _LOGGER.exception("Unexpected error fetching supported countries: %s", e)
+        return None
 
 
 class IsItPayday2ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     VERSION = 1
 
     def __init__(self) -> None:
-        self.name = None
-        self.country = None
-        self.pay_frequency = None
+        self.name: str | None = None
+        self.country: str | None = None
+        self.pay_frequency: str | None = None
         self.pay_day = None
-        self.last_pay_date = None
-        self.bank_offset = 0
-        self.weekday = None
-        self.country_list = {}
+        self.last_pay_date: str | None = None
+        self.bank_offset: int = 0
+        self.weekday: int | None = None
+        self.country_list: dict[str, str] = {}
         self.reconfig_entry = None
 
-    async def async_step_reconfigure(self, user_input=None):
+    async def async_step_reconfigure(self, user_input=None) -> FlowResult:
+        """Handle reconfiguration of an existing entry."""
         _LOGGER.info("Starting reconfiguration flow")
         entry_id = self.context.get("entry_id")
         if not entry_id:
@@ -71,25 +114,48 @@ class IsItPayday2ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         self.last_pay_date = data.get(CONF_LAST_PAY_DATE)
         self.bank_offset = data.get(CONF_BANK_OFFSET, 0)
         self.weekday = data.get(CONF_WEEKDAY)
-        self.country_list = await async_fetch_supported_countries()
+
+        # FIX #8: Fetch country list once here for reconfigure,
+        # async_step_user will reuse self.country_list if already populated.
+        self.country_list = await async_fetch_supported_countries() or {}
 
         return await self.async_step_user()
 
-    async def async_step_user(self, user_input=None):
+    async def async_step_user(self, user_input=None) -> FlowResult:
+        """Handle the initial user step (name + country)."""
+        errors: dict[str, str] = {}
+
         if user_input is None:
-            self.country_list = await async_fetch_supported_countries()
+            # FIX #8: Only fetch country list if not already populated
+            # (avoids double API call during reconfigure).
+            if not self.country_list:
+                self.country_list = await async_fetch_supported_countries() or {}
+
+            if not self.country_list:
+                errors["base"] = "cannot_connect"
+                return self.async_show_form(
+                    step_id="user",
+                    data_schema=vol.Schema({}),
+                    errors=errors,
+                )
+
             current_country = (
-                self.country or await async_get_homeassistant_country(self.hass) or "DK"
+                self.country
+                or await async_get_homeassistant_country(self.hass)
+                or "DK"
             )
             return self.async_show_form(
-                step_id="user", data_schema=self._create_user_schema(current_country)
+                step_id="user",
+                data_schema=self._create_user_schema(current_country),
+                errors=errors,
             )
 
         self.name = user_input[CONF_NAME]
         self.country = user_input[CONF_COUNTRY]
         return await self.async_step_frequency()
 
-    async def async_step_frequency(self, user_input=None):
+    async def async_step_frequency(self, user_input=None) -> FlowResult:
+        """Handle pay frequency selection."""
         if user_input is None:
             return self.async_show_form(
                 step_id="frequency", data_schema=self._create_pay_frequency_schema()
@@ -113,7 +179,8 @@ class IsItPayday2ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 
         return self._create_entry()
 
-    async def async_step_monthly_day(self, user_input=None):
+    async def async_step_monthly_day(self, user_input=None) -> FlowResult:
+        """Handle selection of which day of the month payday falls on."""
         if user_input is None:
             return self.async_show_form(
                 step_id="monthly_day", data_schema=self._create_monthly_day_schema()
@@ -128,7 +195,8 @@ class IsItPayday2ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 
         return self._create_entry()
 
-    async def async_step_bank_offset(self, user_input=None):
+    async def async_step_bank_offset(self, user_input=None) -> FlowResult:
+        """Handle selection of days before last bank day."""
         if user_input is None:
             return self.async_show_form(
                 step_id="bank_offset", data_schema=self._create_bank_offset_schema()
@@ -137,7 +205,8 @@ class IsItPayday2ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         self.bank_offset = int(user_input[CONF_BANK_OFFSET])
         return self._create_entry()
 
-    async def async_step_specific_day(self, user_input=None):
+    async def async_step_specific_day(self, user_input=None) -> FlowResult:
+        """Handle selection of a specific day of the month."""
         if user_input is None:
             return self.async_show_form(
                 step_id="specific_day", data_schema=self._create_specific_day_schema()
@@ -146,7 +215,8 @@ class IsItPayday2ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         self.pay_day = int(user_input[CONF_PAY_DAY])
         return self._create_entry()
 
-    async def async_step_cycle_last_paydate(self, user_input=None):
+    async def async_step_cycle_last_paydate(self, user_input=None) -> FlowResult:
+        """Handle selection of the last payday date for interval-based frequencies."""
         if user_input is None:
             return self.async_show_form(
                 step_id="cycle_last_paydate",
@@ -156,7 +226,8 @@ class IsItPayday2ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         self.last_pay_date = user_input[CONF_LAST_PAY_DATE]
         return self._create_entry()
 
-    async def async_step_weekly(self, user_input=None):
+    async def async_step_weekly(self, user_input=None) -> FlowResult:
+        """Handle selection of weekday for weekly pay frequency."""
         if user_input is None:
             return self.async_show_form(
                 step_id="weekly", data_schema=self._create_weekly_schema()
@@ -167,6 +238,7 @@ class IsItPayday2ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         return self._create_entry()
 
     def _create_entry(self) -> FlowResult:
+        """Persist the config entry or update the existing one on reconfigure."""
         data = {
             CONF_NAME: self.name,
             CONF_COUNTRY: self.country,
@@ -178,26 +250,35 @@ class IsItPayday2ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         }
 
         if self.reconfig_entry:
-            _LOGGER.info("Updating existing entry: %s", self.reconfig_entry.entry_id)
-            self.hass.config_entries.async_update_entry(self.reconfig_entry, data=data)
+            _LOGGER.info(
+                "Updating existing entry: %s", self.reconfig_entry.entry_id
+            )
+            self.hass.config_entries.async_update_entry(
+                self.reconfig_entry, data=data
+            )
             self.hass.async_create_task(
                 self.hass.config_entries.async_reload(self.reconfig_entry.entry_id)
             )
-
             self.hass.async_create_task(
                 self.hass.services.async_call(
                     "persistent_notification",
                     "create",
                     {
                         "title": "IsItPayday",
-                        "message": f"The configuration for '{self.name}' has been successfully updated.",
+                        "message": (
+                            f"The configuration for '{self.name}' "
+                            "has been successfully updated."
+                        ),
                     },
                 )
             )
-
             return self.async_abort(reason="reconfigured")
 
         return self.async_create_entry(title=self.name, data=data)
+
+    # ------------------------------------------------------------------ #
+    # Schema helpers                                                       #
+    # ------------------------------------------------------------------ #
 
     def _create_user_schema(self, default_country: str) -> vol.Schema:
         return vol.Schema(
@@ -230,18 +311,18 @@ class IsItPayday2ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     def _create_bank_offset_schema(self) -> vol.Schema:
         return vol.Schema(
             {
-                vol.Required(CONF_BANK_OFFSET, default=self.bank_offset or 0): vol.In(
-                    range(0, 11)
-                )
+                vol.Required(
+                    CONF_BANK_OFFSET, default=self.bank_offset or 0
+                ): vol.In(range(0, 11))
             }
         )
 
     def _create_specific_day_schema(self) -> vol.Schema:
         return vol.Schema(
             {
-                vol.Required(CONF_PAY_DAY, default=self.pay_day or 31): vol.In(
-                    range(1, 32)
-                )
+                vol.Required(
+                    CONF_PAY_DAY, default=self.pay_day or 31
+                ): vol.In(range(1, 32))
             }
         )
 
@@ -257,8 +338,9 @@ class IsItPayday2ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     def _create_weekly_schema(self) -> vol.Schema:
         return vol.Schema(
             {
-                vol.Required(CONF_PAY_DAY, default=self.pay_day or "Monday"): vol.In(
-                    WEEKDAY_OPTIONS
-                )
+                vol.Required(
+                    CONF_PAY_DAY, default=self.pay_day or "Monday"
+                ): vol.In(WEEKDAY_OPTIONS)
             }
         )
+        

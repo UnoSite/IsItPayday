@@ -4,7 +4,7 @@
         "step": {
             "user": {
                 "title": "Selecionar país",
-                "description": "O país selecionado é usado para verificar feriados públicos",
+                "description": "O país selecionado é usado para verificar feriados",
                 "data": {
                     "name": "Nome da instância",
                     "country": "País"
@@ -12,42 +12,42 @@
             },
             "frequency": {
                 "title": "Selecione a frequência de pagamento",
-                "description": "Escolha com que frequência você recebe o pagamento",
+                "description": "Selecione com que frequência você recebe o salário",
                 "data": {
                     "pay_frequency": "Frequência de pagamento"
                 }
             },
             "monthly_day": {
                 "title": "Selecione o dia do mês",
-                "description": "Escolha em que dia do mês você recebe o pagamento",
+                "description": "Selecione em que dia do mês você recebe o salário",
                 "data": {
                     "pay_day": "Dia do mês"
                 }
             },
             "bank_offset": {
                 "title": "Dias antes do último dia bancário",
-                "description": "Se você recebe o pagamento alguns dias antes do último dia bancário, escolha quantos dias antes",
+                "description": "Se você recebe o salário alguns dias antes do último dia bancário, selecione quantos dias antes",
                 "data": {
                     "bank_offset": "Dias antes"
                 }
             },
             "specific_day": {
-                "title": "Selecione o dia específico",
-                "description": "Selecione o dia exato em que você recebe o pagamento a cada mês",
+                "title": "Selecione um dia específico",
+                "description": "Selecione o dia exato em que você recebe o salário todos os meses",
                 "data": {
                     "pay_day": "Dia específico"
                 }
             },
             "cycle_last_paydate": {
-                "title": "Selecione o último dia de pagamento",
-                "description": "Selecione a última data em que você recebeu o pagamento. Ela será usada para calcular o próximo dia de pagamento",
+                "title": "Selecione a data do último pagamento",
+                "description": "Selecione a última data em que você recebeu o salário. Isso será usado para calcular o próximo dia de pagamento",
                 "data": {
-                    "last_pay_date": "Último dia de pagamento"
+                    "last_pay_date": "Último pagamento"
                 }
             },
             "weekly": {
                 "title": "Selecione o dia de pagamento semanal",
-                "description": "Escolha em que dia da semana você recebe o pagamento",
+                "description": "Selecione em que dia da semana você recebe o salário",
                 "data": {
                     "pay_day": "Dia da semana do pagamento"
                 }
@@ -63,7 +63,7 @@
         "step": {
             "init": {
                 "title": "Ajustar as configurações do IsItPayday",
-                "description": "Modifique as configurações deste rastreador de pagamento"
+                "description": "Modifique as configurações deste rastreador de dia de pagamento"
             }
         }
     }

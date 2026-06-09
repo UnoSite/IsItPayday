@@ -3,67 +3,67 @@
     "config": {
         "step": {
             "user": {
-                "title": "Select country",
-                "description": "The selected country is used to check public holidays",
+                "title": "اختر البلد",
+                "description": "يُستخدم البلد المحدد للتحقق من العطلات الرسمية",
                 "data": {
-                    "name": "Instance name",
-                    "country": "Country"
+                    "name": "اسم المثيل",
+                    "country": "البلد"
                 }
             },
             "frequency": {
-                "title": "Select payout frequency",
-                "description": "Choose how often you get paid",
+                "title": "حدد وتيرة صرف الراتب",
+                "description": "اختر عدد مرات استلامك للراتب",
                 "data": {
-                    "pay_frequency": "Payout frequency"
+                    "pay_frequency": "وتيرة صرف الراتب"
                 }
             },
             "monthly_day": {
-                "title": "Select day of month",
-                "description": "Choose which day of the month you are paid",
+                "title": "حدد يوم الشهر",
+                "description": "اختر اليوم من الشهر الذي يُصرف فيه راتبك",
                 "data": {
-                    "pay_day": "Day of month"
+                    "pay_day": "يوم الشهر"
                 }
             },
             "bank_offset": {
-                "title": "Days before the last banking day",
-                "description": "If you are paid a few days before the last banking day, choose how many days before",
+                "title": "الأيام قبل آخر يوم مصرفي",
+                "description": "إذا كان راتبك يُصرف قبل آخر يوم مصرفي ببضعة أيام، فاختر عدد الأيام السابقة",
                 "data": {
-                    "bank_offset": "Days before"
+                    "bank_offset": "الأيام السابقة"
                 }
             },
             "specific_day": {
-                "title": "Select specific day",
-                "description": "Select the exact day you are paid each month",
+                "title": "حدد يومًا معينًا",
+                "description": "حدد اليوم المحدد الذي يُصرف فيه راتبك كل شهر",
                 "data": {
-                    "pay_day": "Specific day"
+                    "pay_day": "يوم محدد"
                 }
             },
             "cycle_last_paydate": {
-                "title": "Select last payday",
-                "description": "Select the last date you were paid. This will be used to calculate the next payday",
+                "title": "حدد آخر يوم صرف راتب",
+                "description": "حدد آخر تاريخ استلمت فيه راتبك. سيُستخدم هذا لحساب يوم صرف الراتب التالي",
                 "data": {
-                    "last_pay_date": "Last payday"
+                    "last_pay_date": "آخر يوم صرف راتب"
                 }
             },
             "weekly": {
-                "title": "Select weekly payday",
-                "description": "Choose which weekday you are paid each week",
+                "title": "حدد يوم صرف الراتب الأسبوعي",
+                "description": "اختر يوم الأسبوع الذي يُصرف فيه راتبك كل أسبوع",
                 "data": {
-                    "pay_day": "Payday weekday"
+                    "pay_day": "يوم صرف الراتب الأسبوعي"
                 }
             }
         },
         "error": {
-            "cannot_connect": "Failed to connect to the IsItPayday service",
-            "invalid_country": "The selected country is not supported",
-            "invalid_response": "Invalid response from the IsItPayday service"
+            "cannot_connect": "فشل الاتصال بخدمة IsItPayday",
+            "invalid_country": "البلد المحدد غير مدعوم",
+            "invalid_response": "استجابة غير صالحة من خدمة IsItPayday"
         }
     },
     "options": {
         "step": {
             "init": {
-                "title": "Adjust IsItPayday settings",
-                "description": "Modify the settings for this payday tracker"
+                "title": "اضبط إعدادات IsItPayday",
+                "description": "عدّل إعدادات متتبع يوم صرف الراتب هذا"
             }
         }
     }

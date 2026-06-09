@@ -3,67 +3,67 @@
     "config": {
         "step": {
             "user": {
-                "title": "国を選択",
-                "description": "選択した国は祝日の判定に使用されます",
+                "title": "Select country",
+                "description": "The selected country is used to check public holidays",
                 "data": {
-                    "name": "インスタンス名",
-                    "country": "国"
+                    "name": "Instance name",
+                    "country": "Country"
                 }
             },
             "frequency": {
-                "title": "支払い頻度を選択",
-                "description": "給与を受け取る頻度を選択してください",
+                "title": "Select payout frequency",
+                "description": "Choose how often you get paid",
                 "data": {
-                    "pay_frequency": "支給頻度"
+                    "pay_frequency": "Payout frequency"
                 }
             },
             "monthly_day": {
-                "title": "月の日付を選択",
-                "description": "毎月給与を受け取る日付を選択してください",
+                "title": "Select day of month",
+                "description": "Choose which day of the month you are paid",
                 "data": {
-                    "pay_day": "月の日付"
+                    "pay_day": "Day of month"
                 }
             },
             "bank_offset": {
-                "title": "最終銀行営業日前の日数",
-                "description": "最終銀行営業日の数日前に給与を受け取る場合は、何日前かを選択してください",
+                "title": "Days before the last banking day",
+                "description": "If you are paid a few days before the last banking day, choose how many days before",
                 "data": {
-                    "bank_offset": "日前"
+                    "bank_offset": "Days before"
                 }
             },
             "specific_day": {
-                "title": "特定の日を選択",
-                "description": "毎月給与を受け取る正確な日を選択してください",
+                "title": "Select specific day",
+                "description": "Select the exact day you are paid each month",
                 "data": {
-                    "pay_day": "特定の日"
+                    "pay_day": "Specific day"
                 }
             },
             "cycle_last_paydate": {
-                "title": "直近の給与支給日を選択",
-                "description": "直近で給与を受け取った日付を選択してください。これは次回の給与支給日を計算するために使用されます",
+                "title": "Select last payday",
+                "description": "Select the last date you were paid. This will be used to calculate the next payday",
                 "data": {
-                    "last_pay_date": "直近の給与支給日"
+                    "last_pay_date": "Last payday"
                 }
             },
             "weekly": {
-                "title": "毎週の給与支給曜日を選択",
-                "description": "毎週給与を受け取る曜日を選択してください",
+                "title": "Select weekly payday",
+                "description": "Choose which weekday you are paid each week",
                 "data": {
-                    "pay_day": "給与支給曜日"
+                    "pay_day": "Payday weekday"
                 }
             }
         },
         "error": {
-            "cannot_connect": "IsItPaydayサービスに接続できませんでした",
-            "invalid_country": "選択した国はサポートされていません",
-            "invalid_response": "IsItPaydayサービスから無効な応答が返されました"
+            "cannot_connect": "Failed to connect to the IsItPayday service",
+            "invalid_country": "The selected country is not supported",
+            "invalid_response": "Invalid response from the IsItPayday service"
         }
     },
     "options": {
         "step": {
             "init": {
-                "title": "IsItPaydayの設定を調整",
-                "description": "この給与支給日トラッキングの設定を編集"
+                "title": "Adjust IsItPayday settings",
+                "description": "Modify the settings for this payday tracker"
             }
         }
     }

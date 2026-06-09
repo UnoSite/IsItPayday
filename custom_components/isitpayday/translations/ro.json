@@ -3,67 +3,67 @@
     "config": {
         "step": {
             "user": {
-                "title": "Select country",
-                "description": "The selected country is used to check public holidays",
+                "title": "Selectați țara",
+                "description": "Țara selectată este folosită pentru a verifica sărbătorile legale",
                 "data": {
-                    "name": "Instance name",
-                    "country": "Country"
+                    "name": "Numele instanței",
+                    "country": "Țară"
                 }
             },
             "frequency": {
-                "title": "Select payout frequency",
-                "description": "Choose how often you get paid",
+                "title": "Selectați frecvența plății",
+                "description": "Alegeți cât de des sunteți plătit(ă)",
                 "data": {
-                    "pay_frequency": "Payout frequency"
+                    "pay_frequency": "Frecvența plății"
                 }
             },
             "monthly_day": {
-                "title": "Select day of month",
-                "description": "Choose which day of the month you are paid",
+                "title": "Selectați ziua din lună",
+                "description": "Alegeți în ce zi din lună sunteți plătit(ă)",
                 "data": {
-                    "pay_day": "Day of month"
+                    "pay_day": "Ziua din lună"
                 }
             },
             "bank_offset": {
-                "title": "Days before the last banking day",
-                "description": "If you are paid a few days before the last banking day, choose how many days before",
+                "title": "Zile înainte de ultima zi bancară",
+                "description": "Dacă sunteți plătit(ă) cu câteva zile înainte de ultima zi bancară, alegeți cu câte zile înainte",
                 "data": {
-                    "bank_offset": "Days before"
+                    "bank_offset": "Zile înainte"
                 }
             },
             "specific_day": {
-                "title": "Select specific day",
-                "description": "Select the exact day you are paid each month",
+                "title": "Selectați o zi anume",
+                "description": "Selectați ziua exactă în care sunteți plătit(ă) în fiecare lună",
                 "data": {
-                    "pay_day": "Specific day"
+                    "pay_day": "Zi specifică"
                 }
             },
             "cycle_last_paydate": {
-                "title": "Select last payday",
-                "description": "Select the last date you were paid. This will be used to calculate the next payday",
+                "title": "Selectați ultima zi de plată",
+                "description": "Selectați ultima dată la care ați fost plătit(ă). Aceasta va fi utilizată pentru a calcula următoarea zi de plată",
                 "data": {
-                    "last_pay_date": "Last payday"
+                    "last_pay_date": "Ultima zi de plată"
                 }
             },
             "weekly": {
-                "title": "Select weekly payday",
-                "description": "Choose which weekday you are paid each week",
+                "title": "Selectați ziua săptămânală de plată",
+                "description": "Alegeți în ce zi a săptămânii sunteți plătit(ă) în fiecare săptămână",
                 "data": {
-                    "pay_day": "Payday weekday"
+                    "pay_day": "Ziua săptămânii pentru plată"
                 }
             }
         },
         "error": {
-            "cannot_connect": "Failed to connect to the IsItPayday service",
-            "invalid_country": "The selected country is not supported",
-            "invalid_response": "Invalid response from the IsItPayday service"
+            "cannot_connect": "Conectarea la serviciul IsItPayday a eșuat",
+            "invalid_country": "Țara selectată nu este acceptată",
+            "invalid_response": "Răspuns nevalid de la serviciul IsItPayday"
         }
     },
     "options": {
         "step": {
             "init": {
-                "title": "Adjust IsItPayday settings",
-                "description": "Modify the settings for this payday tracker"
+                "title": "Ajustați setările IsItPayday",
+                "description": "Modificați setările pentru acest instrument de urmărire a zilei de plată"
             }
         }
     }

@@ -61,7 +61,8 @@
         "abort": {
             "reconfigured": "Configuration has been updated successfully.",
             "missing_entry": "Reconfiguration could not start: no entry ID found.",
-            "entry_not_found": "Reconfiguration could not start: the entry no longer exists."
+            "entry_not_found": "Reconfiguration could not start: the entry no longer exists.",
+            "cannot_connect": "Could not connect to the public holidays API (date.nager.at). Please check your internet connection and try again."
         }
     },
     "options": {

@@ -67,9 +67,6 @@ DEFAULT_MONTHLY_DAY = PAY_DAY_LAST_BANK_DAY
 DEFAULT_BANK_OFFSET = 0
 DEFAULT_SPECIFIC_DAY = 31
 
-# API endpoints (year is substituted in payday_calculator.py)
-API_COUNTRIES = "https://date.nager.at/api/v3/AvailableCountries"
-API_HOLIDAYS = "https://date.nager.at/api/v3/PublicHolidays/{year}/{country}"
 
 # Sensor icons
 ICON_NEXT_PAYDAY = "mdi:calendar-clock"

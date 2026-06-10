@@ -54,9 +54,9 @@
             }
         },
         "error": {
-            "cannot_connect": "Không thể kết nối với API ngày nghỉ lễ (date.nager.at). Vui lòng kiểm tra kết nối internet của bạn và thử lại.",
-            "invalid_country": "Quốc gia đã chọn không được API ngày nghỉ lễ hỗ trợ",
-            "invalid_response": "Đã nhận được phản hồi không mong đợi từ API ngày nghỉ lễ"
+            "cannot_connect": "Không thể kết nối với dịch vụ IsItPayday",
+            "invalid_country": "Quốc gia đã chọn không được hỗ trợ",
+            "invalid_response": "Phản hồi từ dịch vụ IsItPayday không hợp lệ"
         },
         "abort": {
             "reconfigured": "Cấu hình đã được cập nhật thành công.",

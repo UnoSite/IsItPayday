@@ -54,9 +54,9 @@
             }
         },
         "error": {
-            "cannot_connect": "Nepodařilo se připojit k API státních svátků (date.nager.at). Zkontrolujte prosím své internetové připojení a zkuste to znovu.",
-            "invalid_country": "Vybraná země není podporována API státních svátků",
-            "invalid_response": "Byla přijata neočekávaná odpověď z API státních svátků"
+            "cannot_connect": "Nepodařilo se připojit ke službě IsItPayday",
+            "invalid_country": "Vybraná země není podporována",
+            "invalid_response": "Neplatná odpověď ze služby IsItPayday"
         },
         "abort": {
             "reconfigured": "Konfigurace byla úspěšně aktualizována.",

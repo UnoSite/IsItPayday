@@ -12,58 +12,64 @@
             },
             "frequency": {
                 "title": "Chọn tần suất trả lương",
-                "description": "Chọn tần suất bạn nhận lương",
+                "description": "Chọn tần suất bạn được trả lương",
                 "data": {
                     "pay_frequency": "Tần suất trả lương"
                 }
             },
             "monthly_day": {
                 "title": "Chọn ngày trong tháng",
-                "description": "Chọn ngày trong tháng mà bạn nhận lương",
+                "description": "Chọn ngày trong tháng bạn được trả lương",
                 "data": {
                     "pay_day": "Ngày trong tháng"
                 }
             },
             "bank_offset": {
                 "title": "Số ngày trước ngày làm việc ngân hàng cuối cùng",
-                "description": "Nếu bạn nhận lương vài ngày trước ngày làm việc ngân hàng cuối cùng, hãy chọn số ngày trước đó",
+                "description": "Nếu bạn được trả lương vài ngày trước ngày làm việc ngân hàng cuối cùng, hãy chọn số ngày trước đó",
                 "data": {
                     "bank_offset": "Số ngày trước"
                 }
             },
             "specific_day": {
                 "title": "Chọn ngày cụ thể",
-                "description": "Chọn chính xác ngày bạn nhận lương mỗi tháng",
+                "description": "Chọn chính xác ngày bạn được trả lương mỗi tháng",
                 "data": {
                     "pay_day": "Ngày cụ thể"
                 }
             },
             "cycle_last_paydate": {
                 "title": "Chọn ngày trả lương gần nhất",
-                "description": "Chọn ngày gần nhất bạn nhận lương. Thông tin này được dùng để tính ngày trả lương tiếp theo",
+                "description": "Chọn ngày gần nhất bạn được trả lương. Ngày này sẽ được dùng để tính ngày trả lương tiếp theo",
                 "data": {
                     "last_pay_date": "Ngày trả lương gần nhất"
                 }
             },
             "weekly": {
                 "title": "Chọn ngày trả lương hằng tuần",
-                "description": "Chọn ngày trong tuần mà bạn nhận lương mỗi tuần",
+                "description": "Chọn thứ trong tuần mà bạn được trả lương mỗi tuần",
                 "data": {
-                    "pay_day": "Ngày trong tuần trả lương"
+                    "pay_day": "Thứ trả lương"
                 }
             }
         },
         "error": {
-            "cannot_connect": "Không thể kết nối tới dịch vụ IsItPayday",
-            "invalid_country": "Quốc gia đã chọn không được hỗ trợ",
-            "invalid_response": "Phản hồi không hợp lệ từ dịch vụ IsItPayday"
+            "cannot_connect": "Không thể kết nối với API ngày nghỉ lễ (date.nager.at). Vui lòng kiểm tra kết nối internet của bạn và thử lại.",
+            "invalid_country": "Quốc gia đã chọn không được API ngày nghỉ lễ hỗ trợ",
+            "invalid_response": "Đã nhận được phản hồi không mong đợi từ API ngày nghỉ lễ"
+        },
+        "abort": {
+            "reconfigured": "Cấu hình đã được cập nhật thành công.",
+            "missing_entry": "Không thể bắt đầu cấu hình lại: không tìm thấy ID mục nhập.",
+            "entry_not_found": "Không thể bắt đầu cấu hình lại: mục nhập không còn tồn tại.",
+            "cannot_connect": "Không thể kết nối với API ngày lễ công cộng (date.nager.at). Vui lòng kiểm tra kết nối internet của bạn và thử lại."
         }
     },
     "options": {
         "step": {
             "init": {
-                "title": "Điều chỉnh cài đặt cho IsItPayday",
-                "description": "Chỉnh sửa cài đặt cho tính năng theo dõi ngày trả lương này"
+                "title": "Điều chỉnh cài đặt IsItPayday",
+                "description": "Chỉnh sửa cài đặt cho trình theo dõi ngày trả lương này"
             }
         }
     }

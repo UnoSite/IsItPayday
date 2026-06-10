@@ -3,8 +3,8 @@
     "config": {
         "step": {
             "user": {
-                "title": "Seleziona paese",
-                "description": "Il paese selezionato viene utilizzato per controllare i giorni festivi",
+                "title": "Seleziona il paese",
+                "description": "Il paese selezionato viene utilizzato per verificare i giorni festivi",
                 "data": {
                     "name": "Nome istanza",
                     "country": "Paese"
@@ -12,58 +12,64 @@
             },
             "frequency": {
                 "title": "Seleziona la frequenza di pagamento",
-                "description": "Seleziona con quale frequenza ricevi lo stipendio",
+                "description": "Scegli con quale frequenza vieni pagato",
                 "data": {
                     "pay_frequency": "Frequenza di pagamento"
                 }
             },
             "monthly_day": {
                 "title": "Seleziona il giorno del mese",
-                "description": "Seleziona in quale giorno del mese ricevi lo stipendio",
+                "description": "Scegli in quale giorno del mese vieni pagato",
                 "data": {
                     "pay_day": "Giorno del mese"
                 }
             },
             "bank_offset": {
-                "title": "Giorni prima dell'ultimo giorno bancabile",
-                "description": "Se ricevi lo stipendio un paio di giorni prima dell'ultimo giorno bancabile, seleziona quanti giorni prima",
+                "title": "Giorni prima dell'ultimo giorno bancario",
+                "description": "Se vieni pagato qualche giorno prima dell'ultimo giorno bancario, scegli quanti giorni prima",
                 "data": {
                     "bank_offset": "Giorni prima"
                 }
             },
             "specific_day": {
                 "title": "Seleziona un giorno specifico",
-                "description": "Seleziona il giorno esatto in cui ricevi lo stipendio ogni mese",
+                "description": "Seleziona il giorno esatto in cui vieni pagato ogni mese",
                 "data": {
                     "pay_day": "Giorno specifico"
                 }
             },
             "cycle_last_paydate": {
-                "title": "Seleziona la data dell'ultimo stipendio",
-                "description": "Seleziona la data più recente in cui hai ricevuto lo stipendio. Verrà usata per calcolare il prossimo giorno di pagamento",
+                "title": "Seleziona l'ultimo giorno di paga",
+                "description": "Seleziona l'ultima data in cui sei stato pagato. Verrà utilizzata per calcolare il prossimo giorno di paga",
                 "data": {
-                    "last_pay_date": "Data dell'ultimo stipendio"
+                    "last_pay_date": "Ultimo giorno di paga"
                 }
             },
             "weekly": {
-                "title": "Seleziona il giorno di pagamento settimanale",
-                "description": "Seleziona in quale giorno della settimana ricevi lo stipendio ogni settimana",
+                "title": "Seleziona il giorno di paga settimanale",
+                "description": "Scegli in quale giorno della settimana vieni pagato",
                 "data": {
-                    "pay_day": "Giorno della settimana di pagamento"
+                    "pay_day": "Giorno della settimana di paga"
                 }
             }
         },
         "error": {
-            "cannot_connect": "Impossibile connettersi al servizio IsItPayday",
-            "invalid_country": "Il paese selezionato non è supportato",
-            "invalid_response": "Risposta non valida dal servizio IsItPayday"
+            "cannot_connect": "Impossibile connettersi all'API dei giorni festivi (date.nager.at). Controlla la tua connessione a Internet e riprova.",
+            "invalid_country": "Il paese selezionato non è supportato dall'API dei giorni festivi",
+            "invalid_response": "Ricevuta una risposta imprevista dall'API dei giorni festivi"
+        },
+        "abort": {
+            "reconfigured": "La configurazione è stata aggiornata con successo.",
+            "missing_entry": "Impossibile avviare la riconfigurazione: nessun ID voce trovato.",
+            "entry_not_found": "Impossibile avviare la riconfigurazione: la voce non esiste più.",
+            "cannot_connect": "Impossibile connettersi all'API dei giorni festivi (date.nager.at). Controlla la tua connessione Internet e riprova."
         }
     },
     "options": {
         "step": {
             "init": {
                 "title": "Modifica le impostazioni di IsItPayday",
-                "description": "Modifica le impostazioni di questo tracciamento del giorno di pagamento"
+                "description": "Modifica le impostazioni di questo tracker del giorno di paga"
             }
         }
     }

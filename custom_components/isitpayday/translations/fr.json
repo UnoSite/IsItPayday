@@ -3,67 +3,73 @@
     "config": {
         "step": {
             "user": {
-                "title": "Choisir un pays",
-                "description": "Le pays sélectionné est utilisé pour contrôler les jours fériés",
+                "title": "Sélectionner un pays",
+                "description": "Le pays sélectionné est utilisé pour vérifier les jours fériés",
                 "data": {
                     "name": "Nom de l'instance",
                     "country": "Pays"
                 }
             },
             "frequency": {
-                "title": "Choisir la fréquence de paiement",
-                "description": "Choisissez la fréquence à laquelle vous êtes payé",
+                "title": "Sélectionnez la fréquence de versement",
+                "description": "Choisissez à quelle fréquence vous êtes payé",
                 "data": {
-                    "pay_frequency": "Fréquence de paiement"
+                    "pay_frequency": "Fréquence de versement"
                 }
             },
             "monthly_day": {
-                "title": "Choisir le jour du mois",
-                "description": "Choisissez le jour du mois où vous recevez votre salaire",
+                "title": "Sélectionnez le jour du mois",
+                "description": "Choisissez le jour du mois où vous êtes payé",
                 "data": {
                     "pay_day": "Jour du mois"
                 }
             },
             "bank_offset": {
                 "title": "Jours avant le dernier jour bancaire",
-                "description": "Si vous recevez votre salaire quelques jours avant le dernier jour bancaire, choisissez combien de jours avant",
+                "description": "Si vous êtes payé quelques jours avant le dernier jour bancaire, choisissez combien de jours avant",
                 "data": {
                     "bank_offset": "Jours avant"
                 }
             },
             "specific_day": {
-                "title": "Choisir un jour spécifique",
-                "description": "Choisissez le jour exact où vous recevez votre salaire chaque mois",
+                "title": "Sélectionnez un jour précis",
+                "description": "Sélectionnez le jour exact où vous êtes payé chaque mois",
                 "data": {
-                    "pay_day": "Jour spécifique"
+                    "pay_day": "Jour précis"
                 }
             },
             "cycle_last_paydate": {
-                "title": "Choisir la dernière date de paie",
-                "description": "Choisissez la date la plus récente à laquelle vous avez reçu votre salaire. Cela est utilisé pour calculer la prochaine date de paie",
+                "title": "Sélectionnez le dernier jour de paie",
+                "description": "Sélectionnez la dernière date à laquelle vous avez été payé. Elle sera utilisée pour calculer le prochain jour de paie",
                 "data": {
-                    "last_pay_date": "Dernière date de paie"
+                    "last_pay_date": "Dernier jour de paie"
                 }
             },
             "weekly": {
-                "title": "Choisir le jour de paie hebdomadaire",
-                "description": "Choisissez le jour de la semaine où vous recevez votre salaire chaque semaine",
+                "title": "Sélectionnez le jour de paie hebdomadaire",
+                "description": "Choisissez le jour de la semaine où vous êtes payé",
                 "data": {
-                    "pay_day": "Jour de la semaine du jour de paie"
+                    "pay_day": "Jour de la semaine de paie"
                 }
             }
         },
         "error": {
-            "cannot_connect": "Impossible de se connecter au service IsItPayday",
-            "invalid_country": "Le pays sélectionné n’est pas pris en charge",
-            "invalid_response": "Réponse invalide du service IsItPayday"
+            "cannot_connect": "Impossible de se connecter à l’API des jours fériés (date.nager.at). Veuillez vérifier votre connexion Internet et réessayer.",
+            "invalid_country": "Le pays sélectionné n’est pas pris en charge par l’API des jours fériés",
+            "invalid_response": "Réponse inattendue reçue de l’API des jours fériés"
+        },
+        "abort": {
+            "reconfigured": "La configuration a été mise à jour avec succès.",
+            "missing_entry": "La reconfiguration n’a pas pu démarrer : aucun identifiant d’entrée trouvé.",
+            "entry_not_found": "La reconfiguration n’a pas pu démarrer : l’entrée n’existe plus.",
+            "cannot_connect": "Impossible de se connecter à l’API des jours fériés (date.nager.at). Veuillez vérifier votre connexion Internet et réessayer."
         }
     },
     "options": {
         "step": {
             "init": {
                 "title": "Ajuster les paramètres d’IsItPayday",
-                "description": "Modifier les paramètres de ce suivi du jour de paie"
+                "description": "Modifiez les paramètres de ce suivi de paie"
             }
         }
     }

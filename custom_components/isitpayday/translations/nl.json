@@ -3,7 +3,7 @@
     "config": {
         "step": {
             "user": {
-                "title": "Kies land",
+                "title": "Land selecteren",
                 "description": "Het geselecteerde land wordt gebruikt om feestdagen te controleren",
                 "data": {
                     "name": "Instantienaam",
@@ -11,59 +11,65 @@
                 }
             },
             "frequency": {
-                "title": "Kies uitbetalingsfrequentie",
-                "description": "Kies hoe vaak je salaris ontvangt",
+                "title": "Selecteer uitbetalingsfrequentie",
+                "description": "Kies hoe vaak je betaald krijgt",
                 "data": {
                     "pay_frequency": "Uitbetalingsfrequentie"
                 }
             },
             "monthly_day": {
-                "title": "Kies een dag van de maand",
-                "description": "Kies op welke dag van de maand je salaris ontvangt",
+                "title": "Selecteer dag van de maand",
+                "description": "Kies op welke dag van de maand je wordt betaald",
                 "data": {
                     "pay_day": "Dag van de maand"
                 }
             },
             "bank_offset": {
                 "title": "Dagen vóór de laatste bankdag",
-                "description": "Als je een paar dagen vóór de laatste bankdag salaris ontvangt, kies dan hoeveel dagen ervoor",
+                "description": "Als je een paar dagen vóór de laatste bankdag wordt betaald, kies dan hoeveel dagen ervoor",
                 "data": {
-                    "bank_offset": "Dagen vóór"
+                    "bank_offset": "Dagen ervoor"
                 }
             },
             "specific_day": {
-                "title": "Kies een specifieke dag",
-                "description": "Kies de exacte dag waarop je elke maand salaris ontvangt",
+                "title": "Selecteer specifieke dag",
+                "description": "Selecteer de exacte dag waarop je elke maand wordt betaald",
                 "data": {
                     "pay_day": "Specifieke dag"
                 }
             },
             "cycle_last_paydate": {
-                "title": "Kies de meest recente betaaldag",
-                "description": "Kies de meest recente datum waarop je salaris hebt ontvangen. Dit wordt gebruikt om de volgende betaaldag te berekenen",
+                "title": "Selecteer laatste betaaldag",
+                "description": "Selecteer de laatste datum waarop je werd betaald. Deze wordt gebruikt om de volgende betaaldag te berekenen",
                 "data": {
-                    "last_pay_date": "Meest recente betaaldag"
+                    "last_pay_date": "Laatste betaaldag"
                 }
             },
             "weekly": {
-                "title": "Kies de wekelijkse betaaldag",
-                "description": "Kies op welke weekdag je elke week salaris ontvangt",
+                "title": "Selecteer wekelijkse betaaldag",
+                "description": "Kies op welke weekdag je elke week wordt betaald",
                 "data": {
                     "pay_day": "Weekdag van betaaldag"
                 }
             }
         },
         "error": {
-            "cannot_connect": "Kan geen verbinding maken met de IsItPayday-service",
-            "invalid_country": "Het geselecteerde land wordt niet ondersteund",
-            "invalid_response": "Ongeldig antwoord van de IsItPayday-service"
+            "cannot_connect": "Kan geen verbinding maken met de API voor feestdagen (date.nager.at). Controleer uw internetverbinding en probeer het opnieuw.",
+            "invalid_country": "Het geselecteerde land wordt niet ondersteund door de API voor feestdagen",
+            "invalid_response": "Er is een onverwacht antwoord ontvangen van de API voor feestdagen"
+        },
+        "abort": {
+            "reconfigured": "De configuratie is succesvol bijgewerkt.",
+            "missing_entry": "Herconfiguratie kon niet worden gestart: geen invoer-ID gevonden.",
+            "entry_not_found": "Herconfiguratie kon niet worden gestart: de invoer bestaat niet meer.",
+            "cannot_connect": "Kon geen verbinding maken met de API voor feestdagen (date.nager.at). Controleer uw internetverbinding en probeer het opnieuw."
         }
     },
     "options": {
         "step": {
             "init": {
-                "title": "Instellingen voor IsItPayday aanpassen",
-                "description": "Bewerk de instellingen voor deze betaaldag-tracker"
+                "title": "IsItPayday-instellingen aanpassen",
+                "description": "Wijzig de instellingen voor deze betaaldagtracker"
             }
         }
     }

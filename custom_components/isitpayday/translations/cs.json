@@ -1,5 +1,5 @@
 {
-    "title": "Je výplata",
+    "title": "IsItPayday",
     "config": {
         "step": {
             "user": {
@@ -12,23 +12,23 @@
             },
             "frequency": {
                 "title": "Vyberte frekvenci výplaty",
-                "description": "Vyberte, jak často dostáváte výplatu",
+                "description": "Zvolte, jak často dostáváte výplatu",
                 "data": {
                     "pay_frequency": "Frekvence výplaty"
                 }
             },
             "monthly_day": {
                 "title": "Vyberte den v měsíci",
-                "description": "Vyberte, který den v měsíci dostáváte výplatu",
+                "description": "Zvolte, který den v měsíci dostáváte výplatu",
                 "data": {
                     "pay_day": "Den v měsíci"
                 }
             },
             "bank_offset": {
-                "title": "Dny před posledním bankovním dnem",
-                "description": "Pokud dostáváte výplatu několik dní před posledním bankovním dnem, vyberte kolik dní předtím",
+                "title": "Počet dnů před posledním bankovním dnem",
+                "description": "Pokud dostáváte výplatu několik dní před posledním bankovním dnem, zvolte kolik dní předem",
                 "data": {
-                    "bank_offset": "Dny před"
+                    "bank_offset": "Dnů předem"
                 }
             },
             "specific_day": {
@@ -39,31 +39,37 @@
                 }
             },
             "cycle_last_paydate": {
-                "title": "Vyberte datum poslední výplaty",
-                "description": "Vyberte poslední datum, kdy jste dostali výplatu. To se používá k výpočtu dalšího dne výplaty",
+                "title": "Vyberte poslední výplatní den",
+                "description": "Vyberte poslední datum, kdy jste dostali výplatu. To bude použito k výpočtu dalšího výplatního dne",
                 "data": {
-                    "last_pay_date": "Datum poslední výplaty"
+                    "last_pay_date": "Poslední výplatní den"
                 }
             },
             "weekly": {
-                "title": "Vyberte den výplaty v týdnu",
-                "description": "Vyberte, který den v týdnu dostáváte výplatu každý týden",
+                "title": "Vyberte týdenní výplatní den",
+                "description": "Zvolte, který den v týdnu dostáváte výplatu",
                 "data": {
-                    "pay_day": "Den v týdnu pro výplatu"
+                    "pay_day": "Den v týdnu výplaty"
                 }
             }
         },
         "error": {
-            "cannot_connect": "Nepodařilo se připojit ke službě IsItPayday",
-            "invalid_country": "Vybraná země není podporována",
-            "invalid_response": "Neplatná odpověď ze služby IsItPayday"
+            "cannot_connect": "Nepodařilo se připojit k API státních svátků (date.nager.at). Zkontrolujte prosím své internetové připojení a zkuste to znovu.",
+            "invalid_country": "Vybraná země není podporována API státních svátků",
+            "invalid_response": "Byla přijata neočekávaná odpověď z API státních svátků"
+        },
+        "abort": {
+            "reconfigured": "Konfigurace byla úspěšně aktualizována.",
+            "missing_entry": "Překonfiguraci nebylo možné spustit: nebylo nalezeno ID záznamu.",
+            "entry_not_found": "Překonfiguraci nebylo možné spustit: záznam již neexistuje.",
+            "cannot_connect": "Nepodařilo se připojit k API státních svátků (date.nager.at). Zkontrolujte prosím své internetové připojení a zkuste to znovu."
         }
     },
     "options": {
         "step": {
             "init": {
-                "title": "Upravte nastavení pro IsItPayday",
-                "description": "Upravte nastavení tohoto sledování dne výplaty"
+                "title": "Upravit nastavení IsItPayday",
+                "description": "Upravte nastavení tohoto sledovače výplat"
             }
         }
     }

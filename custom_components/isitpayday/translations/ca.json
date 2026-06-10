@@ -4,7 +4,7 @@
         "step": {
             "user": {
                 "title": "Selecciona el país",
-                "description": "El país seleccionat s’utilitza per controlar els dies festius",
+                "description": "El país seleccionat s'utilitza per comprovar els dies festius",
                 "data": {
                     "name": "Nom de la instància",
                     "country": "País"
@@ -12,58 +12,64 @@
             },
             "frequency": {
                 "title": "Selecciona la freqüència de pagament",
-                "description": "Selecciona amb quina freqüència cobres",
+                "description": "Tria amb quina freqüència cobres",
                 "data": {
                     "pay_frequency": "Freqüència de pagament"
                 }
             },
             "monthly_day": {
-                "title": "Tria el dia del mes",
+                "title": "Selecciona el dia del mes",
                 "description": "Tria quin dia del mes cobres",
                 "data": {
                     "pay_day": "Dia del mes"
                 }
             },
             "bank_offset": {
-                "title": "Dies abans de l'últim dia bancari",
-                "description": "Si cobres uns quants dies abans de l'últim dia bancari, tria quants dies abans",
+                "title": "Dies abans de l’últim dia bancari",
+                "description": "Si cobres uns dies abans de l’últim dia bancari, tria quants dies abans",
                 "data": {
                     "bank_offset": "Dies abans"
                 }
             },
             "specific_day": {
-                "title": "Tria un dia específic",
-                "description": "Tria el dia exacte en què cobres cada mes",
+                "title": "Selecciona un dia concret",
+                "description": "Selecciona el dia exacte que cobres cada mes",
                 "data": {
-                    "pay_day": "Dia específic"
+                    "pay_day": "Dia concret"
                 }
             },
             "cycle_last_paydate": {
-                "title": "Tria l'últim dia de pagament",
-                "description": "Tria la data més recent en què vas cobrar. Això es fa servir per calcular el proper dia de pagament",
+                "title": "Selecciona l’últim dia de cobrament",
+                "description": "Selecciona l’última data en què vas cobrar. Es farà servir per calcular el pròxim dia de cobrament",
                 "data": {
-                    "last_pay_date": "Últim dia de pagament"
+                    "last_pay_date": "Últim dia de cobrament"
                 }
             },
             "weekly": {
-                "title": "Tria el dia de pagament setmanal",
+                "title": "Selecciona el dia de cobrament setmanal",
                 "description": "Tria quin dia de la setmana cobres",
                 "data": {
-                    "pay_day": "Dia de la setmana de pagament"
+                    "pay_day": "Dia de cobrament setmanal"
                 }
             }
         },
         "error": {
-            "cannot_connect": "No s'ha pogut connectar al servei IsItPayday",
-            "invalid_country": "El país seleccionat no és compatible",
-            "invalid_response": "Resposta no vàlida del servei IsItPayday"
+            "cannot_connect": "No s'ha pogut connectar amb l'API de dies festius públics (date.nager.at). Comproveu la connexió a Internet i torneu-ho a provar.",
+            "invalid_country": "El país seleccionat no és compatible amb l'API de dies festius públics",
+            "invalid_response": "S'ha rebut una resposta inesperada de l'API de dies festius públics"
+        },
+        "abort": {
+            "reconfigured": "La configuració s'ha actualitzat correctament.",
+            "missing_entry": "No s'ha pogut iniciar la reconfiguració: no s'ha trobat cap ID d'entrada.",
+            "entry_not_found": "No s'ha pogut iniciar la reconfiguració: l'entrada ja no existeix.",
+            "cannot_connect": "No s'ha pogut connectar amb l'API de dies festius (date.nager.at). Comproveu la connexió a Internet i torneu-ho a provar."
         }
     },
     "options": {
         "step": {
             "init": {
-                "title": "Ajusta la configuració d'IsItPayday",
-                "description": "Edita la configuració d'aquest seguiment del dia de pagament"
+                "title": "Ajusta la configuració d’IsItPayday",
+                "description": "Modifica la configuració d’aquest rastrejador de dies de cobrament"
             }
         }
     }

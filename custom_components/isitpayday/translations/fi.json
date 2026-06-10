@@ -4,7 +4,7 @@
         "step": {
             "user": {
                 "title": "Valitse maa",
-                "description": "Valittua maata käytetään pyhäpäivien tarkistamiseen",
+                "description": "Valittua maata käytetään yleisten vapaapäivien tarkistamiseen",
                 "data": {
                     "name": "Instanssin nimi",
                     "country": "Maa"
@@ -12,58 +12,64 @@
             },
             "frequency": {
                 "title": "Valitse palkanmaksutiheys",
-                "description": "Valitse, kuinka usein saat palkkaa",
+                "description": "Valitse, kuinka usein saat palkan",
                 "data": {
                     "pay_frequency": "Palkanmaksutiheys"
                 }
             },
             "monthly_day": {
-                "title": "Valitse päivä kuukaudessa",
-                "description": "Valitse, minä päivänä kuukaudessa saat palkkaa",
+                "title": "Valitse kuukauden päivä",
+                "description": "Valitse, minä kuukauden päivänä palkka maksetaan",
                 "data": {
-                    "pay_day": "Päivä kuukaudessa"
+                    "pay_day": "Kuukauden päivä"
                 }
             },
             "bank_offset": {
-                "title": "Päiviä ennen viimeistä pankkipäivää",
-                "description": "Jos saat palkkaa pari päivää ennen viimeistä pankkipäivää, valitse kuinka monta päivää ennen",
+                "title": "Päivät ennen kuukauden viimeistä pankkipäivää",
+                "description": "Jos palkka maksetaan muutama päivä ennen kuukauden viimeistä pankkipäivää, valitse kuinka monta päivää ennen",
                 "data": {
                     "bank_offset": "Päiviä ennen"
                 }
             },
             "specific_day": {
                 "title": "Valitse tietty päivä",
-                "description": "Valitse tarkka päivä, jolloin saat palkkaa joka kuukausi",
+                "description": "Valitse tarkka päivä, jolloin palkka maksetaan joka kuukausi",
                 "data": {
                     "pay_day": "Tietty päivä"
                 }
             },
             "cycle_last_paydate": {
-                "title": "Valitse viimeisin palkanmaksupäivä",
-                "description": "Valitse viimeisin päivämäärä, jolloin sait palkkaa. Tätä käytetään seuraavan palkanmaksupäivän laskemiseen",
+                "title": "Valitse edellinen palkanmaksupäivä",
+                "description": "Valitse viimeisin päivä, jolloin sait palkan. Sitä käytetään seuraavan palkanmaksupäivän laskemiseen",
                 "data": {
-                    "last_pay_date": "Viimeisin palkanmaksupäivä"
+                    "last_pay_date": "Edellinen palkanmaksupäivä"
                 }
             },
             "weekly": {
                 "title": "Valitse viikoittainen palkanmaksupäivä",
-                "description": "Valitse, minä viikonpäivänä saat palkkaa joka viikko",
+                "description": "Valitse, minä viikonpäivänä palkka maksetaan joka viikko",
                 "data": {
-                    "pay_day": "Palkanmaksupäivän viikonpäivä"
+                    "pay_day": "Palkanmaksun viikonpäivä"
                 }
             }
         },
         "error": {
-            "cannot_connect": "Yhteyden muodostaminen IsItPayday-palveluun epäonnistui",
-            "invalid_country": "Valittua maata ei tueta",
-            "invalid_response": "Virheellinen vastaus IsItPayday-palvelusta"
+            "cannot_connect": "Yhteyttä yleisten vapaapäivien APIin (date.nager.at) ei voitu muodostaa. Tarkista internetyhteytesi ja yritä uudelleen.",
+            "invalid_country": "Valittua maata ei tueta yleisten vapaapäivien APIssa",
+            "invalid_response": "Yleisten vapaapäivien API palautti odottamattoman vastauksen"
+        },
+        "abort": {
+            "reconfigured": "Määritykset on päivitetty onnistuneesti.",
+            "missing_entry": "Uudelleenmääritystä ei voitu aloittaa: kohteen tunnusta ei löytynyt.",
+            "entry_not_found": "Uudelleenmääritystä ei voitu aloittaa: kohdetta ei enää ole olemassa.",
+            "cannot_connect": "Yhteyttä yleisten vapaapäivien APIin (date.nager.at) ei voitu muodostaa. Tarkista internetyhteytesi ja yritä uudelleen."
         }
     },
     "options": {
         "step": {
             "init": {
                 "title": "Muokkaa IsItPaydayn asetuksia",
-                "description": "Muokkaa tämän palkanmaksupäivän seurannan asetuksia"
+                "description": "Muokkaa tämän palkanmaksun seurannan asetuksia"
             }
         }
     }

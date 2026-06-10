@@ -1,10 +1,10 @@
 {
-    "title": "IstHeuteZahltag",
+    "title": "IsItPayday",
     "config": {
         "step": {
             "user": {
                 "title": "Land auswählen",
-                "description": "Das ausgewählte Land wird verwendet, um Feiertage zu kontrollieren",
+                "description": "Das ausgewählte Land wird verwendet, um gesetzliche Feiertage zu prüfen",
                 "data": {
                     "name": "Instanzname",
                     "country": "Land"
@@ -12,58 +12,64 @@
             },
             "frequency": {
                 "title": "Auszahlungsfrequenz auswählen",
-                "description": "Wähle, wie oft du Gehalt bekommst",
+                "description": "Wählen Sie aus, wie oft Sie bezahlt werden",
                 "data": {
                     "pay_frequency": "Auszahlungsfrequenz"
                 }
             },
             "monthly_day": {
-                "title": "Wähle den Tag im Monat",
-                "description": "Wähle, an welchem Tag im Monat du Gehalt bekommst",
+                "title": "Tag des Monats auswählen",
+                "description": "Wählen Sie aus, an welchem Tag des Monats Sie bezahlt werden",
                 "data": {
-                    "pay_day": "Tag im Monat"
+                    "pay_day": "Tag des Monats"
                 }
             },
             "bank_offset": {
                 "title": "Tage vor dem letzten Bankarbeitstag",
-                "description": "Wenn du ein paar Tage vor dem letzten Bankarbeitstag Gehalt bekommst, wähle aus, wie viele Tage vorher",
+                "description": "Wenn Sie einige Tage vor dem letzten Bankarbeitstag bezahlt werden, wählen Sie aus, wie viele Tage vorher",
                 "data": {
                     "bank_offset": "Tage vorher"
                 }
             },
             "specific_day": {
-                "title": "Wähle einen bestimmten Tag",
-                "description": "Wähle den genauen Tag, an dem du jeden Monat Gehalt bekommst",
+                "title": "Bestimmten Tag auswählen",
+                "description": "Wählen Sie den genauen Tag aus, an dem Sie jeden Monat bezahlt werden",
                 "data": {
                     "pay_day": "Bestimmter Tag"
                 }
             },
             "cycle_last_paydate": {
-                "title": "Wähle den letzten Zahltag",
-                "description": "Wähle das letzte Datum aus, an dem du Gehalt bekommen hast. Dies wird verwendet, um den nächsten Zahltag zu berechnen",
+                "title": "Letzten Zahltag auswählen",
+                "description": "Wählen Sie das letzte Datum aus, an dem Sie bezahlt wurden. Dieses wird verwendet, um den nächsten Zahltag zu berechnen",
                 "data": {
                     "last_pay_date": "Letzter Zahltag"
                 }
             },
             "weekly": {
-                "title": "Wähle den wöchentlichen Zahltag",
-                "description": "Wähle, an welchem Wochentag du jede Woche Gehalt bekommst",
+                "title": "Wöchentlichen Zahltag auswählen",
+                "description": "Wählen Sie aus, an welchem Wochentag Sie jede Woche bezahlt werden",
                 "data": {
                     "pay_day": "Wochentag des Zahltags"
                 }
             }
         },
         "error": {
-            "cannot_connect": "Verbindung zum IsItPayday-Dienst konnte nicht hergestellt werden",
-            "invalid_country": "Das ausgewählte Land wird nicht unterstützt",
-            "invalid_response": "Ungültige Antwort vom IsItPayday-Dienst"
+            "cannot_connect": "Verbindung zur API für Feiertage (date.nager.at) konnte nicht hergestellt werden. Bitte überprüfen Sie Ihre Internetverbindung und versuchen Sie es erneut.",
+            "invalid_country": "Das ausgewählte Land wird von der API für Feiertage nicht unterstützt.",
+            "invalid_response": "Von der API für Feiertage wurde eine unerwartete Antwort empfangen."
+        },
+        "abort": {
+            "reconfigured": "Die Konfiguration wurde erfolgreich aktualisiert.",
+            "missing_entry": "Die Neukonfiguration konnte nicht gestartet werden: Keine Eintrags-ID gefunden.",
+            "entry_not_found": "Die Neukonfiguration konnte nicht gestartet werden: Der Eintrag existiert nicht mehr.",
+            "cannot_connect": "Verbindung zur API für Feiertage (date.nager.at) konnte nicht hergestellt werden. Bitte überprüfen Sie Ihre Internetverbindung und versuchen Sie es erneut."
         }
     },
     "options": {
         "step": {
             "init": {
-                "title": "Einstellungen für IsItPayday anpassen",
-                "description": "Bearbeite die Einstellungen für diese Zahltagverfolgung"
+                "title": "IsItPayday-Einstellungen anpassen",
+                "description": "Ändern Sie die Einstellungen für diesen Zahltag-Tracker"
             }
         }
     }

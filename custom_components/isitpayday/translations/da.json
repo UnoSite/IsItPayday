@@ -4,7 +4,7 @@
         "step": {
             "user": {
                 "title": "Vælg land",
-                "description": "Det valgte land bruges til, at kontrollere helligdage",
+                "description": "Det valgte land bruges til at kontrollere helligdage",
                 "data": {
                     "name": "Instansnavn",
                     "country": "Land"
@@ -25,7 +25,7 @@
                 }
             },
             "bank_offset": {
-                "title": "Dage før sidste bankdag",
+                "title": "Dage før den sidste bankdag",
                 "description": "Hvis du får løn et par dage før den sidste bankdag, skal du vælge hvor mange dage før",
                 "data": {
                     "bank_offset": "Dage før"
@@ -54,9 +54,15 @@
             }
         },
         "error": {
-            "cannot_connect": "Kunne ikke oprette forbindelse til IsItPayday-tjenesten",
-            "invalid_country": "Det valgte land understøttes ikke",
-            "invalid_response": "Ugyldigt svar fra IsItPayday-tjenesten"
+            "cannot_connect": "Kunne ikke oprette forbindelse til API'et for helligdage (date.nager.at). Kontrollér din internetforbindelse, og prøv igen.",
+            "invalid_country": "Det valgte land understøttes ikke af API'et for helligdage",
+            "invalid_response": "Modtog et uventet svar fra API'et for helligdage"
+        },
+        "abort": {
+            "reconfigured": "Konfigurationen er blevet opdateret.",
+            "missing_entry": "Omkonfigurationen kunne ikke starte: intet entry-ID blev fundet.",
+            "entry_not_found": "Omkonfigurationen kunne ikke starte: posten findes ikke længere.",
+            "cannot_connect": "Kunne ikke oprette forbindelse til API'et for offentlige helligdage (date.nager.at). Kontroller din internetforbindelse, og prøv igen."
         }
     },
     "options": {

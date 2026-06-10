@@ -4,14 +4,14 @@
         "step": {
             "user": {
                 "title": "Wybierz kraj",
-                "description": "Wybrany kraj jest używany do określania dni świątecznych",
+                "description": "Wybrany kraj jest używany do sprawdzania świąt państwowych",
                 "data": {
                     "name": "Nazwa instancji",
                     "country": "Kraj"
                 }
             },
             "frequency": {
-                "title": "Wybierz częstotliwość wypłat",
+                "title": "Wybierz częstotliwość wypłaty",
                 "description": "Wybierz, jak często otrzymujesz wynagrodzenie",
                 "data": {
                     "pay_frequency": "Częstotliwość wypłaty"
@@ -25,45 +25,51 @@
                 }
             },
             "bank_offset": {
-                "title": "Dni przed ostatnim dniem bankowym",
-                "description": "Jeśli otrzymujesz wynagrodzenie kilka dni przed ostatnim dniem bankowym, wybierz, ile dni wcześniej",
+                "title": "Liczba dni przed ostatnim dniem bankowym",
+                "description": "Jeśli wynagrodzenie jest wypłacane kilka dni przed ostatnim dniem bankowym, wybierz, ile dni wcześniej",
                 "data": {
-                    "bank_offset": "Dni wcześniej"
+                    "bank_offset": "Liczba dni wcześniej"
                 }
             },
             "specific_day": {
                 "title": "Wybierz konkretny dzień",
-                "description": "Wybierz dokładny dzień, w którym co miesiąc otrzymujesz wynagrodzenie",
+                "description": "Wybierz dokładny dzień miesiąca, w którym otrzymujesz wynagrodzenie",
                 "data": {
                     "pay_day": "Konkretny dzień"
                 }
             },
             "cycle_last_paydate": {
                 "title": "Wybierz datę ostatniej wypłaty",
-                "description": "Wybierz ostatnią datę, kiedy otrzymałeś(-aś) wynagrodzenie. Służy to do obliczenia następnego dnia wypłaty",
+                "description": "Wybierz datę ostatniej wypłaty. Zostanie ona użyta do obliczenia następnego dnia wypłaty",
                 "data": {
-                    "last_pay_date": "Data ostatniej wypłaty"
+                    "last_pay_date": "Ostatnia wypłata"
                 }
             },
             "weekly": {
-                "title": "Wybierz tygodniowy dzień wypłaty",
-                "description": "Wybierz, w który dzień tygodnia otrzymujesz wynagrodzenie co tydzień",
+                "title": "Wybierz dzień tygodnia wypłaty",
+                "description": "Wybierz, w który dzień tygodnia otrzymujesz wynagrodzenie",
                 "data": {
                     "pay_day": "Dzień tygodnia wypłaty"
                 }
             }
         },
         "error": {
-            "cannot_connect": "Nie udało się połączyć z usługą IsItPayday",
-            "invalid_country": "Wybrany kraj nie jest obsługiwany",
-            "invalid_response": "Nieprawidłowa odpowiedź z usługi IsItPayday"
+            "cannot_connect": "Nie można połączyć się z API świąt publicznych (date.nager.at). Sprawdź połączenie z internetem i spróbuj ponownie.",
+            "invalid_country": "Wybrany kraj nie jest obsługiwany przez API świąt publicznych",
+            "invalid_response": "Otrzymano nieoczekiwaną odpowiedź z API świąt publicznych"
+        },
+        "abort": {
+            "reconfigured": "Konfiguracja została pomyślnie zaktualizowana.",
+            "missing_entry": "Nie można rozpocząć rekonfiguracji: nie znaleziono identyfikatora wpisu.",
+            "entry_not_found": "Nie można rozpocząć rekonfiguracji: wpis już nie istnieje.",
+            "cannot_connect": "Nie udało się połączyć z interfejsem API świąt państwowych (date.nager.at). Sprawdź połączenie z internetem i spróbuj ponownie."
         }
     },
     "options": {
         "step": {
             "init": {
                 "title": "Dostosuj ustawienia IsItPayday",
-                "description": "Edytuj ustawienia tego śledzenia dnia wypłaty"
+                "description": "Zmodyfikuj ustawienia tego narzędzia do śledzenia dni wypłaty"
             }
         }
     }

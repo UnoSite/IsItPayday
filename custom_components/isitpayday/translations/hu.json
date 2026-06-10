@@ -4,66 +4,72 @@
         "step": {
             "user": {
                 "title": "Ország kiválasztása",
-                "description": "A kiválasztott országot az ünnepnapok ellenőrzésére használjuk",
+                "description": "A kiválasztott ország alapján történik a munkaszüneti napok ellenőrzése",
                 "data": {
-                    "name": "Példánynév",
+                    "name": "Példány neve",
                     "country": "Ország"
                 }
             },
             "frequency": {
                 "title": "Kifizetési gyakoriság kiválasztása",
-                "description": "Válaszd ki, milyen gyakran kapsz fizetést",
+                "description": "Válassza ki, milyen gyakran kap fizetést",
                 "data": {
-                    "pay_frequency": "Kifizetés gyakorisága"
+                    "pay_frequency": "Kifizetési gyakoriság"
                 }
             },
             "monthly_day": {
-                "title": "Válaszd ki a hónap napját",
-                "description": "Válaszd ki, a hónap melyik napján kapsz fizetést",
+                "title": "A hónap napjának kiválasztása",
+                "description": "Válassza ki, a hónap melyik napján kap fizetést",
                 "data": {
                     "pay_day": "A hónap napja"
                 }
             },
             "bank_offset": {
-                "title": "Napok az utolsó banki munkanap előtt",
-                "description": "Ha a fizetésedet néhány nappal az utolsó banki munkanap előtt kapod meg, válaszd ki, hány nappal előtte",
+                "title": "Napok száma az utolsó banki nap előtt",
+                "description": "Ha az utolsó banki nap előtt néhány nappal kap fizetést, válassza ki, hány nappal előtte",
                 "data": {
-                    "bank_offset": "Napok előtte"
+                    "bank_offset": "Napok száma előtte"
                 }
             },
             "specific_day": {
-                "title": "Válassz konkrét napot",
-                "description": "Válaszd ki a pontos napot, amikor minden hónapban megkapod a fizetésedet",
+                "title": "Konkrét nap kiválasztása",
+                "description": "Válassza ki a pontos napot, amikor minden hónapban fizetést kap",
                 "data": {
                     "pay_day": "Konkrét nap"
                 }
             },
             "cycle_last_paydate": {
-                "title": "Válaszd ki a legutóbbi fizetésnapot",
-                "description": "Válaszd ki a legutóbbi dátumot, amikor fizetést kaptál. Ezt a következő fizetésnap kiszámításához használjuk",
+                "title": "Legutóbbi fizetésnap kiválasztása",
+                "description": "Válassza ki azt a legutóbbi dátumot, amikor fizetést kapott. Ezt a rendszer a következő fizetésnap kiszámításához használja",
                 "data": {
                     "last_pay_date": "Legutóbbi fizetésnap"
                 }
             },
             "weekly": {
-                "title": "Válaszd ki a heti fizetésnapot",
-                "description": "Válaszd ki, a hét melyik napján kapsz fizetést minden héten",
+                "title": "Heti fizetésnap kiválasztása",
+                "description": "Válassza ki, a hét melyik napján kap fizetést",
                 "data": {
-                    "pay_day": "A fizetésnap hétköznapja"
+                    "pay_day": "A fizetés napja a héten"
                 }
             }
         },
         "error": {
-            "cannot_connect": "Nem sikerült csatlakozni az IsItPayday szolgáltatáshoz",
-            "invalid_country": "A kiválasztott ország nem támogatott",
-            "invalid_response": "Érvénytelen válasz az IsItPayday szolgáltatástól"
+            "cannot_connect": "Nem sikerült csatlakozni a munkaszüneti napok API-jához (date.nager.at). Kérjük, ellenőrizze internetkapcsolatát, és próbálja újra.",
+            "invalid_country": "A kiválasztott országot nem támogatja a munkaszüneti napok API-ja",
+            "invalid_response": "Váratlan választ kaptunk a munkaszüneti napok API-jától"
+        },
+        "abort": {
+            "reconfigured": "A konfiguráció frissítése sikeresen megtörtént.",
+            "missing_entry": "Az újrakonfigurálás nem indulhatott el: nem található bejegyzésazonosító.",
+            "entry_not_found": "Az újrakonfigurálás nem indulhatott el: a bejegyzés már nem létezik.",
+            "cannot_connect": "Nem sikerült csatlakozni a munkaszüneti napok API-jához (date.nager.at). Kérjük, ellenőrizze internetkapcsolatát, majd próbálja újra."
         }
     },
     "options": {
         "step": {
             "init": {
                 "title": "Az IsItPayday beállításainak módosítása",
-                "description": "Szerkeszd ennek a fizetésnap-követőnek a beállításait"
+                "description": "Módosítsa ennek a fizetésnap-követőnek a beállításait"
             }
         }
     }

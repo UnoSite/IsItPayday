@@ -1,34 +1,34 @@
 {
-    "title": "급여일인가요?",
+    "title": "IsItPayday",
     "config": {
         "step": {
             "user": {
                 "title": "국가 선택",
-                "description": "선택한 국가는 공휴일을 확인하는 데 사용됩니다",
+                "description": "선택한 국가는 공휴일 확인에 사용됩니다",
                 "data": {
                     "name": "인스턴스 이름",
                     "country": "국가"
                 }
             },
             "frequency": {
-                "title": "급여 지급 빈도 선택",
-                "description": "급여를 받는 빈도를 선택하세요",
+                "title": "급여 지급 주기 선택",
+                "description": "급여를 얼마나 자주 받는지 선택하세요",
                 "data": {
-                    "pay_frequency": "급여 지급 빈도"
+                    "pay_frequency": "급여 지급 주기"
                 }
             },
             "monthly_day": {
-                "title": "월의 날짜를 선택하세요",
+                "title": "월의 날짜 선택",
                 "description": "매월 급여를 받는 날짜를 선택하세요",
                 "data": {
                     "pay_day": "월의 날짜"
                 }
             },
             "bank_offset": {
-                "title": "마지막 은행 영업일 전 일수",
-                "description": "마지막 은행 영업일보다 며칠 전에 급여를 받는 경우, 그 이전 일수를 선택하세요",
+                "title": "마지막 은행 영업일 전 며칠",
+                "description": "마지막 은행 영업일보다 며칠 전에 급여를 받는 경우, 며칠 전인지 선택하세요",
                 "data": {
-                    "bank_offset": "이전 일수"
+                    "bank_offset": "며칠 전"
                 }
             },
             "specific_day": {
@@ -39,31 +39,37 @@
                 }
             },
             "cycle_last_paydate": {
-                "title": "최근 급여일 선택",
-                "description": "가장 최근에 급여를 받은 날짜를 선택하세요. 다음 급여일을 계산하는 데 사용됩니다",
+                "title": "마지막 급여일 선택",
+                "description": "마지막으로 급여를 받은 날짜를 선택하세요. 다음 급여일을 계산하는 데 사용됩니다",
                 "data": {
-                    "last_pay_date": "최근 급여일"
+                    "last_pay_date": "마지막 급여일"
                 }
             },
             "weekly": {
                 "title": "주간 급여일 선택",
                 "description": "매주 급여를 받는 요일을 선택하세요",
                 "data": {
-                    "pay_day": "급여일의 요일"
+                    "pay_day": "급여일 요일"
                 }
             }
         },
         "error": {
-            "cannot_connect": "IsItPayday 서비스에 연결할 수 없습니다",
-            "invalid_country": "선택한 국가는 지원되지 않습니다",
-            "invalid_response": "IsItPayday 서비스의 응답이 올바르지 않습니다"
+            "cannot_connect": "공휴일 API(date.nager.at)에 연결할 수 없습니다. 인터넷 연결을 확인한 후 다시 시도해 주세요.",
+            "invalid_country": "선택한 국가는 공휴일 API에서 지원되지 않습니다.",
+            "invalid_response": "공휴일 API로부터 예기치 않은 응답을 받았습니다."
+        },
+        "abort": {
+            "reconfigured": "구성이 성공적으로 업데이트되었습니다.",
+            "missing_entry": "재구성을 시작할 수 없습니다: 항목 ID를 찾을 수 없습니다.",
+            "entry_not_found": "재구성을 시작할 수 없습니다: 해당 항목이 더 이상 존재하지 않습니다.",
+            "cannot_connect": "공휴일 API(date.nager.at)에 연결할 수 없습니다. 인터넷 연결을 확인한 후 다시 시도해 주세요."
         }
     },
     "options": {
         "step": {
             "init": {
                 "title": "IsItPayday 설정 조정",
-                "description": "이 급여일 추적의 설정을 수정하세요"
+                "description": "이 급여 추적기의 설정을 수정합니다"
             }
         }
     }

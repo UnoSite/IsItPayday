@@ -8,6 +8,7 @@ from homeassistant.helpers.update_coordinator import (
 )
 
 from .const import (
+    CONF_CONFIG_URL,
     DOMAIN,
     CONF_MANUFACTURER,
     CONF_MODEL,
@@ -99,4 +100,5 @@ class IsItPaydayCalendar(CoordinatorEntity, CalendarEntity):
             "name": self._instance_name,
             "manufacturer": CONF_MANUFACTURER,
             "model": CONF_MODEL,
+            "configuration_url": CONF_CONFIG_URL,
         }

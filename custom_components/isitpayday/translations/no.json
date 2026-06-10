@@ -54,9 +54,9 @@
             }
         },
         "error": {
-            "cannot_connect": "Kunne ikke koble til API-et for offentlige helligdager (date.nager.at). Kontroller internettforbindelsen din og prøv igjen.",
-            "invalid_country": "Det valgte landet støttes ikke av API-et for offentlige helligdager",
-            "invalid_response": "Mottok et uventet svar fra API-et for offentlige helligdager"
+            "cannot_connect": "Kunne ikke koble til IsItPayday-tjenesten",
+            "invalid_country": "Det valgte landet støttes ikke",
+            "invalid_response": "Ugyldig svar fra IsItPayday-tjenesten"
         },
         "abort": {
             "reconfigured": "Konfigurasjonen er oppdatert.",

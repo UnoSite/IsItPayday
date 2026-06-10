@@ -1,5 +1,6 @@
 import logging
 from datetime import date, timedelta
+from functools import partial
 
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
@@ -16,7 +17,7 @@ from .const import (
     CONF_WEEKDAY,
     CONF_BANK_OFFSET,
 )
-from .payday_calculator import async_calculate_next_payday
+from .payday_calculator import calculate_next_payday
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -44,13 +45,18 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
             if isinstance(last_known_payday, date) and last_known_payday > today:
                 return {"payday_next": last_known_payday}
 
-            new_payday = await async_calculate_next_payday(
-                data[CONF_COUNTRY],
-                data[CONF_PAY_FREQ],
-                data.get(CONF_PAY_DAY),
-                data.get(CONF_LAST_PAY_DATE),
-                data.get(CONF_WEEKDAY),
-                data.get(CONF_BANK_OFFSET, 0),
+            # The holidays package is synchronous, so the calculation runs
+            # in an executor to avoid blocking the event loop.
+            new_payday = await hass.async_add_executor_job(
+                partial(
+                    calculate_next_payday,
+                    data[CONF_COUNTRY],
+                    data[CONF_PAY_FREQ],
+                    data.get(CONF_PAY_DAY),
+                    data.get(CONF_LAST_PAY_DATE),
+                    data.get(CONF_WEEKDAY),
+                    data.get(CONF_BANK_OFFSET, 0),
+                )
             )
 
             last_known_payday = new_payday
@@ -67,9 +73,8 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         update_interval=timedelta(minutes=5),
     )
 
-    # FIX #7 from review: use async_config_entry_first_refresh() so that a
-    # failed initial update raises ConfigEntryNotReady and HA retries setup
-    # automatically, instead of loading dead sensors.
+    # A failed initial update raises ConfigEntryNotReady and HA retries
+    # setup automatically, instead of loading dead sensors.
     await coordinator.async_config_entry_first_refresh()
 
     hass.data.setdefault(DOMAIN, {})[entry.entry_id] = {

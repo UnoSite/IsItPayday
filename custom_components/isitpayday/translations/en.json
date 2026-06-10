@@ -4,7 +4,7 @@
         "step": {
             "user": {
                 "title": "Select country",
-                "description": "The selected country is used to check public holidays",
+                "description": "The selected country is used to determine public holidays (calculated locally, no internet required)",
                 "data": {
                     "name": "Instance name",
                     "country": "Country"
@@ -54,15 +54,12 @@
             }
         },
         "error": {
-            "cannot_connect": "Could not connect to the public holidays API (date.nager.at). Please check your internet connection and try again.",
-            "invalid_country": "The selected country is not supported by the public holidays API",
-            "invalid_response": "Received an unexpected response from the public holidays API"
+            "invalid_country": "The selected country is not supported by the holidays library"
         },
         "abort": {
             "reconfigured": "Configuration has been updated successfully.",
             "missing_entry": "Reconfiguration could not start: no entry ID found.",
-            "entry_not_found": "Reconfiguration could not start: the entry no longer exists.",
-            "cannot_connect": "Could not connect to the public holidays API (date.nager.at). Please check your internet connection and try again."
+            "entry_not_found": "Reconfiguration could not start: the entry no longer exists."
         }
     },
     "options": {

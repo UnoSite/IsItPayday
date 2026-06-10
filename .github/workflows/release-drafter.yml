@@ -5,8 +5,6 @@ on:
   push:
     branches:
       - main
-  pull_request:
-    types: [opened, reopened, synchronize]
 
 jobs:
   update_release_draft:
@@ -21,6 +19,6 @@ jobs:
         with:
           fetch-depth: 0
       - name: Create Release
-        uses: release-drafter/release-drafter@v7.1.1
+        uses: release-drafter/release-drafter@v7.3.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,10 +1,18 @@
 import logging
-from datetime import timedelta
+from datetime import date, datetime, timedelta
 
 from homeassistant.components.calendar import CalendarEntity, CalendarEvent
-from homeassistant.helpers.update_coordinator import CoordinatorEntity, DataUpdateCoordinator
+from homeassistant.helpers.update_coordinator import (
+    CoordinatorEntity,
+    DataUpdateCoordinator,
+)
 
-from .const import *
+from .const import (
+    CONF_CONFIG_URL,
+    DOMAIN,
+    CONF_MANUFACTURER,
+    CONF_MODEL,
+)
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -14,64 +22,83 @@ async def async_setup_entry(hass, entry, async_add_entities):
     coordinator: DataUpdateCoordinator = data["coordinator"]
     instance_name = data.get("name", "IsItPayday")
 
-    async_add_entities([IsItPaydayCalendar(coordinator, entry.entry_id, instance_name)])
+    async_add_entities(
+        [IsItPaydayCalendar(coordinator, entry.entry_id, instance_name)]
+    )
 
 
 class IsItPaydayCalendar(CoordinatorEntity, CalendarEntity):
+    """Calendar entity exposing the next payday as an all-day event."""
+
     def __init__(
-        self, coordinator: DataUpdateCoordinator, entry_id: str, instance_name: str
-    ):
+        self,
+        coordinator: DataUpdateCoordinator,
+        entry_id: str,
+        instance_name: str,
+    ) -> None:
         super().__init__(coordinator)
-        self._attr_unique_id = f"{entry_id}_calendar"
+        self._attr_unique_id = f"{entry_id}_payday_calendar"
         self._attr_name = f"{instance_name}: Payday"
         self._instance_name = instance_name
         self._entry_id = entry_id
 
-    @property
-    def event(self) -> CalendarEvent | None:
+    def _get_payday(self) -> date | None:
+        """Return the next payday from the coordinator as a date, or None."""
         payday = self.coordinator.data.get("payday_next")
         if not payday:
             return None
-
+        if isinstance(payday, date):
+            return payday
         try:
-            if isinstance(payday, str):
-                payday = date.fromisoformat(payday)
-
-            return CalendarEvent(
-                summary="Payday",
-                start=payday,
-                end=payday + timedelta(days=1),
-            )
-        except Exception as e:
-            _LOGGER.exception("Error creating calendar event: %s", e)
+            return date.fromisoformat(payday)
+        except (ValueError, TypeError):
+            _LOGGER.warning("Invalid payday value in coordinator: %s", payday)
             return None
 
-    async def async_get_events(self, hass, start_date, end_date):
-        event = self.event
-        if not event:
+    def _build_event(self, payday: date) -> CalendarEvent:
+        """Build an all-day CalendarEvent for the given payday.
+
+        For all-day events, Home Assistant expects `start` and `end` as
+        date objects, where `end` is exclusive (the day after).
+        """
+        return CalendarEvent(
+            summary=f"{self._instance_name}: Payday",
+            start=payday,
+            end=payday + timedelta(days=1),
+            description="Next payday calculated by the IsItPayday integration.",
+        )
+
+    @property
+    def event(self) -> CalendarEvent | None:
+        """Return the next upcoming payday event."""
+        payday = self._get_payday()
+        if payday is None or payday < date.today():
+            return None
+        return self._build_event(payday)
+
+    async def async_get_events(
+        self,
+        hass,
+        start_date: datetime,
+        end_date: datetime,
+    ) -> list[CalendarEvent]:
+        """Return payday events within the requested time window."""
+        payday = self._get_payday()
+        if payday is None:
             return []
 
-        event_start = event.start
-        if hasattr(event_start, "date"):
-            event_start = event_start.date()
-
-        if start_date.date() <= event_start <= end_date.date():
-            return [event]
+        # Compare on dates since the payday event is all-day.
+        if start_date.date() <= payday < end_date.date():
+            return [self._build_event(payday)]
 
         return []
 
     @property
-    def extra_state_attributes(self):
-        return {
-            "source": "IsItPayday Calendar",
-            "raw_data": str(self.coordinator.data),
-        }
-
-    @property
-    def device_info(self):
+    def device_info(self) -> dict:
         return {
             "identifiers": {(DOMAIN, self._entry_id)},
             "name": self._instance_name,
             "manufacturer": CONF_MANUFACTURER,
             "model": CONF_MODEL,
+            "configuration_url": CONF_CONFIG_URL,
         }

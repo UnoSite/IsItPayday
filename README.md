@@ -8,7 +8,11 @@
 [![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/UnoSite/IsItPayday/total?style=for-the-badge&labelColor=333333&color=cad401)](#)
 
 <!-- FIX #1: Changed to raw.githubusercontent.com so the image renders correctly -->
+
+
 ![Logo](https://raw.githubusercontent.com/UnoSite/IsItPayday/main/logo.png)
+
+
 
 [![Sponsor Github](https://img.shields.io/badge/Sponsor-Github-000?style=for-the-badge&logo=githubsponsors&labelColor=333333&color=cad401&logoColor=EA4AAA)](https://github.com/sponsors/UnoSite)\
 [![Sponsor Buy Me a Coffee](https://img.shields.io/badge/Sponsor-Buy%20me%20a%20coffee-000?style=for-the-badge&logo=buymeacoffee&labelColor=333333&color=cad401&logoColor=FFDD00)](https://buymeacoffee.com/UnoSite)\
@@ -18,7 +22,7 @@
 
 ## 📌 Overview
 
-**IsItPayday** is a custom integration for Home Assistant that calculates and displays your next payday based on your country's public holidays and your specified pay frequency.
+**IsItPayday** is a custom integration for Home Assistant that calculates and displays your next payday based on your country's public holidays and your specified pay frequency. All calculations are performed locally - no cloud services or internet connection required.
 
 ---
 
@@ -57,8 +61,9 @@
     - **Annually**
 
 - **Automatic Adjustment for Holidays and Weekends:**
-  - Fetches public holidays from the [Nager.Date API](https://date.nager.at).
+  - Public holidays are calculated locally using the [holidays](https://pypi.org/project/holidays/) Python package.
   - Adjusts payday if it falls on a weekend or public holiday.
+  - Works fully offline - no internet connection or external API required.
 
 - **Reconfiguration Support:**
   - After initial setup, you can adjust all settings via the **Configure** button in the **Devices & Services** section.
@@ -94,7 +99,7 @@
 ### Step 1: Instance Name & Country
 
 - Enter a name for this instance (e.g. `My Payday`).
-- Choose your country from the dropdown list. The integration will automatically pre-select the country based on your Home Assistant configuration, but you can change it if needed.
+- Choose your country from the dropdown list. The list contains all countries supported by the [holidays](https://pypi.org/project/holidays/) package. The integration will automatically pre-select the country based on your Home Assistant configuration, but you can change it if needed.
 
 ### Step 2: Select Payout Frequency
 
@@ -180,8 +185,8 @@ entities:
 ## 🛠️ Troubleshooting
 
 **Sensors show "Unknown"**
-- Check that your Home Assistant instance has internet access and can reach [date.nager.at](https://date.nager.at).
-- Verify that the selected country is supported by checking the [list of available countries](https://date.nager.at/api/v3/AvailableCountries).
+- Check the Home Assistant logs for messages from `custom_components.isitpayday` - they will indicate if the configured country or pay settings are invalid.
+- Verify that the selected country is supported by the [holidays package](https://github.com/vacanza/holidays#available-countries).
 
 **Payday date seems wrong**
 - Make sure the correct pay frequency and reference date (last payday) are configured.

@@ -56,7 +56,7 @@
         "error": {
             "cannot_connect": "Não foi possível conectar à API de feriados públicos (date.nager.at). Verifique a sua ligação à internet e tente novamente.",
             "invalid_country": "O país selecionado não é suportado pela API de feriados públicos",
-            "invalid_response": "Foi recebida uma resposta inesperada da API de feriados públicos"
+            "invalid_response": "Resposta inválida do serviço IsItPayday"
         },
         "abort": {
             "reconfigured": "A configuração foi atualizada com sucesso.",

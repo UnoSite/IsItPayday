@@ -1,10 +1,18 @@
+"""Payday calculation logic for the IsItPayday integration.
+
+All functions in this module are synchronous. Holiday data is generated
+locally by the `holidays` package, so no network access is required.
+Callers inside Home Assistant must run these functions in an executor,
+e.g. via `hass.async_add_executor_job`.
+"""
+
 import logging
+import re
 from datetime import date, timedelta
 
-import aiohttp
+import holidays as holidays_lib
 
 from .const import (
-    API_HOLIDAYS,
     PAY_FREQ_MONTHLY,
     PAY_FREQ_28_DAYS,
     PAY_FREQ_14_DAYS,
@@ -19,49 +27,80 @@ from .const import (
 
 _LOGGER = logging.getLogger(__name__)
 
-# Safety limit for month-based search loops (FIX #4 from review).
+# Safety limit for month-based search loops.
 _MAX_MONTH_ITERATIONS = 24
 
 
-async def async_get_bank_holidays(country: str, year: int) -> list:
-    """Fetch public holidays for a given country and year from Nager.Date API."""
-    url = API_HOLIDAYS.format(year=year, country=country)
-    _LOGGER.debug("Collecting bank holidays from: %s", url)
-
+def get_supported_countries() -> dict[str, str]:
+    """Return supported countries as {ISO code: display name}, sorted by name."""
+    countries: dict[str, str] = {}
     try:
-        async with aiohttp.ClientSession() as session:
-            async with session.get(
-                url, timeout=aiohttp.ClientTimeout(total=10)
-            ) as response:
-                if response.status != 200:
-                    _LOGGER.error(
-                        "Error: Can't collect bank holidays: HTTP %s", response.status
-                    )
-                    return []
-                holidays = await response.json()
-                return [date.fromisoformat(h["date"]) for h in holidays]
+        from holidays.registry import COUNTRIES
+
+        for entry in COUNTRIES.values():
+            class_name, alpha2 = entry[0], entry[1]
+            # Convert CamelCase class names to readable names,
+            # e.g. "UnitedStates" -> "United States".
+            display_name = re.sub(r"(?<=[a-z])(?=[A-Z])", " ", class_name)
+            countries[alpha2] = display_name
+    except Exception:  # pragma: no cover - fallback for registry changes
+        _LOGGER.warning(
+            "Could not read country names from holidays registry; "
+            "falling back to country codes."
+        )
+        for code in holidays_lib.list_supported_countries():
+            countries[code] = code
+
+    return dict(sorted(countries.items(), key=lambda item: item[1]))
+
+
+def get_bank_holidays(country: str, years: list[int]):
+    """Return a holidays object for the given country, pre-populated with years.
+
+    The returned object supports `date in obj` membership checks and lazily
+    populates additional years on demand, so lookups outside the given
+    years also work correctly.
+    """
+    try:
+        return holidays_lib.country_holidays(country, years=years)
+    except NotImplementedError:
+        _LOGGER.error(
+            "Country '%s' is not supported by the holidays package.", country
+        )
+        return {}
     except Exception as e:
-        _LOGGER.exception("Can't collect bank holidays: %s", e)
-        return []
+        _LOGGER.exception("Error generating holidays for %s: %s", country, e)
+        return {}
 
 
-def _is_bank_day(d: date, bank_holidays: list) -> bool:
+def _is_bank_day(d: date, bank_holidays) -> bool:
     """Return True if the date is a working bank day (not weekend, not holiday)."""
     return d.weekday() < 5 and d not in bank_holidays
 
 
-def _adjust_to_previous_bank_day(d: date, bank_holidays: list) -> date:
+def _adjust_to_previous_bank_day(d: date, bank_holidays) -> date:
     """Move date backwards until it lands on a valid bank day."""
     while not _is_bank_day(d, bank_holidays):
         d -= timedelta(days=1)
     return d
 
 
-def _adjust_to_next_bank_day(d: date, bank_holidays: list) -> date:
+def _adjust_to_next_bank_day(d: date, bank_holidays) -> date:
     """Move date forwards until it lands on a valid bank day."""
     while not _is_bank_day(d, bank_holidays):
         d += timedelta(days=1)
     return d
+
+
+def _adjust_not_before_today(payday: date, today: date, bank_holidays) -> date:
+    """Adjust payday to the previous bank day, but never earlier than today.
+
+    If adjusting backwards would land before today, adjust forwards instead.
+    """
+    adjusted = _adjust_to_previous_bank_day(payday, bank_holidays)
+    if adjusted < today:
+        adjusted = _adjust_to_next_bank_day(payday, bank_holidays)
+    return adjusted
 
 
 def _add_months(d: date, months: int) -> date:
@@ -69,7 +108,6 @@ def _add_months(d: date, months: int) -> date:
     month_index = d.month - 1 + months
     year = d.year + month_index // 12
     month = month_index % 12 + 1
-    # Clamp day to last valid day of target month (handles e.g. Jan 31 -> Feb 28).
     day = d.day
     while day > 28:
         try:
@@ -79,16 +117,7 @@ def _add_months(d: date, months: int) -> date:
     return date(year, month, day)
 
 
-async def _get_holidays_for_years(country: str, years: set) -> list:
-    """Fetch and combine bank holidays for multiple years."""
-    all_holidays = []
-    for year in years:
-        holidays = await async_get_bank_holidays(country, year)
-        all_holidays.extend(holidays)
-    return all_holidays
-
-
-async def async_calculate_next_payday(
+def calculate_next_payday(
     country: str,
     pay_frequency: str,
     pay_day=None,
@@ -104,20 +133,15 @@ async def async_calculate_next_payday(
     )
 
     today = date.today()
-    bank_holidays = await _get_holidays_for_years(
-        country, {today.year, today.year + 1}
-    )
+    bank_holidays = get_bank_holidays(country, [today.year, today.year + 1])
 
     if pay_frequency == PAY_FREQ_MONTHLY:
-        # async_calculate_month_based already returns an adjusted date.
-        payday = await async_calculate_month_based(
+        payday = calculate_month_based(
             today, 1, pay_day, bank_offset, bank_holidays
         )
 
     elif pay_frequency == PAY_FREQ_BIMONTHLY:
-        # FIX #1 from review: bimonthly is anchored to last_pay_date and uses
-        # real month arithmetic (not pay_day-based logic, and not fixed 60 days).
-        payday = await async_calculate_month_interval(
+        payday = calculate_month_interval(
             last_pay_date, 2, today, bank_holidays
         )
 
@@ -135,17 +159,14 @@ async def async_calculate_next_payday(
             PAY_FREQ_SEMIANNUAL: 182,
             PAY_FREQ_ANNUAL: 365,
         }[pay_frequency]
-        payday = await async_calculate_recurring(
-            last_pay_date, interval_days, bank_holidays
-        )
-        # FIX #3 from review: adjust, but never to a date before today.
+        payday = calculate_recurring(last_pay_date, interval_days)
         if payday is not None:
             payday = _adjust_not_before_today(payday, today, bank_holidays)
 
     elif pay_frequency == PAY_FREQ_WEEKLY:
         if weekday is None:
             raise ValueError("Weekday missing for weekly payday.")
-        payday = await async_calculate_weekly(today, weekday, bank_holidays)
+        payday = calculate_weekly(today, weekday)
         if payday is not None:
             payday = _adjust_to_next_bank_day(payday, bank_holidays)
 
@@ -153,37 +174,16 @@ async def async_calculate_next_payday(
         _LOGGER.error("Invalid payday frequency: %s", pay_frequency)
         return None
 
-    # FIX #6 from review: if the payday landed in a year we have no holiday
-    # data for, fetch that year's holidays and re-validate the date.
-    if payday is not None and payday.year > today.year + 1:
-        extra_holidays = await async_get_bank_holidays(country, payday.year)
-        if extra_holidays:
-            combined = bank_holidays + extra_holidays
-            payday = _adjust_not_before_today(payday, today, combined)
-
     _LOGGER.info("Next payday calculated: %s", payday)
     return payday
 
 
-def _adjust_not_before_today(
-    payday: date, today: date, bank_holidays: list
-) -> date:
-    """Adjust payday to the previous bank day, but never earlier than today.
-
-    If adjusting backwards would land before today, adjust forwards instead.
-    """
-    adjusted = _adjust_to_previous_bank_day(payday, bank_holidays)
-    if adjusted < today:
-        adjusted = _adjust_to_next_bank_day(payday, bank_holidays)
-    return adjusted
-
-
-async def async_calculate_month_based(
+def calculate_month_based(
     today: date,
     month_interval: int,
     pay_day,
     bank_offset: int,
-    bank_holidays: list,
+    bank_holidays,
 ):
     """Calculate next payday for monthly frequency (pay_day based).
 
@@ -191,7 +191,6 @@ async def async_calculate_month_based(
     """
     year, month = today.year, today.month
 
-    # FIX #4 from review: bounded loop instead of `while True`.
     for _ in range(_MAX_MONTH_ITERATIONS):
         if pay_day == PAY_DAY_LAST_BANK_DAY:
             payday = _find_last_bank_day(year, month, bank_holidays, bank_offset)
@@ -216,11 +215,11 @@ async def async_calculate_month_based(
     return None
 
 
-async def async_calculate_month_interval(
+def calculate_month_interval(
     last_pay_date: str,
     month_interval: int,
     today: date,
-    bank_holidays: list,
+    bank_holidays,
 ) -> date | None:
     """Calculate next payday for month-interval frequencies anchored to a date.
 
@@ -235,7 +234,6 @@ async def async_calculate_month_interval(
     anchor = date.fromisoformat(last_pay_date)
     payday = _add_months(anchor, month_interval)
 
-    # FIX #4 from review: bounded loop.
     for _ in range(_MAX_MONTH_ITERATIONS):
         if payday >= today:
             return _adjust_not_before_today(payday, today, bank_holidays)
@@ -247,11 +245,7 @@ async def async_calculate_month_interval(
     return None
 
 
-async def async_calculate_recurring(
-    last_pay_date: str,
-    interval: int,
-    bank_holidays: list,
-) -> date | None:
+def calculate_recurring(last_pay_date: str, interval: int) -> date | None:
     """Calculate next payday for fixed-interval frequencies.
 
     Returns an unadjusted date. The caller is responsible for adjusting.
@@ -271,19 +265,14 @@ async def async_calculate_recurring(
     return payday
 
 
-async def async_calculate_weekly(
-    today: date,
-    weekday: int,
-    bank_holidays: list,
-) -> date:
+def calculate_weekly(today: date, weekday: int) -> date:
     """Return the next occurrence of the given weekday (unadjusted)."""
     days_ahead = (weekday - today.weekday()) % 7
-    payday = today + timedelta(days=days_ahead)
-    return payday
+    return today + timedelta(days=days_ahead)
 
 
 def _find_last_bank_day(
-    year: int, month: int, bank_holidays: list, bank_offset: int
+    year: int, month: int, bank_holidays, bank_offset: int
 ) -> date | None:
     """Find the last bank day of the month, then apply bank_offset.
 
@@ -302,9 +291,7 @@ def _find_last_bank_day(
     return None
 
 
-def _find_first_bank_day(
-    year: int, month: int, bank_holidays: list
-) -> date | None:
+def _find_first_bank_day(year: int, month: int, bank_holidays) -> date | None:
     """Find the first bank day of the month."""
     day = 1
     while day <= 31:
@@ -319,7 +306,7 @@ def _find_first_bank_day(
 
 
 def _find_specific_day(
-    year: int, month: int, day: int, bank_holidays: list
+    year: int, month: int, day: int, bank_holidays
 ) -> date | None:
     """Find a specific day of the month, adjusting backwards if not a bank day."""
     while day > 0:

@@ -2,10 +2,8 @@
 
 import logging
 
-import aiohttp
 import voluptuous as vol
 from homeassistant import config_entries
-from homeassistant.core import HomeAssistant
 from homeassistant.data_entry_flow import FlowResult
 from homeassistant.helpers.selector import DateSelector
 
@@ -18,7 +16,7 @@ from .const import (
     CONF_LAST_PAY_DATE,
     CONF_BANK_OFFSET,
     CONF_WEEKDAY,
-    API_COUNTRIES,
+    DEFAULT_COUNTRY,
     PAY_FREQ_MONTHLY,
     PAY_FREQ_BIMONTHLY,
     PAY_FREQ_QUARTERLY,
@@ -34,6 +32,7 @@ from .const import (
     WEEKDAY_MAP,
     WEEKDAY_OPTIONS,
 )
+from .payday_calculator import get_supported_countries
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -41,51 +40,13 @@ _LOGGER = logging.getLogger(__name__)
 def _coerce_int(value, default: int) -> int:
     """Safely convert a stored config value to int.
 
-    FIX #5 from review: older config entries may have stored numeric
-    values as strings (e.g. '31'). This normalizes them.
+    Older config entries may have stored numeric values as strings
+    (e.g. '31'). This normalizes them.
     """
     try:
         return int(value)
     except (TypeError, ValueError):
         return default
-
-
-async def async_get_homeassistant_country(hass: HomeAssistant) -> str | None:
-    """Return HA's configured country if it is supported by Nager.Date API."""
-    country = getattr(hass.config, "country", None)
-    if not country:
-        _LOGGER.warning("Home Assistant country is not set.")
-        return None
-    supported_countries = await async_fetch_supported_countries()
-    if supported_countries is None or country not in supported_countries:
-        _LOGGER.warning("Country '%s' is not supported.", country)
-        return None
-    return country
-
-
-async def async_fetch_supported_countries() -> dict[str, str] | None:
-    """Fetch available countries from Nager.Date API.
-
-    Returns None on failure instead of raising an unhandled exception.
-    """
-    try:
-        async with aiohttp.ClientSession() as session:
-            async with session.get(
-                API_COUNTRIES, timeout=aiohttp.ClientTimeout(total=10)
-            ) as response:
-                if response.status != 200:
-                    _LOGGER.error(
-                        "Failed to fetch supported countries: HTTP %s", response.status
-                    )
-                    return None
-                data = await response.json()
-                return {country["countryCode"]: country["name"] for country in data}
-    except aiohttp.ClientError as e:
-        _LOGGER.error("Network error fetching supported countries: %s", e)
-        return None
-    except Exception as e:
-        _LOGGER.exception("Unexpected error fetching supported countries: %s", e)
-        return None
 
 
 class IsItPayday2ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
@@ -101,6 +62,27 @@ class IsItPayday2ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         self.weekday: int | None = None
         self.country_list: dict[str, str] = {}
         self.reconfig_entry = None
+
+    async def _async_load_country_list(self) -> None:
+        """Load the supported country list from the holidays package.
+
+        The holidays package is synchronous, so this runs in an executor.
+        """
+        if not self.country_list:
+            self.country_list = await self.hass.async_add_executor_job(
+                get_supported_countries
+            )
+
+    def _default_country(self) -> str:
+        """Return the best default country for the form."""
+        if self.country and self.country in self.country_list:
+            return self.country
+        ha_country = getattr(self.hass.config, "country", None)
+        if ha_country and ha_country in self.country_list:
+            return ha_country
+        if DEFAULT_COUNTRY in self.country_list:
+            return DEFAULT_COUNTRY
+        return next(iter(self.country_list))
 
     async def async_step_reconfigure(self, user_input=None) -> FlowResult:
         """Handle reconfiguration of an existing entry."""
@@ -122,7 +104,6 @@ class IsItPayday2ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         self.country = data.get(CONF_COUNTRY)
         self.pay_frequency = data.get(CONF_PAY_FREQ)
         self.last_pay_date = data.get(CONF_LAST_PAY_DATE)
-        # FIX #5 from review: normalize possibly string-typed stored values.
         self.bank_offset = _coerce_int(data.get(CONF_BANK_OFFSET), 0)
         self.weekday = data.get(CONF_WEEKDAY)
 
@@ -133,30 +114,15 @@ class IsItPayday2ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             pay_day = int(pay_day)
         self.pay_day = pay_day
 
-        # Fetch country list once here; async_step_user reuses it.
-        self.country_list = await async_fetch_supported_countries() or {}
-
         return await self.async_step_user()
 
     async def async_step_user(self, user_input=None) -> FlowResult:
         """Handle the initial user step (name + country)."""
         if user_input is None:
-            if not self.country_list:
-                self.country_list = await async_fetch_supported_countries() or {}
-
-            # FIX #2 from review: abort cleanly when the API is unreachable
-            # instead of showing an empty form that would crash on submit.
-            if not self.country_list:
-                return self.async_abort(reason="cannot_connect")
-
-            current_country = (
-                self.country
-                or await async_get_homeassistant_country(self.hass)
-                or "DK"
-            )
+            await self._async_load_country_list()
             return self.async_show_form(
                 step_id="user",
-                data_schema=self._create_user_schema(current_country),
+                data_schema=self._create_user_schema(self._default_country()),
             )
 
         self.name = user_input[CONF_NAME]
@@ -327,8 +293,6 @@ class IsItPayday2ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         )
 
     def _create_bank_offset_schema(self) -> vol.Schema:
-        # FIX #5 from review: normalize to int so the default always matches
-        # the option list, even for entries stored with string values.
         default = _coerce_int(self.bank_offset, 0)
         if default not in range(0, 11):
             default = 0
@@ -339,7 +303,6 @@ class IsItPayday2ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         )
 
     def _create_specific_day_schema(self) -> vol.Schema:
-        # FIX #5 from review: same normalization for specific day.
         default = _coerce_int(self.pay_day, 31)
         if default not in range(1, 32):
             default = 31
@@ -370,4 +333,4 @@ class IsItPayday2ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             {
                 vol.Required(CONF_PAY_DAY, default=default): vol.In(WEEKDAY_OPTIONS)
             }
-                )
+            )

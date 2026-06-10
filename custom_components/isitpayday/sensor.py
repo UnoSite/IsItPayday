@@ -12,6 +12,7 @@ from homeassistant.helpers.update_coordinator import (
 )
 
 from .const import (
+    CONF_CONFIG_URL,
     DOMAIN,
     CONF_MANUFACTURER,
     CONF_MODEL,
@@ -78,6 +79,7 @@ class IsItPaydayNextSensor(CoordinatorEntity, SensorEntity):
             "name": self._instance_name,
             "manufacturer": CONF_MANUFACTURER,
             "model": CONF_MODEL,
+            "configuration_url": CONF_CONFIG_URL,
         }
 
 
@@ -128,4 +130,5 @@ class IsItPaydayDaysToSensor(CoordinatorEntity, SensorEntity):
             "name": self._instance_name,
             "manufacturer": CONF_MANUFACTURER,
             "model": CONF_MODEL,
+            "configuration_url": CONF_CONFIG_URL,
     }

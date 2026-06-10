@@ -7,11 +7,13 @@
     "config_flow": true,
     "dependencies": [],
     "documentation": "https://github.com/UnoSite/IsItPayday",
-    "iot_class": "cloud_polling",
+    "iot_class": "calculated",
     "issue_tracker": "https://github.com/UnoSite/IsItPayday/issues",
     "loggers": [
         "custom_components.isitpayday"
     ],
-    "requirements": [],
-    "version": "4.2.0"
+    "requirements": [
+        "holidays==0.94"
+    ],
+    "version": "5.0.0"
 }

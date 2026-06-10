@@ -54,9 +54,9 @@
             }
         },
         "error": {
-            "cannot_connect": "Kan geen verbinding maken met de API voor feestdagen (date.nager.at). Controleer uw internetverbinding en probeer het opnieuw.",
-            "invalid_country": "Het geselecteerde land wordt niet ondersteund door de API voor feestdagen",
-            "invalid_response": "Er is een onverwacht antwoord ontvangen van de API voor feestdagen"
+            "cannot_connect": "Kan geen verbinding maken met de IsItPayday-service",
+            "invalid_country": "Het geselecteerde land wordt niet ondersteund",
+            "invalid_response": "Ongeldige reactie van de IsItPayday-service"
         },
         "abort": {
             "reconfigured": "De configuratie is succesvol bijgewerkt.",

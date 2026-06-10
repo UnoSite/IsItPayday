@@ -5,6 +5,7 @@ DOMAIN = "isitpayday"
 CONF_TITLE = "Is It Payday"
 CONF_MANUFACTURER = "UnoSite"
 CONF_MODEL = "Payday Tracker"
+CONF_CONFIG_URL = "https://github.com/UnoSite/IsItPayday"
 
 # Configuration keys (stored in config entry)
 CONF_COUNTRY = "country"

@@ -29,8 +29,15 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
     return True
 
 
+async def _async_update_listener(hass: HomeAssistant, entry: ConfigEntry) -> None:
+    """Reload the integration when options are changed."""
+    await hass.config_entries.async_reload(entry.entry_id)
+
+
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
-    data = entry.data
+    # Options (from the options flow) take precedence over the original
+    # setup data, so changed settings apply without touching entry.data.
+    data = {**entry.data, **entry.options}
     instance_name = data.get(CONF_NAME, "IsItPayday")
 
     last_known_payday: date | None = None
@@ -83,6 +90,9 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         "coordinator": coordinator,
         "name": instance_name,
     }
+
+    # Reload automatically when the user saves new options.
+    entry.async_on_unload(entry.add_update_listener(_async_update_listener))
 
     await hass.config_entries.async_forward_entry_setups(entry, _PLATFORMS)
     return True

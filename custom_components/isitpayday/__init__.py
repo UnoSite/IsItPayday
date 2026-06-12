@@ -18,7 +18,7 @@ from .const import (
     CONF_BANK_OFFSET,
     CONF_SUBDIV,
 )
-from .payday_calculator import calculate_next_payday
+from .payday_calculator import calculate_upcoming_paydays
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -40,24 +40,26 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     data = {**entry.data, **entry.options}
     instance_name = data.get(CONF_NAME, "IsItPayday")
 
-    last_known_payday: date | None = None
+    last_data: dict | None = None
 
     async def async_update_data() -> dict:
-        nonlocal last_known_payday
+        nonlocal last_data
         today = date.today()
 
         try:
-            # Only use the cached value if payday is strictly in the future.
-            # On payday itself we recalculate so the sensors immediately
-            # start counting towards the next payday.
-            if isinstance(last_known_payday, date) and last_known_payday > today:
-                return {"payday_next": last_known_payday}
+            # Only use the cached result if the next payday is strictly in
+            # the future. On payday itself we recalculate so the sensors
+            # immediately start counting towards the next payday.
+            if last_data:
+                first = last_data.get("payday_next")
+                if isinstance(first, date) and first > today:
+                    return last_data
 
             # The holidays package is synchronous, so the calculation runs
             # in an executor to avoid blocking the event loop.
-            new_payday = await hass.async_add_executor_job(
+            upcoming = await hass.async_add_executor_job(
                 partial(
-                    calculate_next_payday,
+                    calculate_upcoming_paydays,
                     data[CONF_COUNTRY],
                     data[CONF_PAY_FREQ],
                     data.get(CONF_PAY_DAY),
@@ -65,11 +67,16 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
                     data.get(CONF_WEEKDAY),
                     data.get(CONF_BANK_OFFSET, 0),
                     data.get(CONF_SUBDIV),
+                    12,
                 )
             )
 
-            last_known_payday = new_payday
-            return {"payday_next": new_payday}
+            result = {
+                "payday_next": upcoming[0] if upcoming else None,
+                "paydays_upcoming": upcoming,
+            }
+            last_data = result if upcoming else None
+            return result
 
         except Exception as err:
             raise UpdateFailed(f"Error calculating next payday: {err}") from err

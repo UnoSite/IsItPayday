@@ -73,6 +73,30 @@ class IsItPaydayNextSensor(CoordinatorEntity, SensorEntity):
         return "Unknown"
 
     @property
+    def extra_state_attributes(self) -> dict:
+        """Expose upcoming paydays and remaining paydays this month.
+
+        `paydays_this_month` contains the remaining paydays (today or
+        later) in the current calendar month - useful for automations in
+        months with e.g. three biweekly payouts.
+        """
+        upcoming = self.coordinator.data.get("paydays_upcoming") or []
+        today = date.today()
+
+        upcoming_dates = [d for d in upcoming if isinstance(d, date)]
+        this_month = [
+            d
+            for d in upcoming_dates
+            if d.year == today.year and d.month == today.month
+        ]
+
+        return {
+            "upcoming_paydays": [d.isoformat() for d in upcoming_dates],
+            "paydays_this_month": [d.isoformat() for d in this_month],
+            "paydays_this_month_count": len(this_month),
+        }
+
+    @property
     def device_info(self) -> dict:
         return {
             "identifiers": {(DOMAIN, self._entry_id)},

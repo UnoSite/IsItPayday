@@ -55,6 +55,41 @@ def get_supported_countries() -> dict[str, str]:
     return dict(sorted(countries.items(), key=lambda item: item[1]))
 
 
+def get_country_subdivisions(country: str) -> dict[str, str]:
+    """Return subdivisions (states/regions) for a country as {code: label}.
+
+    Returns an empty dict if the country has no subdivisions. Friendly
+    names are used where the holidays package provides aliases,
+    e.g. "Bavaria (BY)" instead of just "BY".
+    """
+    try:
+        supported = holidays_lib.list_supported_countries()
+        subdivs = supported.get(country, [])
+        if not subdivs:
+            return {}
+
+        code_to_alias: dict[str, str] = {}
+        try:
+            probe = holidays_lib.country_holidays(country)
+            aliases = getattr(probe, "subdivisions_aliases", {}) or {}
+            # aliases maps alias name -> subdivision code; invert it and
+            # keep the first (usually most readable) alias per code.
+            for alias, code in aliases.items():
+                code_to_alias.setdefault(str(code), str(alias))
+        except Exception:  # pragma: no cover - aliases are a nice-to-have
+            code_to_alias = {}
+
+        options: dict[str, str] = {}
+        for code in subdivs:
+            code = str(code)
+            alias = code_to_alias.get(code)
+            options[code] = f"{alias} ({code})" if alias else code
+        return dict(sorted(options.items(), key=lambda item: item[1]))
+    except Exception as e:
+        _LOGGER.exception("Error listing subdivisions for %s: %s", country, e)
+        return {}
+
+
 # Some countries place their de facto bank closing days in categories other
 # than BANK. For Denmark, Constitution Day, Christmas Eve and New Year's Eve
 # are in the OPTIONAL category, but banks are closed on those days.
@@ -63,7 +98,7 @@ _EXTRA_CATEGORIES_PER_COUNTRY: dict[str, tuple] = {
 }
 
 
-def get_bank_holidays(country: str, years: list[int]):
+def get_bank_holidays(country: str, years: list[int], subdiv: str | None = None):
     """Return a holidays object covering all bank closing days for a country.
 
     Includes the PUBLIC category, the BANK category where the country
@@ -90,7 +125,7 @@ def get_bank_holidays(country: str, years: list[int]):
             "Using holiday categories %s for country %s", categories, country
         )
         return holidays_lib.country_holidays(
-            country, years=years, categories=tuple(categories)
+            country, subdiv=subdiv, years=years, categories=tuple(categories)
         )
     except NotImplementedError:
         _LOGGER.error(
@@ -153,6 +188,7 @@ def calculate_next_payday(
     last_pay_date=None,
     weekday=None,
     bank_offset: int = 0,
+    subdiv: str | None = None,
 ):
     """Calculate the next payday date, adjusted for weekends and public holidays."""
     _LOGGER.info(
@@ -162,7 +198,7 @@ def calculate_next_payday(
     )
 
     today = date.today()
-    bank_holidays = get_bank_holidays(country, [today.year, today.year + 1])
+    bank_holidays = get_bank_holidays(country, [today.year, today.year + 1], subdiv)
 
     if pay_frequency == PAY_FREQ_MONTHLY:
         payday = calculate_month_based(

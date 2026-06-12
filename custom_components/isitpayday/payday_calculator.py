@@ -190,25 +190,76 @@ def calculate_next_payday(
     bank_offset: int = 0,
     subdiv: str | None = None,
 ):
-    """Calculate the next payday date, adjusted for weekends and public holidays."""
+    """Calculate the next payday date (first of the upcoming paydays)."""
+    paydays = calculate_upcoming_paydays(
+        country, pay_frequency, pay_day, last_pay_date,
+        weekday, bank_offset, subdiv, count=1,
+    )
+    return paydays[0] if paydays else None
+
+
+def calculate_upcoming_paydays(
+    country: str,
+    pay_frequency: str,
+    pay_day=None,
+    last_pay_date=None,
+    weekday=None,
+    bank_offset: int = 0,
+    subdiv: str | None = None,
+    count: int = 12,
+) -> list[date]:
+    """Calculate the upcoming paydays, adjusted for weekends and holidays.
+
+    Returns a sorted, de-duplicated list of at most `count` dates, all of
+    which are today or later.
+    """
+    count = max(1, min(count, 24))
     _LOGGER.info(
-        "Starting calculation of the next payday for %s with frequency: %s",
+        "Calculating %s upcoming paydays for %s with frequency: %s",
+        count,
         country,
         pay_frequency,
     )
 
     today = date.today()
-    bank_holidays = get_bank_holidays(country, [today.year, today.year + 1], subdiv)
+    bank_holidays = get_bank_holidays(
+        country, [today.year, today.year + 1, today.year + 2], subdiv
+    )
+
+    raw: list[date] = []
 
     if pay_frequency == PAY_FREQ_MONTHLY:
-        payday = calculate_month_based(
-            today, 1, pay_day, bank_offset, bank_holidays
-        )
+        year, month = today.year, today.month
+        for _ in range(count + 12):
+            payday = _payday_for_month(
+                year, month, pay_day, bank_offset, bank_holidays
+            )
+            if payday is None and not isinstance(pay_day, int) and pay_day not in (
+                PAY_DAY_LAST_BANK_DAY,
+                PAY_DAY_FIRST_BANK_DAY,
+            ):
+                _LOGGER.error("Invalid payday value: %s", pay_day)
+                return []
+            if payday is not None and payday >= today:
+                raw.append(payday)
+            if len(raw) >= count:
+                break
+            month += 1
+            year += (month - 1) // 12
+            month = (month - 1) % 12 + 1
 
     elif pay_frequency == PAY_FREQ_BIMONTHLY:
-        payday = calculate_month_interval(
-            last_pay_date, 2, today, bank_holidays
-        )
+        if not last_pay_date:
+            _LOGGER.error("Missing last payday date for month-interval payout.")
+            return []
+        nxt = _add_months(date.fromisoformat(last_pay_date), 2)
+        guard = 0
+        while nxt < today and guard < _MAX_MONTH_ITERATIONS:
+            nxt = _add_months(nxt, 2)
+            guard += 1
+        for _ in range(count):
+            raw.append(_adjust_not_before_today(nxt, today, bank_holidays))
+            nxt = _add_months(nxt, 2)
 
     elif pay_frequency in (
         PAY_FREQ_28_DAYS,
@@ -217,123 +268,56 @@ def calculate_next_payday(
         PAY_FREQ_SEMIANNUAL,
         PAY_FREQ_ANNUAL,
     ):
-        interval_days = {
+        interval = {
             PAY_FREQ_14_DAYS: 14,
             PAY_FREQ_28_DAYS: 28,
             PAY_FREQ_QUARTERLY: 91,
             PAY_FREQ_SEMIANNUAL: 182,
             PAY_FREQ_ANNUAL: 365,
         }[pay_frequency]
-        payday = calculate_recurring(last_pay_date, interval_days)
-        if payday is not None:
-            payday = _adjust_not_before_today(payday, today, bank_holidays)
+        if not last_pay_date:
+            _LOGGER.error("Missing last payday date for recurring payout.")
+            return []
+        nxt = date.fromisoformat(last_pay_date) + timedelta(days=interval)
+        while nxt < today:
+            nxt += timedelta(days=interval)
+        for _ in range(count):
+            raw.append(_adjust_not_before_today(nxt, today, bank_holidays))
+            nxt += timedelta(days=interval)
 
     elif pay_frequency == PAY_FREQ_WEEKLY:
         if weekday is None:
             raise ValueError("Weekday missing for weekly payday.")
-        payday = calculate_weekly(today, weekday)
-        if payday is not None:
-            payday = _adjust_to_next_bank_day(payday, bank_holidays)
+        days_ahead = (weekday - today.weekday()) % 7
+        nxt = today + timedelta(days=days_ahead)
+        for _ in range(count):
+            raw.append(_adjust_to_next_bank_day(nxt, bank_holidays))
+            nxt += timedelta(days=7)
 
     else:
         _LOGGER.error("Invalid payday frequency: %s", pay_frequency)
-        return None
+        return []
 
-    _LOGGER.info("Next payday calculated: %s", payday)
-    return payday
+    paydays = sorted(set(d for d in raw if d >= today))[:count]
+    _LOGGER.info("Upcoming paydays calculated: %s", paydays)
+    return paydays
 
 
-def calculate_month_based(
-    today: date,
-    month_interval: int,
+def _payday_for_month(
+    year: int,
+    month: int,
     pay_day,
     bank_offset: int,
     bank_holidays,
-):
-    """Calculate next payday for monthly frequency (pay_day based).
-
-    Already returns a fully adjusted (bank day) date.
-    """
-    year, month = today.year, today.month
-
-    for _ in range(_MAX_MONTH_ITERATIONS):
-        if pay_day == PAY_DAY_LAST_BANK_DAY:
-            payday = _find_last_bank_day(year, month, bank_holidays, bank_offset)
-        elif pay_day == PAY_DAY_FIRST_BANK_DAY:
-            payday = _find_first_bank_day(year, month, bank_holidays)
-        elif isinstance(pay_day, int):
-            payday = _find_specific_day(year, month, pay_day, bank_holidays)
-        else:
-            _LOGGER.error("Invalid payday value: %s", pay_day)
-            return None
-
-        if payday is not None and payday >= today:
-            return payday
-
-        month += month_interval
-        year += (month - 1) // 12
-        month = (month - 1) % 12 + 1
-
-    _LOGGER.error(
-        "Could not find a valid payday within %s months.", _MAX_MONTH_ITERATIONS
-    )
-    return None
-
-
-def calculate_month_interval(
-    last_pay_date: str,
-    month_interval: int,
-    today: date,
-    bank_holidays,
 ) -> date | None:
-    """Calculate next payday for month-interval frequencies anchored to a date.
-
-    Used for bimonthly (every 2 months). Adds whole months to the last
-    payday date until the result is today or later, then adjusts to a
-    valid bank day (never before today).
-    """
-    if not last_pay_date:
-        _LOGGER.error("Missing last payday date for month-interval payout.")
-        return None
-
-    anchor = date.fromisoformat(last_pay_date)
-    payday = _add_months(anchor, month_interval)
-
-    for _ in range(_MAX_MONTH_ITERATIONS):
-        if payday >= today:
-            return _adjust_not_before_today(payday, today, bank_holidays)
-        payday = _add_months(payday, month_interval)
-
-    _LOGGER.error(
-        "Could not find a valid payday within %s months.", _MAX_MONTH_ITERATIONS
-    )
+    """Return the payday for a specific month, fully adjusted, or None."""
+    if pay_day == PAY_DAY_LAST_BANK_DAY:
+        return _find_last_bank_day(year, month, bank_holidays, bank_offset)
+    if pay_day == PAY_DAY_FIRST_BANK_DAY:
+        return _find_first_bank_day(year, month, bank_holidays)
+    if isinstance(pay_day, int):
+        return _find_specific_day(year, month, pay_day, bank_holidays)
     return None
-
-
-def calculate_recurring(last_pay_date: str, interval: int) -> date | None:
-    """Calculate next payday for fixed-interval frequencies.
-
-    Returns an unadjusted date. The caller is responsible for adjusting.
-    """
-    if not last_pay_date:
-        _LOGGER.error("Missing last payday date for recurring payout.")
-        return None
-
-    last_date = date.fromisoformat(last_pay_date)
-    payday = last_date + timedelta(days=interval)
-
-    today = date.today()
-    while payday < today:
-        payday += timedelta(days=interval)
-
-    _LOGGER.info("Next recurring payday (before adjustment): %s", payday)
-    return payday
-
-
-def calculate_weekly(today: date, weekday: int) -> date:
-    """Return the next occurrence of the given weekday (unadjusted)."""
-    days_ahead = (weekday - today.weekday()) % 7
-    return today + timedelta(days=days_ahead)
 
 
 def _find_last_bank_day(

@@ -10,6 +10,13 @@
                     "country": "Country"
                 }
             },
+            "subdivision": {
+                "title": "Select region",
+                "description": "Some countries have regional holidays. Select your state/region for the most accurate holiday calendar, or choose 'Entire country' to use only national holidays",
+                "data": {
+                    "subdivision": "State/Region"
+                }
+            },
             "frequency": {
                 "title": "Select payout frequency",
                 "description": "Choose how often you get paid",

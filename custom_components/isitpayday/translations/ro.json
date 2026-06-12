@@ -54,9 +54,9 @@
             }
         },
         "error": {
-            "cannot_connect": "Nu s-a putut realiza conexiunea la API-ul de sărbători legale (date.nager.at). Verificați conexiunea la internet și încercați din nou.",
-            "invalid_country": "Țara selectată nu este acceptată de API-ul de sărbători legale",
-            "invalid_response": "S-a primit un răspuns neașteptat de la API-ul de sărbători legale"
+            "cannot_connect": "Conectarea la serviciul IsItPayday a eșuat",
+            "invalid_country": "Țara selectată nu este acceptată",
+            "invalid_response": "Răspuns nevalid de la serviciul IsItPayday"
         },
         "abort": {
             "reconfigured": "Configurația a fost actualizată cu succes.",

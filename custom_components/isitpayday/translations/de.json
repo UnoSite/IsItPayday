@@ -54,9 +54,9 @@
             }
         },
         "error": {
-            "cannot_connect": "Verbindung zur API für Feiertage (date.nager.at) konnte nicht hergestellt werden. Bitte überprüfen Sie Ihre Internetverbindung und versuchen Sie es erneut.",
-            "invalid_country": "Das ausgewählte Land wird von der API für Feiertage nicht unterstützt.",
-            "invalid_response": "Von der API für Feiertage wurde eine unerwartete Antwort empfangen."
+            "cannot_connect": "Verbindung zum IsItPayday-Dienst fehlgeschlagen",
+            "invalid_country": "Das ausgewählte Land wird nicht unterstützt",
+            "invalid_response": "Ungültige Antwort vom IsItPayday-Dienst"
         },
         "abort": {
             "reconfigured": "Die Konfiguration wurde erfolgreich aktualisiert.",

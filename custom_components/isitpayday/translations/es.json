@@ -54,9 +54,9 @@
             }
         },
         "error": {
-            "cannot_connect": "No se pudo conectar con la API de días festivos (date.nager.at). Comprueba tu conexión a Internet e inténtalo de nuevo.",
-            "invalid_country": "El país seleccionado no es compatible con la API de días festivos",
-            "invalid_response": "Se recibió una respuesta inesperada de la API de días festivos"
+            "cannot_connect": "No se pudo conectar con el servicio IsItPayday",
+            "invalid_country": "El país seleccionado no es compatible",
+            "invalid_response": "Respuesta no válida del servicio IsItPayday"
         },
         "abort": {
             "reconfigured": "La configuración se ha actualizado correctamente.",

@@ -54,9 +54,9 @@
             }
         },
         "error": {
-            "cannot_connect": "Kon nie aan die openbare vakansiedae-API (date.nager.at) koppel nie. Gaan asseblief jou internetverbinding na en probeer weer.",
-            "invalid_country": "Die geselekteerde land word nie deur die openbare vakansiedae-API ondersteun nie",
-            "invalid_response": "Het 'n onverwagte reaksie van die openbare vakansiedae-API ontvang"
+            "cannot_connect": "Kon nie aan die IsItPayday-diens koppel nie",
+            "invalid_country": "Die gekose land word nie ondersteun nie",
+            "invalid_response": "Ongeldige reaksie van die IsItPayday-diens"
         },
         "abort": {
             "reconfigured": "Konfigurasie is suksesvol opgedateer.",

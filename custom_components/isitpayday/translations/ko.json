@@ -54,9 +54,9 @@
             }
         },
         "error": {
-            "cannot_connect": "공휴일 API(date.nager.at)에 연결할 수 없습니다. 인터넷 연결을 확인한 후 다시 시도해 주세요.",
-            "invalid_country": "선택한 국가는 공휴일 API에서 지원되지 않습니다.",
-            "invalid_response": "공휴일 API로부터 예기치 않은 응답을 받았습니다."
+            "cannot_connect": "IsItPayday 서비스에 연결하지 못했습니다",
+            "invalid_country": "선택한 국가는 지원되지 않습니다",
+            "invalid_response": "IsItPayday 서비스의 응답이 올바르지 않습니다"
         },
         "abort": {
             "reconfigured": "구성이 성공적으로 업데이트되었습니다.",

@@ -54,9 +54,9 @@
             }
         },
         "error": {
-            "cannot_connect": "Yhteyttä yleisten vapaapäivien APIin (date.nager.at) ei voitu muodostaa. Tarkista internetyhteytesi ja yritä uudelleen.",
-            "invalid_country": "Valittua maata ei tueta yleisten vapaapäivien APIssa",
-            "invalid_response": "Yleisten vapaapäivien API palautti odottamattoman vastauksen"
+            "cannot_connect": "Yhteyden muodostaminen IsItPayday-palveluun epäonnistui",
+            "invalid_country": "Valittua maata ei tueta",
+            "invalid_response": "Virheellinen vastaus IsItPayday-palvelulta"
         },
         "abort": {
             "reconfigured": "Määritykset on päivitetty onnistuneesti.",

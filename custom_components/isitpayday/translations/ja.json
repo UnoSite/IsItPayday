@@ -54,9 +54,9 @@
             }
         },
         "error": {
-            "cannot_connect": "祝日API（date.nager.at）に接続できませんでした。インターネット接続を確認して、もう一度お試しください。",
-            "invalid_country": "選択した国は祝日APIでサポートされていません",
-            "invalid_response": "祝日APIから予期しない応答を受信しました"
+            "cannot_connect": "IsItPaydayサービスに接続できませんでした",
+            "invalid_country": "選択した国はサポートされていません",
+            "invalid_response": "IsItPaydayサービスから無効な応答が返されました"
         },
         "abort": {
             "reconfigured": "設定が正常に更新されました。",

@@ -54,9 +54,9 @@
             }
         },
         "error": {
-            "cannot_connect": "Nem sikerült csatlakozni a munkaszüneti napok API-jához (date.nager.at). Kérjük, ellenőrizze internetkapcsolatát, és próbálja újra.",
-            "invalid_country": "A kiválasztott országot nem támogatja a munkaszüneti napok API-ja",
-            "invalid_response": "Váratlan választ kaptunk a munkaszüneti napok API-jától"
+            "cannot_connect": "Nem sikerült csatlakozni az IsItPayday szolgáltatáshoz",
+            "invalid_country": "A kiválasztott ország nem támogatott",
+            "invalid_response": "Érvénytelen válasz érkezett az IsItPayday szolgáltatástól"
         },
         "abort": {
             "reconfigured": "A konfiguráció frissítése sikeresen megtörtént.",

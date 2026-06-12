@@ -15,6 +15,7 @@ CONF_PAY_DAY = "pay_day"
 CONF_LAST_PAY_DATE = "last_pay_date"
 CONF_BANK_OFFSET = "bank_offset"
 CONF_WEEKDAY = "weekday"
+CONF_SUBDIV = "subdivision"
 
 # Pay frequency options shown to user
 PAY_FREQ_MONTHLY = "monthly"

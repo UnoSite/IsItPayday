@@ -16,6 +16,7 @@ from .const import (
     CONF_LAST_PAY_DATE,
     CONF_WEEKDAY,
     CONF_BANK_OFFSET,
+    CONF_SUBDIV,
 )
 from .payday_calculator import calculate_next_payday
 
@@ -56,6 +57,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
                     data.get(CONF_LAST_PAY_DATE),
                     data.get(CONF_WEEKDAY),
                     data.get(CONF_BANK_OFFSET, 0),
+                    data.get(CONF_SUBDIV),
                 )
             )
 

@@ -54,9 +54,9 @@
             }
         },
         "error": {
-            "cannot_connect": "Kunde inte ansluta till API:t för allmänna helgdagar (date.nager.at). Kontrollera din internetanslutning och försök igen.",
-            "invalid_country": "Det valda landet stöds inte av API:t för allmänna helgdagar",
-            "invalid_response": "Fick ett oväntat svar från API:t för allmänna helgdagar"
+            "cannot_connect": "Det gick inte att ansluta till IsItPayday-tjänsten",
+            "invalid_country": "Det valda landet stöds inte",
+            "invalid_response": "Ogiltigt svar från IsItPayday-tjänsten"
         },
         "abort": {
             "reconfigured": "Konfigurationen har uppdaterats.",

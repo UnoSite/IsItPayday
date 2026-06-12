@@ -54,9 +54,9 @@
             }
         },
         "error": {
-            "cannot_connect": "Nie można połączyć się z API świąt publicznych (date.nager.at). Sprawdź połączenie z internetem i spróbuj ponownie.",
-            "invalid_country": "Wybrany kraj nie jest obsługiwany przez API świąt publicznych",
-            "invalid_response": "Otrzymano nieoczekiwaną odpowiedź z API świąt publicznych"
+            "cannot_connect": "Nie udało się połączyć z usługą IsItPayday",
+            "invalid_country": "Wybrany kraj nie jest obsługiwany",
+            "invalid_response": "Nieprawidłowa odpowiedź z usługi IsItPayday"
         },
         "abort": {
             "reconfigured": "Konfiguracja została pomyślnie zaktualizowana.",

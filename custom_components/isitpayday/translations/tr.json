@@ -54,9 +54,9 @@
             }
         },
         "error": {
-            "cannot_connect": "Resmi tatiller API'sine (date.nager.at) bağlanılamadı. Lütfen internet bağlantınızı kontrol edin ve tekrar deneyin.",
-            "invalid_country": "Seçilen ülke resmi tatiller API'si tarafından desteklenmiyor",
-            "invalid_response": "Resmi tatiller API'sinden beklenmeyen bir yanıt alındı"
+            "cannot_connect": "IsItPayday hizmetine bağlanılamadı",
+            "invalid_country": "Seçilen ülke desteklenmiyor",
+            "invalid_response": "IsItPayday hizmetinden geçersiz yanıt alındı"
         },
         "abort": {
             "reconfigured": "Yapılandırma başarıyla güncellendi.",

@@ -54,9 +54,9 @@
             }
         },
         "error": {
-            "cannot_connect": "Impossible de se connecter à l’API des jours fériés (date.nager.at). Veuillez vérifier votre connexion Internet et réessayer.",
-            "invalid_country": "Le pays sélectionné n’est pas pris en charge par l’API des jours fériés",
-            "invalid_response": "Réponse inattendue reçue de l’API des jours fériés"
+            "cannot_connect": "Échec de la connexion au service IsItPayday",
+            "invalid_country": "Le pays sélectionné n’est pas pris en charge",
+            "invalid_response": "Réponse non valide du service IsItPayday"
         },
         "abort": {
             "reconfigured": "La configuration a été mise à jour avec succès.",

@@ -16,6 +16,7 @@ from .const import (
     CONF_LAST_PAY_DATE,
     CONF_BANK_OFFSET,
     CONF_WEEKDAY,
+    CONF_SUBDIV,
     DEFAULT_COUNTRY,
     PAY_FREQ_MONTHLY,
     PAY_FREQ_BIMONTHLY,
@@ -32,9 +33,12 @@ from .const import (
     WEEKDAY_MAP,
     WEEKDAY_OPTIONS,
 )
-from .payday_calculator import get_supported_countries
+from .payday_calculator import get_country_subdivisions, get_supported_countries
 
 _LOGGER = logging.getLogger(__name__)
+
+# Sentinel for "no subdivision selected" in the subdivision dropdown.
+SUBDIV_NONE = "none"
 
 
 def _coerce_int(value, default: int) -> int:
@@ -60,7 +64,9 @@ class IsItPayday2ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         self.last_pay_date: str | None = None
         self.bank_offset: int = 0
         self.weekday: int | None = None
+        self.subdiv: str | None = None
         self.country_list: dict[str, str] = {}
+        self.subdivision_list: dict[str, str] = {}
         self.reconfig_entry = None
 
     async def _async_load_country_list(self) -> None:
@@ -106,6 +112,7 @@ class IsItPayday2ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         self.last_pay_date = data.get(CONF_LAST_PAY_DATE)
         self.bank_offset = _coerce_int(data.get(CONF_BANK_OFFSET), 0)
         self.weekday = data.get(CONF_WEEKDAY)
+        self.subdiv = data.get(CONF_SUBDIV)
 
         # pay_day can be a string option (last_bank_day, weekday name) OR an
         # int (specific day). Old entries may have ints stored as strings.
@@ -127,6 +134,33 @@ class IsItPayday2ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 
         self.name = user_input[CONF_NAME]
         self.country = user_input[CONF_COUNTRY]
+
+        # If the country has subdivisions (states/regions), offer them in an
+        # extra step so regional holidays are applied correctly.
+        self.subdivision_list = await self.hass.async_add_executor_job(
+            get_country_subdivisions, self.country
+        )
+        if self.subdivision_list:
+            return await self.async_step_subdivision()
+
+        self.subdiv = None
+        return await self.async_step_frequency()
+
+    async def async_step_subdivision(self, user_input=None) -> FlowResult:
+        """Handle optional selection of a state/region within the country."""
+        if user_input is None:
+            options = {SUBDIV_NONE: "Entire country (no region)"}
+            options.update(self.subdivision_list)
+            default = self.subdiv if self.subdiv in options else SUBDIV_NONE
+            return self.async_show_form(
+                step_id="subdivision",
+                data_schema=vol.Schema(
+                    {vol.Required(CONF_SUBDIV, default=default): vol.In(options)}
+                ),
+            )
+
+        selection = user_input[CONF_SUBDIV]
+        self.subdiv = None if selection == SUBDIV_NONE else selection
         return await self.async_step_frequency()
 
     async def async_step_frequency(self, user_input=None) -> FlowResult:
@@ -222,6 +256,7 @@ class IsItPayday2ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             CONF_LAST_PAY_DATE: self.last_pay_date,
             CONF_BANK_OFFSET: self.bank_offset,
             CONF_WEEKDAY: self.weekday,
+            CONF_SUBDIV: self.subdiv,
         }
 
         if self.reconfig_entry:
@@ -333,4 +368,4 @@ class IsItPayday2ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             {
                 vol.Required(CONF_PAY_DAY, default=default): vol.In(WEEKDAY_OPTIONS)
             }
-            )
+    )

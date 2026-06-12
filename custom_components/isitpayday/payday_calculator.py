@@ -11,6 +11,7 @@ import re
 from datetime import date, timedelta
 
 import holidays as holidays_lib
+from holidays.constants import BANK, OPTIONAL, PUBLIC
 
 from .const import (
     PAY_FREQ_MONTHLY,
@@ -54,15 +55,43 @@ def get_supported_countries() -> dict[str, str]:
     return dict(sorted(countries.items(), key=lambda item: item[1]))
 
 
+# Some countries place their de facto bank closing days in categories other
+# than BANK. For Denmark, Constitution Day, Christmas Eve and New Year's Eve
+# are in the OPTIONAL category, but banks are closed on those days.
+_EXTRA_CATEGORIES_PER_COUNTRY: dict[str, tuple] = {
+    "DK": (OPTIONAL,),
+}
+
+
 def get_bank_holidays(country: str, years: list[int]):
-    """Return a holidays object for the given country, pre-populated with years.
+    """Return a holidays object covering all bank closing days for a country.
+
+    Includes the PUBLIC category, the BANK category where the country
+    supports it, and any country-specific extra categories that represent
+    de facto bank closing days. Only categories actually supported by the
+    country are requested, so no errors are raised for unsupported ones.
 
     The returned object supports `date in obj` membership checks and lazily
     populates additional years on demand, so lookups outside the given
     years also work correctly.
     """
     try:
-        return holidays_lib.country_holidays(country, years=years)
+        probe = holidays_lib.country_holidays(country)
+        supported = getattr(probe, "supported_categories", (PUBLIC,))
+
+        categories = [PUBLIC]
+        if BANK in supported:
+            categories.append(BANK)
+        for extra in _EXTRA_CATEGORIES_PER_COUNTRY.get(country, ()):
+            if extra in supported and extra not in categories:
+                categories.append(extra)
+
+        _LOGGER.debug(
+            "Using holiday categories %s for country %s", categories, country
+        )
+        return holidays_lib.country_holidays(
+            country, years=years, categories=tuple(categories)
+        )
     except NotImplementedError:
         _LOGGER.error(
             "Country '%s' is not supported by the holidays package.", country

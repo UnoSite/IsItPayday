@@ -1,4 +1,4 @@
-name: Check if PR is on hold
+name: Check if PR is on hold or work in progress
 
 on:
   pull_request:
@@ -18,4 +18,12 @@ jobs:
         if: contains(github.event.pull_request.labels.*.name, 'pr-on-hold')
         run: |
           echo "This PR is currently on hold."
+          exit 1
+  fail-if-work-in-progress:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fail if PR is work in progress
+        if: contains(github.event.pull_request.labels.*.name, 'work-in-progress')
+        run: |
+          echo "This PR is work in progress"
           exit 1

@@ -22,6 +22,27 @@ from .payday_calculator import calculate_upcoming_paydays
 
 _LOGGER = logging.getLogger(__name__)
 
+
+def _normalize_pay_day(value):
+    """Normalize pay_day from older config entries.
+
+    Specific days may have been stored as strings (e.g. '31') by older
+    versions; convert those to int. String options like 'last_bank_day'
+    pass through unchanged.
+    """
+    if isinstance(value, str) and value.isdigit():
+        return int(value)
+    return value
+
+
+def _normalize_int(value, default: int) -> int:
+    """Normalize an int setting that may have been stored as a string."""
+    try:
+        return int(value)
+    except (TypeError, ValueError):
+        return default
+
+
 _PLATFORMS = ["sensor", "binary_sensor", "calendar"]
 
 
@@ -62,10 +83,10 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
                     calculate_upcoming_paydays,
                     data[CONF_COUNTRY],
                     data[CONF_PAY_FREQ],
-                    data.get(CONF_PAY_DAY),
+                    _normalize_pay_day(data.get(CONF_PAY_DAY)),
                     data.get(CONF_LAST_PAY_DATE),
                     data.get(CONF_WEEKDAY),
-                    data.get(CONF_BANK_OFFSET, 0),
+                    _normalize_int(data.get(CONF_BANK_OFFSET), 0),
                     data.get(CONF_SUBDIV),
                     12,
                 )

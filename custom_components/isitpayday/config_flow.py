@@ -297,7 +297,9 @@ class IsItPaydayConfigFlow(PaydayFlowMixin, config_entries.ConfigFlow, domain=DO
                 step_id="user",
                 data_schema=vol.Schema(
                     {
-                        vol.Required(CONF_NAME, default=""): str,
+                        vol.Required(CONF_NAME, default=""): vol.All(
+                            str, vol.Length(min=1)
+                        ),
                         vol.Required(
                             CONF_COUNTRY, default=default_country
                         ): vol.In(self.country_list),

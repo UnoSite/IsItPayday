@@ -28,9 +28,6 @@ from .const import (
 
 _LOGGER = logging.getLogger(__name__)
 
-# Safety limit for month-based search loops.
-_MAX_MONTH_ITERATIONS = 24
-
 
 def get_supported_countries() -> dict[str, str]:
     """Return supported countries as {ISO code: display name}, sorted by name."""
@@ -214,7 +211,17 @@ def calculate_upcoming_paydays(
     which are today or later.
     """
     count = max(1, min(count, 24))
-    _LOGGER.info(
+
+    # Defensive normalization: older config entries may provide numeric
+    # settings as strings (e.g. pay_day='31', bank_offset='2').
+    if isinstance(pay_day, str) and pay_day.isdigit():
+        pay_day = int(pay_day)
+    try:
+        bank_offset = int(bank_offset)
+    except (TypeError, ValueError):
+        bank_offset = 0
+
+    _LOGGER.debug(
         "Calculating %s upcoming paydays for %s with frequency: %s",
         count,
         country,
@@ -253,10 +260,8 @@ def calculate_upcoming_paydays(
             _LOGGER.error("Missing last payday date for month-interval payout.")
             return []
         nxt = _add_months(date.fromisoformat(last_pay_date), 2)
-        guard = 0
-        while nxt < today and guard < _MAX_MONTH_ITERATIONS:
+        while nxt < today:
             nxt = _add_months(nxt, 2)
-            guard += 1
         for _ in range(count):
             raw.append(_adjust_not_before_today(nxt, today, bank_holidays))
             nxt = _add_months(nxt, 2)
@@ -299,7 +304,7 @@ def calculate_upcoming_paydays(
         return []
 
     paydays = sorted(set(d for d in raw if d >= today))[:count]
-    _LOGGER.info("Upcoming paydays calculated: %s", paydays)
+    _LOGGER.debug("Upcoming paydays calculated: %s", paydays)
     return paydays
 
 

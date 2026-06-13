@@ -62,8 +62,7 @@
         },
         "error": {
             "invalid_country": "The selected country is not supported by the holidays library"
-        },
-        "abort": {}
+        }
     },
     "options": {
         "step": {

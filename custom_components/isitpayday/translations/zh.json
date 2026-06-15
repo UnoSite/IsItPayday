@@ -1,10 +1,10 @@
 {
-    "title": "IsItPayday",
+    "title": "發薪日到了嗎？",
     "config": {
         "step": {
             "user": {
                 "title": "选择国家",
-                "description": "The selected country is used to determine public holidays (calculated locally, no internet required)",
+                "description": "所选国家将用于检查公共假日",
                 "data": {
                     "name": "实例名称",
                     "country": "国家"
@@ -61,14 +61,14 @@
             }
         },
         "error": {
-            "invalid_country": "The selected country is not supported by the holidays library"
+            "invalid_country": "所选国家/地区不受公共假日 API 支持"
         }
     },
     "options": {
         "step": {
             "init": {
-                "title": "Adjust IsItPayday settings",
-                "description": "Modify the settings for this payday tracker",
+                "title": "调整 IsItPayday 设置",
+                "description": "修改此发薪跟踪器的设置",
                 "data": {
                     "country": "Country"
                 }

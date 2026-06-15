@@ -74,3 +74,7 @@ ICON_NEXT_PAYDAY = "mdi:calendar-clock"
 ICON_IS_IT_PAYDAY_TRUE = "mdi:cash-fast"
 ICON_IS_IT_PAYDAY_FALSE = "mdi:cash-clock"
 ICON_DAYS_TO = "mdi:calendar-end"
+ICON_LAST_PAYDAY = "mdi:calendar-check"
+
+# Event fired on the day a payday occurs
+EVENT_PAYDAY = "isitpayday_payday"

@@ -195,6 +195,99 @@ def calculate_next_payday(
     return paydays[0] if paydays else None
 
 
+def calculate_last_payday(
+    country: str,
+    pay_frequency: str,
+    pay_day=None,
+    last_pay_date=None,
+    weekday=None,
+    bank_offset: int = 0,
+    subdiv: str | None = None,
+) -> date | None:
+    """Calculate the most recent payday on or before today.
+
+    Returns None if no past payday can be determined (for example when an
+    interval-based frequency has a last_pay_date in the future).
+    """
+    # Defensive normalization (mirrors calculate_upcoming_paydays).
+    if isinstance(pay_day, str) and pay_day.isdigit():
+        pay_day = int(pay_day)
+    try:
+        bank_offset = int(bank_offset)
+    except (TypeError, ValueError):
+        bank_offset = 0
+
+    today = date.today()
+    bank_holidays = get_bank_holidays(
+        country, [today.year - 1, today.year, today.year + 1], subdiv
+    )
+
+    if pay_frequency == PAY_FREQ_MONTHLY:
+        year, month = today.year, today.month
+        for _ in range(24):
+            payday = _payday_for_month(
+                year, month, pay_day, bank_offset, bank_holidays
+            )
+            if payday is not None and payday <= today:
+                return payday
+            month -= 1
+            if month == 0:
+                month = 12
+                year -= 1
+        return None
+
+    if pay_frequency == PAY_FREQ_BIMONTHLY:
+        if not last_pay_date:
+            return None
+        anchor = date.fromisoformat(last_pay_date)
+        prev = None
+        cursor = anchor
+        # Walk forward in 2-month steps, tracking the last value <= today.
+        guard = 0
+        while cursor <= today and guard < 600:
+            prev = cursor
+            cursor = _add_months(cursor, 2)
+            guard += 1
+        if prev is None:
+            return None
+        return _adjust_to_previous_bank_day(prev, bank_holidays)
+
+    if pay_frequency in (
+        PAY_FREQ_28_DAYS,
+        PAY_FREQ_14_DAYS,
+        PAY_FREQ_QUARTERLY,
+        PAY_FREQ_SEMIANNUAL,
+        PAY_FREQ_ANNUAL,
+    ):
+        interval = {
+            PAY_FREQ_14_DAYS: 14,
+            PAY_FREQ_28_DAYS: 28,
+            PAY_FREQ_QUARTERLY: 91,
+            PAY_FREQ_SEMIANNUAL: 182,
+            PAY_FREQ_ANNUAL: 365,
+        }[pay_frequency]
+        if not last_pay_date:
+            return None
+        cursor = date.fromisoformat(last_pay_date)
+        if cursor > today:
+            return None
+        prev = cursor
+        while cursor <= today:
+            prev = cursor
+            cursor += timedelta(days=interval)
+        return _adjust_to_previous_bank_day(prev, bank_holidays)
+
+    if pay_frequency == PAY_FREQ_WEEKLY:
+        if weekday is None:
+            return None
+        days_behind = (today.weekday() - weekday) % 7
+        candidate = today - timedelta(days=days_behind)
+        return _adjust_to_previous_bank_day(candidate, bank_holidays)
+
+    _LOGGER.error("Invalid payday frequency: %s", pay_frequency)
+    return None
+
+
 def calculate_upcoming_paydays(
     country: str,
     pay_frequency: str,

@@ -9,7 +9,7 @@
 
 
 
-![Logo](https://raw.githubusercontent.com/UnoSite/IsItPayday/main/logo.png)
+![Icon](https://raw.githubusercontent.com/UnoSite/IsItPayday/main/custom_components/isitpayday/brand/icon.png)
 
 
 

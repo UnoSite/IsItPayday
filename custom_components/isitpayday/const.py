@@ -15,6 +15,7 @@ CONF_PAY_DAY = "pay_day"
 CONF_LAST_PAY_DATE = "last_pay_date"
 CONF_BANK_OFFSET = "bank_offset"
 CONF_WEEKDAY = "weekday"
+CONF_SUBDIV = "subdivision"
 
 # Pay frequency options shown to user
 PAY_FREQ_MONTHLY = "monthly"
@@ -67,12 +68,13 @@ DEFAULT_MONTHLY_DAY = PAY_DAY_LAST_BANK_DAY
 DEFAULT_BANK_OFFSET = 0
 DEFAULT_SPECIFIC_DAY = 31
 
-# API endpoints (year is substituted in payday_calculator.py)
-API_COUNTRIES = "https://date.nager.at/api/v3/AvailableCountries"
-API_HOLIDAYS = "https://date.nager.at/api/v3/PublicHolidays/{year}/{country}"
 
 # Sensor icons
 ICON_NEXT_PAYDAY = "mdi:calendar-clock"
 ICON_IS_IT_PAYDAY_TRUE = "mdi:cash-fast"
 ICON_IS_IT_PAYDAY_FALSE = "mdi:cash-clock"
 ICON_DAYS_TO = "mdi:calendar-end"
+ICON_LAST_PAYDAY = "mdi:calendar-check"
+
+# Event fired on the day a payday occurs
+EVENT_PAYDAY = "isitpayday_payday"

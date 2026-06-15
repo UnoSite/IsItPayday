@@ -42,18 +42,25 @@ class IsItPaydayCalendar(CoordinatorEntity, CalendarEntity):
         self._instance_name = instance_name
         self._entry_id = entry_id
 
-    def _get_payday(self) -> date | None:
-        """Return the next payday from the coordinator as a date, or None."""
-        payday = self.coordinator.data.get("payday_next")
-        if not payday:
-            return None
-        if isinstance(payday, date):
-            return payday
-        try:
-            return date.fromisoformat(payday)
-        except (ValueError, TypeError):
-            _LOGGER.warning("Invalid payday value in coordinator: %s", payday)
-            return None
+    def _get_paydays(self) -> list[date]:
+        """Return all upcoming paydays from the coordinator as dates."""
+        data = self.coordinator.data or {}
+        raw = data.get("paydays_upcoming")
+        if not raw:
+            # Fallback for older coordinator data with a single payday.
+            single = data.get("payday_next")
+            raw = [single] if single else []
+
+        paydays: list[date] = []
+        for value in raw:
+            if isinstance(value, date):
+                paydays.append(value)
+                continue
+            try:
+                paydays.append(date.fromisoformat(value))
+            except (ValueError, TypeError):
+                _LOGGER.warning("Invalid payday value in coordinator: %s", value)
+        return sorted(paydays)
 
     def _build_event(self, payday: date) -> CalendarEvent:
         """Build an all-day CalendarEvent for the given payday.
@@ -71,10 +78,11 @@ class IsItPaydayCalendar(CoordinatorEntity, CalendarEntity):
     @property
     def event(self) -> CalendarEvent | None:
         """Return the next upcoming payday event."""
-        payday = self._get_payday()
-        if payday is None or payday < date.today():
-            return None
-        return self._build_event(payday)
+        today = date.today()
+        for payday in self._get_paydays():
+            if payday >= today:
+                return self._build_event(payday)
+        return None
 
     async def async_get_events(
         self,
@@ -82,16 +90,13 @@ class IsItPaydayCalendar(CoordinatorEntity, CalendarEntity):
         start_date: datetime,
         end_date: datetime,
     ) -> list[CalendarEvent]:
-        """Return payday events within the requested time window."""
-        payday = self._get_payday()
-        if payday is None:
-            return []
-
-        # Compare on dates since the payday event is all-day.
-        if start_date.date() <= payday < end_date.date():
-            return [self._build_event(payday)]
-
-        return []
+        """Return all payday events within the requested time window."""
+        # Compare on dates since payday events are all-day.
+        return [
+            self._build_event(payday)
+            for payday in self._get_paydays()
+            if start_date.date() <= payday < end_date.date()
+        ]
 
     @property
     def device_info(self) -> dict:
@@ -101,4 +106,4 @@ class IsItPaydayCalendar(CoordinatorEntity, CalendarEntity):
             "manufacturer": CONF_MANUFACTURER,
             "model": CONF_MODEL,
             "configuration_url": CONF_CONFIG_URL,
-        }
+            }

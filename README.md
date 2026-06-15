@@ -7,8 +7,11 @@
 [![Stars](https://img.shields.io/github/stars/UnoSite/IsItPayday?style=for-the-badge&labelColor=333333&color=cad401)](#)
 [![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/UnoSite/IsItPayday/total?style=for-the-badge&labelColor=333333&color=cad401)](#)
 
-<!-- FIX #1: Changed to raw.githubusercontent.com so the image renders correctly -->
-![Logo](https://raw.githubusercontent.com/UnoSite/IsItPayday/main/logo.png)
+
+
+![Icon](https://raw.githubusercontent.com/UnoSite/IsItPayday/main/custom_components/isitpayday/brand/icon.png)
+
+
 
 [![Sponsor Github](https://img.shields.io/badge/Sponsor-Github-000?style=for-the-badge&logo=githubsponsors&labelColor=333333&color=cad401&logoColor=EA4AAA)](https://github.com/sponsors/UnoSite)\
 [![Sponsor Buy Me a Coffee](https://img.shields.io/badge/Sponsor-Buy%20me%20a%20coffee-000?style=for-the-badge&logo=buymeacoffee&labelColor=333333&color=cad401&logoColor=FFDD00)](https://buymeacoffee.com/UnoSite)\
@@ -18,13 +21,15 @@
 
 ## 📌 Overview
 
-**IsItPayday** is a custom integration for Home Assistant that calculates and displays your next payday based on your country's public holidays and your specified pay frequency.
+**IsItPayday** is a custom integration for Home Assistant that calculates and displays your next payday based on your country's public and bank holidays and your chosen pay frequency.
+
+All calculations are performed **locally** using the [holidays](https://pypi.org/project/holidays/) Python package - no cloud services, external API, or internet connection required.
 
 ---
 
 ## 🚀 Features
 
-- **Device-based integration:** All sensors are grouped under a single device for each configured instance.
+- **Device-based integration:** All entities are grouped under a single device for each configured instance.
 
 - **Binary Sensor:** `binary_sensor.<instance_name>_is_it_payday`
   - Indicates whether today is a payday (`on` or `off`).
@@ -34,6 +39,7 @@
 
 - **Sensor:** `sensor.<instance_name>_next_payday`
   - Displays the date of the next payday.
+  - Exposes extra attributes: `upcoming_paydays` (the next several paydays), `paydays_this_month` (remaining paydays in the current month) and `paydays_this_month_count`.
   - Icon: `mdi:calendar-clock`. <sup><sup>([See icon](https://pictogrammers.com/library/mdi/icon/calendar-clock/))</sup></sup>
 
 - **Sensor:** `sensor.<instance_name>_days_to`
@@ -41,9 +47,9 @@
   - Icon: `mdi:calendar-end`. <sup><sup>([See icon](https://pictogrammers.com/library/mdi/icon/calendar-end/))</sup></sup>
 
 - **Calendar:** `calendar.<instance_name>_payday`
-  - Adds your next payday as a calendar event.
-  - All-day event.
-  - Automatically updates when payday changes.
+  - Shows your upcoming paydays as all-day calendar events.
+  - Multiple future paydays are displayed, not just the next one.
+  - Automatically updates when paydays change.
 
 - **Custom Payday Calculation:**
   - Supports various pay frequencies:
@@ -57,14 +63,18 @@
     - **Annually**
 
 - **Automatic Adjustment for Holidays and Weekends:**
-  - Fetches public holidays from the [Nager.Date API](https://date.nager.at).
-  - Adjusts payday if it falls on a weekend or public holiday.
+  - Public holidays and bank holidays (where available) are calculated locally using the [holidays](https://pypi.org/project/holidays/) Python package.
+  - Adjusts payday if it falls on a weekend or holiday.
+  - Works fully offline - no internet connection or external API required.
 
-- **Reconfiguration Support:**
-  - After initial setup, you can adjust all settings via the **Configure** button in the **Devices & Services** section.
+- **Regional Holiday Support:**
+  - For countries with regional holidays (e.g. German Bundesländer or US states), you can select your state/region during setup for the most accurate holiday calendar.
 
-- **Persistent Notification After Reconfiguration:**
-  - When settings are updated, you will see a persistent notification confirming the change.
+- **Options Flow:**
+  - After initial setup, you can adjust all settings via the **Configure** button in the **Devices & Services** section. The integration reloads automatically when settings are saved - no restart required.
+
+- **Diagnostics:**
+  - Downloadable diagnostics (configuration and latest calculation) are available from the device page to make troubleshooting and bug reports easier.
 
 ---
 
@@ -94,9 +104,14 @@
 ### Step 1: Instance Name & Country
 
 - Enter a name for this instance (e.g. `My Payday`).
-- Choose your country from the dropdown list. The integration will automatically pre-select the country based on your Home Assistant configuration, but you can change it if needed.
+- Choose your country from the dropdown list. The list contains all countries supported by the [holidays](https://pypi.org/project/holidays/) package. The integration automatically pre-selects the country based on your Home Assistant configuration, but you can change it if needed.
 
-### Step 2: Select Payout Frequency
+### Step 2: Region (only for some countries)
+
+- If the selected country has regional holidays, you are asked to select your state/region. Choose **Entire country** to use only national holidays, or pick a region to include its regional holidays in the calculation.
+- Countries without regional holidays skip this step automatically.
+
+### Step 3: Select Payout Frequency
 
 - **Options:**
   - `weekly`: Weekly
@@ -108,7 +123,7 @@
   - `semiannual`: Every 6 months
   - `annual`: Every year
 
-### Step 3: Frequency-specific Settings
+### Step 4: Frequency-specific Settings
 
 - **Monthly:**
   - **Options:**
@@ -128,31 +143,40 @@
   - **Days before last bank day** (0–10, default 0): Specify how many days before the last bank day you are paid. The resulting date is also validated to be a bank day.
 
 - **If "Specific day" is selected:**
-  - **Specific day** (1–31, default 31): Choose the exact day of the month. If that day falls on a weekend or public holiday, the integration adjusts to the previous working day.
+  - **Specific day** (1–31, default 31): Choose the exact day of the month. If that day falls on a weekend or holiday, the integration adjusts to the previous working day.
 
 ---
 
 ## 📡 Entities
 
-<!-- FIX #3: Added the calendar entity to the table -->
 | Entity ID                                     | Name          | Description                                       |
 |-----------------------------------------------|---------------|---------------------------------------------------|
 | `binary_sensor.<instance_name>_is_it_payday`  | Is It Payday? | `on` if today is payday, otherwise `off`.         |
 | `sensor.<instance_name>_next_payday`          | Next Payday   | Date of the next payday (`YYYY-MM-DD`).           |
 | `sensor.<instance_name>_days_to`              | Days until    | Number of days until the next payday.             |
-| `calendar.<instance_name>_payday`             | Payday        | All-day calendar event for the next payday.       |
+| `calendar.<instance_name>_payday`             | Payday        | All-day calendar events for upcoming paydays.     |
 
 All entities are grouped under a single device, named after your chosen **Instance Name** during setup.
 
+### Next Payday Attributes
+
+The **Next Payday** sensor exposes additional attributes useful for automations:
+
+| Attribute                  | Description                                                        |
+|----------------------------|--------------------------------------------------------------------|
+| `upcoming_paydays`         | List of the upcoming paydays (`YYYY-MM-DD`).                       |
+| `paydays_this_month`       | Remaining paydays in the current calendar month.                   |
+| `paydays_this_month_count` | Number of remaining paydays this month (handy for biweekly pay).   |
+
 ---
 
-## 🔧 Reconfiguration
+## 🔧 Changing Settings
 
-After the integration is set up, you can change any setting (country, pay frequency, day, etc.) directly from:
+After the integration is set up, you can change any setting (country, region, pay frequency, day, etc.) directly from:
 
 **Settings > Devices & Services > Is It Payday > Configure**
 
-Once saved, a **persistent notification** will appear confirming the update.
+The integration reloads automatically when you save - no restart required. To rename an instance, use the rename (pencil) option on the integration entry.
 
 ---
 
@@ -160,7 +184,6 @@ Once saved, a **persistent notification** will appear confirming the update.
 
 You can add a **Payday Info Card** to your Home Assistant dashboard using the following Lovelace YAML configuration:
 
-<!-- FIX #5: Added the calendar entity to the dashboard example -->
 ```yaml
 type: entities
 title: Payday Information
@@ -180,15 +203,17 @@ entities:
 ## 🛠️ Troubleshooting
 
 **Sensors show "Unknown"**
-- Check that your Home Assistant instance has internet access and can reach [date.nager.at](https://date.nager.at).
-- Verify that the selected country is supported by checking the [list of available countries](https://date.nager.at/api/v3/AvailableCountries).
+- Check the Home Assistant logs for messages from `custom_components.isitpayday` - they will indicate if the configured country or pay settings are invalid.
+- Verify that the selected country is supported by the [holidays package](https://github.com/vacanza/holidays#available-countries).
 
 **Payday date seems wrong**
 - Make sure the correct pay frequency and reference date (last payday) are configured.
 - If you use "Last bank day with offset", verify that the offset does not push the date into a weekend or holiday — the integration adjusts automatically, but double-check in the logs.
+- For regional holidays, make sure the correct state/region is selected via **Configure**.
 
 **Integration fails to load**
 - Check the Home Assistant logs under **Settings > System > Logs** and look for entries from `custom_components.isitpayday`.
+- Download diagnostics from the device page and attach them to a bug report.
 - Try removing and re-adding the integration.
 
 ---

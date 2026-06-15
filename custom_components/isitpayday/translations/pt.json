@@ -10,6 +10,13 @@
                     "country": "País"
                 }
             },
+            "subdivision": {
+                "title": "Select region",
+                "description": "Some countries have regional holidays. Select your state/region for the most accurate holiday calendar, or choose 'Entire country' to use only national holidays",
+                "data": {
+                    "subdivision": "State/Region"
+                }
+            },
             "frequency": {
                 "title": "Selecione a frequência de pagamento",
                 "description": "Escolha com que frequência você recebe o pagamento",
@@ -54,23 +61,73 @@
             }
         },
         "error": {
-            "cannot_connect": "Não foi possível conectar à API de feriados públicos (date.nager.at). Verifique a sua ligação à internet e tente novamente.",
-            "invalid_country": "O país selecionado não é suportado pela API de feriados públicos",
-            "invalid_response": "Resposta inválida do serviço IsItPayday"
-        },
-        "abort": {
-            "reconfigured": "A configuração foi atualizada com sucesso.",
-            "missing_entry": "Não foi possível iniciar a reconfiguração: nenhum ID de entrada foi encontrado.",
-            "entry_not_found": "Não foi possível iniciar a reconfiguração: a entrada já não existe.",
-            "cannot_connect": "Não foi possível conectar à API de feriados públicos (date.nager.at). Verifique sua conexão com a internet e tente novamente."
+            "invalid_country": "O país selecionado não é suportado pela API de feriados públicos"
         }
     },
     "options": {
         "step": {
             "init": {
                 "title": "Ajustar as configurações do IsItPayday",
-                "description": "Modifique as configurações deste rastreador de pagamento"
+                "description": "Modifique as configurações deste rastreador de pagamento",
+                "data": {
+                    "country": "Country"
+                }
+            },
+            "subdivision": {
+                "title": "Select region",
+                "description": "Some countries have regional holidays. Select your state/region for the most accurate holiday calendar, or choose 'Entire country' to use only national holidays",
+                "data": {
+                    "subdivision": "State/Region"
+                }
+            },
+            "frequency": {
+                "title": "Select payout frequency",
+                "description": "Choose how often you get paid",
+                "data": {
+                    "pay_frequency": "Payout frequency"
+                }
+            },
+            "monthly_day": {
+                "title": "Select day of month",
+                "description": "Choose which day of the month you are paid",
+                "data": {
+                    "pay_day": "Day of month"
+                }
+            },
+            "bank_offset": {
+                "title": "Days before the last banking day",
+                "description": "If you are paid a few days before the last banking day, choose how many days before",
+                "data": {
+                    "bank_offset": "Days before"
+                }
+            },
+            "specific_day": {
+                "title": "Select specific day",
+                "description": "Select the exact day you are paid each month",
+                "data": {
+                    "pay_day": "Specific day"
+                }
+            },
+            "cycle_last_paydate": {
+                "title": "Select last payday",
+                "description": "Select the last date you were paid. This will be used to calculate the next payday",
+                "data": {
+                    "last_pay_date": "Last payday"
+                }
+            },
+            "weekly": {
+                "title": "Select weekly payday",
+                "description": "Choose which weekday you are paid each week",
+                "data": {
+                    "pay_day": "Payday weekday"
+                }
             }
+        }
+    },
+    "issues": {
+        "unsupported_country": {
+            "title": "Country no longer supported",
+            "description": "The country \"{country}\" configured for IsItPayday is no longer supported by the holidays library. Please open the integration options and select a supported country."
         }
     }
 }

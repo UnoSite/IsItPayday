@@ -10,6 +10,13 @@
                     "country": "البلد"
                 }
             },
+            "subdivision": {
+                "title": "Select region",
+                "description": "Some countries have regional holidays. Select your state/region for the most accurate holiday calendar, or choose 'Entire country' to use only national holidays",
+                "data": {
+                    "subdivision": "State/Region"
+                }
+            },
             "frequency": {
                 "title": "حدد وتيرة صرف الراتب",
                 "description": "اختر عدد مرات استلامك للراتب",
@@ -54,23 +61,73 @@
             }
         },
         "error": {
-            "cannot_connect": "فشل الاتصال بخدمة IsItPayday",
-            "invalid_country": "البلد المحدد غير مدعوم",
-            "invalid_response": "استجابة غير صالحة من خدمة IsItPayday"
-        },
-        "abort": {
-            "reconfigured": "تم تحديث الإعداد بنجاح.",
-            "missing_entry": "تعذّر بدء إعادة الإعداد: لم يتم العثور على معرّف الإدخال.",
-            "entry_not_found": "تعذّر بدء إعادة الإعداد: لم يعد الإدخال موجودًا.",
-            "cannot_connect": "تعذر الاتصال بواجهة برمجة تطبيقات العطلات الرسمية (date.nager.at). يُرجى التحقق من اتصالك بالإنترنت والمحاولة مرة أخرى."
+            "invalid_country": "البلد المحدد غير مدعوم"
         }
     },
     "options": {
         "step": {
             "init": {
                 "title": "اضبط إعدادات IsItPayday",
-                "description": "عدّل إعدادات متتبع يوم صرف الراتب هذا"
+                "description": "عدّل إعدادات متتبع يوم صرف الراتب هذا",
+                "data": {
+                    "country": "Country"
+                }
+            },
+            "subdivision": {
+                "title": "Select region",
+                "description": "Some countries have regional holidays. Select your state/region for the most accurate holiday calendar, or choose 'Entire country' to use only national holidays",
+                "data": {
+                    "subdivision": "State/Region"
+                }
+            },
+            "frequency": {
+                "title": "Select payout frequency",
+                "description": "Choose how often you get paid",
+                "data": {
+                    "pay_frequency": "Payout frequency"
+                }
+            },
+            "monthly_day": {
+                "title": "Select day of month",
+                "description": "Choose which day of the month you are paid",
+                "data": {
+                    "pay_day": "Day of month"
+                }
+            },
+            "bank_offset": {
+                "title": "Days before the last banking day",
+                "description": "If you are paid a few days before the last banking day, choose how many days before",
+                "data": {
+                    "bank_offset": "Days before"
+                }
+            },
+            "specific_day": {
+                "title": "Select specific day",
+                "description": "Select the exact day you are paid each month",
+                "data": {
+                    "pay_day": "Specific day"
+                }
+            },
+            "cycle_last_paydate": {
+                "title": "Select last payday",
+                "description": "Select the last date you were paid. This will be used to calculate the next payday",
+                "data": {
+                    "last_pay_date": "Last payday"
+                }
+            },
+            "weekly": {
+                "title": "Select weekly payday",
+                "description": "Choose which weekday you are paid each week",
+                "data": {
+                    "pay_day": "Payday weekday"
+                }
             }
+        }
+    },
+    "issues": {
+        "unsupported_country": {
+            "title": "Country no longer supported",
+            "description": "The country \"{country}\" configured for IsItPayday is no longer supported by the holidays library. Please open the integration options and select a supported country."
         }
     }
 }

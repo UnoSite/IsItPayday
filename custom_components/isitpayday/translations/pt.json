@@ -4,7 +4,7 @@
         "step": {
             "user": {
                 "title": "Selecionar país",
-                "description": "The selected country is used to determine public holidays (calculated locally, no internet required)",
+                "description": "O país selecionado é usado para verificar feriados públicos",
                 "data": {
                     "name": "Nome da instância",
                     "country": "País"
@@ -61,14 +61,14 @@
             }
         },
         "error": {
-            "invalid_country": "The selected country is not supported by the holidays library"
+            "invalid_country": "O país selecionado não é suportado pela API de feriados públicos"
         }
     },
     "options": {
         "step": {
             "init": {
-                "title": "Select country",
-                "description": "The selected country is used to determine public holidays (calculated locally, no internet required)",
+                "title": "Ajustar as configurações do IsItPayday",
+                "description": "Modifique as configurações deste rastreador de pagamento",
                 "data": {
                     "country": "Country"
                 }

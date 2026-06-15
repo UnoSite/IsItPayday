@@ -229,16 +229,3 @@ If you encounter any issues or have feature requests, please open an issue on Gi
 ## 📜 License
 
 This integration is licensed under the [MIT License](https://github.com/UnoSite/IsItPayday/blob/main/LICENSE.md).
-```
-
-**Opsummering af ændringerne:**
-
-- **Overview** — Nævner nu både public og bank holidays, og fremhæver lokal beregning med `holidays`-pakken.
-- **Features** — "Reconfiguration Support" + "Persistent Notification" erstattet af "Options Flow"; tilføjet nye punkter om regional holiday support og diagnostik; Next Payday-sensoren beskriver nu sine nye attributter; kalenderen beskriver flere kommende lønningsdage.
-- **Configuration** — Nyt "Step 2: Region"-trin indsat, og de øvrige trin renummereret. Bemærker at trinnet springes over for lande uden regioner.
-- **Entities** — Ny undertabel "Next Payday Attributes" der dokumenterer `upcoming_paydays`, `paydays_this_month` og `paydays_this_month_count`.
-- **Reconfiguration → Changing Settings** — Omskrevet til options flow med automatisk reload; omdøbning via blyant-ikonet.
-- **Troubleshooting** — Tilføjet tips om regionsvalg og om at downloade diagnostik.
-- Fjernet de gamle `<!-- FIX #... -->`-kommentarer, da de var interne noter fra en tidligere gennemgang og ikke hører hjemme i en udgivet README.
-
-Vil du have den gemt som fil, eller har du den herfra?

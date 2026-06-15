@@ -67,8 +67,8 @@
     "options": {
         "step": {
             "init": {
-                "title": "Select country",
-                "description": "The selected country is used to determine public holidays (calculated locally, no internet required)",
+                "title": "Adjust IsItPayday settings",
+                "description": "Modify the settings for this payday tracker",
                 "data": {
                     "country": "Country"
                 }

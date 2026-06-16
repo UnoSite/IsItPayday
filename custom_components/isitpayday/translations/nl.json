@@ -3,23 +3,23 @@
     "config": {
         "step": {
             "user": {
-                "title": "Land selecteren",
-                "description": "Het geselecteerde land wordt gebruikt om feestdagen te controleren",
+                "title": "Selecteer land",
+                "description": "Het geselecteerde land wordt gebruikt om feestdagen te bepalen (lokaal berekend, geen internet vereist)",
                 "data": {
-                    "name": "Instantienaam",
+                    "name": "Naam van instantie",
                     "country": "Land"
                 }
             },
             "subdivision": {
-                "title": "Select region",
-                "description": "Some countries have regional holidays. Select your state/region for the most accurate holiday calendar, or choose 'Entire country' to use only national holidays",
+                "title": "Selecteer regio",
+                "description": "Sommige landen hebben regionale feestdagen. Selecteer je staat/regio voor de meest nauwkeurige feestdagenkalender, of kies 'Hele land' om alleen nationale feestdagen te gebruiken",
                 "data": {
-                    "subdivision": "State/Region"
+                    "subdivision": "Staat/regio"
                 }
             },
             "frequency": {
                 "title": "Selecteer uitbetalingsfrequentie",
-                "description": "Kies hoe vaak je betaald krijgt",
+                "description": "Kies hoe vaak je wordt betaald",
                 "data": {
                     "pay_frequency": "Uitbetalingsfrequentie"
                 }
@@ -33,7 +33,7 @@
             },
             "bank_offset": {
                 "title": "Dagen vóór de laatste bankdag",
-                "description": "Als je een paar dagen vóór de laatste bankdag wordt betaald, kies dan hoeveel dagen ervoor",
+                "description": "Als je een paar dagen vóór de laatste bankdag wordt betaald, kies dan hoeveel dagen eerder",
                 "data": {
                     "bank_offset": "Dagen ervoor"
                 }
@@ -47,7 +47,7 @@
             },
             "cycle_last_paydate": {
                 "title": "Selecteer laatste betaaldag",
-                "description": "Selecteer de laatste datum waarop je werd betaald. Deze wordt gebruikt om de volgende betaaldag te berekenen",
+                "description": "Selecteer de laatste datum waarop je bent betaald. Deze wordt gebruikt om de volgende betaaldag te berekenen",
                 "data": {
                     "last_pay_date": "Laatste betaaldag"
                 }
@@ -61,73 +61,73 @@
             }
         },
         "error": {
-            "invalid_country": "Het geselecteerde land wordt niet ondersteund"
+            "invalid_country": "Het geselecteerde land wordt niet ondersteund door de feestdagenbibliotheek"
         }
     },
     "options": {
         "step": {
             "init": {
-                "title": "IsItPayday-instellingen aanpassen",
-                "description": "Wijzig de instellingen voor deze betaaldagtracker",
+                "title": "Select country",
+                "description": "The selected country is used to determine public holidays (calculated locally, no internet required)",
                 "data": {
-                    "country": "Country"
+                    "country": "Land"
                 }
             },
             "subdivision": {
-                "title": "Select region",
-                "description": "Some countries have regional holidays. Select your state/region for the most accurate holiday calendar, or choose 'Entire country' to use only national holidays",
+                "title": "Selecteer regio",
+                "description": "Sommige landen hebben regionale feestdagen. Selecteer je staat/regio voor de meest nauwkeurige feestdagenkalender, of kies 'Hele land' om alleen nationale feestdagen te gebruiken",
                 "data": {
-                    "subdivision": "State/Region"
+                    "subdivision": "Staat/regio"
                 }
             },
             "frequency": {
-                "title": "Select payout frequency",
-                "description": "Choose how often you get paid",
+                "title": "Selecteer uitbetalingsfrequentie",
+                "description": "Kies hoe vaak je wordt betaald",
                 "data": {
-                    "pay_frequency": "Payout frequency"
+                    "pay_frequency": "Uitbetalingsfrequentie"
                 }
             },
             "monthly_day": {
-                "title": "Select day of month",
-                "description": "Choose which day of the month you are paid",
+                "title": "Selecteer dag van de maand",
+                "description": "Kies op welke dag van de maand je wordt betaald",
                 "data": {
-                    "pay_day": "Day of month"
+                    "pay_day": "Dag van de maand"
                 }
             },
             "bank_offset": {
-                "title": "Days before the last banking day",
-                "description": "If you are paid a few days before the last banking day, choose how many days before",
+                "title": "Dagen vóór de laatste bankdag",
+                "description": "Als je een paar dagen vóór de laatste bankdag wordt betaald, kies dan hoeveel dagen eerder",
                 "data": {
-                    "bank_offset": "Days before"
+                    "bank_offset": "Dagen ervoor"
                 }
             },
             "specific_day": {
-                "title": "Select specific day",
-                "description": "Select the exact day you are paid each month",
+                "title": "Selecteer specifieke dag",
+                "description": "Selecteer de exacte dag waarop je elke maand wordt betaald",
                 "data": {
-                    "pay_day": "Specific day"
+                    "pay_day": "Specifieke dag"
                 }
             },
             "cycle_last_paydate": {
-                "title": "Select last payday",
-                "description": "Select the last date you were paid. This will be used to calculate the next payday",
+                "title": "Selecteer laatste betaaldag",
+                "description": "Selecteer de laatste datum waarop je bent betaald. Deze wordt gebruikt om de volgende betaaldag te berekenen",
                 "data": {
-                    "last_pay_date": "Last payday"
+                    "last_pay_date": "Laatste betaaldag"
                 }
             },
             "weekly": {
-                "title": "Select weekly payday",
-                "description": "Choose which weekday you are paid each week",
+                "title": "Selecteer wekelijkse betaaldag",
+                "description": "Kies op welke weekdag je elke week wordt betaald",
                 "data": {
-                    "pay_day": "Payday weekday"
+                    "pay_day": "Weekdag van betaaldag"
                 }
             }
         }
     },
     "issues": {
         "unsupported_country": {
-            "title": "Country no longer supported",
-            "description": "The country \"{country}\" configured for IsItPayday is no longer supported by the holidays library. Please open the integration options and select a supported country."
+            "title": "Land wordt niet langer ondersteund",
+            "description": "Het land \"{country}\" dat is geconfigureerd voor IsItPayday wordt niet langer ondersteund door de feestdagenbibliotheek. Open de integratie-opties en selecteer een ondersteund land."
         }
     }
 }

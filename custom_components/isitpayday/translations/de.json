@@ -4,17 +4,17 @@
         "step": {
             "user": {
                 "title": "Land auswählen",
-                "description": "Das ausgewählte Land wird verwendet, um gesetzliche Feiertage zu prüfen",
+                "description": "Das ausgewählte Land wird verwendet, um Feiertage zu bestimmen (lokal berechnet, keine Internetverbindung erforderlich)",
                 "data": {
                     "name": "Instanzname",
                     "country": "Land"
                 }
             },
             "subdivision": {
-                "title": "Select region",
-                "description": "Some countries have regional holidays. Select your state/region for the most accurate holiday calendar, or choose 'Entire country' to use only national holidays",
+                "title": "Region auswählen",
+                "description": "In einigen Ländern gibt es regionale Feiertage. Wählen Sie Ihr Bundesland/Ihre Region für den genauesten Feiertagskalender aus oder wählen Sie 'Ganzes Land', um nur nationale Feiertage zu verwenden",
                 "data": {
-                    "subdivision": "State/Region"
+                    "subdivision": "Bundesland/Region"
                 }
             },
             "frequency": {
@@ -61,73 +61,73 @@
             }
         },
         "error": {
-            "invalid_country": "Das ausgewählte Land wird nicht unterstützt"
+            "invalid_country": "Das ausgewählte Land wird von der Feiertagsbibliothek nicht unterstützt"
         }
     },
     "options": {
         "step": {
             "init": {
-                "title": "IsItPayday-Einstellungen anpassen",
-                "description": "Ändern Sie die Einstellungen für diesen Zahltag-Tracker",
+                "title": "Select country",
+                "description": "The selected country is used to determine public holidays (calculated locally, no internet required)",
                 "data": {
-                    "country": "Country"
+                    "country": "Land"
                 }
             },
             "subdivision": {
-                "title": "Select region",
-                "description": "Some countries have regional holidays. Select your state/region for the most accurate holiday calendar, or choose 'Entire country' to use only national holidays",
+                "title": "Region auswählen",
+                "description": "In einigen Ländern gibt es regionale Feiertage. Wählen Sie Ihr Bundesland/Ihre Region für den genauesten Feiertagskalender aus oder wählen Sie 'Ganzes Land', um nur nationale Feiertage zu verwenden",
                 "data": {
-                    "subdivision": "State/Region"
+                    "subdivision": "Bundesland/Region"
                 }
             },
             "frequency": {
-                "title": "Select payout frequency",
-                "description": "Choose how often you get paid",
+                "title": "Auszahlungsfrequenz auswählen",
+                "description": "Wählen Sie aus, wie oft Sie bezahlt werden",
                 "data": {
-                    "pay_frequency": "Payout frequency"
+                    "pay_frequency": "Auszahlungsfrequenz"
                 }
             },
             "monthly_day": {
-                "title": "Select day of month",
-                "description": "Choose which day of the month you are paid",
+                "title": "Tag des Monats auswählen",
+                "description": "Wählen Sie aus, an welchem Tag des Monats Sie bezahlt werden",
                 "data": {
-                    "pay_day": "Day of month"
+                    "pay_day": "Tag des Monats"
                 }
             },
             "bank_offset": {
-                "title": "Days before the last banking day",
-                "description": "If you are paid a few days before the last banking day, choose how many days before",
+                "title": "Tage vor dem letzten Bankarbeitstag",
+                "description": "Wenn Sie einige Tage vor dem letzten Bankarbeitstag bezahlt werden, wählen Sie aus, wie viele Tage vorher",
                 "data": {
-                    "bank_offset": "Days before"
+                    "bank_offset": "Tage vorher"
                 }
             },
             "specific_day": {
-                "title": "Select specific day",
-                "description": "Select the exact day you are paid each month",
+                "title": "Bestimmten Tag auswählen",
+                "description": "Wählen Sie den genauen Tag aus, an dem Sie jeden Monat bezahlt werden",
                 "data": {
-                    "pay_day": "Specific day"
+                    "pay_day": "Bestimmter Tag"
                 }
             },
             "cycle_last_paydate": {
-                "title": "Select last payday",
-                "description": "Select the last date you were paid. This will be used to calculate the next payday",
+                "title": "Letzten Zahltag auswählen",
+                "description": "Wählen Sie das letzte Datum aus, an dem Sie bezahlt wurden. Dieses wird verwendet, um den nächsten Zahltag zu berechnen",
                 "data": {
-                    "last_pay_date": "Last payday"
+                    "last_pay_date": "Letzter Zahltag"
                 }
             },
             "weekly": {
-                "title": "Select weekly payday",
-                "description": "Choose which weekday you are paid each week",
+                "title": "Wöchentlichen Zahltag auswählen",
+                "description": "Wählen Sie aus, an welchem Wochentag Sie jede Woche bezahlt werden",
                 "data": {
-                    "pay_day": "Payday weekday"
+                    "pay_day": "Wochentag des Zahltags"
                 }
             }
         }
     },
     "issues": {
         "unsupported_country": {
-            "title": "Country no longer supported",
-            "description": "The country \"{country}\" configured for IsItPayday is no longer supported by the holidays library. Please open the integration options and select a supported country."
+            "title": "Land nicht mehr unterstützt",
+            "description": "Das für IsItPayday konfigurierte Land \"{country}\" wird von der Feiertagsbibliothek nicht mehr unterstützt. Bitte öffnen Sie die Integrationsoptionen und wählen Sie ein unterstütztes Land aus."
         }
     }
 }

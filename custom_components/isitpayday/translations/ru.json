@@ -1,20 +1,20 @@
 {
-    "title": "IsItPayday",
+    "title": "Это зарплатный день?",
     "config": {
         "step": {
             "user": {
                 "title": "Выберите страну",
-                "description": "Выбранная страна используется для проверки государственных праздников",
+                "description": "Выбранная страна используется для определения государственных праздников (рассчитываются локально, без интернета)",
                 "data": {
                     "name": "Название экземпляра",
                     "country": "Страна"
                 }
             },
             "subdivision": {
-                "title": "Select region",
-                "description": "Some countries have regional holidays. Select your state/region for the most accurate holiday calendar, or choose 'Entire country' to use only national holidays",
+                "title": "Выберите регион",
+                "description": "В некоторых странах есть региональные праздники. Выберите свой штат/регион для наиболее точного календаря праздников или выберите 'Вся страна', чтобы использовать только национальные праздники",
                 "data": {
-                    "subdivision": "State/Region"
+                    "subdivision": "Штат/регион"
                 }
             },
             "frequency": {
@@ -26,108 +26,108 @@
             },
             "monthly_day": {
                 "title": "Выберите день месяца",
-                "description": "Выберите, в какой день месяца вам выплачивают зарплату",
+                "description": "Выберите, в какой день месяца вы получаете зарплату",
                 "data": {
                     "pay_day": "День месяца"
                 }
             },
             "bank_offset": {
-                "title": "Дни до последнего банковского дня",
-                "description": "Если вам платят за несколько дней до последнего банковского дня, выберите, за сколько дней до него",
+                "title": "Дней до последнего банковского дня",
+                "description": "Если вы получаете зарплату за несколько дней до последнего банковского дня, выберите, за сколько дней до него",
                 "data": {
                     "bank_offset": "Дней до"
                 }
             },
             "specific_day": {
                 "title": "Выберите конкретный день",
-                "description": "Выберите точный день, когда вам выплачивают зарплату каждый месяц",
+                "description": "Выберите точный день каждого месяца, когда вы получаете зарплату",
                 "data": {
                     "pay_day": "Конкретный день"
                 }
             },
             "cycle_last_paydate": {
                 "title": "Выберите последний день выплаты",
-                "description": "Выберите последнюю дату, когда вам выплачивали зарплату. Она будет использоваться для расчёта следующего дня выплаты",
+                "description": "Выберите последнюю дату, когда вы получали зарплату. Она будет использоваться для расчёта следующего дня выплаты",
                 "data": {
                     "last_pay_date": "Последний день выплаты"
                 }
             },
             "weekly": {
-                "title": "Выберите еженедельный день выплаты",
-                "description": "Выберите, в какой день недели вам выплачивают зарплату",
+                "title": "Выберите день выплаты на неделе",
+                "description": "Выберите, в какой день недели вы получаете зарплату",
                 "data": {
                     "pay_day": "День недели выплаты"
                 }
             }
         },
         "error": {
-            "invalid_country": "Выбранная страна не поддерживается"
+            "invalid_country": "Выбранная страна не поддерживается библиотекой праздников"
         }
     },
     "options": {
         "step": {
             "init": {
-                "title": "Настройте параметры IsItPayday",
-                "description": "Измените настройки этого трекера зарплаты",
+                "title": "Select country",
+                "description": "The selected country is used to determine public holidays (calculated locally, no internet required)",
                 "data": {
-                    "country": "Country"
+                    "country": "Страна"
                 }
             },
             "subdivision": {
-                "title": "Select region",
-                "description": "Some countries have regional holidays. Select your state/region for the most accurate holiday calendar, or choose 'Entire country' to use only national holidays",
+                "title": "Выберите регион",
+                "description": "В некоторых странах есть региональные праздники. Выберите свой штат/регион для наиболее точного календаря праздников или выберите 'Вся страна', чтобы использовать только национальные праздники",
                 "data": {
-                    "subdivision": "State/Region"
+                    "subdivision": "Штат/регион"
                 }
             },
             "frequency": {
-                "title": "Select payout frequency",
-                "description": "Choose how often you get paid",
+                "title": "Выберите частоту выплат",
+                "description": "Выберите, как часто вы получаете зарплату",
                 "data": {
-                    "pay_frequency": "Payout frequency"
+                    "pay_frequency": "Частота выплат"
                 }
             },
             "monthly_day": {
-                "title": "Select day of month",
-                "description": "Choose which day of the month you are paid",
+                "title": "Выберите день месяца",
+                "description": "Выберите, в какой день месяца вы получаете зарплату",
                 "data": {
-                    "pay_day": "Day of month"
+                    "pay_day": "День месяца"
                 }
             },
             "bank_offset": {
-                "title": "Days before the last banking day",
-                "description": "If you are paid a few days before the last banking day, choose how many days before",
+                "title": "Дней до последнего банковского дня",
+                "description": "Если вы получаете зарплату за несколько дней до последнего банковского дня, выберите, за сколько дней до него",
                 "data": {
-                    "bank_offset": "Days before"
+                    "bank_offset": "Дней до"
                 }
             },
             "specific_day": {
-                "title": "Select specific day",
-                "description": "Select the exact day you are paid each month",
+                "title": "Выберите конкретный день",
+                "description": "Выберите точный день каждого месяца, когда вы получаете зарплату",
                 "data": {
-                    "pay_day": "Specific day"
+                    "pay_day": "Конкретный день"
                 }
             },
             "cycle_last_paydate": {
-                "title": "Select last payday",
-                "description": "Select the last date you were paid. This will be used to calculate the next payday",
+                "title": "Выберите последний день выплаты",
+                "description": "Выберите последнюю дату, когда вы получали зарплату. Она будет использоваться для расчёта следующего дня выплаты",
                 "data": {
-                    "last_pay_date": "Last payday"
+                    "last_pay_date": "Последний день выплаты"
                 }
             },
             "weekly": {
-                "title": "Select weekly payday",
-                "description": "Choose which weekday you are paid each week",
+                "title": "Выберите день выплаты на неделе",
+                "description": "Выберите, в какой день недели вы получаете зарплату",
                 "data": {
-                    "pay_day": "Payday weekday"
+                    "pay_day": "День недели выплаты"
                 }
             }
         }
     },
     "issues": {
         "unsupported_country": {
-            "title": "Country no longer supported",
-            "description": "The country \"{country}\" configured for IsItPayday is no longer supported by the holidays library. Please open the integration options and select a supported country."
+            "title": "Страна больше не поддерживается",
+            "description": "Страна \"{country}\", настроенная для IsItPayday, больше не поддерживается библиотекой праздников. Пожалуйста, откройте параметры интеграции и выберите поддерживаемую страну."
         }
     }
 }

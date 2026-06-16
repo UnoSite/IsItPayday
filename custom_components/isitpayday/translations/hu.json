@@ -4,17 +4,17 @@
         "step": {
             "user": {
                 "title": "Ország kiválasztása",
-                "description": "A kiválasztott ország alapján történik a munkaszüneti napok ellenőrzése",
+                "description": "A kiválasztott ország alapján határozzuk meg a munkaszüneti napokat (helyben számítva, internetkapcsolat nélkül)",
                 "data": {
                     "name": "Példány neve",
                     "country": "Ország"
                 }
             },
             "subdivision": {
-                "title": "Select region",
-                "description": "Some countries have regional holidays. Select your state/region for the most accurate holiday calendar, or choose 'Entire country' to use only national holidays",
+                "title": "Régió kiválasztása",
+                "description": "Egyes országokban vannak regionális ünnepnapok. Válassza ki az államát/régióját a lehető legpontosabb ünnepnaptárhoz, vagy válassza a \"Teljes ország\" lehetőséget, ha csak a nemzeti ünnepnapokat szeretné használni",
                 "data": {
-                    "subdivision": "State/Region"
+                    "subdivision": "Állam/Régió"
                 }
             },
             "frequency": {
@@ -25,17 +25,17 @@
                 }
             },
             "monthly_day": {
-                "title": "A hónap napjának kiválasztása",
+                "title": "Hónap napjának kiválasztása",
                 "description": "Válassza ki, a hónap melyik napján kap fizetést",
                 "data": {
                     "pay_day": "A hónap napja"
                 }
             },
             "bank_offset": {
-                "title": "Napok száma az utolsó banki nap előtt",
-                "description": "Ha az utolsó banki nap előtt néhány nappal kap fizetést, válassza ki, hány nappal előtte",
+                "title": "Napok száma az utolsó banki munkanap előtt",
+                "description": "Ha az utolsó banki munkanap előtt néhány nappal kap fizetést, válassza ki, hány nappal előtte",
                 "data": {
-                    "bank_offset": "Napok száma előtte"
+                    "bank_offset": "Nappal előtte"
                 }
             },
             "specific_day": {
@@ -46,88 +46,88 @@
                 }
             },
             "cycle_last_paydate": {
-                "title": "Legutóbbi fizetésnap kiválasztása",
-                "description": "Válassza ki azt a legutóbbi dátumot, amikor fizetést kapott. Ezt a rendszer a következő fizetésnap kiszámításához használja",
+                "title": "Utolsó fizetésnap kiválasztása",
+                "description": "Válassza ki az utolsó dátumot, amikor fizetést kapott. Ezt a következő fizetésnap kiszámításához használjuk",
                 "data": {
-                    "last_pay_date": "Legutóbbi fizetésnap"
+                    "last_pay_date": "Utolsó fizetésnap"
                 }
             },
             "weekly": {
                 "title": "Heti fizetésnap kiválasztása",
                 "description": "Válassza ki, a hét melyik napján kap fizetést",
                 "data": {
-                    "pay_day": "A fizetés napja a héten"
+                    "pay_day": "A fizetésnap hétköznapja"
                 }
             }
         },
         "error": {
-            "invalid_country": "A kiválasztott ország nem támogatott"
+            "invalid_country": "A kiválasztott országot nem támogatja az ünnepnap-könyvtár"
         }
     },
     "options": {
         "step": {
             "init": {
-                "title": "Az IsItPayday beállításainak módosítása",
-                "description": "Módosítsa ennek a fizetésnap-követőnek a beállításait",
+                "title": "Select country",
+                "description": "The selected country is used to determine public holidays (calculated locally, no internet required)",
                 "data": {
-                    "country": "Country"
+                    "country": "Ország"
                 }
             },
             "subdivision": {
-                "title": "Select region",
-                "description": "Some countries have regional holidays. Select your state/region for the most accurate holiday calendar, or choose 'Entire country' to use only national holidays",
+                "title": "Régió kiválasztása",
+                "description": "Egyes országokban vannak regionális ünnepnapok. Válassza ki az államát/régióját a lehető legpontosabb ünnepnaptárhoz, vagy válassza a \"Teljes ország\" lehetőséget, ha csak a nemzeti ünnepnapokat szeretné használni",
                 "data": {
-                    "subdivision": "State/Region"
+                    "subdivision": "Állam/Régió"
                 }
             },
             "frequency": {
-                "title": "Select payout frequency",
-                "description": "Choose how often you get paid",
+                "title": "Kifizetési gyakoriság kiválasztása",
+                "description": "Válassza ki, milyen gyakran kap fizetést",
                 "data": {
-                    "pay_frequency": "Payout frequency"
+                    "pay_frequency": "Kifizetési gyakoriság"
                 }
             },
             "monthly_day": {
-                "title": "Select day of month",
-                "description": "Choose which day of the month you are paid",
+                "title": "Hónap napjának kiválasztása",
+                "description": "Válassza ki, a hónap melyik napján kap fizetést",
                 "data": {
-                    "pay_day": "Day of month"
+                    "pay_day": "A hónap napja"
                 }
             },
             "bank_offset": {
-                "title": "Days before the last banking day",
-                "description": "If you are paid a few days before the last banking day, choose how many days before",
+                "title": "Napok száma az utolsó banki munkanap előtt",
+                "description": "Ha az utolsó banki munkanap előtt néhány nappal kap fizetést, válassza ki, hány nappal előtte",
                 "data": {
-                    "bank_offset": "Days before"
+                    "bank_offset": "Nappal előtte"
                 }
             },
             "specific_day": {
-                "title": "Select specific day",
-                "description": "Select the exact day you are paid each month",
+                "title": "Konkrét nap kiválasztása",
+                "description": "Válassza ki a pontos napot, amikor minden hónapban fizetést kap",
                 "data": {
-                    "pay_day": "Specific day"
+                    "pay_day": "Konkrét nap"
                 }
             },
             "cycle_last_paydate": {
-                "title": "Select last payday",
-                "description": "Select the last date you were paid. This will be used to calculate the next payday",
+                "title": "Utolsó fizetésnap kiválasztása",
+                "description": "Válassza ki az utolsó dátumot, amikor fizetést kapott. Ezt a következő fizetésnap kiszámításához használjuk",
                 "data": {
-                    "last_pay_date": "Last payday"
+                    "last_pay_date": "Utolsó fizetésnap"
                 }
             },
             "weekly": {
-                "title": "Select weekly payday",
-                "description": "Choose which weekday you are paid each week",
+                "title": "Heti fizetésnap kiválasztása",
+                "description": "Válassza ki, a hét melyik napján kap fizetést",
                 "data": {
-                    "pay_day": "Payday weekday"
+                    "pay_day": "A fizetésnap hétköznapja"
                 }
             }
         }
     },
     "issues": {
         "unsupported_country": {
-            "title": "Country no longer supported",
-            "description": "The country \"{country}\" configured for IsItPayday is no longer supported by the holidays library. Please open the integration options and select a supported country."
+            "title": "Az ország már nem támogatott",
+            "description": "Az IsItPaydayhez beállított \"{country}\" országot már nem támogatja az ünnepnap-könyvtár. Kérjük, nyissa meg az integráció beállításait, és válasszon egy támogatott országot."
         }
     }
 }

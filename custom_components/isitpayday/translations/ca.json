@@ -4,24 +4,24 @@
         "step": {
             "user": {
                 "title": "Selecciona el país",
-                "description": "El país seleccionat s'utilitza per comprovar els dies festius",
+                "description": "El país seleccionat s'utilitza per determinar els dies festius (calculats localment, sense necessitat d'internet)",
                 "data": {
                     "name": "Nom de la instància",
                     "country": "País"
                 }
             },
             "subdivision": {
-                "title": "Select region",
-                "description": "Some countries have regional holidays. Select your state/region for the most accurate holiday calendar, or choose 'Entire country' to use only national holidays",
+                "title": "Selecciona la regió",
+                "description": "Alguns països tenen festius regionals. Selecciona el teu estat/regió per obtenir el calendari festiu més precís, o tria 'Tot el país' per utilitzar només els festius nacionals",
                 "data": {
-                    "subdivision": "State/Region"
+                    "subdivision": "Estat/Regió"
                 }
             },
             "frequency": {
-                "title": "Selecciona la freqüència de pagament",
+                "title": "Selecciona la freqüència de cobrament",
                 "description": "Tria amb quina freqüència cobres",
                 "data": {
-                    "pay_frequency": "Freqüència de pagament"
+                    "pay_frequency": "Freqüència de cobrament"
                 }
             },
             "monthly_day": {
@@ -32,22 +32,22 @@
                 }
             },
             "bank_offset": {
-                "title": "Dies abans de l’últim dia bancari",
-                "description": "Si cobres uns dies abans de l’últim dia bancari, tria quants dies abans",
+                "title": "Dies abans de l'últim dia bancari",
+                "description": "Si cobres uns quants dies abans de l'últim dia bancari, tria quants dies abans",
                 "data": {
                     "bank_offset": "Dies abans"
                 }
             },
             "specific_day": {
-                "title": "Selecciona un dia concret",
-                "description": "Selecciona el dia exacte que cobres cada mes",
+                "title": "Selecciona un dia específic",
+                "description": "Selecciona el dia exacte en què cobres cada mes",
                 "data": {
-                    "pay_day": "Dia concret"
+                    "pay_day": "Dia específic"
                 }
             },
             "cycle_last_paydate": {
-                "title": "Selecciona l’últim dia de cobrament",
-                "description": "Selecciona l’última data en què vas cobrar. Es farà servir per calcular el pròxim dia de cobrament",
+                "title": "Selecciona l'últim dia de cobrament",
+                "description": "Selecciona l'última data en què vas cobrar. S'utilitzarà per calcular el pròxim dia de cobrament",
                 "data": {
                     "last_pay_date": "Últim dia de cobrament"
                 }
@@ -56,78 +56,78 @@
                 "title": "Selecciona el dia de cobrament setmanal",
                 "description": "Tria quin dia de la setmana cobres",
                 "data": {
-                    "pay_day": "Dia de cobrament setmanal"
+                    "pay_day": "Dia de la setmana de cobrament"
                 }
             }
         },
         "error": {
-            "invalid_country": "El país seleccionat no és compatible"
+            "invalid_country": "El país seleccionat no és compatible amb la biblioteca de dies festius"
         }
     },
     "options": {
         "step": {
             "init": {
-                "title": "Ajusta la configuració d’IsItPayday",
-                "description": "Modifica la configuració d’aquest rastrejador de dies de cobrament",
+                "title": "Select country",
+                "description": "The selected country is used to determine public holidays (calculated locally, no internet required)",
                 "data": {
-                    "country": "Country"
+                    "country": "País"
                 }
             },
             "subdivision": {
-                "title": "Select region",
-                "description": "Some countries have regional holidays. Select your state/region for the most accurate holiday calendar, or choose 'Entire country' to use only national holidays",
+                "title": "Selecciona la regió",
+                "description": "Alguns països tenen festius regionals. Selecciona el teu estat/regió per obtenir el calendari festiu més precís, o tria 'Tot el país' per utilitzar només els festius nacionals",
                 "data": {
-                    "subdivision": "State/Region"
+                    "subdivision": "Estat/Regió"
                 }
             },
             "frequency": {
-                "title": "Select payout frequency",
-                "description": "Choose how often you get paid",
+                "title": "Selecciona la freqüència de cobrament",
+                "description": "Tria amb quina freqüència cobres",
                 "data": {
-                    "pay_frequency": "Payout frequency"
+                    "pay_frequency": "Freqüència de cobrament"
                 }
             },
             "monthly_day": {
-                "title": "Select day of month",
-                "description": "Choose which day of the month you are paid",
+                "title": "Selecciona el dia del mes",
+                "description": "Tria quin dia del mes cobres",
                 "data": {
-                    "pay_day": "Day of month"
+                    "pay_day": "Dia del mes"
                 }
             },
             "bank_offset": {
-                "title": "Days before the last banking day",
-                "description": "If you are paid a few days before the last banking day, choose how many days before",
+                "title": "Dies abans de l'últim dia bancari",
+                "description": "Si cobres uns quants dies abans de l'últim dia bancari, tria quants dies abans",
                 "data": {
-                    "bank_offset": "Days before"
+                    "bank_offset": "Dies abans"
                 }
             },
             "specific_day": {
-                "title": "Select specific day",
-                "description": "Select the exact day you are paid each month",
+                "title": "Selecciona un dia específic",
+                "description": "Selecciona el dia exacte en què cobres cada mes",
                 "data": {
-                    "pay_day": "Specific day"
+                    "pay_day": "Dia específic"
                 }
             },
             "cycle_last_paydate": {
-                "title": "Select last payday",
-                "description": "Select the last date you were paid. This will be used to calculate the next payday",
+                "title": "Selecciona l'últim dia de cobrament",
+                "description": "Selecciona l'última data en què vas cobrar. S'utilitzarà per calcular el pròxim dia de cobrament",
                 "data": {
-                    "last_pay_date": "Last payday"
+                    "last_pay_date": "Últim dia de cobrament"
                 }
             },
             "weekly": {
-                "title": "Select weekly payday",
-                "description": "Choose which weekday you are paid each week",
+                "title": "Selecciona el dia de cobrament setmanal",
+                "description": "Tria quin dia de la setmana cobres",
                 "data": {
-                    "pay_day": "Payday weekday"
+                    "pay_day": "Dia de la setmana de cobrament"
                 }
             }
         }
     },
     "issues": {
         "unsupported_country": {
-            "title": "Country no longer supported",
-            "description": "The country \"{country}\" configured for IsItPayday is no longer supported by the holidays library. Please open the integration options and select a supported country."
+            "title": "País ja no compatible",
+            "description": "El país \"{country}\" configurat per a IsItPayday ja no és compatible amb la biblioteca de dies festius. Obre les opcions de la integració i selecciona un país compatible."
         }
     }
 }

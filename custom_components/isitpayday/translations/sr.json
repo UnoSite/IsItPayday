@@ -1,20 +1,20 @@
 {
-    "title": "IsItPayday",
+    "title": "Да ли је данас плата?",
     "config": {
         "step": {
             "user": {
                 "title": "Изаберите земљу",
-                "description": "Изабрана земља се користи за проверу државних празника",
+                "description": "Изабрана земља се користи за одређивање државних празника (израчунава се локално, није потребан интернет)",
                 "data": {
                     "name": "Назив инстанце",
                     "country": "Земља"
                 }
             },
             "subdivision": {
-                "title": "Select region",
-                "description": "Some countries have regional holidays. Select your state/region for the most accurate holiday calendar, or choose 'Entire country' to use only national holidays",
+                "title": "Изаберите регион",
+                "description": "Неке земље имају регионалне празнике. Изаберите своју државу/регион за најтачнији календар празника или изаберите 'Цела земља' да бисте користили само државне празнике",
                 "data": {
-                    "subdivision": "State/Region"
+                    "subdivision": "Држава/регион"
                 }
             },
             "frequency": {
@@ -32,15 +32,15 @@
                 }
             },
             "bank_offset": {
-                "title": "Број дана пре последњег банкарског дана",
+                "title": "Дани пре последњег банкарског дана",
                 "description": "Ако примате плату неколико дана пре последњег банкарског дана, изаберите колико дана раније",
                 "data": {
-                    "bank_offset": "Број дана раније"
+                    "bank_offset": "Дани пре"
                 }
             },
             "specific_day": {
                 "title": "Изаберите одређени дан",
-                "description": "Изаберите тачан дан када примате плату сваког месеца",
+                "description": "Изаберите тачан дан када сваког месеца примате плату",
                 "data": {
                     "pay_day": "Одређени дан"
                 }
@@ -61,73 +61,73 @@
             }
         },
         "error": {
-            "invalid_country": "Изабрана земља није подржана"
+            "invalid_country": "Изабрана земља није подржана у библиотеци празника"
         }
     },
     "options": {
         "step": {
             "init": {
-                "title": "Прилагодите подешавања за IsItPayday",
-                "description": "Измените подешавања за овај пратилац дана исплате",
+                "title": "Select country",
+                "description": "The selected country is used to determine public holidays (calculated locally, no internet required)",
                 "data": {
-                    "country": "Country"
+                    "country": "Земља"
                 }
             },
             "subdivision": {
-                "title": "Select region",
-                "description": "Some countries have regional holidays. Select your state/region for the most accurate holiday calendar, or choose 'Entire country' to use only national holidays",
+                "title": "Изаберите регион",
+                "description": "Неке земље имају регионалне празнике. Изаберите своју државу/регион за најтачнији календар празника или изаберите 'Цела земља' да бисте користили само државне празнике",
                 "data": {
-                    "subdivision": "State/Region"
+                    "subdivision": "Држава/регион"
                 }
             },
             "frequency": {
-                "title": "Select payout frequency",
-                "description": "Choose how often you get paid",
+                "title": "Изаберите учесталост исплате",
+                "description": "Изаберите колико често примате плату",
                 "data": {
-                    "pay_frequency": "Payout frequency"
+                    "pay_frequency": "Учесталост исплате"
                 }
             },
             "monthly_day": {
-                "title": "Select day of month",
-                "description": "Choose which day of the month you are paid",
+                "title": "Изаберите дан у месецу",
+                "description": "Изаберите ког дана у месецу примате плату",
                 "data": {
-                    "pay_day": "Day of month"
+                    "pay_day": "Дан у месецу"
                 }
             },
             "bank_offset": {
-                "title": "Days before the last banking day",
-                "description": "If you are paid a few days before the last banking day, choose how many days before",
+                "title": "Дани пре последњег банкарског дана",
+                "description": "Ако примате плату неколико дана пре последњег банкарског дана, изаберите колико дана раније",
                 "data": {
-                    "bank_offset": "Days before"
+                    "bank_offset": "Дани пре"
                 }
             },
             "specific_day": {
-                "title": "Select specific day",
-                "description": "Select the exact day you are paid each month",
+                "title": "Изаберите одређени дан",
+                "description": "Изаберите тачан дан када сваког месеца примате плату",
                 "data": {
-                    "pay_day": "Specific day"
+                    "pay_day": "Одређени дан"
                 }
             },
             "cycle_last_paydate": {
-                "title": "Select last payday",
-                "description": "Select the last date you were paid. This will be used to calculate the next payday",
+                "title": "Изаберите последњи дан исплате",
+                "description": "Изаберите последњи датум када сте примили плату. Ово ће се користити за израчунавање следећег дана исплате",
                 "data": {
-                    "last_pay_date": "Last payday"
+                    "last_pay_date": "Последњи дан исплате"
                 }
             },
             "weekly": {
-                "title": "Select weekly payday",
-                "description": "Choose which weekday you are paid each week",
+                "title": "Изаберите недељни дан исплате",
+                "description": "Изаберите ког дана у недељи примате плату",
                 "data": {
-                    "pay_day": "Payday weekday"
+                    "pay_day": "Дан исплате у недељи"
                 }
             }
         }
     },
     "issues": {
         "unsupported_country": {
-            "title": "Country no longer supported",
-            "description": "The country \"{country}\" configured for IsItPayday is no longer supported by the holidays library. Please open the integration options and select a supported country."
+            "title": "Земља више није подржана",
+            "description": "Земља \"{country}\" подешена за IsItPayday више није подржана у библиотеци празника. Отворите опције интеграције и изаберите подржану земљу."
         }
     }
 }

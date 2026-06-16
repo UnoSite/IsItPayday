@@ -1,133 +1,133 @@
 {
-    "title": "IsItPayday",
+    "title": "האם זה יום המשכורת",
     "config": {
         "step": {
             "user": {
-                "title": "בחירת מדינה",
-                "description": "המדינה שנבחרה משמשת לבדיקת חגים ציבוריים",
+                "title": "בחר מדינה",
+                "description": "המדינה שנבחרה משמשת לקביעת חגים ציבוריים (מחושב מקומית, ללא צורך באינטרנט)",
                 "data": {
                     "name": "שם המופע",
                     "country": "מדינה"
                 }
             },
             "subdivision": {
-                "title": "Select region",
-                "description": "Some countries have regional holidays. Select your state/region for the most accurate holiday calendar, or choose 'Entire country' to use only national holidays",
+                "title": "בחר אזור",
+                "description": "בחלק מהמדינות יש חגים אזוריים. בחר את המדינה/האזור שלך לקבלת לוח החגים המדויק ביותר, או בחר 'כל המדינה' כדי להשתמש רק בחגים לאומיים",
                 "data": {
-                    "subdivision": "State/Region"
+                    "subdivision": "מדינה/אזור"
                 }
             },
             "frequency": {
-                "title": "בחרו את תדירות התשלום",
-                "description": "בחרו באיזו תדירות אתם מקבלים שכר",
+                "title": "בחר תדירות תשלום",
+                "description": "בחר באיזו תדירות אתה מקבל שכר",
                 "data": {
-                    "pay_frequency": "תדירות התשלום"
+                    "pay_frequency": "תדירות תשלום"
                 }
             },
             "monthly_day": {
-                "title": "בחרו את היום בחודש",
-                "description": "בחרו באיזה יום בחודש אתם מקבלים שכר",
+                "title": "בחר יום בחודש",
+                "description": "בחר באיזה יום בחודש אתה מקבל שכר",
                 "data": {
                     "pay_day": "יום בחודש"
                 }
             },
             "bank_offset": {
                 "title": "ימים לפני יום הבנקאות האחרון",
-                "description": "אם אתם מקבלים שכר כמה ימים לפני יום הבנקאות האחרון, בחרו כמה ימים לפני",
+                "description": "אם אתה מקבל שכר כמה ימים לפני יום הבנקאות האחרון, בחר כמה ימים לפני כן",
                 "data": {
                     "bank_offset": "ימים לפני"
                 }
             },
             "specific_day": {
-                "title": "בחרו יום מסוים",
-                "description": "בחרו את היום המדויק שבו אתם מקבלים שכר בכל חודש",
+                "title": "בחר יום מסוים",
+                "description": "בחר את היום המדויק שבו אתה מקבל שכר בכל חודש",
                 "data": {
                     "pay_day": "יום מסוים"
                 }
             },
             "cycle_last_paydate": {
-                "title": "בחרו את יום התשלום האחרון",
-                "description": "בחרו את התאריך האחרון שבו קיבלתם שכר. תאריך זה ישמש לחישוב יום התשלום הבא",
+                "title": "בחר את יום התשלום האחרון",
+                "description": "בחר את התאריך האחרון שבו קיבלת שכר. תאריך זה ישמש לחישוב יום התשלום הבא",
                 "data": {
                     "last_pay_date": "יום התשלום האחרון"
                 }
             },
             "weekly": {
-                "title": "בחרו את יום התשלום השבועי",
-                "description": "בחרו באיזה יום בשבוע אתם מקבלים שכר",
+                "title": "בחר יום תשלום שבועי",
+                "description": "בחר באיזה יום בשבוע אתה מקבל שכר בכל שבוע",
                 "data": {
-                    "pay_day": "יום התשלום בשבוע"
+                    "pay_day": "יום בשבוע לתשלום השכר"
                 }
             }
         },
         "error": {
-            "invalid_country": "המדינה שנבחרה אינה נתמכת"
+            "invalid_country": "המדינה שנבחרה אינה נתמכת על ידי ספריית החגים"
         }
     },
     "options": {
         "step": {
             "init": {
-                "title": "התאימו את הגדרות IsItPayday",
-                "description": "שנו את ההגדרות של עוקב יום התשלום הזה",
+                "title": "Select country",
+                "description": "The selected country is used to determine public holidays (calculated locally, no internet required)",
                 "data": {
-                    "country": "Country"
+                    "country": "מדינה"
                 }
             },
             "subdivision": {
-                "title": "Select region",
-                "description": "Some countries have regional holidays. Select your state/region for the most accurate holiday calendar, or choose 'Entire country' to use only national holidays",
+                "title": "בחר אזור",
+                "description": "בחלק מהמדינות יש חגים אזוריים. בחר את המדינה/האזור שלך לקבלת לוח החגים המדויק ביותר, או בחר 'כל המדינה' כדי להשתמש רק בחגים לאומיים",
                 "data": {
-                    "subdivision": "State/Region"
+                    "subdivision": "מדינה/אזור"
                 }
             },
             "frequency": {
-                "title": "Select payout frequency",
-                "description": "Choose how often you get paid",
+                "title": "בחר תדירות תשלום",
+                "description": "בחר באיזו תדירות אתה מקבל שכר",
                 "data": {
-                    "pay_frequency": "Payout frequency"
+                    "pay_frequency": "תדירות תשלום"
                 }
             },
             "monthly_day": {
-                "title": "Select day of month",
-                "description": "Choose which day of the month you are paid",
+                "title": "בחר יום בחודש",
+                "description": "בחר באיזה יום בחודש אתה מקבל שכר",
                 "data": {
-                    "pay_day": "Day of month"
+                    "pay_day": "יום בחודש"
                 }
             },
             "bank_offset": {
-                "title": "Days before the last banking day",
-                "description": "If you are paid a few days before the last banking day, choose how many days before",
+                "title": "ימים לפני יום הבנקאות האחרון",
+                "description": "אם אתה מקבל שכר כמה ימים לפני יום הבנקאות האחרון, בחר כמה ימים לפני כן",
                 "data": {
-                    "bank_offset": "Days before"
+                    "bank_offset": "ימים לפני"
                 }
             },
             "specific_day": {
-                "title": "Select specific day",
-                "description": "Select the exact day you are paid each month",
+                "title": "בחר יום מסוים",
+                "description": "בחר את היום המדויק שבו אתה מקבל שכר בכל חודש",
                 "data": {
-                    "pay_day": "Specific day"
+                    "pay_day": "יום מסוים"
                 }
             },
             "cycle_last_paydate": {
-                "title": "Select last payday",
-                "description": "Select the last date you were paid. This will be used to calculate the next payday",
+                "title": "בחר את יום התשלום האחרון",
+                "description": "בחר את התאריך האחרון שבו קיבלת שכר. תאריך זה ישמש לחישוב יום התשלום הבא",
                 "data": {
-                    "last_pay_date": "Last payday"
+                    "last_pay_date": "יום התשלום האחרון"
                 }
             },
             "weekly": {
-                "title": "Select weekly payday",
-                "description": "Choose which weekday you are paid each week",
+                "title": "בחר יום תשלום שבועי",
+                "description": "בחר באיזה יום בשבוע אתה מקבל שכר בכל שבוע",
                 "data": {
-                    "pay_day": "Payday weekday"
+                    "pay_day": "יום בשבוע לתשלום השכר"
                 }
             }
         }
     },
     "issues": {
         "unsupported_country": {
-            "title": "Country no longer supported",
-            "description": "The country \"{country}\" configured for IsItPayday is no longer supported by the holidays library. Please open the integration options and select a supported country."
+            "title": "המדינה אינה נתמכת עוד",
+            "description": "המדינה \"{country}\" שהוגדרה עבור IsItPayday אינה נתמכת עוד על ידי ספריית החגים. פתח את אפשרויות האינטגרציה ובחר מדינה נתמכת."
         }
     }
 }

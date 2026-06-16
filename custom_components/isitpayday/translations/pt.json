@@ -3,7 +3,7 @@
     "config": {
         "step": {
             "user": {
-                "title": "Selecionar país",
+                "title": "Selecione o país",
                 "description": "O país selecionado é usado para determinar os feriados públicos (calculados localmente, sem necessidade de internet)",
                 "data": {
                     "name": "Nome da instância",
@@ -11,22 +11,22 @@
                 }
             },
             "subdivision": {
-                "title": "Selecionar região",
-                "description": "Alguns países têm feriados regionais. Selecione seu estado/região para o calendário de feriados mais preciso ou escolha 'País inteiro' para usar apenas feriados nacionais",
+                "title": "Selecione a região",
+                "description": "Alguns países têm feriados regionais. Selecione seu estado/região para obter o calendário de feriados mais preciso ou escolha 'País inteiro' para usar apenas os feriados nacionais",
                 "data": {
                     "subdivision": "Estado/Região"
                 }
             },
             "frequency": {
-                "title": "Selecionar frequência de pagamento",
+                "title": "Selecione a frequência de pagamento",
                 "description": "Escolha com que frequência você recebe",
                 "data": {
                     "pay_frequency": "Frequência de pagamento"
                 }
             },
             "monthly_day": {
-                "title": "Selecionar dia do mês",
-                "description": "Escolha em que dia do mês você recebe",
+                "title": "Selecione o dia do mês",
+                "description": "Escolha em qual dia do mês você recebe",
                 "data": {
                     "pay_day": "Dia do mês"
                 }
@@ -39,22 +39,22 @@
                 }
             },
             "specific_day": {
-                "title": "Selecionar dia específico",
+                "title": "Selecione um dia específico",
                 "description": "Selecione o dia exato em que você recebe a cada mês",
                 "data": {
                     "pay_day": "Dia específico"
                 }
             },
             "cycle_last_paydate": {
-                "title": "Selecionar último dia de pagamento",
-                "description": "Selecione a última data em que você recebeu. Ela será usada para calcular o próximo dia de pagamento",
+                "title": "Selecione a última data de pagamento",
+                "description": "Selecione a última data em que você recebeu. Ela será usada para calcular o próximo pagamento",
                 "data": {
-                    "last_pay_date": "Último dia de pagamento"
+                    "last_pay_date": "Última data de pagamento"
                 }
             },
             "weekly": {
-                "title": "Selecionar dia de pagamento semanal",
-                "description": "Escolha em que dia da semana você recebe",
+                "title": "Selecione o dia de pagamento semanal",
+                "description": "Escolha em qual dia da semana você recebe",
                 "data": {
                     "pay_day": "Dia da semana do pagamento"
                 }
@@ -74,22 +74,22 @@
                 }
             },
             "subdivision": {
-                "title": "Selecionar região",
-                "description": "Alguns países têm feriados regionais. Selecione seu estado/região para o calendário de feriados mais preciso ou escolha 'País inteiro' para usar apenas feriados nacionais",
+                "title": "Selecione a região",
+                "description": "Alguns países têm feriados regionais. Selecione seu estado/região para obter o calendário de feriados mais preciso ou escolha 'País inteiro' para usar apenas os feriados nacionais",
                 "data": {
                     "subdivision": "Estado/Região"
                 }
             },
             "frequency": {
-                "title": "Selecionar frequência de pagamento",
+                "title": "Selecione a frequência de pagamento",
                 "description": "Escolha com que frequência você recebe",
                 "data": {
                     "pay_frequency": "Frequência de pagamento"
                 }
             },
             "monthly_day": {
-                "title": "Selecionar dia do mês",
-                "description": "Escolha em que dia do mês você recebe",
+                "title": "Selecione o dia do mês",
+                "description": "Escolha em qual dia do mês você recebe",
                 "data": {
                     "pay_day": "Dia do mês"
                 }
@@ -102,22 +102,22 @@
                 }
             },
             "specific_day": {
-                "title": "Selecionar dia específico",
+                "title": "Selecione um dia específico",
                 "description": "Selecione o dia exato em que você recebe a cada mês",
                 "data": {
                     "pay_day": "Dia específico"
                 }
             },
             "cycle_last_paydate": {
-                "title": "Selecionar último dia de pagamento",
-                "description": "Selecione a última data em que você recebeu. Ela será usada para calcular o próximo dia de pagamento",
+                "title": "Selecione a última data de pagamento",
+                "description": "Selecione a última data em que você recebeu. Ela será usada para calcular o próximo pagamento",
                 "data": {
-                    "last_pay_date": "Último dia de pagamento"
+                    "last_pay_date": "Última data de pagamento"
                 }
             },
             "weekly": {
-                "title": "Selecionar dia de pagamento semanal",
-                "description": "Escolha em que dia da semana você recebe",
+                "title": "Selecione o dia de pagamento semanal",
+                "description": "Escolha em qual dia da semana você recebe",
                 "data": {
                     "pay_day": "Dia da semana do pagamento"
                 }

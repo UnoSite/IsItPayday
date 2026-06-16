@@ -4,130 +4,130 @@
         "step": {
             "user": {
                 "title": "Selectați țara",
-                "description": "Țara selectată este folosită pentru a verifica sărbătorile legale",
+                "description": "Țara selectată este folosită pentru a determina sărbătorile legale (calculate local, fără internet)",
                 "data": {
                     "name": "Numele instanței",
                     "country": "Țară"
                 }
             },
             "subdivision": {
-                "title": "Select region",
-                "description": "Some countries have regional holidays. Select your state/region for the most accurate holiday calendar, or choose 'Entire country' to use only national holidays",
+                "title": "Selectați regiunea",
+                "description": "Unele țări au sărbători regionale. Selectați statul/regiunea dvs. pentru cel mai precis calendar al sărbătorilor sau alegeți 'Întreaga țară' pentru a folosi doar sărbătorile naționale",
                 "data": {
-                    "subdivision": "State/Region"
+                    "subdivision": "Stat/Regiune"
                 }
             },
             "frequency": {
                 "title": "Selectați frecvența plății",
-                "description": "Alegeți cât de des sunteți plătit(ă)",
+                "description": "Alegeți cât de des sunteți plătit",
                 "data": {
                     "pay_frequency": "Frecvența plății"
                 }
             },
             "monthly_day": {
                 "title": "Selectați ziua din lună",
-                "description": "Alegeți în ce zi din lună sunteți plătit(ă)",
+                "description": "Alegeți în ce zi din lună sunteți plătit",
                 "data": {
                     "pay_day": "Ziua din lună"
                 }
             },
             "bank_offset": {
                 "title": "Zile înainte de ultima zi bancară",
-                "description": "Dacă sunteți plătit(ă) cu câteva zile înainte de ultima zi bancară, alegeți cu câte zile înainte",
+                "description": "Dacă sunteți plătit cu câteva zile înainte de ultima zi bancară, alegeți cu câte zile înainte",
                 "data": {
                     "bank_offset": "Zile înainte"
                 }
             },
             "specific_day": {
-                "title": "Selectați o zi anume",
-                "description": "Selectați ziua exactă în care sunteți plătit(ă) în fiecare lună",
+                "title": "Selectați o zi specifică",
+                "description": "Selectați ziua exactă în care sunteți plătit în fiecare lună",
                 "data": {
                     "pay_day": "Zi specifică"
                 }
             },
             "cycle_last_paydate": {
                 "title": "Selectați ultima zi de plată",
-                "description": "Selectați ultima dată la care ați fost plătit(ă). Aceasta va fi utilizată pentru a calcula următoarea zi de plată",
+                "description": "Selectați ultima dată la care ați fost plătit. Aceasta va fi folosită pentru a calcula următoarea zi de plată",
                 "data": {
                     "last_pay_date": "Ultima zi de plată"
                 }
             },
             "weekly": {
                 "title": "Selectați ziua săptămânală de plată",
-                "description": "Alegeți în ce zi a săptămânii sunteți plătit(ă) în fiecare săptămână",
+                "description": "Alegeți în ce zi a săptămânii sunteți plătit în fiecare săptămână",
                 "data": {
-                    "pay_day": "Ziua săptămânii pentru plată"
+                    "pay_day": "Ziua săptămânală de plată"
                 }
             }
         },
         "error": {
-            "invalid_country": "Țara selectată nu este acceptată"
+            "invalid_country": "Țara selectată nu este acceptată de biblioteca de sărbători"
         }
     },
     "options": {
         "step": {
             "init": {
-                "title": "Ajustați setările IsItPayday",
-                "description": "Modificați setările pentru acest instrument de urmărire a zilei de plată",
+                "title": "Select country",
+                "description": "The selected country is used to determine public holidays (calculated locally, no internet required)",
                 "data": {
-                    "country": "Country"
+                    "country": "Țară"
                 }
             },
             "subdivision": {
-                "title": "Select region",
-                "description": "Some countries have regional holidays. Select your state/region for the most accurate holiday calendar, or choose 'Entire country' to use only national holidays",
+                "title": "Selectați regiunea",
+                "description": "Unele țări au sărbători regionale. Selectați statul/regiunea dvs. pentru cel mai precis calendar al sărbătorilor sau alegeți 'Întreaga țară' pentru a folosi doar sărbătorile naționale",
                 "data": {
-                    "subdivision": "State/Region"
+                    "subdivision": "Stat/Regiune"
                 }
             },
             "frequency": {
-                "title": "Select payout frequency",
-                "description": "Choose how often you get paid",
+                "title": "Selectați frecvența plății",
+                "description": "Alegeți cât de des sunteți plătit",
                 "data": {
-                    "pay_frequency": "Payout frequency"
+                    "pay_frequency": "Frecvența plății"
                 }
             },
             "monthly_day": {
-                "title": "Select day of month",
-                "description": "Choose which day of the month you are paid",
+                "title": "Selectați ziua din lună",
+                "description": "Alegeți în ce zi din lună sunteți plătit",
                 "data": {
-                    "pay_day": "Day of month"
+                    "pay_day": "Ziua din lună"
                 }
             },
             "bank_offset": {
-                "title": "Days before the last banking day",
-                "description": "If you are paid a few days before the last banking day, choose how many days before",
+                "title": "Zile înainte de ultima zi bancară",
+                "description": "Dacă sunteți plătit cu câteva zile înainte de ultima zi bancară, alegeți cu câte zile înainte",
                 "data": {
-                    "bank_offset": "Days before"
+                    "bank_offset": "Zile înainte"
                 }
             },
             "specific_day": {
-                "title": "Select specific day",
-                "description": "Select the exact day you are paid each month",
+                "title": "Selectați o zi specifică",
+                "description": "Selectați ziua exactă în care sunteți plătit în fiecare lună",
                 "data": {
-                    "pay_day": "Specific day"
+                    "pay_day": "Zi specifică"
                 }
             },
             "cycle_last_paydate": {
-                "title": "Select last payday",
-                "description": "Select the last date you were paid. This will be used to calculate the next payday",
+                "title": "Selectați ultima zi de plată",
+                "description": "Selectați ultima dată la care ați fost plătit. Aceasta va fi folosită pentru a calcula următoarea zi de plată",
                 "data": {
-                    "last_pay_date": "Last payday"
+                    "last_pay_date": "Ultima zi de plată"
                 }
             },
             "weekly": {
-                "title": "Select weekly payday",
-                "description": "Choose which weekday you are paid each week",
+                "title": "Selectați ziua săptămânală de plată",
+                "description": "Alegeți în ce zi a săptămânii sunteți plătit în fiecare săptămână",
                 "data": {
-                    "pay_day": "Payday weekday"
+                    "pay_day": "Ziua săptămânală de plată"
                 }
             }
         }
     },
     "issues": {
         "unsupported_country": {
-            "title": "Country no longer supported",
-            "description": "The country \"{country}\" configured for IsItPayday is no longer supported by the holidays library. Please open the integration options and select a supported country."
+            "title": "Țară care nu mai este acceptată",
+            "description": "Țara \"{country}\" configurată pentru IsItPayday nu mai este acceptată de biblioteca de sărbători. Deschideți opțiunile integrării și selectați o țară acceptată."
         }
     }
 }

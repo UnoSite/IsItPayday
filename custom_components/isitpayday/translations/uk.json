@@ -4,17 +4,17 @@
         "step": {
             "user": {
                 "title": "Виберіть країну",
-                "description": "Вибрана країна використовується для перевірки державних свят",
+                "description": "Вибрана країна використовується для визначення державних свят (обчислюються локально, без доступу до інтернету)",
                 "data": {
                     "name": "Назва екземпляра",
                     "country": "Країна"
                 }
             },
             "subdivision": {
-                "title": "Select region",
-                "description": "Some countries have regional holidays. Select your state/region for the most accurate holiday calendar, or choose 'Entire country' to use only national holidays",
+                "title": "Виберіть регіон",
+                "description": "У деяких країнах є регіональні свята. Виберіть свою область/регіон для найточнішого календаря свят або виберіть 'Уся країна', щоб використовувати лише національні свята",
                 "data": {
-                    "subdivision": "State/Region"
+                    "subdivision": "Область/Регіон"
                 }
             },
             "frequency": {
@@ -47,87 +47,87 @@
             },
             "cycle_last_paydate": {
                 "title": "Виберіть останній день виплати",
-                "description": "Виберіть останню дату, коли ви отримали зарплату. Вона буде використана для розрахунку наступного дня виплати",
+                "description": "Виберіть останню дату, коли ви отримали зарплату. Її буде використано для обчислення наступного дня виплати",
                 "data": {
                     "last_pay_date": "Останній день виплати"
                 }
             },
             "weekly": {
                 "title": "Виберіть щотижневий день виплати",
-                "description": "Виберіть, у який день тижня ви отримуєте зарплату щотижня",
+                "description": "Виберіть, у який день тижня ви отримуєте зарплату",
                 "data": {
                     "pay_day": "День тижня виплати"
                 }
             }
         },
         "error": {
-            "invalid_country": "Вибрана країна не підтримується"
+            "invalid_country": "Вибрана країна не підтримується бібліотекою свят"
         }
     },
     "options": {
         "step": {
             "init": {
-                "title": "Налаштуйте параметри IsItPayday",
-                "description": "Змініть параметри цього трекера виплат",
+                "title": "Select country",
+                "description": "The selected country is used to determine public holidays (calculated locally, no internet required)",
                 "data": {
-                    "country": "Country"
+                    "country": "Країна"
                 }
             },
             "subdivision": {
-                "title": "Select region",
-                "description": "Some countries have regional holidays. Select your state/region for the most accurate holiday calendar, or choose 'Entire country' to use only national holidays",
+                "title": "Виберіть регіон",
+                "description": "У деяких країнах є регіональні свята. Виберіть свою область/регіон для найточнішого календаря свят або виберіть 'Уся країна', щоб використовувати лише національні свята",
                 "data": {
-                    "subdivision": "State/Region"
+                    "subdivision": "Область/Регіон"
                 }
             },
             "frequency": {
-                "title": "Select payout frequency",
-                "description": "Choose how often you get paid",
+                "title": "Виберіть частоту виплат",
+                "description": "Виберіть, як часто ви отримуєте зарплату",
                 "data": {
-                    "pay_frequency": "Payout frequency"
+                    "pay_frequency": "Частота виплат"
                 }
             },
             "monthly_day": {
-                "title": "Select day of month",
-                "description": "Choose which day of the month you are paid",
+                "title": "Виберіть день місяця",
+                "description": "Виберіть, у який день місяця ви отримуєте зарплату",
                 "data": {
-                    "pay_day": "Day of month"
+                    "pay_day": "День місяця"
                 }
             },
             "bank_offset": {
-                "title": "Days before the last banking day",
-                "description": "If you are paid a few days before the last banking day, choose how many days before",
+                "title": "Днів до останнього банківського дня",
+                "description": "Якщо ви отримуєте зарплату за кілька днів до останнього банківського дня, виберіть, за скільки днів до нього",
                 "data": {
-                    "bank_offset": "Days before"
+                    "bank_offset": "Днів до"
                 }
             },
             "specific_day": {
-                "title": "Select specific day",
-                "description": "Select the exact day you are paid each month",
+                "title": "Виберіть конкретний день",
+                "description": "Виберіть точний день, коли ви отримуєте зарплату щомісяця",
                 "data": {
-                    "pay_day": "Specific day"
+                    "pay_day": "Конкретний день"
                 }
             },
             "cycle_last_paydate": {
-                "title": "Select last payday",
-                "description": "Select the last date you were paid. This will be used to calculate the next payday",
+                "title": "Виберіть останній день виплати",
+                "description": "Виберіть останню дату, коли ви отримали зарплату. Її буде використано для обчислення наступного дня виплати",
                 "data": {
-                    "last_pay_date": "Last payday"
+                    "last_pay_date": "Останній день виплати"
                 }
             },
             "weekly": {
-                "title": "Select weekly payday",
-                "description": "Choose which weekday you are paid each week",
+                "title": "Виберіть щотижневий день виплати",
+                "description": "Виберіть, у який день тижня ви отримуєте зарплату",
                 "data": {
-                    "pay_day": "Payday weekday"
+                    "pay_day": "День тижня виплати"
                 }
             }
         }
     },
     "issues": {
         "unsupported_country": {
-            "title": "Country no longer supported",
-            "description": "The country \"{country}\" configured for IsItPayday is no longer supported by the holidays library. Please open the integration options and select a supported country."
+            "title": "Країна більше не підтримується",
+            "description": "Країна \"{country}\", налаштована для IsItPayday, більше не підтримується бібліотекою свят. Відкрийте параметри інтеграції та виберіть підтримувану країну."
         }
     }
 }

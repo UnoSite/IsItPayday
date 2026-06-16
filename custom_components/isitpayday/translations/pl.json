@@ -4,17 +4,17 @@
         "step": {
             "user": {
                 "title": "Wybierz kraj",
-                "description": "Wybrany kraj jest używany do sprawdzania świąt państwowych",
+                "description": "Wybrany kraj służy do określenia świąt publicznych (obliczanych lokalnie, bez dostępu do internetu)",
                 "data": {
                     "name": "Nazwa instancji",
                     "country": "Kraj"
                 }
             },
             "subdivision": {
-                "title": "Select region",
-                "description": "Some countries have regional holidays. Select your state/region for the most accurate holiday calendar, or choose 'Entire country' to use only national holidays",
+                "title": "Wybierz region",
+                "description": "Niektóre kraje mają święta regionalne. Wybierz swój stan/region, aby uzyskać jak najdokładniejszy kalendarz świąt, lub wybierz 'Cały kraj', aby używać tylko świąt krajowych",
                 "data": {
-                    "subdivision": "State/Region"
+                    "subdivision": "Stan/Region"
                 }
             },
             "frequency": {
@@ -32,10 +32,10 @@
                 }
             },
             "bank_offset": {
-                "title": "Liczba dni przed ostatnim dniem bankowym",
-                "description": "Jeśli wynagrodzenie jest wypłacane kilka dni przed ostatnim dniem bankowym, wybierz, ile dni wcześniej",
+                "title": "Liczba dni przed ostatnim dniem roboczym dla banków",
+                "description": "Jeśli otrzymujesz wynagrodzenie kilka dni przed ostatnim dniem roboczym dla banków, wybierz ile dni wcześniej",
                 "data": {
-                    "bank_offset": "Liczba dni wcześniej"
+                    "bank_offset": "Liczba dni przed"
                 }
             },
             "specific_day": {
@@ -46,88 +46,88 @@
                 }
             },
             "cycle_last_paydate": {
-                "title": "Wybierz datę ostatniej wypłaty",
-                "description": "Wybierz datę ostatniej wypłaty. Zostanie ona użyta do obliczenia następnego dnia wypłaty",
+                "title": "Wybierz ostatni dzień wypłaty",
+                "description": "Wybierz ostatnią datę otrzymania wynagrodzenia. Zostanie ona użyta do obliczenia następnego dnia wypłaty",
                 "data": {
-                    "last_pay_date": "Ostatnia wypłata"
+                    "last_pay_date": "Ostatni dzień wypłaty"
                 }
             },
             "weekly": {
-                "title": "Wybierz dzień tygodnia wypłaty",
-                "description": "Wybierz, w który dzień tygodnia otrzymujesz wynagrodzenie",
+                "title": "Wybierz tygodniowy dzień wypłaty",
+                "description": "Wybierz, którego dnia tygodnia otrzymujesz wynagrodzenie",
                 "data": {
                     "pay_day": "Dzień tygodnia wypłaty"
                 }
             }
         },
         "error": {
-            "invalid_country": "Wybrany kraj nie jest obsługiwany"
+            "invalid_country": "Wybrany kraj nie jest obsługiwany przez bibliotekę świąt"
         }
     },
     "options": {
         "step": {
             "init": {
-                "title": "Dostosuj ustawienia IsItPayday",
-                "description": "Zmodyfikuj ustawienia tego narzędzia do śledzenia dni wypłaty",
+                "title": "Select country",
+                "description": "The selected country is used to determine public holidays (calculated locally, no internet required)",
                 "data": {
-                    "country": "Country"
+                    "country": "Kraj"
                 }
             },
             "subdivision": {
-                "title": "Select region",
-                "description": "Some countries have regional holidays. Select your state/region for the most accurate holiday calendar, or choose 'Entire country' to use only national holidays",
+                "title": "Wybierz region",
+                "description": "Niektóre kraje mają święta regionalne. Wybierz swój stan/region, aby uzyskać jak najdokładniejszy kalendarz świąt, lub wybierz 'Cały kraj', aby używać tylko świąt krajowych",
                 "data": {
-                    "subdivision": "State/Region"
+                    "subdivision": "Stan/Region"
                 }
             },
             "frequency": {
-                "title": "Select payout frequency",
-                "description": "Choose how often you get paid",
+                "title": "Wybierz częstotliwość wypłaty",
+                "description": "Wybierz, jak często otrzymujesz wynagrodzenie",
                 "data": {
-                    "pay_frequency": "Payout frequency"
+                    "pay_frequency": "Częstotliwość wypłaty"
                 }
             },
             "monthly_day": {
-                "title": "Select day of month",
-                "description": "Choose which day of the month you are paid",
+                "title": "Wybierz dzień miesiąca",
+                "description": "Wybierz, którego dnia miesiąca otrzymujesz wynagrodzenie",
                 "data": {
-                    "pay_day": "Day of month"
+                    "pay_day": "Dzień miesiąca"
                 }
             },
             "bank_offset": {
-                "title": "Days before the last banking day",
-                "description": "If you are paid a few days before the last banking day, choose how many days before",
+                "title": "Liczba dni przed ostatnim dniem roboczym dla banków",
+                "description": "Jeśli otrzymujesz wynagrodzenie kilka dni przed ostatnim dniem roboczym dla banków, wybierz ile dni wcześniej",
                 "data": {
-                    "bank_offset": "Days before"
+                    "bank_offset": "Liczba dni przed"
                 }
             },
             "specific_day": {
-                "title": "Select specific day",
-                "description": "Select the exact day you are paid each month",
+                "title": "Wybierz konkretny dzień",
+                "description": "Wybierz dokładny dzień miesiąca, w którym otrzymujesz wynagrodzenie",
                 "data": {
-                    "pay_day": "Specific day"
+                    "pay_day": "Konkretny dzień"
                 }
             },
             "cycle_last_paydate": {
-                "title": "Select last payday",
-                "description": "Select the last date you were paid. This will be used to calculate the next payday",
+                "title": "Wybierz ostatni dzień wypłaty",
+                "description": "Wybierz ostatnią datę otrzymania wynagrodzenia. Zostanie ona użyta do obliczenia następnego dnia wypłaty",
                 "data": {
-                    "last_pay_date": "Last payday"
+                    "last_pay_date": "Ostatni dzień wypłaty"
                 }
             },
             "weekly": {
-                "title": "Select weekly payday",
-                "description": "Choose which weekday you are paid each week",
+                "title": "Wybierz tygodniowy dzień wypłaty",
+                "description": "Wybierz, którego dnia tygodnia otrzymujesz wynagrodzenie",
                 "data": {
-                    "pay_day": "Payday weekday"
+                    "pay_day": "Dzień tygodnia wypłaty"
                 }
             }
         }
     },
     "issues": {
         "unsupported_country": {
-            "title": "Country no longer supported",
-            "description": "The country \"{country}\" configured for IsItPayday is no longer supported by the holidays library. Please open the integration options and select a supported country."
+            "title": "Kraj nie jest już obsługiwany",
+            "description": "Kraj \"{country}\" skonfigurowany dla IsItPayday nie jest już obsługiwany przez bibliotekę świąt. Otwórz opcje integracji i wybierz obsługiwany kraj."
         }
     }
 }

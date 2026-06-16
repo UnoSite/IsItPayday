@@ -4,17 +4,17 @@
         "step": {
             "user": {
                 "title": "Valitse maa",
-                "description": "Valittua maata käytetään yleisten vapaapäivien tarkistamiseen",
+                "description": "Valittua maata käytetään yleisten vapaapäivien määrittämiseen (lasketaan paikallisesti, internetyhteyttä ei tarvita)",
                 "data": {
-                    "name": "Instanssin nimi",
+                    "name": "Ilmentymän nimi",
                     "country": "Maa"
                 }
             },
             "subdivision": {
-                "title": "Select region",
-                "description": "Some countries have regional holidays. Select your state/region for the most accurate holiday calendar, or choose 'Entire country' to use only national holidays",
+                "title": "Valitse alue",
+                "description": "Joissakin maissa on alueellisia vapaapäiviä. Valitse osavaltiosi/alueesi mahdollisimman tarkan vapaapäiväkalenterin saamiseksi tai valitse 'Koko maa', jos haluat käyttää vain kansallisia vapaapäiviä",
                 "data": {
-                    "subdivision": "State/Region"
+                    "subdivision": "Osavaltio/alue"
                 }
             },
             "frequency": {
@@ -32,7 +32,7 @@
                 }
             },
             "bank_offset": {
-                "title": "Päivät ennen kuukauden viimeistä pankkipäivää",
+                "title": "Päiviä ennen kuukauden viimeistä pankkipäivää",
                 "description": "Jos palkka maksetaan muutama päivä ennen kuukauden viimeistä pankkipäivää, valitse kuinka monta päivää ennen",
                 "data": {
                     "bank_offset": "Päiviä ennen"
@@ -46,10 +46,10 @@
                 }
             },
             "cycle_last_paydate": {
-                "title": "Valitse edellinen palkanmaksupäivä",
+                "title": "Valitse viimeisin palkanmaksupäivä",
                 "description": "Valitse viimeisin päivä, jolloin sait palkan. Sitä käytetään seuraavan palkanmaksupäivän laskemiseen",
                 "data": {
-                    "last_pay_date": "Edellinen palkanmaksupäivä"
+                    "last_pay_date": "Viimeisin palkanmaksupäivä"
                 }
             },
             "weekly": {
@@ -61,73 +61,73 @@
             }
         },
         "error": {
-            "invalid_country": "Valittua maata ei tueta"
+            "invalid_country": "Valittua maata ei tueta vapaapäiväkirjastossa"
         }
     },
     "options": {
         "step": {
             "init": {
-                "title": "Muokkaa IsItPaydayn asetuksia",
-                "description": "Muokkaa tämän palkanmaksun seurannan asetuksia",
+                "title": "Select country",
+                "description": "The selected country is used to determine public holidays (calculated locally, no internet required)",
                 "data": {
-                    "country": "Country"
+                    "country": "Maa"
                 }
             },
             "subdivision": {
-                "title": "Select region",
-                "description": "Some countries have regional holidays. Select your state/region for the most accurate holiday calendar, or choose 'Entire country' to use only national holidays",
+                "title": "Valitse alue",
+                "description": "Joissakin maissa on alueellisia vapaapäiviä. Valitse osavaltiosi/alueesi mahdollisimman tarkan vapaapäiväkalenterin saamiseksi tai valitse 'Koko maa', jos haluat käyttää vain kansallisia vapaapäiviä",
                 "data": {
-                    "subdivision": "State/Region"
+                    "subdivision": "Osavaltio/alue"
                 }
             },
             "frequency": {
-                "title": "Select payout frequency",
-                "description": "Choose how often you get paid",
+                "title": "Valitse palkanmaksutiheys",
+                "description": "Valitse, kuinka usein saat palkan",
                 "data": {
-                    "pay_frequency": "Payout frequency"
+                    "pay_frequency": "Palkanmaksutiheys"
                 }
             },
             "monthly_day": {
-                "title": "Select day of month",
-                "description": "Choose which day of the month you are paid",
+                "title": "Valitse kuukauden päivä",
+                "description": "Valitse, minä kuukauden päivänä palkka maksetaan",
                 "data": {
-                    "pay_day": "Day of month"
+                    "pay_day": "Kuukauden päivä"
                 }
             },
             "bank_offset": {
-                "title": "Days before the last banking day",
-                "description": "If you are paid a few days before the last banking day, choose how many days before",
+                "title": "Päiviä ennen kuukauden viimeistä pankkipäivää",
+                "description": "Jos palkka maksetaan muutama päivä ennen kuukauden viimeistä pankkipäivää, valitse kuinka monta päivää ennen",
                 "data": {
-                    "bank_offset": "Days before"
+                    "bank_offset": "Päiviä ennen"
                 }
             },
             "specific_day": {
-                "title": "Select specific day",
-                "description": "Select the exact day you are paid each month",
+                "title": "Valitse tietty päivä",
+                "description": "Valitse tarkka päivä, jolloin palkka maksetaan joka kuukausi",
                 "data": {
-                    "pay_day": "Specific day"
+                    "pay_day": "Tietty päivä"
                 }
             },
             "cycle_last_paydate": {
-                "title": "Select last payday",
-                "description": "Select the last date you were paid. This will be used to calculate the next payday",
+                "title": "Valitse viimeisin palkanmaksupäivä",
+                "description": "Valitse viimeisin päivä, jolloin sait palkan. Sitä käytetään seuraavan palkanmaksupäivän laskemiseen",
                 "data": {
-                    "last_pay_date": "Last payday"
+                    "last_pay_date": "Viimeisin palkanmaksupäivä"
                 }
             },
             "weekly": {
-                "title": "Select weekly payday",
-                "description": "Choose which weekday you are paid each week",
+                "title": "Valitse viikoittainen palkanmaksupäivä",
+                "description": "Valitse, minä viikonpäivänä palkka maksetaan joka viikko",
                 "data": {
-                    "pay_day": "Payday weekday"
+                    "pay_day": "Palkanmaksun viikonpäivä"
                 }
             }
         }
     },
     "issues": {
         "unsupported_country": {
-            "title": "Country no longer supported",
-            "description": "The country \"{country}\" configured for IsItPayday is no longer supported by the holidays library. Please open the integration options and select a supported country."
+            "title": "Maata ei enää tueta",
+            "description": "IsItPaydaylle määritettyä maata \"{country}\" ei enää tueta vapaapäiväkirjastossa. Avaa integraation asetukset ja valitse tuettu maa."
         }
     }
 }

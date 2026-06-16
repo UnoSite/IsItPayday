@@ -4,29 +4,29 @@
         "step": {
             "user": {
                 "title": "Chọn quốc gia",
-                "description": "Quốc gia đã chọn được dùng để kiểm tra ngày lễ",
+                "description": "Quốc gia được chọn được dùng để xác định ngày nghỉ lễ (được tính cục bộ, không cần internet)",
                 "data": {
                     "name": "Tên phiên bản",
                     "country": "Quốc gia"
                 }
             },
             "subdivision": {
-                "title": "Select region",
-                "description": "Some countries have regional holidays. Select your state/region for the most accurate holiday calendar, or choose 'Entire country' to use only national holidays",
+                "title": "Chọn khu vực",
+                "description": "Một số quốc gia có ngày nghỉ lễ theo khu vực. Chọn bang/khu vực của bạn để có lịch nghỉ lễ chính xác nhất hoặc chọn 'Toàn quốc' để chỉ dùng ngày nghỉ lễ cấp quốc gia",
                 "data": {
-                    "subdivision": "State/Region"
+                    "subdivision": "Bang/Khu vực"
                 }
             },
             "frequency": {
-                "title": "Chọn tần suất trả lương",
+                "title": "Chọn tần suất nhận lương",
                 "description": "Chọn tần suất bạn được trả lương",
                 "data": {
-                    "pay_frequency": "Tần suất trả lương"
+                    "pay_frequency": "Tần suất nhận lương"
                 }
             },
             "monthly_day": {
                 "title": "Chọn ngày trong tháng",
-                "description": "Chọn ngày trong tháng bạn được trả lương",
+                "description": "Chọn ngày trong tháng mà bạn được trả lương",
                 "data": {
                     "pay_day": "Ngày trong tháng"
                 }
@@ -61,73 +61,73 @@
             }
         },
         "error": {
-            "invalid_country": "Quốc gia đã chọn không được hỗ trợ"
+            "invalid_country": "Quốc gia đã chọn không được thư viện ngày nghỉ lễ hỗ trợ"
         }
     },
     "options": {
         "step": {
             "init": {
-                "title": "Điều chỉnh cài đặt IsItPayday",
-                "description": "Chỉnh sửa cài đặt cho trình theo dõi ngày trả lương này",
+                "title": "Select country",
+                "description": "The selected country is used to determine public holidays (calculated locally, no internet required)",
                 "data": {
-                    "country": "Country"
+                    "country": "Quốc gia"
                 }
             },
             "subdivision": {
-                "title": "Select region",
-                "description": "Some countries have regional holidays. Select your state/region for the most accurate holiday calendar, or choose 'Entire country' to use only national holidays",
+                "title": "Chọn khu vực",
+                "description": "Một số quốc gia có ngày nghỉ lễ theo khu vực. Chọn bang/khu vực của bạn để có lịch nghỉ lễ chính xác nhất hoặc chọn 'Toàn quốc' để chỉ dùng ngày nghỉ lễ cấp quốc gia",
                 "data": {
-                    "subdivision": "State/Region"
+                    "subdivision": "Bang/Khu vực"
                 }
             },
             "frequency": {
-                "title": "Select payout frequency",
-                "description": "Choose how often you get paid",
+                "title": "Chọn tần suất nhận lương",
+                "description": "Chọn tần suất bạn được trả lương",
                 "data": {
-                    "pay_frequency": "Payout frequency"
+                    "pay_frequency": "Tần suất nhận lương"
                 }
             },
             "monthly_day": {
-                "title": "Select day of month",
-                "description": "Choose which day of the month you are paid",
+                "title": "Chọn ngày trong tháng",
+                "description": "Chọn ngày trong tháng mà bạn được trả lương",
                 "data": {
-                    "pay_day": "Day of month"
+                    "pay_day": "Ngày trong tháng"
                 }
             },
             "bank_offset": {
-                "title": "Days before the last banking day",
-                "description": "If you are paid a few days before the last banking day, choose how many days before",
+                "title": "Số ngày trước ngày làm việc ngân hàng cuối cùng",
+                "description": "Nếu bạn được trả lương vài ngày trước ngày làm việc ngân hàng cuối cùng, hãy chọn số ngày trước đó",
                 "data": {
-                    "bank_offset": "Days before"
+                    "bank_offset": "Số ngày trước"
                 }
             },
             "specific_day": {
-                "title": "Select specific day",
-                "description": "Select the exact day you are paid each month",
+                "title": "Chọn ngày cụ thể",
+                "description": "Chọn chính xác ngày bạn được trả lương mỗi tháng",
                 "data": {
-                    "pay_day": "Specific day"
+                    "pay_day": "Ngày cụ thể"
                 }
             },
             "cycle_last_paydate": {
-                "title": "Select last payday",
-                "description": "Select the last date you were paid. This will be used to calculate the next payday",
+                "title": "Chọn ngày trả lương gần nhất",
+                "description": "Chọn ngày gần nhất bạn được trả lương. Ngày này sẽ được dùng để tính ngày trả lương tiếp theo",
                 "data": {
-                    "last_pay_date": "Last payday"
+                    "last_pay_date": "Ngày trả lương gần nhất"
                 }
             },
             "weekly": {
-                "title": "Select weekly payday",
-                "description": "Choose which weekday you are paid each week",
+                "title": "Chọn ngày trả lương hằng tuần",
+                "description": "Chọn thứ trong tuần mà bạn được trả lương mỗi tuần",
                 "data": {
-                    "pay_day": "Payday weekday"
+                    "pay_day": "Thứ trả lương"
                 }
             }
         }
     },
     "issues": {
         "unsupported_country": {
-            "title": "Country no longer supported",
-            "description": "The country \"{country}\" configured for IsItPayday is no longer supported by the holidays library. Please open the integration options and select a supported country."
+            "title": "Quốc gia không còn được hỗ trợ",
+            "description": "Quốc gia \"{country}\" được cấu hình cho IsItPayday không còn được thư viện ngày nghỉ lễ hỗ trợ nữa. Vui lòng mở tùy chọn tích hợp và chọn một quốc gia được hỗ trợ."
         }
     }
 }

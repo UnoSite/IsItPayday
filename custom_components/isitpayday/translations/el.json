@@ -4,17 +4,17 @@
         "step": {
             "user": {
                 "title": "Επιλέξτε χώρα",
-                "description": "Η επιλεγμένη χώρα χρησιμοποιείται για τον έλεγχο των δημόσιων αργιών",
+                "description": "Η επιλεγμένη χώρα χρησιμοποιείται για τον καθορισμό των δημόσιων αργιών (ο υπολογισμός γίνεται τοπικά, δεν απαιτείται internet)",
                 "data": {
                     "name": "Όνομα παρουσίας",
                     "country": "Χώρα"
                 }
             },
             "subdivision": {
-                "title": "Select region",
-                "description": "Some countries have regional holidays. Select your state/region for the most accurate holiday calendar, or choose 'Entire country' to use only national holidays",
+                "title": "Επιλέξτε περιφέρεια",
+                "description": "Ορισμένες χώρες έχουν περιφερειακές αργίες. Επιλέξτε την πολιτεία/περιφέρειά σας για το πιο ακριβές ημερολόγιο αργιών ή επιλέξτε \"Ολόκληρη η χώρα\" για να χρησιμοποιούνται μόνο οι εθνικές αργίες",
                 "data": {
-                    "subdivision": "State/Region"
+                    "subdivision": "Πολιτεία/Περιφέρεια"
                 }
             },
             "frequency": {
@@ -61,73 +61,73 @@
             }
         },
         "error": {
-            "invalid_country": "Η επιλεγμένη χώρα δεν υποστηρίζεται"
+            "invalid_country": "Η επιλεγμένη χώρα δεν υποστηρίζεται από τη βιβλιοθήκη αργιών"
         }
     },
     "options": {
         "step": {
             "init": {
-                "title": "Προσαρμογή ρυθμίσεων IsItPayday",
-                "description": "Τροποποιήστε τις ρυθμίσεις για αυτόν τον ανιχνευτή ημέρας πληρωμής",
+                "title": "Select country",
+                "description": "The selected country is used to determine public holidays (calculated locally, no internet required)",
                 "data": {
-                    "country": "Country"
+                    "country": "Χώρα"
                 }
             },
             "subdivision": {
-                "title": "Select region",
-                "description": "Some countries have regional holidays. Select your state/region for the most accurate holiday calendar, or choose 'Entire country' to use only national holidays",
+                "title": "Επιλέξτε περιφέρεια",
+                "description": "Ορισμένες χώρες έχουν περιφερειακές αργίες. Επιλέξτε την πολιτεία/περιφέρειά σας για το πιο ακριβές ημερολόγιο αργιών ή επιλέξτε \"Ολόκληρη η χώρα\" για να χρησιμοποιούνται μόνο οι εθνικές αργίες",
                 "data": {
-                    "subdivision": "State/Region"
+                    "subdivision": "Πολιτεία/Περιφέρεια"
                 }
             },
             "frequency": {
-                "title": "Select payout frequency",
-                "description": "Choose how often you get paid",
+                "title": "Επιλέξτε συχνότητα πληρωμής",
+                "description": "Επιλέξτε πόσο συχνά πληρώνεστε",
                 "data": {
-                    "pay_frequency": "Payout frequency"
+                    "pay_frequency": "Συχνότητα πληρωμής"
                 }
             },
             "monthly_day": {
-                "title": "Select day of month",
-                "description": "Choose which day of the month you are paid",
+                "title": "Επιλέξτε ημέρα του μήνα",
+                "description": "Επιλέξτε ποια ημέρα του μήνα πληρώνεστε",
                 "data": {
-                    "pay_day": "Day of month"
+                    "pay_day": "Ημέρα του μήνα"
                 }
             },
             "bank_offset": {
-                "title": "Days before the last banking day",
-                "description": "If you are paid a few days before the last banking day, choose how many days before",
+                "title": "Ημέρες πριν από την τελευταία τραπεζική ημέρα",
+                "description": "Αν πληρώνεστε λίγες ημέρες πριν από την τελευταία τραπεζική ημέρα, επιλέξτε πόσες ημέρες πριν",
                 "data": {
-                    "bank_offset": "Days before"
+                    "bank_offset": "Ημέρες πριν"
                 }
             },
             "specific_day": {
-                "title": "Select specific day",
-                "description": "Select the exact day you are paid each month",
+                "title": "Επιλέξτε συγκεκριμένη ημέρα",
+                "description": "Επιλέξτε την ακριβή ημέρα που πληρώνεστε κάθε μήνα",
                 "data": {
-                    "pay_day": "Specific day"
+                    "pay_day": "Συγκεκριμένη ημέρα"
                 }
             },
             "cycle_last_paydate": {
-                "title": "Select last payday",
-                "description": "Select the last date you were paid. This will be used to calculate the next payday",
+                "title": "Επιλέξτε την τελευταία ημέρα πληρωμής",
+                "description": "Επιλέξτε την τελευταία ημερομηνία που πληρωθήκατε. Αυτή θα χρησιμοποιηθεί για τον υπολογισμό της επόμενης ημέρας πληρωμής",
                 "data": {
-                    "last_pay_date": "Last payday"
+                    "last_pay_date": "Τελευταία ημέρα πληρωμής"
                 }
             },
             "weekly": {
-                "title": "Select weekly payday",
-                "description": "Choose which weekday you are paid each week",
+                "title": "Επιλέξτε εβδομαδιαία ημέρα πληρωμής",
+                "description": "Επιλέξτε ποια ημέρα της εβδομάδας πληρώνεστε κάθε εβδομάδα",
                 "data": {
-                    "pay_day": "Payday weekday"
+                    "pay_day": "Ημέρα εβδομάδας πληρωμής"
                 }
             }
         }
     },
     "issues": {
         "unsupported_country": {
-            "title": "Country no longer supported",
-            "description": "The country \"{country}\" configured for IsItPayday is no longer supported by the holidays library. Please open the integration options and select a supported country."
+            "title": "Η χώρα δεν υποστηρίζεται πλέον",
+            "description": "Η χώρα \"{country}\" που έχει οριστεί για το IsItPayday δεν υποστηρίζεται πλέον από τη βιβλιοθήκη αργιών. Ανοίξτε τις επιλογές της ενσωμάτωσης και επιλέξτε μια υποστηριζόμενη χώρα."
         }
     }
 }

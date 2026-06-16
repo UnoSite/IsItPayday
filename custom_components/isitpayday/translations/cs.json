@@ -4,17 +4,17 @@
         "step": {
             "user": {
                 "title": "Vyberte zemi",
-                "description": "Vybraná země se používá ke kontrole státních svátků",
+                "description": "Vybraná země se používá k určení státních svátků (vypočítává se lokálně, není vyžadován internet)",
                 "data": {
                     "name": "Název instance",
                     "country": "Země"
                 }
             },
             "subdivision": {
-                "title": "Select region",
-                "description": "Some countries have regional holidays. Select your state/region for the most accurate holiday calendar, or choose 'Entire country' to use only national holidays",
+                "title": "Vyberte region",
+                "description": "Některé země mají regionální svátky. Vyberte svůj stát/region pro co nejpřesnější kalendář svátků, nebo zvolte možnost 'Celá země', pokud chcete použít pouze státní svátky",
                 "data": {
-                    "subdivision": "State/Region"
+                    "subdivision": "Stát/region"
                 }
             },
             "frequency": {
@@ -32,10 +32,10 @@
                 }
             },
             "bank_offset": {
-                "title": "Počet dnů před posledním bankovním dnem",
+                "title": "Počet dní před posledním bankovním dnem",
                 "description": "Pokud dostáváte výplatu několik dní před posledním bankovním dnem, zvolte kolik dní předem",
                 "data": {
-                    "bank_offset": "Dnů předem"
+                    "bank_offset": "Dní předem"
                 }
             },
             "specific_day": {
@@ -56,78 +56,78 @@
                 "title": "Vyberte týdenní výplatní den",
                 "description": "Zvolte, který den v týdnu dostáváte výplatu",
                 "data": {
-                    "pay_day": "Den v týdnu výplaty"
+                    "pay_day": "Den výplaty v týdnu"
                 }
             }
         },
         "error": {
-            "invalid_country": "Vybraná země není podporována"
+            "invalid_country": "Vybraná země není podporována knihovnou svátků"
         }
     },
     "options": {
         "step": {
             "init": {
-                "title": "Upravit nastavení IsItPayday",
-                "description": "Upravte nastavení tohoto sledovače výplat",
+                "title": "Select country",
+                "description": "The selected country is used to determine public holidays (calculated locally, no internet required)",
                 "data": {
-                    "country": "Country"
+                    "country": "Země"
                 }
             },
             "subdivision": {
-                "title": "Select region",
-                "description": "Some countries have regional holidays. Select your state/region for the most accurate holiday calendar, or choose 'Entire country' to use only national holidays",
+                "title": "Vyberte region",
+                "description": "Některé země mají regionální svátky. Vyberte svůj stát/region pro co nejpřesnější kalendář svátků, nebo zvolte možnost 'Celá země', pokud chcete použít pouze státní svátky",
                 "data": {
-                    "subdivision": "State/Region"
+                    "subdivision": "Stát/region"
                 }
             },
             "frequency": {
-                "title": "Select payout frequency",
-                "description": "Choose how often you get paid",
+                "title": "Vyberte frekvenci výplaty",
+                "description": "Zvolte, jak často dostáváte výplatu",
                 "data": {
-                    "pay_frequency": "Payout frequency"
+                    "pay_frequency": "Frekvence výplaty"
                 }
             },
             "monthly_day": {
-                "title": "Select day of month",
-                "description": "Choose which day of the month you are paid",
+                "title": "Vyberte den v měsíci",
+                "description": "Zvolte, který den v měsíci dostáváte výplatu",
                 "data": {
-                    "pay_day": "Day of month"
+                    "pay_day": "Den v měsíci"
                 }
             },
             "bank_offset": {
-                "title": "Days before the last banking day",
-                "description": "If you are paid a few days before the last banking day, choose how many days before",
+                "title": "Počet dní před posledním bankovním dnem",
+                "description": "Pokud dostáváte výplatu několik dní před posledním bankovním dnem, zvolte kolik dní předem",
                 "data": {
-                    "bank_offset": "Days before"
+                    "bank_offset": "Dní předem"
                 }
             },
             "specific_day": {
-                "title": "Select specific day",
-                "description": "Select the exact day you are paid each month",
+                "title": "Vyberte konkrétní den",
+                "description": "Vyberte přesný den, kdy každý měsíc dostáváte výplatu",
                 "data": {
-                    "pay_day": "Specific day"
+                    "pay_day": "Konkrétní den"
                 }
             },
             "cycle_last_paydate": {
-                "title": "Select last payday",
-                "description": "Select the last date you were paid. This will be used to calculate the next payday",
+                "title": "Vyberte poslední výplatní den",
+                "description": "Vyberte poslední datum, kdy jste dostali výplatu. To bude použito k výpočtu dalšího výplatního dne",
                 "data": {
-                    "last_pay_date": "Last payday"
+                    "last_pay_date": "Poslední výplatní den"
                 }
             },
             "weekly": {
-                "title": "Select weekly payday",
-                "description": "Choose which weekday you are paid each week",
+                "title": "Vyberte týdenní výplatní den",
+                "description": "Zvolte, který den v týdnu dostáváte výplatu",
                 "data": {
-                    "pay_day": "Payday weekday"
+                    "pay_day": "Den výplaty v týdnu"
                 }
             }
         }
     },
     "issues": {
         "unsupported_country": {
-            "title": "Country no longer supported",
-            "description": "The country \"{country}\" configured for IsItPayday is no longer supported by the holidays library. Please open the integration options and select a supported country."
+            "title": "Země již není podporována",
+            "description": "Země \"{country}\", která je nakonfigurována pro IsItPayday, již není podporována knihovnou svátků. Otevřete prosím možnosti integrace a vyberte podporovanou zemi."
         }
     }
 }

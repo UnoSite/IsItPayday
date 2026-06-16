@@ -1,133 +1,133 @@
 {
-    "title": "IsItPayday",
+    "title": "هل_اليوم_يوم_الراتب؟",
     "config": {
         "step": {
             "user": {
                 "title": "اختر البلد",
-                "description": "يُستخدم البلد المحدد للتحقق من العطلات الرسمية",
+                "description": "يُستخدم البلد المحدد لتحديد العطلات الرسمية (يتم الحساب محليًا، ولا يتطلب اتصالًا بالإنترنت)",
                 "data": {
                     "name": "اسم المثيل",
                     "country": "البلد"
                 }
             },
             "subdivision": {
-                "title": "Select region",
-                "description": "Some countries have regional holidays. Select your state/region for the most accurate holiday calendar, or choose 'Entire country' to use only national holidays",
+                "title": "اختر المنطقة",
+                "description": "تحتوي بعض البلدان على عطلات إقليمية. اختر الولاية/المنطقة الخاصة بك للحصول على أدق تقويم للعطلات، أو اختر 'البلد بالكامل' لاستخدام العطلات الوطنية فقط",
                 "data": {
-                    "subdivision": "State/Region"
+                    "subdivision": "الولاية/المنطقة"
                 }
             },
             "frequency": {
-                "title": "حدد وتيرة صرف الراتب",
-                "description": "اختر عدد مرات استلامك للراتب",
+                "title": "اختر وتيرة الدفع",
+                "description": "اختر عدد مرات حصولك على الراتب",
                 "data": {
-                    "pay_frequency": "وتيرة صرف الراتب"
+                    "pay_frequency": "وتيرة الدفع"
                 }
             },
             "monthly_day": {
-                "title": "حدد يوم الشهر",
-                "description": "اختر اليوم من الشهر الذي يُصرف فيه راتبك",
+                "title": "اختر يومًا من الشهر",
+                "description": "اختر اليوم من الشهر الذي تتقاضى فيه راتبك",
                 "data": {
-                    "pay_day": "يوم الشهر"
+                    "pay_day": "يوم من الشهر"
                 }
             },
             "bank_offset": {
                 "title": "الأيام قبل آخر يوم مصرفي",
-                "description": "إذا كان راتبك يُصرف قبل آخر يوم مصرفي ببضعة أيام، فاختر عدد الأيام السابقة",
+                "description": "إذا كنت تتقاضى راتبك قبل آخر يوم مصرفي ببضعة أيام، فاختر عدد الأيام السابقة له",
                 "data": {
                     "bank_offset": "الأيام السابقة"
                 }
             },
             "specific_day": {
-                "title": "حدد يومًا معينًا",
-                "description": "حدد اليوم المحدد الذي يُصرف فيه راتبك كل شهر",
+                "title": "اختر يومًا محددًا",
+                "description": "اختر اليوم المحدد الذي تتقاضى فيه راتبك كل شهر",
                 "data": {
                     "pay_day": "يوم محدد"
                 }
             },
             "cycle_last_paydate": {
-                "title": "حدد آخر يوم صرف راتب",
-                "description": "حدد آخر تاريخ استلمت فيه راتبك. سيُستخدم هذا لحساب يوم صرف الراتب التالي",
+                "title": "اختر آخر يوم راتب",
+                "description": "اختر آخر تاريخ تقاضيت فيه راتبك. سيُستخدم هذا لحساب يوم الراتب التالي",
                 "data": {
-                    "last_pay_date": "آخر يوم صرف راتب"
+                    "last_pay_date": "آخر يوم راتب"
                 }
             },
             "weekly": {
-                "title": "حدد يوم صرف الراتب الأسبوعي",
-                "description": "اختر يوم الأسبوع الذي يُصرف فيه راتبك كل أسبوع",
+                "title": "اختر يوم الراتب الأسبوعي",
+                "description": "اختر يوم الأسبوع الذي تتقاضى فيه راتبك كل أسبوع",
                 "data": {
-                    "pay_day": "يوم صرف الراتب الأسبوعي"
+                    "pay_day": "يوم الأسبوع للراتب"
                 }
             }
         },
         "error": {
-            "invalid_country": "البلد المحدد غير مدعوم"
+            "invalid_country": "البلد المحدد غير مدعوم من مكتبة العطلات"
         }
     },
     "options": {
         "step": {
             "init": {
-                "title": "اضبط إعدادات IsItPayday",
-                "description": "عدّل إعدادات متتبع يوم صرف الراتب هذا",
+                "title": "Select country",
+                "description": "The selected country is used to determine public holidays (calculated locally, no internet required)",
                 "data": {
-                    "country": "Country"
+                    "country": "البلد"
                 }
             },
             "subdivision": {
-                "title": "Select region",
-                "description": "Some countries have regional holidays. Select your state/region for the most accurate holiday calendar, or choose 'Entire country' to use only national holidays",
+                "title": "اختر المنطقة",
+                "description": "تحتوي بعض البلدان على عطلات إقليمية. اختر الولاية/المنطقة الخاصة بك للحصول على أدق تقويم للعطلات، أو اختر 'البلد بالكامل' لاستخدام العطلات الوطنية فقط",
                 "data": {
-                    "subdivision": "State/Region"
+                    "subdivision": "الولاية/المنطقة"
                 }
             },
             "frequency": {
-                "title": "Select payout frequency",
-                "description": "Choose how often you get paid",
+                "title": "اختر وتيرة الدفع",
+                "description": "اختر عدد مرات حصولك على الراتب",
                 "data": {
-                    "pay_frequency": "Payout frequency"
+                    "pay_frequency": "وتيرة الدفع"
                 }
             },
             "monthly_day": {
-                "title": "Select day of month",
-                "description": "Choose which day of the month you are paid",
+                "title": "اختر يومًا من الشهر",
+                "description": "اختر اليوم من الشهر الذي تتقاضى فيه راتبك",
                 "data": {
-                    "pay_day": "Day of month"
+                    "pay_day": "يوم من الشهر"
                 }
             },
             "bank_offset": {
-                "title": "Days before the last banking day",
-                "description": "If you are paid a few days before the last banking day, choose how many days before",
+                "title": "الأيام قبل آخر يوم مصرفي",
+                "description": "إذا كنت تتقاضى راتبك قبل آخر يوم مصرفي ببضعة أيام، فاختر عدد الأيام السابقة له",
                 "data": {
-                    "bank_offset": "Days before"
+                    "bank_offset": "الأيام السابقة"
                 }
             },
             "specific_day": {
-                "title": "Select specific day",
-                "description": "Select the exact day you are paid each month",
+                "title": "اختر يومًا محددًا",
+                "description": "اختر اليوم المحدد الذي تتقاضى فيه راتبك كل شهر",
                 "data": {
-                    "pay_day": "Specific day"
+                    "pay_day": "يوم محدد"
                 }
             },
             "cycle_last_paydate": {
-                "title": "Select last payday",
-                "description": "Select the last date you were paid. This will be used to calculate the next payday",
+                "title": "اختر آخر يوم راتب",
+                "description": "اختر آخر تاريخ تقاضيت فيه راتبك. سيُستخدم هذا لحساب يوم الراتب التالي",
                 "data": {
-                    "last_pay_date": "Last payday"
+                    "last_pay_date": "آخر يوم راتب"
                 }
             },
             "weekly": {
-                "title": "Select weekly payday",
-                "description": "Choose which weekday you are paid each week",
+                "title": "اختر يوم الراتب الأسبوعي",
+                "description": "اختر يوم الأسبوع الذي تتقاضى فيه راتبك كل أسبوع",
                 "data": {
-                    "pay_day": "Payday weekday"
+                    "pay_day": "يوم الأسبوع للراتب"
                 }
             }
         }
     },
     "issues": {
         "unsupported_country": {
-            "title": "Country no longer supported",
-            "description": "The country \"{country}\" configured for IsItPayday is no longer supported by the holidays library. Please open the integration options and select a supported country."
+            "title": "البلد لم يعد مدعومًا",
+            "description": "لم يعد البلد \"{country}\" المُعدّ لتطبيق IsItPayday مدعومًا من مكتبة العطلات. يُرجى فتح خيارات التكامل واختيار بلد مدعوم."
         }
     }
 }

@@ -4,7 +4,7 @@
         "step": {
             "user": {
                 "title": "Seleziona il paese",
-                "description": "Il paese selezionato viene usato per determinare le festività pubbliche (calcolate localmente, senza necessità di internet)",
+                "description": "Il paese selezionato viene usato per determinare le festività pubbliche (calcolate localmente, senza connessione a Internet)",
                 "data": {
                     "name": "Nome istanza",
                     "country": "Paese"
@@ -12,7 +12,7 @@
             },
             "subdivision": {
                 "title": "Seleziona la regione",
-                "description": "Alcuni paesi hanno festività regionali. Seleziona il tuo stato/regione per avere il calendario delle festività più accurato, oppure scegli 'Intero paese' per usare solo le festività nazionali",
+                "description": "Alcuni paesi hanno festività regionali. Seleziona il tuo stato/regione per il calendario festivo più accurato, oppure scegli 'Intero paese' per usare solo le festività nazionali",
                 "data": {
                     "subdivision": "Stato/Regione"
                 }
@@ -33,7 +33,7 @@
             },
             "bank_offset": {
                 "title": "Giorni prima dell'ultimo giorno bancario",
-                "description": "Se vieni pagato qualche giorno prima dell'ultimo giorno bancario, scegli quanti giorni prima",
+                "description": "Se vieni pagato alcuni giorni prima dell'ultimo giorno bancario, scegli quanti giorni prima",
                 "data": {
                     "bank_offset": "Giorni prima"
                 }
@@ -60,29 +60,29 @@
                 }
             },
             "event_time": {
-                "title": "Payday event time",
-                "description": "Choose the time of day the payday event is fired on each payday. Automations can trigger on the 'isitpayday_payday' event.",
+                "title": "Orario dell'evento payday",
+                "description": "Scegli l'ora del giorno in cui viene generato l'evento payday a ogni giorno di paga. Le automazioni possono attivarsi con l'evento 'isitpayday_payday'.",
                 "data": {
-                    "event_time": "Event time"
+                    "event_time": "Ora dell'evento"
                 }
             }
         },
         "error": {
-            "invalid_country": "Il paese selezionato non è supportato dalla libreria delle festività"
+            "invalid_country": "Il paese selezionato non è supportato dalla libreria holidays"
         }
     },
     "options": {
         "step": {
             "init": {
-                "title": "Select country",
-                "description": "The selected country is used to determine public holidays (calculated locally, no internet required)",
+                "title": "Seleziona il paese",
+                "description": "Il paese selezionato viene usato per determinare le festività pubbliche (calcolate localmente, senza connessione a Internet)",
                 "data": {
                     "country": "Paese"
                 }
             },
             "subdivision": {
                 "title": "Seleziona la regione",
-                "description": "Alcuni paesi hanno festività regionali. Seleziona il tuo stato/regione per avere il calendario delle festività più accurato, oppure scegli 'Intero paese' per usare solo le festività nazionali",
+                "description": "Alcuni paesi hanno festività regionali. Seleziona il tuo stato/regione per il calendario festivo più accurato, oppure scegli 'Intero paese' per usare solo le festività nazionali",
                 "data": {
                     "subdivision": "Stato/Regione"
                 }
@@ -103,7 +103,7 @@
             },
             "bank_offset": {
                 "title": "Giorni prima dell'ultimo giorno bancario",
-                "description": "Se vieni pagato qualche giorno prima dell'ultimo giorno bancario, scegli quanti giorni prima",
+                "description": "Se vieni pagato alcuni giorni prima dell'ultimo giorno bancario, scegli quanti giorni prima",
                 "data": {
                     "bank_offset": "Giorni prima"
                 }
@@ -130,10 +130,10 @@
                 }
             },
             "event_time": {
-                "title": "Payday event time",
-                "description": "Choose the time of day the payday event is fired on each payday. Automations can trigger on the 'isitpayday_payday' event.",
+                "title": "Orario dell'evento payday",
+                "description": "Scegli l'ora del giorno in cui viene generato l'evento payday a ogni giorno di paga. Le automazioni possono attivarsi con l'evento 'isitpayday_payday'.",
                 "data": {
-                    "event_time": "Event time"
+                    "event_time": "Ora dell'evento"
                 }
             }
         }
@@ -141,7 +141,7 @@
     "issues": {
         "unsupported_country": {
             "title": "Paese non più supportato",
-            "description": "Il paese \"{country}\" configurato per IsItPayday non è più supportato dalla libreria delle festività. Apri le opzioni dell'integrazione e seleziona un paese supportato."
+            "description": "Il paese \"{country}\" configurato per IsItPayday non è più supportato dalla libreria holidays. Apri le opzioni dell'integrazione e seleziona un paese supportato."
         }
     }
 }

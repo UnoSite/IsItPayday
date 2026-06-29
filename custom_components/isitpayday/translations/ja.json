@@ -58,6 +58,13 @@
                 "data": {
                     "pay_day": "給料日の曜日"
                 }
+            },
+            "event_time": {
+                "title": "Payday event time",
+                "description": "Choose the time of day the payday event is fired on each payday. Automations can trigger on the 'isitpayday_payday' event.",
+                "data": {
+                    "event_time": "Event time"
+                }
             }
         },
         "error": {
@@ -120,6 +127,13 @@
                 "description": "毎週給与が支払われる曜日を選択してください",
                 "data": {
                     "pay_day": "給料日の曜日"
+                }
+            },
+            "event_time": {
+                "title": "Payday event time",
+                "description": "Choose the time of day the payday event is fired on each payday. Automations can trigger on the 'isitpayday_payday' event.",
+                "data": {
+                    "event_time": "Event time"
                 }
             }
         }

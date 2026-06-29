@@ -4,7 +4,7 @@
         "step": {
             "user": {
                 "title": "Selecionar país",
-                "description": "O país selecionado é usado para determinar os feriados públicos (calculados localmente, sem necessidade de internet)",
+                "description": "O país selecionado é usado para verificar feriados públicos",
                 "data": {
                     "name": "Nome da instância",
                     "country": "País"
@@ -19,7 +19,7 @@
             },
             "frequency": {
                 "title": "Selecionar frequência de pagamento",
-                "description": "Escolha com que frequência você recebe",
+                "description": "Escolha com que frequência você recebe o pagamento",
                 "data": {
                     "pay_frequency": "Frequência de pagamento"
                 }
@@ -33,14 +33,14 @@
             },
             "bank_offset": {
                 "title": "Dias antes do último dia bancário",
-                "description": "Se você recebe alguns dias antes do último dia bancário, escolha quantos dias antes",
+                "description": "Se você recebe o pagamento alguns dias antes do último dia bancário, escolha quantos dias antes",
                 "data": {
                     "bank_offset": "Dias antes"
                 }
             },
             "specific_day": {
                 "title": "Selecionar dia específico",
-                "description": "Selecione o dia exato em que você recebe a cada mês",
+                "description": "Selecione o dia exato em que você recebe o pagamento a cada mês",
                 "data": {
                     "pay_day": "Dia específico"
                 }
@@ -68,14 +68,14 @@
             }
         },
         "error": {
-            "invalid_country": "O país selecionado não é compatível com a biblioteca de feriados"
+            "invalid_country": "O país selecionado não é suportado pela biblioteca de feriados"
         }
     },
     "options": {
         "step": {
             "init": {
-                "title": "Select country",
-                "description": "The selected country is used to determine public holidays (calculated locally, no internet required)",
+                "title": "Ajustar definições do IsItPayday",
+                "description": "Modificar as definições deste rastreador de pagamento",
                 "data": {
                     "country": "País"
                 }
@@ -89,7 +89,7 @@
             },
             "frequency": {
                 "title": "Selecionar frequência de pagamento",
-                "description": "Escolha com que frequência você recebe",
+                "description": "Escolha com que frequência recebe o pagamento",
                 "data": {
                     "pay_frequency": "Frequência de pagamento"
                 }
@@ -103,14 +103,14 @@
             },
             "bank_offset": {
                 "title": "Dias antes do último dia bancário",
-                "description": "Se você recebe alguns dias antes do último dia bancário, escolha quantos dias antes",
+                "description": "Se receber o pagamento alguns dias antes do último dia bancário, escolha quantos dias antes",
                 "data": {
                     "bank_offset": "Dias antes"
                 }
             },
             "specific_day": {
                 "title": "Selecionar dia específico",
-                "description": "Selecione o dia exato em que você recebe a cada mês",
+                "description": "Selecione o dia exato em que recebe o pagamento todos os meses",
                 "data": {
                     "pay_day": "Dia específico"
                 }
@@ -140,8 +140,8 @@
     },
     "issues": {
         "unsupported_country": {
-            "title": "País não mais compatível",
-            "description": "O país \"{country}\" configurado para o IsItPayday não é mais compatível com a biblioteca de feriados. Abra as opções da integração e selecione um país compatível."
+            "title": "País já não suportado",
+            "description": "O país \"{country}\" configurado para o IsItPayday já não é suportado pela biblioteca de feriados. Abra as opções da integração e selecione um país suportado."
         }
     }
 }

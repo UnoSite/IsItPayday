@@ -16,6 +16,7 @@ CONF_LAST_PAY_DATE = "last_pay_date"
 CONF_BANK_OFFSET = "bank_offset"
 CONF_WEEKDAY = "weekday"
 CONF_SUBDIV = "subdivision"
+CONF_EVENT_TIME = "event_time"
 
 # Pay frequency options shown to user
 PAY_FREQ_MONTHLY = "monthly"
@@ -67,6 +68,7 @@ DEFAULT_PAY_FREQ = PAY_FREQ_MONTHLY
 DEFAULT_MONTHLY_DAY = PAY_DAY_LAST_BANK_DAY
 DEFAULT_BANK_OFFSET = 0
 DEFAULT_SPECIFIC_DAY = 31
+DEFAULT_EVENT_TIME = "06:00:00"
 
 
 # Sensor icons

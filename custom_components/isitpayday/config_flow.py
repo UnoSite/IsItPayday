@@ -7,7 +7,7 @@ from homeassistant import config_entries
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import callback
 from homeassistant.data_entry_flow import FlowResult
-from homeassistant.helpers.selector import DateSelector
+from homeassistant.helpers.selector import DateSelector, TimeSelector
 
 from .const import (
     DOMAIN,
@@ -19,7 +19,9 @@ from .const import (
     CONF_BANK_OFFSET,
     CONF_WEEKDAY,
     CONF_SUBDIV,
+    CONF_EVENT_TIME,
     DEFAULT_COUNTRY,
+    DEFAULT_EVENT_TIME,
     PAY_FREQ_MONTHLY,
     PAY_FREQ_BIMONTHLY,
     PAY_FREQ_QUARTERLY,
@@ -69,10 +71,33 @@ class PaydayFlowMixin:
     last_pay_date: str | None = None
     bank_offset: int = 0
     weekday: int | None = None
+    event_time: str | None = None
     subdivision_list: dict[str, str]
 
     def _finish(self) -> FlowResult:
         raise NotImplementedError
+
+    async def _async_continue_to_event_time(self) -> FlowResult:
+        """Show the event-time step as the final step before finishing."""
+        return await self.async_step_event_time()
+
+    async def async_step_event_time(self, user_input=None) -> FlowResult:
+        """Handle selection of the time of day the payday event fires."""
+        if user_input is None:
+            default = self.event_time or DEFAULT_EVENT_TIME
+            return self.async_show_form(
+                step_id="event_time",
+                data_schema=vol.Schema(
+                    {
+                        vol.Required(
+                            CONF_EVENT_TIME, default=default
+                        ): TimeSelector()
+                    }
+                ),
+            )
+
+        self.event_time = user_input[CONF_EVENT_TIME]
+        return self._finish()
 
     async def _async_continue_after_country(self) -> FlowResult:
         """Continue to subdivision selection if relevant, else frequency."""
@@ -133,7 +158,7 @@ class PaydayFlowMixin:
         elif self.pay_frequency == PAY_FREQ_WEEKLY:
             return await self.async_step_weekly()
 
-        return self._finish()
+        return await self._async_continue_to_event_time()
 
     async def async_step_monthly_day(self, user_input=None) -> FlowResult:
         """Handle selection of which day of the month payday falls on."""
@@ -165,7 +190,7 @@ class PaydayFlowMixin:
         elif self.pay_day == PAY_DAY_SPECIFIC_DAY:
             return await self.async_step_specific_day()
 
-        return self._finish()
+        return await self._async_continue_to_event_time()
 
     async def async_step_bank_offset(self, user_input=None) -> FlowResult:
         """Handle selection of days before last bank day."""
@@ -185,7 +210,7 @@ class PaydayFlowMixin:
             )
 
         self.bank_offset = _coerce_int(user_input[CONF_BANK_OFFSET], 0)
-        return self._finish()
+        return await self._async_continue_to_event_time()
 
     async def async_step_specific_day(self, user_input=None) -> FlowResult:
         """Handle selection of a specific day of the month."""
@@ -205,7 +230,7 @@ class PaydayFlowMixin:
             )
 
         self.pay_day = _coerce_int(user_input[CONF_PAY_DAY], 31)
-        return self._finish()
+        return await self._async_continue_to_event_time()
 
     async def async_step_cycle_last_paydate(self, user_input=None) -> FlowResult:
         """Handle selection of the last payday date for interval-based frequencies."""
@@ -227,7 +252,7 @@ class PaydayFlowMixin:
             )
 
         self.last_pay_date = user_input[CONF_LAST_PAY_DATE]
-        return self._finish()
+        return await self._async_continue_to_event_time()
 
     async def async_step_weekly(self, user_input=None) -> FlowResult:
         """Handle selection of weekday for weekly pay frequency."""
@@ -246,7 +271,7 @@ class PaydayFlowMixin:
 
         self.pay_day = user_input[CONF_PAY_DAY]
         self.weekday = WEEKDAY_MAP[self.pay_day]
-        return self._finish()
+        return await self._async_continue_to_event_time()
 
     def _collect_settings(self) -> dict:
         """Return the collected settings as a dict."""
@@ -258,6 +283,7 @@ class PaydayFlowMixin:
             CONF_LAST_PAY_DATE: self.last_pay_date,
             CONF_BANK_OFFSET: self.bank_offset,
             CONF_WEEKDAY: self.weekday,
+            CONF_EVENT_TIME: self.event_time or DEFAULT_EVENT_TIME,
         }
 
 
@@ -341,6 +367,7 @@ class IsItPaydayOptionsFlow(PaydayFlowMixin, config_entries.OptionsFlow):
             self.last_pay_date = config.get(CONF_LAST_PAY_DATE)
             self.bank_offset = _coerce_int(config.get(CONF_BANK_OFFSET), 0)
             self.weekday = config.get(CONF_WEEKDAY)
+            self.event_time = config.get(CONF_EVENT_TIME, DEFAULT_EVENT_TIME)
 
             pay_day = config.get(CONF_PAY_DAY)
             if isinstance(pay_day, str) and pay_day.isdigit():

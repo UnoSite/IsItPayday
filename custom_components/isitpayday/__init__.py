@@ -20,6 +20,8 @@ from .const import (
     CONF_WEEKDAY,
     CONF_BANK_OFFSET,
     CONF_SUBDIV,
+    CONF_EVENT_TIME,
+    DEFAULT_EVENT_TIME,
     EVENT_PAYDAY,
 )
 from .payday_calculator import (
@@ -51,10 +53,34 @@ def _normalize_int(value, default: int) -> int:
         return default
 
 
+def _parse_event_time(value) -> time:
+    """Parse a stored 'HH:MM:SS' (or 'HH:MM') string into a time object.
+
+    Falls back to the default event time if the value is missing or invalid.
+    """
+    if not value:
+        value = DEFAULT_EVENT_TIME
+    try:
+        parts = [int(p) for p in str(value).split(":")]
+        while len(parts) < 3:
+            parts.append(0)
+        return time(parts[0], parts[1], parts[2])
+    except (ValueError, IndexError):
+        _LOGGER.warning(
+            "Invalid event_time %r, falling back to %s", value, DEFAULT_EVENT_TIME
+        )
+        h, m, s = (int(p) for p in DEFAULT_EVENT_TIME.split(":"))
+        return time(h, m, s)
+
+
 _PLATFORMS = ["sensor", "binary_sensor", "calendar"]
 
-# Tracks the scheduled "fire at midnight" callback per config entry.
+# Tracks the scheduled "fire at 06:00" callback per config entry.
 _payday_event_unsubs: dict[str, object] = {}
+
+# Tracks the last payday date we already fired an event for, per config entry,
+# so coordinator refreshes during the day do not fire the event repeatedly.
+_payday_last_fired: dict[str, date] = {}
 
 
 @callback
@@ -106,6 +132,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     # setup data, so changed settings apply without touching entry.data.
     data = {**entry.data, **entry.options}
     instance_name = data.get(CONF_NAME, "IsItPayday")
+    event_time = _parse_event_time(data.get(CONF_EVENT_TIME))
 
     last_data: dict | None = None
 
@@ -183,34 +210,57 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         "name": instance_name,
     }
 
-    # Fire an event at midnight on each payday so automations can trigger
-    # directly on the payday instead of watching the binary sensor.
+    # Fire an event at the configured local time on each payday so
+    # automations can trigger directly on the payday instead of watching
+    # the binary sensor.
+    #
+    # The event must fire exactly once per payday. The coordinator refreshes
+    # every few minutes, so we guard with the last date we already fired for
+    # and (re)schedule a single timer for the next payday's event time.
+    def _payday_fire_time(payday: date) -> datetime:
+        """Return the UTC datetime at which to fire for a given payday."""
+        local = datetime.combine(
+            payday,
+            event_time,
+            tzinfo=dt_util.DEFAULT_TIME_ZONE,
+        )
+        return dt_util.as_utc(local)
+
     @callback
     def _schedule_payday_event(_now=None) -> None:
-        unsub = _payday_event_unsubs.pop(entry.entry_id, None)
-        if unsub:
-            unsub()
-
         next_payday = coordinator.data.get("payday_next") if coordinator.data else None
         if not isinstance(next_payday, date):
             return
 
-        fire_at = dt_util.as_utc(
-            datetime.combine(next_payday, time(0, 0), tzinfo=dt_util.DEFAULT_TIME_ZONE)
-        )
-        if fire_at <= dt_util.utcnow():
-            # Payday is today and midnight has passed; fire now.
-            _fire_payday_event(hass, entry, instance_name, next_payday)
+        already_fired = _payday_last_fired.get(entry.entry_id)
+        now = dt_util.utcnow()
+        fire_at = _payday_fire_time(next_payday)
+
+        # Payday is today (or earlier) and the event time has already passed.
+        if fire_at <= now:
+            # Only fire if we have not already fired for this exact date.
+            if already_fired != next_payday:
+                _payday_last_fired[entry.entry_id] = next_payday
+                _fire_payday_event(hass, entry, instance_name, next_payday)
+                # Advance the coordinator to the following payday.
+                hass.async_create_task(coordinator.async_request_refresh())
             return
 
+        # Otherwise schedule a single timer for the event time on the payday.
+        # Cancel any existing timer first so we never stack multiple timers.
+        unsub = _payday_event_unsubs.pop(entry.entry_id, None)
+        if unsub:
+            unsub()
         _payday_event_unsubs[entry.entry_id] = async_track_point_in_time(
             hass, _on_payday, fire_at
         )
 
     @callback
     def _on_payday(now) -> None:
+        _payday_event_unsubs.pop(entry.entry_id, None)
         payday = coordinator.data.get("payday_next") if coordinator.data else None
-        if isinstance(payday, date):
+        if isinstance(payday, date) and _payday_last_fired.get(entry.entry_id) != payday:
+            _payday_last_fired[entry.entry_id] = payday
             _fire_payday_event(hass, entry, instance_name, payday)
         # Refresh so the coordinator advances to the following payday,
         # then reschedule for it.
@@ -224,6 +274,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         unsub = _payday_event_unsubs.pop(entry.entry_id, None)
         if unsub:
             unsub()
+        _payday_last_fired.pop(entry.entry_id, None)
 
     entry.async_on_unload(_cleanup_event)
 

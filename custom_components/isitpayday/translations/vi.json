@@ -4,7 +4,7 @@
         "step": {
             "user": {
                 "title": "Chọn quốc gia",
-                "description": "Quốc gia được chọn được dùng để xác định ngày nghỉ lễ (được tính cục bộ, không cần internet)",
+                "description": "Quốc gia đã chọn được dùng để xác định các ngày lễ công cộng (tính toán cục bộ, không cần internet)",
                 "data": {
                     "name": "Tên phiên bản",
                     "country": "Quốc gia"
@@ -12,21 +12,21 @@
             },
             "subdivision": {
                 "title": "Chọn khu vực",
-                "description": "Một số quốc gia có ngày nghỉ lễ theo khu vực. Chọn bang/khu vực của bạn để có lịch nghỉ lễ chính xác nhất hoặc chọn 'Toàn quốc' để chỉ dùng ngày nghỉ lễ cấp quốc gia",
+                "description": "Một số quốc gia có ngày lễ theo vùng. Chọn bang/khu vực của bạn để có lịch ngày lễ chính xác nhất, hoặc chọn 'Toàn bộ quốc gia' để chỉ sử dụng ngày lễ toàn quốc",
                 "data": {
                     "subdivision": "Bang/Khu vực"
                 }
             },
             "frequency": {
-                "title": "Chọn tần suất nhận lương",
-                "description": "Chọn tần suất bạn được trả lương",
+                "title": "Chọn tần suất trả lương",
+                "description": "Chọn mức độ thường xuyên bạn được trả lương",
                 "data": {
-                    "pay_frequency": "Tần suất nhận lương"
+                    "pay_frequency": "Tần suất trả lương"
                 }
             },
             "monthly_day": {
                 "title": "Chọn ngày trong tháng",
-                "description": "Chọn ngày trong tháng mà bạn được trả lương",
+                "description": "Chọn ngày trong tháng bạn được trả lương",
                 "data": {
                     "pay_day": "Ngày trong tháng"
                 }
@@ -60,43 +60,43 @@
                 }
             },
             "event_time": {
-                "title": "Payday event time",
-                "description": "Choose the time of day the payday event is fired on each payday. Automations can trigger on the 'isitpayday_payday' event.",
+                "title": "Thời gian sự kiện ngày trả lương",
+                "description": "Chọn thời điểm trong ngày mà sự kiện ngày trả lương được kích hoạt vào mỗi ngày trả lương. Các tự động hóa có thể được kích hoạt bởi sự kiện 'isitpayday_payday'.",
                 "data": {
-                    "event_time": "Event time"
+                    "event_time": "Thời gian sự kiện"
                 }
             }
         },
         "error": {
-            "invalid_country": "Quốc gia đã chọn không được thư viện ngày nghỉ lễ hỗ trợ"
+            "invalid_country": "Quốc gia đã chọn không được thư viện ngày lễ hỗ trợ"
         }
     },
     "options": {
         "step": {
             "init": {
-                "title": "Select country",
-                "description": "The selected country is used to determine public holidays (calculated locally, no internet required)",
+                "title": "Chọn quốc gia",
+                "description": "Quốc gia đã chọn được dùng để xác định các ngày lễ công cộng (tính toán cục bộ, không cần internet)",
                 "data": {
                     "country": "Quốc gia"
                 }
             },
             "subdivision": {
                 "title": "Chọn khu vực",
-                "description": "Một số quốc gia có ngày nghỉ lễ theo khu vực. Chọn bang/khu vực của bạn để có lịch nghỉ lễ chính xác nhất hoặc chọn 'Toàn quốc' để chỉ dùng ngày nghỉ lễ cấp quốc gia",
+                "description": "Một số quốc gia có ngày lễ theo vùng. Chọn bang/khu vực của bạn để có lịch ngày lễ chính xác nhất, hoặc chọn 'Toàn bộ quốc gia' để chỉ sử dụng ngày lễ toàn quốc",
                 "data": {
                     "subdivision": "Bang/Khu vực"
                 }
             },
             "frequency": {
-                "title": "Chọn tần suất nhận lương",
-                "description": "Chọn tần suất bạn được trả lương",
+                "title": "Chọn tần suất trả lương",
+                "description": "Chọn mức độ thường xuyên bạn được trả lương",
                 "data": {
-                    "pay_frequency": "Tần suất nhận lương"
+                    "pay_frequency": "Tần suất trả lương"
                 }
             },
             "monthly_day": {
                 "title": "Chọn ngày trong tháng",
-                "description": "Chọn ngày trong tháng mà bạn được trả lương",
+                "description": "Chọn ngày trong tháng bạn được trả lương",
                 "data": {
                     "pay_day": "Ngày trong tháng"
                 }
@@ -130,10 +130,10 @@
                 }
             },
             "event_time": {
-                "title": "Payday event time",
-                "description": "Choose the time of day the payday event is fired on each payday. Automations can trigger on the 'isitpayday_payday' event.",
+                "title": "Thời gian sự kiện ngày trả lương",
+                "description": "Chọn thời điểm trong ngày mà sự kiện ngày trả lương được kích hoạt vào mỗi ngày trả lương. Các tự động hóa có thể được kích hoạt bởi sự kiện 'isitpayday_payday'.",
                 "data": {
-                    "event_time": "Event time"
+                    "event_time": "Thời gian sự kiện"
                 }
             }
         }
@@ -141,7 +141,7 @@
     "issues": {
         "unsupported_country": {
             "title": "Quốc gia không còn được hỗ trợ",
-            "description": "Quốc gia \"{country}\" được cấu hình cho IsItPayday không còn được thư viện ngày nghỉ lễ hỗ trợ nữa. Vui lòng mở tùy chọn tích hợp và chọn một quốc gia được hỗ trợ."
+            "description": "Quốc gia \"{country}\" được cấu hình cho IsItPayday không còn được thư viện ngày lễ hỗ trợ. Vui lòng mở tùy chọn của tích hợp và chọn một quốc gia được hỗ trợ."
         }
     }
 }

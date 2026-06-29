@@ -58,6 +58,13 @@
                 "data": {
                     "pay_day": "급여일 요일"
                 }
+            },
+            "event_time": {
+                "title": "Payday event time",
+                "description": "Choose the time of day the payday event is fired on each payday. Automations can trigger on the 'isitpayday_payday' event.",
+                "data": {
+                    "event_time": "Event time"
+                }
             }
         },
         "error": {
@@ -120,6 +127,13 @@
                 "description": "매주 급여를 받는 요일을 선택하세요",
                 "data": {
                     "pay_day": "급여일 요일"
+                }
+            },
+            "event_time": {
+                "title": "Payday event time",
+                "description": "Choose the time of day the payday event is fired on each payday. Automations can trigger on the 'isitpayday_payday' event.",
+                "data": {
+                    "event_time": "Event time"
                 }
             }
         }

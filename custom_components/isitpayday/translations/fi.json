@@ -58,6 +58,13 @@
                 "data": {
                     "pay_day": "Palkanmaksun viikonpäivä"
                 }
+            },
+            "event_time": {
+                "title": "Payday event time",
+                "description": "Choose the time of day the payday event is fired on each payday. Automations can trigger on the 'isitpayday_payday' event.",
+                "data": {
+                    "event_time": "Event time"
+                }
             }
         },
         "error": {
@@ -120,6 +127,13 @@
                 "description": "Valitse, minä viikonpäivänä palkka maksetaan joka viikko",
                 "data": {
                     "pay_day": "Palkanmaksun viikonpäivä"
+                }
+            },
+            "event_time": {
+                "title": "Payday event time",
+                "description": "Choose the time of day the payday event is fired on each payday. Automations can trigger on the 'isitpayday_payday' event.",
+                "data": {
+                    "event_time": "Event time"
                 }
             }
         }

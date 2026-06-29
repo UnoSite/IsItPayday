@@ -22,7 +22,7 @@ jobs:
         with:
           python-version: 3.8
       - name: Cache
-        uses: actions/cache@v6.0.0
+        uses: actions/cache@v6.1.0
         with:
           path: ~/.cache/pip
           key: pip-format

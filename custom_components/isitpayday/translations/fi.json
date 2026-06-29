@@ -4,122 +4,136 @@
         "step": {
             "user": {
                 "title": "Valitse maa",
-                "description": "Valittua maata käytetään yleisten vapaapäivien määrittämiseen (lasketaan paikallisesti, internetyhteyttä ei tarvita)",
+                "description": "Valittua maata käytetään yleisten vapaapäivien määrittämiseen (lasketaan paikallisesti, ei vaadi internetyhteyttä)",
                 "data": {
-                    "name": "Ilmentymän nimi",
+                    "name": "Instanssin nimi",
                     "country": "Maa"
                 }
             },
             "subdivision": {
                 "title": "Valitse alue",
-                "description": "Joissakin maissa on alueellisia vapaapäiviä. Valitse osavaltiosi/alueesi mahdollisimman tarkan vapaapäiväkalenterin saamiseksi tai valitse 'Koko maa', jos haluat käyttää vain kansallisia vapaapäiviä",
+                "description": "Joissakin maissa on alueellisia vapaapäiviä. Valitse osavaltiosi/alueesi saadaksesi mahdollisimman tarkan vapaapäiväkalenterin, tai valitse 'Koko maa', jos haluat käyttää vain kansallisia vapaapäiviä",
                 "data": {
                     "subdivision": "Osavaltio/alue"
                 }
             },
             "frequency": {
-                "title": "Valitse palkanmaksutiheys",
-                "description": "Valitse, kuinka usein saat palkan",
+                "title": "Valitse palkanmaksun tiheys",
+                "description": "Valitse, kuinka usein saat palkkaa",
                 "data": {
-                    "pay_frequency": "Palkanmaksutiheys"
+                    "pay_frequency": "Palkanmaksun tiheys"
                 }
             },
             "monthly_day": {
                 "title": "Valitse kuukauden päivä",
-                "description": "Valitse, minä kuukauden päivänä palkka maksetaan",
+                "description": "Valitse, minä kuukauden päivänä saat palkan",
                 "data": {
                     "pay_day": "Kuukauden päivä"
                 }
             },
             "bank_offset": {
-                "title": "Päiviä ennen kuukauden viimeistä pankkipäivää",
-                "description": "Jos palkka maksetaan muutama päivä ennen kuukauden viimeistä pankkipäivää, valitse kuinka monta päivää ennen",
+                "title": "Päiviä ennen viimeistä pankkipäivää",
+                "description": "Jos saat palkan muutamaa päivää ennen viimeistä pankkipäivää, valitse kuinka monta päivää ennen",
                 "data": {
                     "bank_offset": "Päiviä ennen"
                 }
             },
             "specific_day": {
                 "title": "Valitse tietty päivä",
-                "description": "Valitse tarkka päivä, jolloin palkka maksetaan joka kuukausi",
+                "description": "Valitse tarkka päivä, jolloin saat palkan joka kuukausi",
                 "data": {
                     "pay_day": "Tietty päivä"
                 }
             },
             "cycle_last_paydate": {
                 "title": "Valitse viimeisin palkanmaksupäivä",
-                "description": "Valitse viimeisin päivä, jolloin sait palkan. Sitä käytetään seuraavan palkanmaksupäivän laskemiseen",
+                "description": "Valitse viimeisin päivä, jolloin sait palkan. Tätä käytetään seuraavan palkanmaksupäivän laskemiseen",
                 "data": {
                     "last_pay_date": "Viimeisin palkanmaksupäivä"
                 }
             },
             "weekly": {
                 "title": "Valitse viikoittainen palkanmaksupäivä",
-                "description": "Valitse, minä viikonpäivänä palkka maksetaan joka viikko",
+                "description": "Valitse, minä viikonpäivänä saat palkan joka viikko",
                 "data": {
                     "pay_day": "Palkanmaksun viikonpäivä"
+                }
+            },
+            "event_time": {
+                "title": "Palkanmaksupäivän tapahtuma-aika",
+                "description": "Valitse kellonaika, jolloin palkanmaksupäivän tapahtuma laukaistaan jokaisena palkanmaksupäivänä. Automaatiot voivat käynnistyä 'isitpayday_payday'-tapahtumasta.",
+                "data": {
+                    "event_time": "Tapahtuma-aika"
                 }
             }
         },
         "error": {
-            "invalid_country": "Valittua maata ei tueta vapaapäiväkirjastossa"
+            "invalid_country": "Valittua maata ei tueta holidays-kirjastossa"
         }
     },
     "options": {
         "step": {
             "init": {
-                "title": "Select country",
-                "description": "The selected country is used to determine public holidays (calculated locally, no internet required)",
+                "title": "Valitse maa",
+                "description": "Valittua maata käytetään yleisten vapaapäivien määrittämiseen (lasketaan paikallisesti, ei vaadi internetyhteyttä)",
                 "data": {
                     "country": "Maa"
                 }
             },
             "subdivision": {
                 "title": "Valitse alue",
-                "description": "Joissakin maissa on alueellisia vapaapäiviä. Valitse osavaltiosi/alueesi mahdollisimman tarkan vapaapäiväkalenterin saamiseksi tai valitse 'Koko maa', jos haluat käyttää vain kansallisia vapaapäiviä",
+                "description": "Joissakin maissa on alueellisia vapaapäiviä. Valitse osavaltiosi/alueesi saadaksesi mahdollisimman tarkan vapaapäiväkalenterin, tai valitse 'Koko maa', jos haluat käyttää vain kansallisia vapaapäiviä",
                 "data": {
                     "subdivision": "Osavaltio/alue"
                 }
             },
             "frequency": {
-                "title": "Valitse palkanmaksutiheys",
-                "description": "Valitse, kuinka usein saat palkan",
+                "title": "Valitse palkanmaksun tiheys",
+                "description": "Valitse, kuinka usein saat palkkaa",
                 "data": {
-                    "pay_frequency": "Palkanmaksutiheys"
+                    "pay_frequency": "Palkanmaksun tiheys"
                 }
             },
             "monthly_day": {
                 "title": "Valitse kuukauden päivä",
-                "description": "Valitse, minä kuukauden päivänä palkka maksetaan",
+                "description": "Valitse, minä kuukauden päivänä saat palkan",
                 "data": {
                     "pay_day": "Kuukauden päivä"
                 }
             },
             "bank_offset": {
-                "title": "Päiviä ennen kuukauden viimeistä pankkipäivää",
-                "description": "Jos palkka maksetaan muutama päivä ennen kuukauden viimeistä pankkipäivää, valitse kuinka monta päivää ennen",
+                "title": "Päiviä ennen viimeistä pankkipäivää",
+                "description": "Jos saat palkan muutamaa päivää ennen viimeistä pankkipäivää, valitse kuinka monta päivää ennen",
                 "data": {
                     "bank_offset": "Päiviä ennen"
                 }
             },
             "specific_day": {
                 "title": "Valitse tietty päivä",
-                "description": "Valitse tarkka päivä, jolloin palkka maksetaan joka kuukausi",
+                "description": "Valitse tarkka päivä, jolloin saat palkan joka kuukausi",
                 "data": {
                     "pay_day": "Tietty päivä"
                 }
             },
             "cycle_last_paydate": {
                 "title": "Valitse viimeisin palkanmaksupäivä",
-                "description": "Valitse viimeisin päivä, jolloin sait palkan. Sitä käytetään seuraavan palkanmaksupäivän laskemiseen",
+                "description": "Valitse viimeisin päivä, jolloin sait palkan. Tätä käytetään seuraavan palkanmaksupäivän laskemiseen",
                 "data": {
                     "last_pay_date": "Viimeisin palkanmaksupäivä"
                 }
             },
             "weekly": {
                 "title": "Valitse viikoittainen palkanmaksupäivä",
-                "description": "Valitse, minä viikonpäivänä palkka maksetaan joka viikko",
+                "description": "Valitse, minä viikonpäivänä saat palkan joka viikko",
                 "data": {
                     "pay_day": "Palkanmaksun viikonpäivä"
+                }
+            },
+            "event_time": {
+                "title": "Palkanmaksupäivän tapahtuma-aika",
+                "description": "Valitse kellonaika, jolloin palkanmaksupäivän tapahtuma laukaistaan jokaisena palkanmaksupäivänä. Automaatiot voivat käynnistyä 'isitpayday_payday'-tapahtumasta.",
+                "data": {
+                    "event_time": "Tapahtuma-aika"
                 }
             }
         }
@@ -127,7 +141,7 @@
     "issues": {
         "unsupported_country": {
             "title": "Maata ei enää tueta",
-            "description": "IsItPaydaylle määritettyä maata \"{country}\" ei enää tueta vapaapäiväkirjastossa. Avaa integraation asetukset ja valitse tuettu maa."
+            "description": "IsItPaydaylle määritettyä maata \"{country}\" ei enää tueta holidays-kirjastossa. Avaa integraation asetukset ja valitse tuettu maa."
         }
     }
 }

@@ -1,5 +1,5 @@
 {
-    "title": "Maaş Günü mü",
+    "title": "IsItPayday",
     "config": {
         "step": {
             "user": {
@@ -12,21 +12,21 @@
             },
             "subdivision": {
                 "title": "Bölge seçin",
-                "description": "Bazı ülkelerde bölgesel tatiller vardır. En doğru tatil takvimi için ilinizi/bölgenizi seçin veya yalnızca ulusal tatilleri kullanmak için 'Tüm ülke' seçeneğini seçin",
+                "description": "Bazı ülkelerde bölgesel tatiller vardır. En doğru tatil takvimi için eyaletinizi/bölgenizi seçin veya yalnızca ulusal tatilleri kullanmak için 'Tüm ülke' seçeneğini seçin",
                 "data": {
-                    "subdivision": "İl/Bölge"
+                    "subdivision": "Eyalet/Bölge"
                 }
             },
             "frequency": {
                 "title": "Ödeme sıklığını seçin",
-                "description": "Ne sıklıkta ödeme aldığınızı seçin",
+                "description": "Ne sıklıkla ödeme aldığınızı seçin",
                 "data": {
                     "pay_frequency": "Ödeme sıklığı"
                 }
             },
             "monthly_day": {
                 "title": "Ayın gününü seçin",
-                "description": "Her ay hangi gün ödeme aldığınızı seçin",
+                "description": "Ayın hangi gününde ödeme aldığınızı seçin",
                 "data": {
                     "pay_day": "Ayın günü"
                 }
@@ -40,56 +40,63 @@
             },
             "specific_day": {
                 "title": "Belirli günü seçin",
-                "description": "Her ay tam olarak hangi gün ödeme aldığınızı seçin",
+                "description": "Her ay ödeme aldığınız tam günü seçin",
                 "data": {
                     "pay_day": "Belirli gün"
                 }
             },
             "cycle_last_paydate": {
-                "title": "Son ödeme gününü seçin",
-                "description": "En son ödeme aldığınız tarihi seçin. Bu, bir sonraki ödeme gününü hesaplamak için kullanılacaktır",
+                "title": "Son maaş ödeme gününü seçin",
+                "description": "En son hangi tarihte ödeme aldığınızı seçin. Bu bilgi bir sonraki maaş ödeme gününü hesaplamak için kullanılacaktır",
                 "data": {
-                    "last_pay_date": "Son ödeme günü"
+                    "last_pay_date": "Son maaş ödeme günü"
                 }
             },
             "weekly": {
-                "title": "Haftalık ödeme gününü seçin",
-                "description": "Her hafta hangi hafta günü ödeme aldığınızı seçin",
+                "title": "Haftalık maaş ödeme gününü seçin",
+                "description": "Her hafta hangi hafta içi günde ödeme aldığınızı seçin",
                 "data": {
-                    "pay_day": "Ödeme günü hafta günü"
+                    "pay_day": "Maaş ödeme hafta içi günü"
+                }
+            },
+            "event_time": {
+                "title": "Maaş ödeme olayı saati",
+                "description": "Her maaş ödeme gününde maaş ödeme olayının günün hangi saatinde tetikleneceğini seçin. Otomasyonlar 'isitpayday_payday' olayıyla tetiklenebilir.",
+                "data": {
+                    "event_time": "Olay saati"
                 }
             }
         },
         "error": {
-            "invalid_country": "Seçilen ülke tatil kütüphanesi tarafından desteklenmiyor"
+            "invalid_country": "Seçilen ülke holidays kütüphanesi tarafından desteklenmiyor"
         }
     },
     "options": {
         "step": {
             "init": {
-                "title": "Select country",
-                "description": "The selected country is used to determine public holidays (calculated locally, no internet required)",
+                "title": "Ülke seçin",
+                "description": "Seçilen ülke, resmî tatilleri belirlemek için kullanılır (yerel olarak hesaplanır, internet gerekmez)",
                 "data": {
                     "country": "Ülke"
                 }
             },
             "subdivision": {
                 "title": "Bölge seçin",
-                "description": "Bazı ülkelerde bölgesel tatiller vardır. En doğru tatil takvimi için ilinizi/bölgenizi seçin veya yalnızca ulusal tatilleri kullanmak için 'Tüm ülke' seçeneğini seçin",
+                "description": "Bazı ülkelerde bölgesel tatiller vardır. En doğru tatil takvimi için eyaletinizi/bölgenizi seçin veya yalnızca ulusal tatilleri kullanmak için 'Tüm ülke' seçeneğini seçin",
                 "data": {
-                    "subdivision": "İl/Bölge"
+                    "subdivision": "Eyalet/Bölge"
                 }
             },
             "frequency": {
                 "title": "Ödeme sıklığını seçin",
-                "description": "Ne sıklıkta ödeme aldığınızı seçin",
+                "description": "Ne sıklıkla ödeme aldığınızı seçin",
                 "data": {
                     "pay_frequency": "Ödeme sıklığı"
                 }
             },
             "monthly_day": {
                 "title": "Ayın gününü seçin",
-                "description": "Her ay hangi gün ödeme aldığınızı seçin",
+                "description": "Ayın hangi gününde ödeme aldığınızı seçin",
                 "data": {
                     "pay_day": "Ayın günü"
                 }
@@ -103,23 +110,30 @@
             },
             "specific_day": {
                 "title": "Belirli günü seçin",
-                "description": "Her ay tam olarak hangi gün ödeme aldığınızı seçin",
+                "description": "Her ay ödeme aldığınız tam günü seçin",
                 "data": {
                     "pay_day": "Belirli gün"
                 }
             },
             "cycle_last_paydate": {
-                "title": "Son ödeme gününü seçin",
-                "description": "En son ödeme aldığınız tarihi seçin. Bu, bir sonraki ödeme gününü hesaplamak için kullanılacaktır",
+                "title": "Son maaş ödeme gününü seçin",
+                "description": "En son hangi tarihte ödeme aldığınızı seçin. Bu bilgi bir sonraki maaş ödeme gününü hesaplamak için kullanılacaktır",
                 "data": {
-                    "last_pay_date": "Son ödeme günü"
+                    "last_pay_date": "Son maaş ödeme günü"
                 }
             },
             "weekly": {
-                "title": "Haftalık ödeme gününü seçin",
-                "description": "Her hafta hangi hafta günü ödeme aldığınızı seçin",
+                "title": "Haftalık maaş ödeme gününü seçin",
+                "description": "Her hafta hangi hafta içi günde ödeme aldığınızı seçin",
                 "data": {
-                    "pay_day": "Ödeme günü hafta günü"
+                    "pay_day": "Maaş ödeme hafta içi günü"
+                }
+            },
+            "event_time": {
+                "title": "Maaş ödeme olayı saati",
+                "description": "Her maaş ödeme gününde maaş ödeme olayının günün hangi saatinde tetikleneceğini seçin. Otomasyonlar 'isitpayday_payday' olayıyla tetiklenebilir.",
+                "data": {
+                    "event_time": "Olay saati"
                 }
             }
         }
@@ -127,7 +141,7 @@
     "issues": {
         "unsupported_country": {
             "title": "Ülke artık desteklenmiyor",
-            "description": "IsItPayday için yapılandırılan \"{country}\" ülkesi artık tatil kütüphanesi tarafından desteklenmiyor. Lütfen entegrasyon seçeneklerini açın ve desteklenen bir ülke seçin."
+            "description": "IsItPayday için yapılandırılan \"{country}\" ülkesi artık holidays kütüphanesi tarafından desteklenmiyor. Lütfen entegrasyon seçeneklerini açın ve desteklenen bir ülke seçin."
         }
     }
 }

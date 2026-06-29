@@ -14,14 +14,14 @@
                 "title": "Välj region",
                 "description": "Vissa länder har regionala helgdagar. Välj din delstat/region för den mest exakta helgdagskalendern, eller välj 'Hela landet' för att endast använda nationella helgdagar",
                 "data": {
-                    "subdivision": "Delstat/region"
+                    "subdivision": "Delstat/Region"
                 }
             },
             "frequency": {
-                "title": "Välj löneutbetalningsfrekvens",
+                "title": "Välj utbetalningsfrekvens",
                 "description": "Välj hur ofta du får lön",
                 "data": {
-                    "pay_frequency": "Löneutbetalningsfrekvens"
+                    "pay_frequency": "Utbetalningsfrekvens"
                 }
             },
             "monthly_day": {
@@ -47,7 +47,7 @@
             },
             "cycle_last_paydate": {
                 "title": "Välj senaste lönedag",
-                "description": "Välj det senaste datumet du fick lön. Detta används för att beräkna nästa lönedag",
+                "description": "Välj det senaste datumet du fick lön. Detta kommer att användas för att beräkna nästa lönedag",
                 "data": {
                     "last_pay_date": "Senaste lönedag"
                 }
@@ -57,6 +57,13 @@
                 "description": "Välj vilken veckodag du får lön varje vecka",
                 "data": {
                     "pay_day": "Lönedagens veckodag"
+                }
+            },
+            "event_time": {
+                "title": "Tid för lönedagshändelse",
+                "description": "Välj vilken tid på dagen lönedagshändelsen utlöses på varje lönedag. Automationer kan utlösas av händelsen 'isitpayday_payday'.",
+                "data": {
+                    "event_time": "Händelsetid"
                 }
             }
         },
@@ -67,8 +74,8 @@
     "options": {
         "step": {
             "init": {
-                "title": "Select country",
-                "description": "The selected country is used to determine public holidays (calculated locally, no internet required)",
+                "title": "Välj land",
+                "description": "Det valda landet används för att fastställa allmänna helgdagar (beräknas lokalt, ingen internetanslutning krävs)",
                 "data": {
                     "country": "Land"
                 }
@@ -77,14 +84,14 @@
                 "title": "Välj region",
                 "description": "Vissa länder har regionala helgdagar. Välj din delstat/region för den mest exakta helgdagskalendern, eller välj 'Hela landet' för att endast använda nationella helgdagar",
                 "data": {
-                    "subdivision": "Delstat/region"
+                    "subdivision": "Delstat/Region"
                 }
             },
             "frequency": {
-                "title": "Välj löneutbetalningsfrekvens",
+                "title": "Välj utbetalningsfrekvens",
                 "description": "Välj hur ofta du får lön",
                 "data": {
-                    "pay_frequency": "Löneutbetalningsfrekvens"
+                    "pay_frequency": "Utbetalningsfrekvens"
                 }
             },
             "monthly_day": {
@@ -110,7 +117,7 @@
             },
             "cycle_last_paydate": {
                 "title": "Välj senaste lönedag",
-                "description": "Välj det senaste datumet du fick lön. Detta används för att beräkna nästa lönedag",
+                "description": "Välj det senaste datumet du fick lön. Detta kommer att användas för att beräkna nästa lönedag",
                 "data": {
                     "last_pay_date": "Senaste lönedag"
                 }
@@ -120,6 +127,13 @@
                 "description": "Välj vilken veckodag du får lön varje vecka",
                 "data": {
                     "pay_day": "Lönedagens veckodag"
+                }
+            },
+            "event_time": {
+                "title": "Tid för lönedagshändelse",
+                "description": "Välj vilken tid på dagen lönedagshändelsen utlöses på varje lönedag. Automationer kan utlösas av händelsen 'isitpayday_payday'.",
+                "data": {
+                    "event_time": "Händelsetid"
                 }
             }
         }

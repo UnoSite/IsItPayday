@@ -12,16 +12,16 @@
             },
             "subdivision": {
                 "title": "Region auswählen",
-                "description": "In einigen Ländern gibt es regionale Feiertage. Wählen Sie Ihr Bundesland/Ihre Region für den genauesten Feiertagskalender aus oder wählen Sie 'Ganzes Land', um nur nationale Feiertage zu verwenden",
+                "description": "In manchen Ländern gibt es regionale Feiertage. Wählen Sie Ihr Bundesland/Ihre Region für den genauesten Feiertagskalender aus, oder wählen Sie 'Gesamtes Land', um nur nationale Feiertage zu verwenden",
                 "data": {
                     "subdivision": "Bundesland/Region"
                 }
             },
             "frequency": {
-                "title": "Auszahlungsfrequenz auswählen",
+                "title": "Auszahlungsintervall auswählen",
                 "description": "Wählen Sie aus, wie oft Sie bezahlt werden",
                 "data": {
-                    "pay_frequency": "Auszahlungsfrequenz"
+                    "pay_frequency": "Auszahlungsintervall"
                 }
             },
             "monthly_day": {
@@ -57,6 +57,13 @@
                 "description": "Wählen Sie aus, an welchem Wochentag Sie jede Woche bezahlt werden",
                 "data": {
                     "pay_day": "Wochentag des Zahltags"
+                }
+            },
+            "event_time": {
+                "title": "Uhrzeit des Zahltag-Ereignisses",
+                "description": "Wählen Sie die Tageszeit, zu der das Zahltag-Ereignis an jedem Zahltag ausgelöst wird. Automatisierungen können durch das Ereignis 'isitpayday_payday' ausgelöst werden.",
+                "data": {
+                    "event_time": "Ereigniszeit"
                 }
             }
         },
@@ -67,24 +74,24 @@
     "options": {
         "step": {
             "init": {
-                "title": "Select country",
-                "description": "The selected country is used to determine public holidays (calculated locally, no internet required)",
+                "title": "Land auswählen",
+                "description": "Das ausgewählte Land wird verwendet, um Feiertage zu bestimmen (lokal berechnet, keine Internetverbindung erforderlich)",
                 "data": {
                     "country": "Land"
                 }
             },
             "subdivision": {
                 "title": "Region auswählen",
-                "description": "In einigen Ländern gibt es regionale Feiertage. Wählen Sie Ihr Bundesland/Ihre Region für den genauesten Feiertagskalender aus oder wählen Sie 'Ganzes Land', um nur nationale Feiertage zu verwenden",
+                "description": "In manchen Ländern gibt es regionale Feiertage. Wählen Sie Ihr Bundesland/Ihre Region für den genauesten Feiertagskalender aus, oder wählen Sie 'Gesamtes Land', um nur nationale Feiertage zu verwenden",
                 "data": {
                     "subdivision": "Bundesland/Region"
                 }
             },
             "frequency": {
-                "title": "Auszahlungsfrequenz auswählen",
+                "title": "Auszahlungsintervall auswählen",
                 "description": "Wählen Sie aus, wie oft Sie bezahlt werden",
                 "data": {
-                    "pay_frequency": "Auszahlungsfrequenz"
+                    "pay_frequency": "Auszahlungsintervall"
                 }
             },
             "monthly_day": {
@@ -121,12 +128,19 @@
                 "data": {
                     "pay_day": "Wochentag des Zahltags"
                 }
+            },
+            "event_time": {
+                "title": "Uhrzeit des Zahltag-Ereignisses",
+                "description": "Wählen Sie die Tageszeit, zu der das Zahltag-Ereignis an jedem Zahltag ausgelöst wird. Automatisierungen können durch das Ereignis 'isitpayday_payday' ausgelöst werden.",
+                "data": {
+                    "event_time": "Ereigniszeit"
+                }
             }
         }
     },
     "issues": {
         "unsupported_country": {
-            "title": "Land nicht mehr unterstützt",
+            "title": "Land wird nicht mehr unterstützt",
             "description": "Das für IsItPayday konfigurierte Land \"{country}\" wird von der Feiertagsbibliothek nicht mehr unterstützt. Bitte öffnen Sie die Integrationsoptionen und wählen Sie ein unterstütztes Land aus."
         }
     }

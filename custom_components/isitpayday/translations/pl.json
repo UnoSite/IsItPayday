@@ -4,7 +4,7 @@
         "step": {
             "user": {
                 "title": "Wybierz kraj",
-                "description": "Wybrany kraj służy do określenia świąt publicznych (obliczanych lokalnie, bez dostępu do internetu)",
+                "description": "Wybrany kraj jest używany do określania dni ustawowo wolnych od pracy (obliczanych lokalnie, bez połączenia z internetem)",
                 "data": {
                     "name": "Nazwa instancji",
                     "country": "Kraj"
@@ -12,7 +12,7 @@
             },
             "subdivision": {
                 "title": "Wybierz region",
-                "description": "Niektóre kraje mają święta regionalne. Wybierz swój stan/region, aby uzyskać jak najdokładniejszy kalendarz świąt, lub wybierz 'Cały kraj', aby używać tylko świąt krajowych",
+                "description": "Niektóre kraje mają święta regionalne. Wybierz swój stan/region, aby uzyskać jak najdokładniejszy kalendarz świąt, lub wybierz 'Cały kraj', aby używać tylko świąt ogólnokrajowych",
                 "data": {
                     "subdivision": "Stan/Region"
                 }
@@ -32,15 +32,15 @@
                 }
             },
             "bank_offset": {
-                "title": "Liczba dni przed ostatnim dniem roboczym dla banków",
-                "description": "Jeśli otrzymujesz wynagrodzenie kilka dni przed ostatnim dniem roboczym dla banków, wybierz ile dni wcześniej",
+                "title": "Liczba dni przed ostatnim dniem bankowym",
+                "description": "Jeśli otrzymujesz wynagrodzenie kilka dni przed ostatnim dniem bankowym, wybierz, ile dni wcześniej",
                 "data": {
-                    "bank_offset": "Liczba dni przed"
+                    "bank_offset": "Liczba dni wcześniej"
                 }
             },
             "specific_day": {
                 "title": "Wybierz konkretny dzień",
-                "description": "Wybierz dokładny dzień miesiąca, w którym otrzymujesz wynagrodzenie",
+                "description": "Wybierz dokładny dzień każdego miesiąca, w którym otrzymujesz wynagrodzenie",
                 "data": {
                     "pay_day": "Konkretny dzień"
                 }
@@ -57,6 +57,13 @@
                 "description": "Wybierz, którego dnia tygodnia otrzymujesz wynagrodzenie",
                 "data": {
                     "pay_day": "Dzień tygodnia wypłaty"
+                }
+            },
+            "event_time": {
+                "title": "Godzina zdarzenia wypłaty",
+                "description": "Wybierz porę dnia, o której w każdy dzień wypłaty wywoływane jest zdarzenie wypłaty. Automatyzacje mogą być uruchamiane przez zdarzenie 'isitpayday_payday'.",
+                "data": {
+                    "event_time": "Godzina zdarzenia"
                 }
             }
         },
@@ -67,15 +74,15 @@
     "options": {
         "step": {
             "init": {
-                "title": "Select country",
-                "description": "The selected country is used to determine public holidays (calculated locally, no internet required)",
+                "title": "Wybierz kraj",
+                "description": "Wybrany kraj jest używany do określania dni ustawowo wolnych od pracy (obliczanych lokalnie, bez połączenia z internetem)",
                 "data": {
                     "country": "Kraj"
                 }
             },
             "subdivision": {
                 "title": "Wybierz region",
-                "description": "Niektóre kraje mają święta regionalne. Wybierz swój stan/region, aby uzyskać jak najdokładniejszy kalendarz świąt, lub wybierz 'Cały kraj', aby używać tylko świąt krajowych",
+                "description": "Niektóre kraje mają święta regionalne. Wybierz swój stan/region, aby uzyskać jak najdokładniejszy kalendarz świąt, lub wybierz 'Cały kraj', aby używać tylko świąt ogólnokrajowych",
                 "data": {
                     "subdivision": "Stan/Region"
                 }
@@ -95,15 +102,15 @@
                 }
             },
             "bank_offset": {
-                "title": "Liczba dni przed ostatnim dniem roboczym dla banków",
-                "description": "Jeśli otrzymujesz wynagrodzenie kilka dni przed ostatnim dniem roboczym dla banków, wybierz ile dni wcześniej",
+                "title": "Liczba dni przed ostatnim dniem bankowym",
+                "description": "Jeśli otrzymujesz wynagrodzenie kilka dni przed ostatnim dniem bankowym, wybierz, ile dni wcześniej",
                 "data": {
-                    "bank_offset": "Liczba dni przed"
+                    "bank_offset": "Liczba dni wcześniej"
                 }
             },
             "specific_day": {
                 "title": "Wybierz konkretny dzień",
-                "description": "Wybierz dokładny dzień miesiąca, w którym otrzymujesz wynagrodzenie",
+                "description": "Wybierz dokładny dzień każdego miesiąca, w którym otrzymujesz wynagrodzenie",
                 "data": {
                     "pay_day": "Konkretny dzień"
                 }
@@ -120,6 +127,13 @@
                 "description": "Wybierz, którego dnia tygodnia otrzymujesz wynagrodzenie",
                 "data": {
                     "pay_day": "Dzień tygodnia wypłaty"
+                }
+            },
+            "event_time": {
+                "title": "Godzina zdarzenia wypłaty",
+                "description": "Wybierz porę dnia, o której w każdy dzień wypłaty wywoływane jest zdarzenie wypłaty. Automatyzacje mogą być uruchamiane przez zdarzenie 'isitpayday_payday'.",
+                "data": {
+                    "event_time": "Godzina zdarzenia"
                 }
             }
         }

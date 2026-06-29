@@ -3,60 +3,67 @@
     "config": {
         "step": {
             "user": {
-                "title": "Selecteer land",
+                "title": "Land selecteren",
                 "description": "Het geselecteerde land wordt gebruikt om feestdagen te bepalen (lokaal berekend, geen internet vereist)",
                 "data": {
-                    "name": "Naam van instantie",
+                    "name": "Instantienaam",
                     "country": "Land"
                 }
             },
             "subdivision": {
-                "title": "Selecteer regio",
+                "title": "Regio selecteren",
                 "description": "Sommige landen hebben regionale feestdagen. Selecteer je staat/regio voor de meest nauwkeurige feestdagenkalender, of kies 'Hele land' om alleen nationale feestdagen te gebruiken",
                 "data": {
                     "subdivision": "Staat/regio"
                 }
             },
             "frequency": {
-                "title": "Selecteer uitbetalingsfrequentie",
+                "title": "Betalingsfrequentie selecteren",
                 "description": "Kies hoe vaak je wordt betaald",
                 "data": {
-                    "pay_frequency": "Uitbetalingsfrequentie"
+                    "pay_frequency": "Betalingsfrequentie"
                 }
             },
             "monthly_day": {
-                "title": "Selecteer dag van de maand",
+                "title": "Dag van de maand selecteren",
                 "description": "Kies op welke dag van de maand je wordt betaald",
                 "data": {
                     "pay_day": "Dag van de maand"
                 }
             },
             "bank_offset": {
-                "title": "Dagen vóór de laatste bankdag",
-                "description": "Als je een paar dagen vóór de laatste bankdag wordt betaald, kies dan hoeveel dagen eerder",
+                "title": "Dagen vóór de laatste bankwerkdag",
+                "description": "Als je een paar dagen vóór de laatste bankwerkdag wordt betaald, kies dan hoeveel dagen van tevoren",
                 "data": {
-                    "bank_offset": "Dagen ervoor"
+                    "bank_offset": "Dagen van tevoren"
                 }
             },
             "specific_day": {
-                "title": "Selecteer specifieke dag",
+                "title": "Specifieke dag selecteren",
                 "description": "Selecteer de exacte dag waarop je elke maand wordt betaald",
                 "data": {
                     "pay_day": "Specifieke dag"
                 }
             },
             "cycle_last_paydate": {
-                "title": "Selecteer laatste betaaldag",
+                "title": "Laatste betaaldag selecteren",
                 "description": "Selecteer de laatste datum waarop je bent betaald. Deze wordt gebruikt om de volgende betaaldag te berekenen",
                 "data": {
                     "last_pay_date": "Laatste betaaldag"
                 }
             },
             "weekly": {
-                "title": "Selecteer wekelijkse betaaldag",
+                "title": "Wekelijkse betaaldag selecteren",
                 "description": "Kies op welke weekdag je elke week wordt betaald",
                 "data": {
                     "pay_day": "Weekdag van betaaldag"
+                }
+            },
+            "event_time": {
+                "title": "Tijd van betaaldaggebeurtenis",
+                "description": "Kies het tijdstip waarop de betaaldaggebeurtenis op elke betaaldag wordt geactiveerd. Automatiseringen kunnen worden geactiveerd door de gebeurtenis 'isitpayday_payday'.",
+                "data": {
+                    "event_time": "Tijdstip van gebeurtenis"
                 }
             }
         },
@@ -67,59 +74,66 @@
     "options": {
         "step": {
             "init": {
-                "title": "Select country",
-                "description": "The selected country is used to determine public holidays (calculated locally, no internet required)",
+                "title": "Land selecteren",
+                "description": "Het geselecteerde land wordt gebruikt om feestdagen te bepalen (lokaal berekend, geen internet vereist)",
                 "data": {
                     "country": "Land"
                 }
             },
             "subdivision": {
-                "title": "Selecteer regio",
+                "title": "Regio selecteren",
                 "description": "Sommige landen hebben regionale feestdagen. Selecteer je staat/regio voor de meest nauwkeurige feestdagenkalender, of kies 'Hele land' om alleen nationale feestdagen te gebruiken",
                 "data": {
                     "subdivision": "Staat/regio"
                 }
             },
             "frequency": {
-                "title": "Selecteer uitbetalingsfrequentie",
+                "title": "Betalingsfrequentie selecteren",
                 "description": "Kies hoe vaak je wordt betaald",
                 "data": {
-                    "pay_frequency": "Uitbetalingsfrequentie"
+                    "pay_frequency": "Betalingsfrequentie"
                 }
             },
             "monthly_day": {
-                "title": "Selecteer dag van de maand",
+                "title": "Dag van de maand selecteren",
                 "description": "Kies op welke dag van de maand je wordt betaald",
                 "data": {
                     "pay_day": "Dag van de maand"
                 }
             },
             "bank_offset": {
-                "title": "Dagen vóór de laatste bankdag",
-                "description": "Als je een paar dagen vóór de laatste bankdag wordt betaald, kies dan hoeveel dagen eerder",
+                "title": "Dagen vóór de laatste bankwerkdag",
+                "description": "Als je een paar dagen vóór de laatste bankwerkdag wordt betaald, kies dan hoeveel dagen van tevoren",
                 "data": {
-                    "bank_offset": "Dagen ervoor"
+                    "bank_offset": "Dagen van tevoren"
                 }
             },
             "specific_day": {
-                "title": "Selecteer specifieke dag",
+                "title": "Specifieke dag selecteren",
                 "description": "Selecteer de exacte dag waarop je elke maand wordt betaald",
                 "data": {
                     "pay_day": "Specifieke dag"
                 }
             },
             "cycle_last_paydate": {
-                "title": "Selecteer laatste betaaldag",
+                "title": "Laatste betaaldag selecteren",
                 "description": "Selecteer de laatste datum waarop je bent betaald. Deze wordt gebruikt om de volgende betaaldag te berekenen",
                 "data": {
                     "last_pay_date": "Laatste betaaldag"
                 }
             },
             "weekly": {
-                "title": "Selecteer wekelijkse betaaldag",
+                "title": "Wekelijkse betaaldag selecteren",
                 "description": "Kies op welke weekdag je elke week wordt betaald",
                 "data": {
                     "pay_day": "Weekdag van betaaldag"
+                }
+            },
+            "event_time": {
+                "title": "Tijd van betaaldaggebeurtenis",
+                "description": "Kies het tijdstip waarop de betaaldaggebeurtenis op elke betaaldag wordt geactiveerd. Automatiseringen kunnen worden geactiveerd door de gebeurtenis 'isitpayday_payday'.",
+                "data": {
+                    "event_time": "Tijdstip van gebeurtenis"
                 }
             }
         }
@@ -127,7 +141,7 @@
     "issues": {
         "unsupported_country": {
             "title": "Land wordt niet langer ondersteund",
-            "description": "Het land \"{country}\" dat is geconfigureerd voor IsItPayday wordt niet langer ondersteund door de feestdagenbibliotheek. Open de integratie-opties en selecteer een ondersteund land."
+            "description": "Het land \"{country}\" dat voor IsItPayday is geconfigureerd, wordt niet langer ondersteund door de feestdagenbibliotheek. Open de integratie-opties en selecteer een ondersteund land."
         }
     }
 }

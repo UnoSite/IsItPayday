@@ -4,7 +4,7 @@
         "step": {
             "user": {
                 "title": "Seleccionar país",
-                "description": "El país seleccionado se utiliza para determinar los días festivos (calculados localmente, sin necesidad de internet)",
+                "description": "El país seleccionado se usa para determinar los días festivos (calculados localmente, sin necesidad de internet)",
                 "data": {
                     "name": "Nombre de la instancia",
                     "country": "País"
@@ -12,51 +12,58 @@
             },
             "subdivision": {
                 "title": "Seleccionar región",
-                "description": "Algunos países tienen días festivos regionales. Selecciona tu estado/región para obtener el calendario de festivos más preciso, o elige 'Todo el país' para usar solo los festivos nacionales",
+                "description": "Algunos países tienen festivos regionales. Selecciona tu estado/región para obtener el calendario de festivos más preciso, o elige 'Todo el país' para usar solo los festivos nacionales",
                 "data": {
                     "subdivision": "Estado/Región"
                 }
             },
             "frequency": {
                 "title": "Seleccionar frecuencia de pago",
-                "description": "Elige con qué frecuencia te pagan",
+                "description": "Elige con qué frecuencia recibes tu salario",
                 "data": {
                     "pay_frequency": "Frecuencia de pago"
                 }
             },
             "monthly_day": {
                 "title": "Seleccionar día del mes",
-                "description": "Elige qué día del mes te pagan",
+                "description": "Elige qué día del mes recibes tu salario",
                 "data": {
                     "pay_day": "Día del mes"
                 }
             },
             "bank_offset": {
                 "title": "Días antes del último día bancario",
-                "description": "Si te pagan unos días antes del último día bancario, elige cuántos días antes",
+                "description": "Si recibes tu salario unos días antes del último día bancario, elige cuántos días antes",
                 "data": {
                     "bank_offset": "Días antes"
                 }
             },
             "specific_day": {
                 "title": "Seleccionar día específico",
-                "description": "Selecciona el día exacto en que te pagan cada mes",
+                "description": "Selecciona el día exacto en que recibes tu salario cada mes",
                 "data": {
                     "pay_day": "Día específico"
                 }
             },
             "cycle_last_paydate": {
                 "title": "Seleccionar último día de pago",
-                "description": "Selecciona la última fecha en que te pagaron. Se utilizará para calcular el próximo día de pago",
+                "description": "Selecciona la última fecha en que recibiste tu salario. Se usará para calcular el próximo día de pago",
                 "data": {
                     "last_pay_date": "Último día de pago"
                 }
             },
             "weekly": {
                 "title": "Seleccionar día de pago semanal",
-                "description": "Elige qué día de la semana te pagan",
+                "description": "Elige qué día de la semana recibes tu salario cada semana",
                 "data": {
                     "pay_day": "Día de la semana de pago"
+                }
+            },
+            "event_time": {
+                "title": "Hora del evento de día de pago",
+                "description": "Elige la hora del día a la que se activa el evento de día de pago en cada día de pago. Las automatizaciones pueden activarse con el evento 'isitpayday_payday'.",
+                "data": {
+                    "event_time": "Hora del evento"
                 }
             }
         },
@@ -67,59 +74,66 @@
     "options": {
         "step": {
             "init": {
-                "title": "Select country",
-                "description": "The selected country is used to determine public holidays (calculated locally, no internet required)",
+                "title": "Seleccionar país",
+                "description": "El país seleccionado se usa para determinar los días festivos (calculados localmente, sin necesidad de internet)",
                 "data": {
                     "country": "País"
                 }
             },
             "subdivision": {
                 "title": "Seleccionar región",
-                "description": "Algunos países tienen días festivos regionales. Selecciona tu estado/región para obtener el calendario de festivos más preciso, o elige 'Todo el país' para usar solo los festivos nacionales",
+                "description": "Algunos países tienen festivos regionales. Selecciona tu estado/región para obtener el calendario de festivos más preciso, o elige 'Todo el país' para usar solo los festivos nacionales",
                 "data": {
                     "subdivision": "Estado/Región"
                 }
             },
             "frequency": {
                 "title": "Seleccionar frecuencia de pago",
-                "description": "Elige con qué frecuencia te pagan",
+                "description": "Elige con qué frecuencia recibes tu salario",
                 "data": {
                     "pay_frequency": "Frecuencia de pago"
                 }
             },
             "monthly_day": {
                 "title": "Seleccionar día del mes",
-                "description": "Elige qué día del mes te pagan",
+                "description": "Elige qué día del mes recibes tu salario",
                 "data": {
                     "pay_day": "Día del mes"
                 }
             },
             "bank_offset": {
                 "title": "Días antes del último día bancario",
-                "description": "Si te pagan unos días antes del último día bancario, elige cuántos días antes",
+                "description": "Si recibes tu salario unos días antes del último día bancario, elige cuántos días antes",
                 "data": {
                     "bank_offset": "Días antes"
                 }
             },
             "specific_day": {
                 "title": "Seleccionar día específico",
-                "description": "Selecciona el día exacto en que te pagan cada mes",
+                "description": "Selecciona el día exacto en que recibes tu salario cada mes",
                 "data": {
                     "pay_day": "Día específico"
                 }
             },
             "cycle_last_paydate": {
                 "title": "Seleccionar último día de pago",
-                "description": "Selecciona la última fecha en que te pagaron. Se utilizará para calcular el próximo día de pago",
+                "description": "Selecciona la última fecha en que recibiste tu salario. Se usará para calcular el próximo día de pago",
                 "data": {
                     "last_pay_date": "Último día de pago"
                 }
             },
             "weekly": {
                 "title": "Seleccionar día de pago semanal",
-                "description": "Elige qué día de la semana te pagan",
+                "description": "Elige qué día de la semana recibes tu salario cada semana",
                 "data": {
                     "pay_day": "Día de la semana de pago"
+                }
+            },
+            "event_time": {
+                "title": "Hora del evento de día de pago",
+                "description": "Elige la hora del día a la que se activa el evento de día de pago en cada día de pago. Las automatizaciones pueden activarse con el evento 'isitpayday_payday'.",
+                "data": {
+                    "event_time": "Hora del evento"
                 }
             }
         }

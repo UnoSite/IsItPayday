@@ -58,6 +58,13 @@
                 "data": {
                     "pay_day": "发薪星期"
                 }
+            },
+            "event_time": {
+                "title": "Payday event time",
+                "description": "Choose the time of day the payday event is fired on each payday. Automations can trigger on the 'isitpayday_payday' event.",
+                "data": {
+                    "event_time": "Event time"
+                }
             }
         },
         "error": {
@@ -67,8 +74,8 @@
     "options": {
         "step": {
             "init": {
-                "title": "调整 IsItPayday 设置",
-                "description": "修改此发薪日跟踪器的设置",
+                "title": "Select country",
+                "description": "The selected country is used to determine public holidays (calculated locally, no internet required)",
                 "data": {
                     "country": "国家/地区"
                 }
@@ -120,6 +127,13 @@
                 "description": "选择您每周在哪个工作日发薪",
                 "data": {
                     "pay_day": "发薪星期"
+                }
+            },
+            "event_time": {
+                "title": "Payday event time",
+                "description": "Choose the time of day the payday event is fired on each payday. Automations can trigger on the 'isitpayday_payday' event.",
+                "data": {
+                    "event_time": "Event time"
                 }
             }
         }

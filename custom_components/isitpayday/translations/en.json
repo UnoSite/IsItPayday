@@ -58,6 +58,13 @@
                 "data": {
                     "pay_day": "Payday weekday"
                 }
+            },
+            "event_time": {
+                "title": "Payday event time",
+                "description": "Choose the time of day the payday event is fired on each payday. Automations can trigger on the 'isitpayday_payday' event.",
+                "data": {
+                    "event_time": "Event time"
+                }
             }
         },
         "error": {
@@ -121,6 +128,13 @@
                 "data": {
                     "pay_day": "Payday weekday"
                 }
+            },
+            "event_time": {
+                "title": "Payday event time",
+                "description": "Choose the time of day the payday event is fired on each payday. Automations can trigger on the 'isitpayday_payday' event.",
+                "data": {
+                    "event_time": "Event time"
+                }
             }
         }
     },
@@ -130,4 +144,4 @@
             "description": "The country \"{country}\" configured for IsItPayday is no longer supported by the holidays library. Please open the integration options and select a supported country."
         }
     }
-}
+        }

@@ -1,10 +1,10 @@
 {
-    "title": "給料日かな",
+    "title": "IsItPayday",
     "config": {
         "step": {
             "user": {
                 "title": "国を選択",
-                "description": "選択した国は祝日の判定に使用されます（ローカルで計算されるため、インターネット接続は不要です）",
+                "description": "選択した国は祝日を判定するために使用されます（ローカルで計算されるため、インターネット接続は不要です）",
                 "data": {
                     "name": "インスタンス名",
                     "country": "国"
@@ -12,9 +12,9 @@
             },
             "subdivision": {
                 "title": "地域を選択",
-                "description": "国によっては地域ごとの祝日があります。最も正確な祝日カレンダーを利用するには州/地域を選択するか、国の祝日のみを使用するには「国全体」を選択してください",
+                "description": "国によっては地域ごとの祝日があります。最も正確な祝日カレンダーのために都道府県・地域を選択するか、国の祝日のみを使用するには '国全体' を選択してください",
                 "data": {
-                    "subdivision": "州/地域"
+                    "subdivision": "都道府県・地域"
                 }
             },
             "frequency": {
@@ -26,28 +26,28 @@
             },
             "monthly_day": {
                 "title": "月の日付を選択",
-                "description": "毎月の給与支払日を選択してください",
+                "description": "毎月給与が支払われる日を選択してください",
                 "data": {
                     "pay_day": "日付"
                 }
             },
             "bank_offset": {
-                "title": "最終銀行営業日前の日数",
+                "title": "最終銀行営業日の何日前",
                 "description": "最終銀行営業日の数日前に給与が支払われる場合は、何日前かを選択してください",
                 "data": {
-                    "bank_offset": "前の日数"
+                    "bank_offset": "何日前"
                 }
             },
             "specific_day": {
-                "title": "特定の日付を選択",
-                "description": "毎月給与が支払われる正確な日付を選択してください",
+                "title": "特定の日を選択",
+                "description": "毎月給与が支払われる正確な日を選択してください",
                 "data": {
-                    "pay_day": "特定の日付"
+                    "pay_day": "特定の日"
                 }
             },
             "cycle_last_paydate": {
                 "title": "前回の給料日を選択",
-                "description": "最後に給与が支払われた日付を選択してください。これは次の給料日の計算に使用されます",
+                "description": "前回給与が支払われた日付を選択してください。これは次の給料日の計算に使用されます",
                 "data": {
                     "last_pay_date": "前回の給料日"
                 }
@@ -60,31 +60,31 @@
                 }
             },
             "event_time": {
-                "title": "Payday event time",
-                "description": "Choose the time of day the payday event is fired on each payday. Automations can trigger on the 'isitpayday_payday' event.",
+                "title": "給料日イベント時刻",
+                "description": "毎回の給料日に給料日イベントが発火する時刻を選択してください。オートメーションは 'isitpayday_payday' イベントをトリガーにできます。",
                 "data": {
-                    "event_time": "Event time"
+                    "event_time": "イベント時刻"
                 }
             }
         },
         "error": {
-            "invalid_country": "選択した国は祝日ライブラリでサポートされていません"
+            "invalid_country": "選択した国は holidays ライブラリでサポートされていません"
         }
     },
     "options": {
         "step": {
             "init": {
-                "title": "Select country",
-                "description": "The selected country is used to determine public holidays (calculated locally, no internet required)",
+                "title": "国を選択",
+                "description": "選択した国は祝日を判定するために使用されます（ローカルで計算されるため、インターネット接続は不要です）",
                 "data": {
                     "country": "国"
                 }
             },
             "subdivision": {
                 "title": "地域を選択",
-                "description": "国によっては地域ごとの祝日があります。最も正確な祝日カレンダーを利用するには州/地域を選択するか、国の祝日のみを使用するには「国全体」を選択してください",
+                "description": "国によっては地域ごとの祝日があります。最も正確な祝日カレンダーのために都道府県・地域を選択するか、国の祝日のみを使用するには '国全体' を選択してください",
                 "data": {
-                    "subdivision": "州/地域"
+                    "subdivision": "都道府県・地域"
                 }
             },
             "frequency": {
@@ -96,28 +96,28 @@
             },
             "monthly_day": {
                 "title": "月の日付を選択",
-                "description": "毎月の給与支払日を選択してください",
+                "description": "毎月給与が支払われる日を選択してください",
                 "data": {
                     "pay_day": "日付"
                 }
             },
             "bank_offset": {
-                "title": "最終銀行営業日前の日数",
+                "title": "最終銀行営業日の何日前",
                 "description": "最終銀行営業日の数日前に給与が支払われる場合は、何日前かを選択してください",
                 "data": {
-                    "bank_offset": "前の日数"
+                    "bank_offset": "何日前"
                 }
             },
             "specific_day": {
-                "title": "特定の日付を選択",
-                "description": "毎月給与が支払われる正確な日付を選択してください",
+                "title": "特定の日を選択",
+                "description": "毎月給与が支払われる正確な日を選択してください",
                 "data": {
-                    "pay_day": "特定の日付"
+                    "pay_day": "特定の日"
                 }
             },
             "cycle_last_paydate": {
                 "title": "前回の給料日を選択",
-                "description": "最後に給与が支払われた日付を選択してください。これは次の給料日の計算に使用されます",
+                "description": "前回給与が支払われた日付を選択してください。これは次の給料日の計算に使用されます",
                 "data": {
                     "last_pay_date": "前回の給料日"
                 }
@@ -130,10 +130,10 @@
                 }
             },
             "event_time": {
-                "title": "Payday event time",
-                "description": "Choose the time of day the payday event is fired on each payday. Automations can trigger on the 'isitpayday_payday' event.",
+                "title": "給料日イベント時刻",
+                "description": "毎回の給料日に給料日イベントが発火する時刻を選択してください。オートメーションは 'isitpayday_payday' イベントをトリガーにできます。",
                 "data": {
-                    "event_time": "Event time"
+                    "event_time": "イベント時刻"
                 }
             }
         }
@@ -141,7 +141,7 @@
     "issues": {
         "unsupported_country": {
             "title": "サポート対象外になった国",
-            "description": "IsItPayday に設定されている国「{country}」は、祝日ライブラリで現在サポートされていません。連携のオプションを開き、サポートされている国を選択してください。"
+            "description": "IsItPayday で設定されている国 \"{country}\" は、holidays ライブラリでのサポート対象外になりました。連携のオプションを開き、サポートされている国を選択してください。"
         }
     }
 }

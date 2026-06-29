@@ -4,7 +4,7 @@
         "step": {
             "user": {
                 "title": "Vyberte zemi",
-                "description": "Vybraná země se používá k určení státních svátků (vypočítává se lokálně, není vyžadován internet)",
+                "description": "Vybraná země se používá k určení státních svátků (vypočítává se lokálně, bez nutnosti připojení k internetu)",
                 "data": {
                     "name": "Název instance",
                     "country": "Země"
@@ -12,7 +12,7 @@
             },
             "subdivision": {
                 "title": "Vyberte region",
-                "description": "Některé země mají regionální svátky. Vyberte svůj stát/region pro co nejpřesnější kalendář svátků, nebo zvolte možnost 'Celá země', pokud chcete použít pouze státní svátky",
+                "description": "Některé země mají regionální svátky. Pro co nejpřesnější kalendář svátků vyberte svůj stát/region, nebo zvolte možnost 'Celá země' pro použití pouze státních svátků",
                 "data": {
                     "subdivision": "Stát/region"
                 }
@@ -32,22 +32,22 @@
                 }
             },
             "bank_offset": {
-                "title": "Počet dní před posledním bankovním dnem",
-                "description": "Pokud dostáváte výplatu několik dní před posledním bankovním dnem, zvolte kolik dní předem",
+                "title": "Počet dnů před posledním bankovním dnem",
+                "description": "Pokud dostáváte výplatu několik dnů před posledním bankovním dnem, zvolte kolik dnů předem",
                 "data": {
-                    "bank_offset": "Dní předem"
+                    "bank_offset": "Počet dnů předem"
                 }
             },
             "specific_day": {
                 "title": "Vyberte konkrétní den",
-                "description": "Vyberte přesný den, kdy každý měsíc dostáváte výplatu",
+                "description": "Vyberte přesný den v měsíci, kdy dostáváte výplatu",
                 "data": {
                     "pay_day": "Konkrétní den"
                 }
             },
             "cycle_last_paydate": {
                 "title": "Vyberte poslední výplatní den",
-                "description": "Vyberte poslední datum, kdy jste dostali výplatu. To bude použito k výpočtu dalšího výplatního dne",
+                "description": "Vyberte poslední datum, kdy jste dostali výplatu. To bude použito pro výpočet příštího výplatního dne",
                 "data": {
                     "last_pay_date": "Poslední výplatní den"
                 }
@@ -60,29 +60,29 @@
                 }
             },
             "event_time": {
-                "title": "Payday event time",
-                "description": "Choose the time of day the payday event is fired on each payday. Automations can trigger on the 'isitpayday_payday' event.",
+                "title": "Čas události výplaty",
+                "description": "Zvolte denní dobu, kdy se v každý výplatní den spustí událost výplaty. Automatizace se mohou spustit při události 'isitpayday_payday'.",
                 "data": {
-                    "event_time": "Event time"
+                    "event_time": "Čas události"
                 }
             }
         },
         "error": {
-            "invalid_country": "Vybraná země není podporována knihovnou svátků"
+            "invalid_country": "Vybraná země není podporována knihovnou holidays"
         }
     },
     "options": {
         "step": {
             "init": {
-                "title": "Select country",
-                "description": "The selected country is used to determine public holidays (calculated locally, no internet required)",
+                "title": "Vyberte zemi",
+                "description": "Vybraná země se používá k určení státních svátků (vypočítává se lokálně, bez nutnosti připojení k internetu)",
                 "data": {
                     "country": "Země"
                 }
             },
             "subdivision": {
                 "title": "Vyberte region",
-                "description": "Některé země mají regionální svátky. Vyberte svůj stát/region pro co nejpřesnější kalendář svátků, nebo zvolte možnost 'Celá země', pokud chcete použít pouze státní svátky",
+                "description": "Některé země mají regionální svátky. Pro co nejpřesnější kalendář svátků vyberte svůj stát/region, nebo zvolte možnost 'Celá země' pro použití pouze státních svátků",
                 "data": {
                     "subdivision": "Stát/region"
                 }
@@ -102,22 +102,22 @@
                 }
             },
             "bank_offset": {
-                "title": "Počet dní před posledním bankovním dnem",
-                "description": "Pokud dostáváte výplatu několik dní před posledním bankovním dnem, zvolte kolik dní předem",
+                "title": "Počet dnů před posledním bankovním dnem",
+                "description": "Pokud dostáváte výplatu několik dnů před posledním bankovním dnem, zvolte kolik dnů předem",
                 "data": {
-                    "bank_offset": "Dní předem"
+                    "bank_offset": "Počet dnů předem"
                 }
             },
             "specific_day": {
                 "title": "Vyberte konkrétní den",
-                "description": "Vyberte přesný den, kdy každý měsíc dostáváte výplatu",
+                "description": "Vyberte přesný den v měsíci, kdy dostáváte výplatu",
                 "data": {
                     "pay_day": "Konkrétní den"
                 }
             },
             "cycle_last_paydate": {
                 "title": "Vyberte poslední výplatní den",
-                "description": "Vyberte poslední datum, kdy jste dostali výplatu. To bude použito k výpočtu dalšího výplatního dne",
+                "description": "Vyberte poslední datum, kdy jste dostali výplatu. To bude použito pro výpočet příštího výplatního dne",
                 "data": {
                     "last_pay_date": "Poslední výplatní den"
                 }
@@ -130,10 +130,10 @@
                 }
             },
             "event_time": {
-                "title": "Payday event time",
-                "description": "Choose the time of day the payday event is fired on each payday. Automations can trigger on the 'isitpayday_payday' event.",
+                "title": "Čas události výplaty",
+                "description": "Zvolte denní dobu, kdy se v každý výplatní den spustí událost výplaty. Automatizace se mohou spustit při události 'isitpayday_payday'.",
                 "data": {
-                    "event_time": "Event time"
+                    "event_time": "Čas události"
                 }
             }
         }
@@ -141,7 +141,7 @@
     "issues": {
         "unsupported_country": {
             "title": "Země již není podporována",
-            "description": "Země \"{country}\", která je nakonfigurována pro IsItPayday, již není podporována knihovnou svátků. Otevřete prosím možnosti integrace a vyberte podporovanou zemi."
+            "description": "Země \"{country}\" nakonfigurovaná pro IsItPayday již není podporována knihovnou holidays. Otevřete prosím možnosti integrace a vyberte podporovanou zemi."
         }
     }
 }

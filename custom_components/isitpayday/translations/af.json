@@ -12,23 +12,23 @@
             },
             "subdivision": {
                 "title": "Kies streek",
-                "description": "Sommige lande het streeksvakansiedae. Kies jou staat/streek vir die akkuraatste vakansiekalender, of kies 'Hele land' om slegs nasionale vakansiedae te gebruik",
+                "description": "Sommige lande het streeksvakansiedae. Kies jou staat/streek vir die mees akkurate vakansiekalender, of kies 'Hele land' om slegs nasionale vakansiedae te gebruik",
                 "data": {
                     "subdivision": "Staat/Streek"
                 }
             },
             "frequency": {
-                "title": "Kies uitbetalingsfrekwensie",
+                "title": "Kies betaaldagfrekwensie",
                 "description": "Kies hoe gereeld jy betaal word",
                 "data": {
-                    "pay_frequency": "Uitbetalingsfrekwensie"
+                    "pay_frequency": "Betaaldagfrekwensie"
                 }
             },
             "monthly_day": {
-                "title": "Kies dag van maand",
+                "title": "Kies dag van die maand",
                 "description": "Kies op watter dag van die maand jy betaal word",
                 "data": {
-                    "pay_day": "Dag van maand"
+                    "pay_day": "Dag van die maand"
                 }
             },
             "bank_offset": {
@@ -56,14 +56,14 @@
                 "title": "Kies weeklikse betaaldag",
                 "description": "Kies op watter weeksdag jy elke week betaal word",
                 "data": {
-                    "pay_day": "Betaaldag-weeksdag"
+                    "pay_day": "Betaaldag-weekdag"
                 }
             },
             "event_time": {
-                "title": "Payday event time",
-                "description": "Choose the time of day the payday event is fired on each payday. Automations can trigger on the 'isitpayday_payday' event.",
+                "title": "Betaaldag-gebeurtenistyd",
+                "description": "Kies die tyd van die dag waarop die betaaldag-gebeurtenis op elke betaaldag afgevuur word. Outomatiserings kan op die 'isitpayday_payday'-gebeurtenis geaktiveer word.",
                 "data": {
-                    "event_time": "Event time"
+                    "event_time": "Gebeurtenistyd"
                 }
             }
         },
@@ -74,31 +74,31 @@
     "options": {
         "step": {
             "init": {
-                "title": "Select country",
-                "description": "The selected country is used to determine public holidays (calculated locally, no internet required)",
+                "title": "Kies land",
+                "description": "Die gekose land word gebruik om openbare vakansiedae te bepaal (plaaslik bereken, geen internet nodig nie)",
                 "data": {
                     "country": "Land"
                 }
             },
             "subdivision": {
                 "title": "Kies streek",
-                "description": "Sommige lande het streeksvakansiedae. Kies jou staat/streek vir die akkuraatste vakansiekalender, of kies 'Hele land' om slegs nasionale vakansiedae te gebruik",
+                "description": "Sommige lande het streeksvakansiedae. Kies jou staat/streek vir die mees akkurate vakansiekalender, of kies 'Hele land' om slegs nasionale vakansiedae te gebruik",
                 "data": {
                     "subdivision": "Staat/Streek"
                 }
             },
             "frequency": {
-                "title": "Kies uitbetalingsfrekwensie",
+                "title": "Kies betaaldagfrekwensie",
                 "description": "Kies hoe gereeld jy betaal word",
                 "data": {
-                    "pay_frequency": "Uitbetalingsfrekwensie"
+                    "pay_frequency": "Betaaldagfrekwensie"
                 }
             },
             "monthly_day": {
-                "title": "Kies dag van maand",
+                "title": "Kies dag van die maand",
                 "description": "Kies op watter dag van die maand jy betaal word",
                 "data": {
-                    "pay_day": "Dag van maand"
+                    "pay_day": "Dag van die maand"
                 }
             },
             "bank_offset": {
@@ -126,14 +126,14 @@
                 "title": "Kies weeklikse betaaldag",
                 "description": "Kies op watter weeksdag jy elke week betaal word",
                 "data": {
-                    "pay_day": "Betaaldag-weeksdag"
+                    "pay_day": "Betaaldag-weekdag"
                 }
             },
             "event_time": {
-                "title": "Payday event time",
-                "description": "Choose the time of day the payday event is fired on each payday. Automations can trigger on the 'isitpayday_payday' event.",
+                "title": "Betaaldag-gebeurtenistyd",
+                "description": "Kies die tyd van die dag waarop die betaaldag-gebeurtenis op elke betaaldag afgevuur word. Outomatiserings kan op die 'isitpayday_payday'-gebeurtenis geaktiveer word.",
                 "data": {
-                    "event_time": "Event time"
+                    "event_time": "Gebeurtenistyd"
                 }
             }
         }

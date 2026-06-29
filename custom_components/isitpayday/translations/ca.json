@@ -12,16 +12,16 @@
             },
             "subdivision": {
                 "title": "Selecciona la regió",
-                "description": "Alguns països tenen festius regionals. Selecciona el teu estat/regió per obtenir el calendari festiu més precís, o tria 'Tot el país' per utilitzar només els festius nacionals",
+                "description": "Alguns països tenen festius regionals. Selecciona el teu estat/regió per obtenir el calendari de festius més precís, o tria 'Tot el país' per utilitzar només els festius nacionals",
                 "data": {
                     "subdivision": "Estat/Regió"
                 }
             },
             "frequency": {
-                "title": "Selecciona la freqüència de cobrament",
-                "description": "Tria amb quina freqüència cobres",
+                "title": "Selecciona la freqüència de pagament",
+                "description": "Tria cada quant cobres",
                 "data": {
-                    "pay_frequency": "Freqüència de cobrament"
+                    "pay_frequency": "Freqüència de pagament"
                 }
             },
             "monthly_day": {
@@ -39,59 +39,59 @@
                 }
             },
             "specific_day": {
-                "title": "Selecciona un dia específic",
-                "description": "Selecciona el dia exacte en què cobres cada mes",
+                "title": "Selecciona un dia concret",
+                "description": "Selecciona el dia exacte que cobres cada mes",
                 "data": {
-                    "pay_day": "Dia específic"
+                    "pay_day": "Dia concret"
                 }
             },
             "cycle_last_paydate": {
-                "title": "Selecciona l'últim dia de cobrament",
-                "description": "Selecciona l'última data en què vas cobrar. S'utilitzarà per calcular el pròxim dia de cobrament",
+                "title": "Selecciona l'últim dia de pagament",
+                "description": "Selecciona l'última data en què vas cobrar. S'utilitzarà per calcular el proper dia de pagament",
                 "data": {
-                    "last_pay_date": "Últim dia de cobrament"
+                    "last_pay_date": "Últim dia de pagament"
                 }
             },
             "weekly": {
-                "title": "Selecciona el dia de cobrament setmanal",
+                "title": "Selecciona el dia de pagament setmanal",
                 "description": "Tria quin dia de la setmana cobres",
                 "data": {
-                    "pay_day": "Dia de la setmana de cobrament"
+                    "pay_day": "Dia de la setmana de pagament"
                 }
             },
             "event_time": {
-                "title": "Payday event time",
-                "description": "Choose the time of day the payday event is fired on each payday. Automations can trigger on the 'isitpayday_payday' event.",
+                "title": "Hora de l'esdeveniment del dia de pagament",
+                "description": "Tria l'hora del dia en què s'activa l'esdeveniment del dia de pagament en cada dia de pagament. Les automatitzacions es poden activar amb l'esdeveniment 'isitpayday_payday'.",
                 "data": {
-                    "event_time": "Event time"
+                    "event_time": "Hora de l'esdeveniment"
                 }
             }
         },
         "error": {
-            "invalid_country": "El país seleccionat no és compatible amb la biblioteca de dies festius"
+            "invalid_country": "El país seleccionat no és compatible amb la biblioteca de festius"
         }
     },
     "options": {
         "step": {
             "init": {
-                "title": "Select country",
-                "description": "The selected country is used to determine public holidays (calculated locally, no internet required)",
+                "title": "Selecciona el país",
+                "description": "El país seleccionat s'utilitza per determinar els dies festius (calculats localment, sense necessitat d'internet)",
                 "data": {
                     "country": "País"
                 }
             },
             "subdivision": {
                 "title": "Selecciona la regió",
-                "description": "Alguns països tenen festius regionals. Selecciona el teu estat/regió per obtenir el calendari festiu més precís, o tria 'Tot el país' per utilitzar només els festius nacionals",
+                "description": "Alguns països tenen festius regionals. Selecciona el teu estat/regió per obtenir el calendari de festius més precís, o tria 'Tot el país' per utilitzar només els festius nacionals",
                 "data": {
                     "subdivision": "Estat/Regió"
                 }
             },
             "frequency": {
-                "title": "Selecciona la freqüència de cobrament",
-                "description": "Tria amb quina freqüència cobres",
+                "title": "Selecciona la freqüència de pagament",
+                "description": "Tria cada quant cobres",
                 "data": {
-                    "pay_frequency": "Freqüència de cobrament"
+                    "pay_frequency": "Freqüència de pagament"
                 }
             },
             "monthly_day": {
@@ -109,39 +109,39 @@
                 }
             },
             "specific_day": {
-                "title": "Selecciona un dia específic",
-                "description": "Selecciona el dia exacte en què cobres cada mes",
+                "title": "Selecciona un dia concret",
+                "description": "Selecciona el dia exacte que cobres cada mes",
                 "data": {
-                    "pay_day": "Dia específic"
+                    "pay_day": "Dia concret"
                 }
             },
             "cycle_last_paydate": {
-                "title": "Selecciona l'últim dia de cobrament",
-                "description": "Selecciona l'última data en què vas cobrar. S'utilitzarà per calcular el pròxim dia de cobrament",
+                "title": "Selecciona l'últim dia de pagament",
+                "description": "Selecciona l'última data en què vas cobrar. S'utilitzarà per calcular el proper dia de pagament",
                 "data": {
-                    "last_pay_date": "Últim dia de cobrament"
+                    "last_pay_date": "Últim dia de pagament"
                 }
             },
             "weekly": {
-                "title": "Selecciona el dia de cobrament setmanal",
+                "title": "Selecciona el dia de pagament setmanal",
                 "description": "Tria quin dia de la setmana cobres",
                 "data": {
-                    "pay_day": "Dia de la setmana de cobrament"
+                    "pay_day": "Dia de la setmana de pagament"
                 }
             },
             "event_time": {
-                "title": "Payday event time",
-                "description": "Choose the time of day the payday event is fired on each payday. Automations can trigger on the 'isitpayday_payday' event.",
+                "title": "Hora de l'esdeveniment del dia de pagament",
+                "description": "Tria l'hora del dia en què s'activa l'esdeveniment del dia de pagament en cada dia de pagament. Les automatitzacions es poden activar amb l'esdeveniment 'isitpayday_payday'.",
                 "data": {
-                    "event_time": "Event time"
+                    "event_time": "Hora de l'esdeveniment"
                 }
             }
         }
     },
     "issues": {
         "unsupported_country": {
-            "title": "País ja no compatible",
-            "description": "El país \"{country}\" configurat per a IsItPayday ja no és compatible amb la biblioteca de dies festius. Obre les opcions de la integració i selecciona un país compatible."
+            "title": "El país ja no és compatible",
+            "description": "El país \"{country}\" configurat per a IsItPayday ja no és compatible amb la biblioteca de festius. Obre les opcions de la integració i selecciona un país compatible."
         }
     }
 }

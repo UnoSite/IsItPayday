@@ -74,8 +74,8 @@
     "options": {
         "step": {
             "init": {
-                "title": "Select country",
-                "description": "The selected country is used to determine public holidays (calculated locally, no internet required)",
+                "title": "调整 IsItPayday 设置",
+                "description": "修改此发薪日跟踪器的设置",
                 "data": {
                     "country": "国家/地区"
                 }

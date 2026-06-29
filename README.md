@@ -46,6 +46,10 @@ All calculations are performed **locally** using the [holidays](https://pypi.org
   - Displays how many days until next payday.
   - Icon: `mdi:calendar-end`. <sup><sup>([See icon](https://pictogrammers.com/library/mdi/icon/calendar-end/))</sup></sup>
 
+- **Sensor:** `sensor.<instance_name>_last_payday`
+  - Displays the most recent payday on or before today.
+  - Icon: `mdi:calendar-check`. <sup><sup>([See icon](https://pictogrammers.com/library/mdi/icon/calendar-check/))</sup></sup>
+
 - **Calendar:** `calendar.<instance_name>_payday`
   - Shows your upcoming paydays as all-day calendar events.
   - Multiple future paydays are displayed, not just the next one.
@@ -69,6 +73,9 @@ All calculations are performed **locally** using the [holidays](https://pypi.org
 
 - **Regional Holiday Support:**
   - For countries with regional holidays (e.g. German Bundesländer or US states), you can select your state/region during setup for the most accurate holiday calendar.
+
+- **Payday Event:**
+  - Fires an `isitpayday_payday` event on each payday, at a time of day you choose (default 06:00). Automations can trigger directly on this event.
 
 - **Options Flow:**
   - After initial setup, you can adjust all settings via the **Configure** button in the **Devices & Services** section. The integration reloads automatically when settings are saved - no restart required.
@@ -104,7 +111,7 @@ All calculations are performed **locally** using the [holidays](https://pypi.org
 ### Step 1: Instance Name & Country
 
 - Enter a name for this instance (e.g. `My Payday`).
-- Choose your country from the dropdown list. The list contains all countries supported by the [holidays](https://pypi.org/project/holidays/) package. The integration automatically pre-selects the country based on your Home Assistant configuration, but you can change it if needed.
+- Choose your country from the dropdown list. The list contains all countries supported by the [holidays](https://pypi.org/project/holidays/) package. The integration automatically pre-selects your Home Assistant configured country, but you can change it if needed.
 
 ### Step 2: Region (only for some countries)
 
@@ -145,6 +152,10 @@ All calculations are performed **locally** using the [holidays](https://pypi.org
 - **If "Specific day" is selected:**
   - **Specific day** (1–31, default 31): Choose the exact day of the month. If that day falls on a weekend or holiday, the integration adjusts to the previous working day.
 
+### Final Step: Payday Event Time
+
+- Choose the time of day the `isitpayday_payday` event is fired on each payday. The default is **06:00**.
+
 ---
 
 ## 📡 Entities
@@ -154,6 +165,7 @@ All calculations are performed **locally** using the [holidays](https://pypi.org
 | `binary_sensor.<instance_name>_is_it_payday`  | Is It Payday? | `on` if today is payday, otherwise `off`.         |
 | `sensor.<instance_name>_next_payday`          | Next Payday   | Date of the next payday (`YYYY-MM-DD`).           |
 | `sensor.<instance_name>_days_to`              | Days until    | Number of days until the next payday.             |
+| `sensor.<instance_name>_last_payday`          | Last Payday   | Most recent payday on or before today.            |
 | `calendar.<instance_name>_payday`             | Payday        | All-day calendar events for upcoming paydays.     |
 
 All entities are grouped under a single device, named after your chosen **Instance Name** during setup.
@@ -170,9 +182,37 @@ The **Next Payday** sensor exposes additional attributes useful for automations:
 
 ---
 
+## 🔔 Payday Event
+
+On each payday, at the configured time of day (default **06:00**), the integration fires an event on the Home Assistant event bus:
+
+- **Event type:** `isitpayday_payday`
+- **Event data:**
+  - `entry_id` – the config entry id
+  - `name` – the instance name
+  - `date` – the payday date (`YYYY-MM-DD`)
+
+You can change the event time at any time via **Configure**.
+
+### Example automation
+
+```yaml
+automation:
+  - alias: "Notify on payday"
+    trigger:
+      - platform: event
+        event_type: isitpayday_payday
+    action:
+      - service: notify.notify
+        data:
+          message: "It's payday! 🎉"
+```
+
+---
+
 ## 🔧 Changing Settings
 
-After the integration is set up, you can change any setting (country, region, pay frequency, day, etc.) directly from:
+After the integration is set up, you can change any setting (country, region, pay frequency, day, event time, etc.) directly from:
 
 **Settings > Devices & Services > Is It Payday > Configure**
 
@@ -194,6 +234,8 @@ entities:
     name: Next Payday Date
   - entity: sensor.my_payday_instance_days_to
     name: Days Until Payday
+  - entity: sensor.my_payday_instance_last_payday
+    name: Last Payday
   - entity: calendar.my_payday_instance_payday
     name: Payday Calendar
 ```
@@ -210,6 +252,10 @@ entities:
 - Make sure the correct pay frequency and reference date (last payday) are configured.
 - If you use "Last bank day with offset", verify that the offset does not push the date into a weekend or holiday — the integration adjusts automatically, but double-check in the logs.
 - For regional holidays, make sure the correct state/region is selected via **Configure**.
+
+**Payday event does not fire**
+- The event fires once per payday at the configured time. If Home Assistant is not running at that time, the event fires once when it next starts up that day.
+- Check **Developer Tools > Events** and listen for `isitpayday_payday` to verify.
 
 **Integration fails to load**
 - Check the Home Assistant logs under **Settings > System > Logs** and look for entries from `custom_components.isitpayday`.

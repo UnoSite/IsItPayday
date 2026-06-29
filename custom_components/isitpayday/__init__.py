@@ -53,8 +53,15 @@ def _normalize_int(value, default: int) -> int:
 
 _PLATFORMS = ["sensor", "binary_sensor", "calendar"]
 
-# Tracks the scheduled "fire at midnight" callback per config entry.
+# The payday event is fired at this local time on the payday itself.
+PAYDAY_EVENT_HOUR = 6
+
+# Tracks the scheduled "fire at 06:00" callback per config entry.
 _payday_event_unsubs: dict[str, object] = {}
+
+# Tracks the last payday date we already fired an event for, per config entry,
+# so coordinator refreshes during the day do not fire the event repeatedly.
+_payday_last_fired: dict[str, date] = {}
 
 
 @callback
@@ -183,34 +190,56 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         "name": instance_name,
     }
 
-    # Fire an event at midnight on each payday so automations can trigger
-    # directly on the payday instead of watching the binary sensor.
+    # Fire an event at 06:00 local time on each payday so automations can
+    # trigger directly on the payday instead of watching the binary sensor.
+    #
+    # The event must fire exactly once per payday. The coordinator refreshes
+    # every few minutes, so we guard with the last date we already fired for
+    # and (re)schedule a single timer for the next payday's 06:00.
+    def _payday_fire_time(payday: date) -> datetime:
+        """Return the UTC datetime at which to fire for a given payday."""
+        local = datetime.combine(
+            payday,
+            time(PAYDAY_EVENT_HOUR, 0),
+            tzinfo=dt_util.DEFAULT_TIME_ZONE,
+        )
+        return dt_util.as_utc(local)
+
     @callback
     def _schedule_payday_event(_now=None) -> None:
-        unsub = _payday_event_unsubs.pop(entry.entry_id, None)
-        if unsub:
-            unsub()
-
         next_payday = coordinator.data.get("payday_next") if coordinator.data else None
         if not isinstance(next_payday, date):
             return
 
-        fire_at = dt_util.as_utc(
-            datetime.combine(next_payday, time(0, 0), tzinfo=dt_util.DEFAULT_TIME_ZONE)
-        )
-        if fire_at <= dt_util.utcnow():
-            # Payday is today and midnight has passed; fire now.
-            _fire_payday_event(hass, entry, instance_name, next_payday)
+        already_fired = _payday_last_fired.get(entry.entry_id)
+        now = dt_util.utcnow()
+        fire_at = _payday_fire_time(next_payday)
+
+        # Payday is today (or earlier) and 06:00 has already passed.
+        if fire_at <= now:
+            # Only fire if we have not already fired for this exact date.
+            if already_fired != next_payday:
+                _payday_last_fired[entry.entry_id] = next_payday
+                _fire_payday_event(hass, entry, instance_name, next_payday)
+                # Advance the coordinator to the following payday.
+                hass.async_create_task(coordinator.async_request_refresh())
             return
 
+        # Otherwise schedule a single timer for 06:00 on the payday.
+        # Cancel any existing timer first so we never stack multiple timers.
+        unsub = _payday_event_unsubs.pop(entry.entry_id, None)
+        if unsub:
+            unsub()
         _payday_event_unsubs[entry.entry_id] = async_track_point_in_time(
             hass, _on_payday, fire_at
         )
 
     @callback
     def _on_payday(now) -> None:
+        _payday_event_unsubs.pop(entry.entry_id, None)
         payday = coordinator.data.get("payday_next") if coordinator.data else None
-        if isinstance(payday, date):
+        if isinstance(payday, date) and _payday_last_fired.get(entry.entry_id) != payday:
+            _payday_last_fired[entry.entry_id] = payday
             _fire_payday_event(hass, entry, instance_name, payday)
         # Refresh so the coordinator advances to the following payday,
         # then reschedule for it.
@@ -224,6 +253,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         unsub = _payday_event_unsubs.pop(entry.entry_id, None)
         if unsub:
             unsub()
+        _payday_last_fired.pop(entry.entry_id, None)
 
     entry.async_on_unload(_cleanup_event)
 

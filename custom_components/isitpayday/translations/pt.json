@@ -1,5 +1,5 @@
 {
-    "title": "IsItPayday",
+    "title": "É dia de pagamento?",
     "config": {
         "step": {
             "user": {
@@ -68,13 +68,13 @@
             }
         },
         "error": {
-            "invalid_country": "O país selecionado não é compatível com a biblioteca de feriados"
+            "invalid_country": "O país selecionado não é suportado pela biblioteca de feriados"
         }
     },
     "options": {
         "step": {
             "init": {
-                "title": "Selecionar país",
+                "title": "Ajustar definições do IsItPayday",
                 "description": "O país selecionado é usado para determinar os feriados (calculados localmente, sem necessidade de internet)",
                 "data": {
                     "country": "País"
@@ -140,7 +140,7 @@
     },
     "issues": {
         "unsupported_country": {
-            "title": "País não é mais compatível",
+            "title": "País já não suportado",
             "description": "O país \"{country}\" configurado para IsItPayday não é mais compatível com a biblioteca de feriados. Abra as opções da integração e selecione um país compatível."
         }
     }

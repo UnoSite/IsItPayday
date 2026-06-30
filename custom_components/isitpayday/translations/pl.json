@@ -4,7 +4,7 @@
         "step": {
             "user": {
                 "title": "Wybierz kraj",
-                "description": "Wybrany kraj jest używany do określania dni ustawowo wolnych od pracy (obliczanych lokalnie, bez połączenia z internetem)",
+                "description": "Wybrany kraj służy do określenia świąt publicznych (obliczanych lokalnie, bez dostępu do internetu)",
                 "data": {
                     "name": "Nazwa instancji",
                     "country": "Kraj"
@@ -12,7 +12,7 @@
             },
             "subdivision": {
                 "title": "Wybierz region",
-                "description": "Niektóre kraje mają święta regionalne. Wybierz swój stan/region, aby uzyskać jak najdokładniejszy kalendarz świąt, lub wybierz 'Cały kraj', aby używać tylko świąt ogólnokrajowych",
+                "description": "Niektóre kraje mają święta regionalne. Wybierz swój stan/region, aby uzyskać jak najdokładniejszy kalendarz świąt, lub wybierz 'Cały kraj', aby używać tylko świąt krajowych",
                 "data": {
                     "subdivision": "Stan/Region"
                 }
@@ -32,15 +32,15 @@
                 }
             },
             "bank_offset": {
-                "title": "Liczba dni przed ostatnim dniem bankowym",
-                "description": "Jeśli otrzymujesz wynagrodzenie kilka dni przed ostatnim dniem bankowym, wybierz, ile dni wcześniej",
+                "title": "Liczba dni przed ostatnim dniem roboczym dla banków",
+                "description": "Jeśli otrzymujesz wynagrodzenie kilka dni przed ostatnim dniem roboczym dla banków, wybierz ile dni wcześniej",
                 "data": {
-                    "bank_offset": "Liczba dni wcześniej"
+                    "bank_offset": "Liczba dni przed"
                 }
             },
             "specific_day": {
                 "title": "Wybierz konkretny dzień",
-                "description": "Wybierz dokładny dzień każdego miesiąca, w którym otrzymujesz wynagrodzenie",
+                "description": "Wybierz dokładny dzień miesiąca, w którym otrzymujesz wynagrodzenie",
                 "data": {
                     "pay_day": "Konkretny dzień"
                 }
@@ -82,7 +82,7 @@
             },
             "subdivision": {
                 "title": "Wybierz region",
-                "description": "Niektóre kraje mają święta regionalne. Wybierz swój stan/region, aby uzyskać jak najdokładniejszy kalendarz świąt, lub wybierz 'Cały kraj', aby używać tylko świąt ogólnokrajowych",
+                "description": "Niektóre kraje mają święta regionalne. Wybierz swój stan/region, aby uzyskać jak najdokładniejszy kalendarz świąt, lub wybierz 'Cały kraj', aby używać tylko świąt krajowych",
                 "data": {
                     "subdivision": "Stan/Region"
                 }
@@ -102,15 +102,15 @@
                 }
             },
             "bank_offset": {
-                "title": "Liczba dni przed ostatnim dniem bankowym",
-                "description": "Jeśli otrzymujesz wynagrodzenie kilka dni przed ostatnim dniem bankowym, wybierz, ile dni wcześniej",
+                "title": "Liczba dni przed ostatnim dniem roboczym dla banków",
+                "description": "Jeśli otrzymujesz wynagrodzenie kilka dni przed ostatnim dniem roboczym dla banków, wybierz ile dni wcześniej",
                 "data": {
-                    "bank_offset": "Liczba dni wcześniej"
+                    "bank_offset": "Liczba dni przed"
                 }
             },
             "specific_day": {
                 "title": "Wybierz konkretny dzień",
-                "description": "Wybierz dokładny dzień każdego miesiąca, w którym otrzymujesz wynagrodzenie",
+                "description": "Wybierz dokładny dzień miesiąca, w którym otrzymujesz wynagrodzenie",
                 "data": {
                     "pay_day": "Konkretny dzień"
                 }

@@ -4,7 +4,7 @@
         "step": {
             "user": {
                 "title": "Selecionar país",
-                "description": "O país selecionado é usado para determinar os feriados públicos (calculados localmente, sem necessidade de internet)",
+                "description": "O país selecionado é usado para determinar os feriados (calculados localmente, sem necessidade de internet)",
                 "data": {
                     "name": "Nome da instância",
                     "country": "País"
@@ -12,56 +12,56 @@
             },
             "subdivision": {
                 "title": "Selecionar região",
-                "description": "Alguns países têm feriados regionais. Selecione seu estado/região para o calendário de feriados mais preciso ou escolha 'País inteiro' para usar apenas feriados nacionais",
+                "description": "Alguns países têm feriados regionais. Selecione seu estado/região para obter o calendário de feriados mais preciso ou escolha 'País inteiro' para usar apenas feriados nacionais",
                 "data": {
                     "subdivision": "Estado/Região"
                 }
             },
             "frequency": {
                 "title": "Selecionar frequência de pagamento",
-                "description": "Escolha com que frequência você recebe",
+                "description": "Escolha com que frequência você recebe o pagamento",
                 "data": {
                     "pay_frequency": "Frequência de pagamento"
                 }
             },
             "monthly_day": {
                 "title": "Selecionar dia do mês",
-                "description": "Escolha em que dia do mês você recebe",
+                "description": "Escolha em que dia do mês você recebe o pagamento",
                 "data": {
                     "pay_day": "Dia do mês"
                 }
             },
             "bank_offset": {
                 "title": "Dias antes do último dia bancário",
-                "description": "Se você recebe alguns dias antes do último dia bancário, escolha quantos dias antes",
+                "description": "Se você recebe o pagamento alguns dias antes do último dia bancário, escolha quantos dias antes",
                 "data": {
                     "bank_offset": "Dias antes"
                 }
             },
             "specific_day": {
                 "title": "Selecionar dia específico",
-                "description": "Selecione o dia exato em que você recebe a cada mês",
+                "description": "Selecione o dia exato em que você recebe o pagamento a cada mês",
                 "data": {
                     "pay_day": "Dia específico"
                 }
             },
             "cycle_last_paydate": {
-                "title": "Selecionar último pagamento",
-                "description": "Selecione a última data em que você recebeu. Ela será usada para calcular o próximo pagamento",
+                "title": "Selecionar último dia de pagamento",
+                "description": "Selecione a última data em que você recebeu o pagamento. Ela será usada para calcular o próximo dia de pagamento",
                 "data": {
-                    "last_pay_date": "Último pagamento"
+                    "last_pay_date": "Último dia de pagamento"
                 }
             },
             "weekly": {
                 "title": "Selecionar dia de pagamento semanal",
-                "description": "Escolha em que dia da semana você recebe a cada semana",
+                "description": "Escolha em que dia da semana você recebe o pagamento",
                 "data": {
                     "pay_day": "Dia da semana do pagamento"
                 }
             },
             "event_time": {
                 "title": "Horário do evento de pagamento",
-                "description": "Escolha o horário do dia em que o evento de pagamento é disparado em cada pagamento. As automações podem ser acionadas pelo evento 'isitpayday_payday'.",
+                "description": "Escolha a hora do dia em que o evento de pagamento é disparado em cada dia de pagamento. As automações podem ser acionadas pelo evento 'isitpayday_payday'.",
                 "data": {
                     "event_time": "Horário do evento"
                 }
@@ -75,63 +75,63 @@
         "step": {
             "init": {
                 "title": "Selecionar país",
-                "description": "O país selecionado é usado para determinar os feriados públicos (calculados localmente, sem necessidade de internet)",
+                "description": "O país selecionado é usado para determinar os feriados (calculados localmente, sem necessidade de internet)",
                 "data": {
                     "country": "País"
                 }
             },
             "subdivision": {
                 "title": "Selecionar região",
-                "description": "Alguns países têm feriados regionais. Selecione seu estado/região para o calendário de feriados mais preciso ou escolha 'País inteiro' para usar apenas feriados nacionais",
+                "description": "Alguns países têm feriados regionais. Selecione seu estado/região para obter o calendário de feriados mais preciso ou escolha 'País inteiro' para usar apenas feriados nacionais",
                 "data": {
                     "subdivision": "Estado/Região"
                 }
             },
             "frequency": {
                 "title": "Selecionar frequência de pagamento",
-                "description": "Escolha com que frequência você recebe",
+                "description": "Escolha com que frequência você recebe o pagamento",
                 "data": {
                     "pay_frequency": "Frequência de pagamento"
                 }
             },
             "monthly_day": {
                 "title": "Selecionar dia do mês",
-                "description": "Escolha em que dia do mês você recebe",
+                "description": "Escolha em que dia do mês você recebe o pagamento",
                 "data": {
                     "pay_day": "Dia do mês"
                 }
             },
             "bank_offset": {
                 "title": "Dias antes do último dia bancário",
-                "description": "Se você recebe alguns dias antes do último dia bancário, escolha quantos dias antes",
+                "description": "Se você recebe o pagamento alguns dias antes do último dia bancário, escolha quantos dias antes",
                 "data": {
                     "bank_offset": "Dias antes"
                 }
             },
             "specific_day": {
                 "title": "Selecionar dia específico",
-                "description": "Selecione o dia exato em que você recebe a cada mês",
+                "description": "Selecione o dia exato em que você recebe o pagamento a cada mês",
                 "data": {
                     "pay_day": "Dia específico"
                 }
             },
             "cycle_last_paydate": {
-                "title": "Selecionar último pagamento",
-                "description": "Selecione a última data em que você recebeu. Ela será usada para calcular o próximo pagamento",
+                "title": "Selecionar último dia de pagamento",
+                "description": "Selecione a última data em que você recebeu o pagamento. Ela será usada para calcular o próximo dia de pagamento",
                 "data": {
-                    "last_pay_date": "Último pagamento"
+                    "last_pay_date": "Último dia de pagamento"
                 }
             },
             "weekly": {
                 "title": "Selecionar dia de pagamento semanal",
-                "description": "Escolha em que dia da semana você recebe a cada semana",
+                "description": "Escolha em que dia da semana você recebe o pagamento",
                 "data": {
                     "pay_day": "Dia da semana do pagamento"
                 }
             },
             "event_time": {
                 "title": "Horário do evento de pagamento",
-                "description": "Escolha o horário do dia em que o evento de pagamento é disparado em cada pagamento. As automações podem ser acionadas pelo evento 'isitpayday_payday'.",
+                "description": "Escolha a hora do dia em que o evento de pagamento é disparado em cada dia de pagamento. As automações podem ser acionadas pelo evento 'isitpayday_payday'.",
                 "data": {
                     "event_time": "Horário do evento"
                 }
@@ -141,7 +141,7 @@
     "issues": {
         "unsupported_country": {
             "title": "País não é mais compatível",
-            "description": "O país \"{country}\" configurado para o IsItPayday não é mais compatível com a biblioteca de feriados. Abra as opções da integração e selecione um país compatível."
+            "description": "O país \"{country}\" configurado para IsItPayday não é mais compatível com a biblioteca de feriados. Abra as opções da integração e selecione um país compatível."
         }
     }
 }

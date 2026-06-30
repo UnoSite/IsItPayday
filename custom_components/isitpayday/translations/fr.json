@@ -3,25 +3,25 @@
     "config": {
         "step": {
             "user": {
-                "title": "Sélectionner le pays",
-                "description": "Le pays sélectionné est utilisé pour déterminer les jours fériés (calculés localement, sans connexion Internet)",
+                "title": "Sélectionner un pays",
+                "description": "Le pays sélectionné est utilisé pour déterminer les jours fériés (calculés localement, aucune connexion Internet requise)",
                 "data": {
                     "name": "Nom de l'instance",
                     "country": "Pays"
                 }
             },
             "subdivision": {
-                "title": "Sélectionner la région",
-                "description": "Certains pays ont des jours fériés régionaux. Sélectionnez votre État/région pour obtenir le calendrier des jours fériés le plus précis, ou choisissez 'Pays entier' pour n'utiliser que les jours fériés nationaux",
+                "title": "Sélectionner une région",
+                "description": "Certains pays ont des jours fériés régionaux. Sélectionnez votre état/région pour obtenir le calendrier des jours fériés le plus précis, ou choisissez 'Pays entier' pour utiliser uniquement les jours fériés nationaux",
                 "data": {
                     "subdivision": "État/Région"
                 }
             },
             "frequency": {
-                "title": "Sélectionner la fréquence de versement",
+                "title": "Sélectionner la fréquence de paie",
                 "description": "Choisissez à quelle fréquence vous êtes payé",
                 "data": {
-                    "pay_frequency": "Fréquence de versement"
+                    "pay_frequency": "Fréquence de paie"
                 }
             },
             "monthly_day": {
@@ -81,17 +81,17 @@
                 }
             },
             "subdivision": {
-                "title": "Sélectionner la région",
-                "description": "Certains pays ont des jours fériés régionaux. Sélectionnez votre État/région pour obtenir le calendrier des jours fériés le plus précis, ou choisissez 'Pays entier' pour n'utiliser que les jours fériés nationaux",
+                "title": "Sélectionner une région",
+                "description": "Certains pays ont des jours fériés régionaux. Sélectionnez votre état/région pour obtenir le calendrier des jours fériés le plus précis, ou choisissez 'Pays entier' pour utiliser uniquement les jours fériés nationaux",
                 "data": {
                     "subdivision": "État/Région"
                 }
             },
             "frequency": {
-                "title": "Sélectionner la fréquence de versement",
+                "title": "Sélectionner la fréquence de paie",
                 "description": "Choisissez à quelle fréquence vous êtes payé",
                 "data": {
-                    "pay_frequency": "Fréquence de versement"
+                    "pay_frequency": "Fréquence de paie"
                 }
             },
             "monthly_day": {

@@ -1,147 +1,147 @@
 {
-    "title": "发薪日到了吗？",
+    "title": "IsItPayday",
     "config": {
         "step": {
             "user": {
-                "title": "選擇國家/地區",
-                "description": "所選國家/地區用於判定公共假期（本機計算，無需網際網路）",
+                "title": "选择国家",
+                "description": "所选国家将用于确定公共假日（本地计算，无需互联网）",
                 "data": {
-                    "name": "實例名稱",
-                    "country": "國家/地區"
+                    "name": "实例名称",
+                    "country": "国家"
                 }
             },
             "subdivision": {
-                "title": "選擇地區",
-                "description": "某些國家/地區有區域性假期。請選擇您的州／地區以取得最準確的假期日曆，或選擇「整個國家/地區」以僅使用全國性假期",
+                "title": "选择地区",
+                "description": "某些国家有地区性假日。请选择您的州/地区以获得最准确的假日日历，或选择“全国”以仅使用国家法定假日",
                 "data": {
-                    "subdivision": "州／地區"
+                    "subdivision": "州/地区"
                 }
             },
             "frequency": {
-                "title": "選擇發薪頻率",
-                "description": "選擇您的發薪頻率",
+                "title": "选择发薪频率",
+                "description": "选择您的发薪频率",
                 "data": {
-                    "pay_frequency": "發薪頻率"
+                    "pay_frequency": "发薪频率"
                 }
             },
             "monthly_day": {
-                "title": "選擇每月日期",
-                "description": "選擇您每月在哪一天發薪",
+                "title": "选择每月日期",
+                "description": "选择您每月发薪的日期",
                 "data": {
                     "pay_day": "每月日期"
                 }
             },
             "bank_offset": {
-                "title": "最後一個銀行工作日前幾天",
-                "description": "如果您的薪資是在最後一個銀行工作日前幾天發放，請選擇提前幾天",
+                "title": "最后一个银行工作日前的天数",
+                "description": "如果您是在最后一个银行工作日前几天发薪，请选择提前多少天",
                 "data": {
-                    "bank_offset": "提前天數"
+                    "bank_offset": "提前天数"
                 }
             },
             "specific_day": {
-                "title": "選擇具體日期",
-                "description": "選擇您每月發薪的確切日期",
+                "title": "选择具体日期",
+                "description": "选择您每月发薪的确切日期",
                 "data": {
-                    "pay_day": "具體日期"
+                    "pay_day": "具体日期"
                 }
             },
             "cycle_last_paydate": {
-                "title": "選擇上次發薪日",
-                "description": "選擇您上次領薪的日期。此日期將用於計算下一個發薪日",
+                "title": "选择上次发薪日",
+                "description": "选择您上次发薪的日期。这将用于计算下一个发薪日",
                 "data": {
-                    "last_pay_date": "上次發薪日"
+                    "last_pay_date": "上次发薪日"
                 }
             },
             "weekly": {
-                "title": "選擇每週發薪日",
-                "description": "選擇您每週在哪一天發薪",
+                "title": "选择每周发薪日",
+                "description": "选择您每周在星期几发薪",
                 "data": {
-                    "pay_day": "發薪星期"
+                    "pay_day": "发薪星期"
                 }
             },
             "event_time": {
-                "title": "發薪事件時間",
-                "description": "選擇每個發薪日觸發發薪事件的時間。自動化可由 'isitpayday_payday' 事件觸發。",
+                "title": "发薪日事件时间",
+                "description": "选择每个发薪日触发发薪日事件的时间。自动化可由“isitpayday_payday”事件触发。",
                 "data": {
-                    "event_time": "事件時間"
+                    "event_time": "事件时间"
                 }
             }
         },
         "error": {
-            "invalid_country": "所選國家/地區不受假期資料庫支援"
+            "invalid_country": "所选国家不受假日库支持"
         }
     },
     "options": {
         "step": {
             "init": {
-                "title": "選擇國家/地區",
-                "description": "所選國家/地區用於判定公共假期（本機計算，無需網際網路）",
+                "title": "选择国家",
+                "description": "所选国家将用于确定公共假日（本地计算，无需互联网）",
                 "data": {
-                    "country": "國家/地區"
+                    "country": "国家"
                 }
             },
             "subdivision": {
-                "title": "選擇地區",
-                "description": "某些國家/地區有區域性假期。請選擇您的州／地區以取得最準確的假期日曆，或選擇「整個國家/地區」以僅使用全國性假期",
+                "title": "选择地区",
+                "description": "某些国家有地区性假日。请选择您的州/地区以获得最准确的假日日历，或选择“全国”以仅使用国家法定假日",
                 "data": {
-                    "subdivision": "州／地區"
+                    "subdivision": "州/地区"
                 }
             },
             "frequency": {
-                "title": "選擇發薪頻率",
-                "description": "選擇您的發薪頻率",
+                "title": "选择发薪频率",
+                "description": "选择您的发薪频率",
                 "data": {
-                    "pay_frequency": "發薪頻率"
+                    "pay_frequency": "发薪频率"
                 }
             },
             "monthly_day": {
-                "title": "選擇每月日期",
-                "description": "選擇您每月在哪一天發薪",
+                "title": "选择每月日期",
+                "description": "选择您每月发薪的日期",
                 "data": {
                     "pay_day": "每月日期"
                 }
             },
             "bank_offset": {
-                "title": "最後一個銀行工作日前幾天",
-                "description": "如果您的薪資是在最後一個銀行工作日前幾天發放，請選擇提前幾天",
+                "title": "最后一个银行工作日前的天数",
+                "description": "如果您是在最后一个银行工作日前几天发薪，请选择提前多少天",
                 "data": {
-                    "bank_offset": "提前天數"
+                    "bank_offset": "提前天数"
                 }
             },
             "specific_day": {
-                "title": "選擇具體日期",
-                "description": "選擇您每月發薪的確切日期",
+                "title": "选择具体日期",
+                "description": "选择您每月发薪的确切日期",
                 "data": {
-                    "pay_day": "具體日期"
+                    "pay_day": "具体日期"
                 }
             },
             "cycle_last_paydate": {
-                "title": "選擇上次發薪日",
-                "description": "選擇您上次領薪的日期。此日期將用於計算下一個發薪日",
+                "title": "选择上次发薪日",
+                "description": "选择您上次发薪的日期。这将用于计算下一个发薪日",
                 "data": {
-                    "last_pay_date": "上次發薪日"
+                    "last_pay_date": "上次发薪日"
                 }
             },
             "weekly": {
-                "title": "選擇每週發薪日",
-                "description": "選擇您每週在哪一天發薪",
+                "title": "选择每周发薪日",
+                "description": "选择您每周在星期几发薪",
                 "data": {
-                    "pay_day": "發薪星期"
+                    "pay_day": "发薪星期"
                 }
             },
             "event_time": {
-                "title": "發薪事件時間",
-                "description": "選擇每個發薪日觸發發薪事件的時間。自動化可由 'isitpayday_payday' 事件觸發。",
+                "title": "发薪日事件时间",
+                "description": "选择每个发薪日触发发薪日事件的时间。自动化可由“isitpayday_payday”事件触发。",
                 "data": {
-                    "event_time": "事件時間"
+                    "event_time": "事件时间"
                 }
             }
         }
     },
     "issues": {
         "unsupported_country": {
-            "title": "國家/地區不再受支援",
-            "description": "為 IsItPayday 設定的國家/地區「{country}」已不再受假期資料庫支援。請開啟整合選項並選擇受支援的國家/地區。"
+            "title": "国家不再受支持",
+            "description": "为 IsItPayday 配置的国家“{country}”不再受假日库支持。请打开集成选项并选择受支持的国家。"
         }
     }
 }

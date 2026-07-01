@@ -12,16 +12,16 @@
             },
             "subdivision": {
                 "title": "Region auswählen",
-                "description": "In manchen Ländern gibt es regionale Feiertage. Wählen Sie Ihr Bundesland/Ihre Region für den genauesten Feiertagskalender aus, oder wählen Sie 'Gesamtes Land', um nur nationale Feiertage zu verwenden",
+                "description": "In einigen Ländern gibt es regionale Feiertage. Wählen Sie Ihr Bundesland/Ihre Region für den genauesten Feiertagskalender aus oder wählen Sie 'Ganzes Land', um nur nationale Feiertage zu verwenden",
                 "data": {
                     "subdivision": "Bundesland/Region"
                 }
             },
             "frequency": {
-                "title": "Auszahlungsintervall auswählen",
+                "title": "Auszahlungsfrequenz auswählen",
                 "description": "Wählen Sie aus, wie oft Sie bezahlt werden",
                 "data": {
-                    "pay_frequency": "Auszahlungsintervall"
+                    "pay_frequency": "Auszahlungsfrequenz"
                 }
             },
             "monthly_day": {
@@ -82,16 +82,16 @@
             },
             "subdivision": {
                 "title": "Region auswählen",
-                "description": "In manchen Ländern gibt es regionale Feiertage. Wählen Sie Ihr Bundesland/Ihre Region für den genauesten Feiertagskalender aus, oder wählen Sie 'Gesamtes Land', um nur nationale Feiertage zu verwenden",
+                "description": "In einigen Ländern gibt es regionale Feiertage. Wählen Sie Ihr Bundesland/Ihre Region für den genauesten Feiertagskalender aus oder wählen Sie 'Ganzes Land', um nur nationale Feiertage zu verwenden",
                 "data": {
                     "subdivision": "Bundesland/Region"
                 }
             },
             "frequency": {
-                "title": "Auszahlungsintervall auswählen",
+                "title": "Auszahlungsfrequenz auswählen",
                 "description": "Wählen Sie aus, wie oft Sie bezahlt werden",
                 "data": {
-                    "pay_frequency": "Auszahlungsintervall"
+                    "pay_frequency": "Auszahlungsfrequenz"
                 }
             },
             "monthly_day": {
@@ -140,7 +140,7 @@
     },
     "issues": {
         "unsupported_country": {
-            "title": "Land wird nicht mehr unterstützt",
+            "title": "Land nicht mehr unterstützt",
             "description": "Das für IsItPayday konfigurierte Land \"{country}\" wird von der Feiertagsbibliothek nicht mehr unterstützt. Bitte öffnen Sie die Integrationsoptionen und wählen Sie ein unterstütztes Land aus."
         }
     }

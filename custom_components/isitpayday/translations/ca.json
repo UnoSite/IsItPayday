@@ -12,16 +12,16 @@
             },
             "subdivision": {
                 "title": "Selecciona la regió",
-                "description": "Alguns països tenen festius regionals. Selecciona el teu estat/regió per obtenir el calendari de festius més precís, o tria 'Tot el país' per utilitzar només els festius nacionals",
+                "description": "Alguns països tenen festius regionals. Selecciona el teu estat/regió per obtenir el calendari festiu més precís, o tria 'Tot el país' per utilitzar només els festius nacionals",
                 "data": {
                     "subdivision": "Estat/Regió"
                 }
             },
             "frequency": {
-                "title": "Selecciona la freqüència de pagament",
-                "description": "Tria cada quant cobres",
+                "title": "Selecciona la freqüència de cobrament",
+                "description": "Tria amb quina freqüència cobres",
                 "data": {
-                    "pay_frequency": "Freqüència de pagament"
+                    "pay_frequency": "Freqüència de cobrament"
                 }
             },
             "monthly_day": {
@@ -39,24 +39,24 @@
                 }
             },
             "specific_day": {
-                "title": "Selecciona un dia concret",
-                "description": "Selecciona el dia exacte que cobres cada mes",
+                "title": "Selecciona un dia específic",
+                "description": "Selecciona el dia exacte en què cobres cada mes",
                 "data": {
-                    "pay_day": "Dia concret"
+                    "pay_day": "Dia específic"
                 }
             },
             "cycle_last_paydate": {
-                "title": "Selecciona l'últim dia de pagament",
-                "description": "Selecciona l'última data en què vas cobrar. S'utilitzarà per calcular el proper dia de pagament",
+                "title": "Selecciona l'últim dia de cobrament",
+                "description": "Selecciona l'última data en què vas cobrar. S'utilitzarà per calcular el pròxim dia de cobrament",
                 "data": {
-                    "last_pay_date": "Últim dia de pagament"
+                    "last_pay_date": "Últim dia de cobrament"
                 }
             },
             "weekly": {
-                "title": "Selecciona el dia de pagament setmanal",
+                "title": "Selecciona el dia de cobrament setmanal",
                 "description": "Tria quin dia de la setmana cobres",
                 "data": {
-                    "pay_day": "Dia de la setmana de pagament"
+                    "pay_day": "Dia de la setmana de cobrament"
                 }
             },
             "event_time": {
@@ -68,7 +68,7 @@
             }
         },
         "error": {
-            "invalid_country": "El país seleccionat no és compatible amb la biblioteca de festius"
+            "invalid_country": "El país seleccionat no és compatible amb la biblioteca de dies festius"
         }
     },
     "options": {
@@ -82,16 +82,16 @@
             },
             "subdivision": {
                 "title": "Selecciona la regió",
-                "description": "Alguns països tenen festius regionals. Selecciona el teu estat/regió per obtenir el calendari de festius més precís, o tria 'Tot el país' per utilitzar només els festius nacionals",
+                "description": "Alguns països tenen festius regionals. Selecciona el teu estat/regió per obtenir el calendari festiu més precís, o tria 'Tot el país' per utilitzar només els festius nacionals",
                 "data": {
                     "subdivision": "Estat/Regió"
                 }
             },
             "frequency": {
-                "title": "Selecciona la freqüència de pagament",
-                "description": "Tria cada quant cobres",
+                "title": "Selecciona la freqüència de cobrament",
+                "description": "Tria amb quina freqüència cobres",
                 "data": {
-                    "pay_frequency": "Freqüència de pagament"
+                    "pay_frequency": "Freqüència de cobrament"
                 }
             },
             "monthly_day": {
@@ -109,24 +109,24 @@
                 }
             },
             "specific_day": {
-                "title": "Selecciona un dia concret",
-                "description": "Selecciona el dia exacte que cobres cada mes",
+                "title": "Selecciona un dia específic",
+                "description": "Selecciona el dia exacte en què cobres cada mes",
                 "data": {
-                    "pay_day": "Dia concret"
+                    "pay_day": "Dia específic"
                 }
             },
             "cycle_last_paydate": {
-                "title": "Selecciona l'últim dia de pagament",
-                "description": "Selecciona l'última data en què vas cobrar. S'utilitzarà per calcular el proper dia de pagament",
+                "title": "Selecciona l'últim dia de cobrament",
+                "description": "Selecciona l'última data en què vas cobrar. S'utilitzarà per calcular el pròxim dia de cobrament",
                 "data": {
-                    "last_pay_date": "Últim dia de pagament"
+                    "last_pay_date": "Últim dia de cobrament"
                 }
             },
             "weekly": {
-                "title": "Selecciona el dia de pagament setmanal",
+                "title": "Selecciona el dia de cobrament setmanal",
                 "description": "Tria quin dia de la setmana cobres",
                 "data": {
-                    "pay_day": "Dia de la setmana de pagament"
+                    "pay_day": "Dia de la setmana de cobrament"
                 }
             },
             "event_time": {
@@ -140,8 +140,8 @@
     },
     "issues": {
         "unsupported_country": {
-            "title": "El país ja no és compatible",
-            "description": "El país \"{country}\" configurat per a IsItPayday ja no és compatible amb la biblioteca de festius. Obre les opcions de la integració i selecciona un país compatible."
+            "title": "País ja no compatible",
+            "description": "El país \"{country}\" configurat per a IsItPayday ja no és compatible amb la biblioteca de dies festius. Obre les opcions de la integració i selecciona un país compatible."
         }
     }
 }

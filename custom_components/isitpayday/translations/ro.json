@@ -12,7 +12,7 @@
             },
             "subdivision": {
                 "title": "Selectați regiunea",
-                "description": "Unele țări au sărbători regionale. Selectați statul/regiunea pentru cel mai precis calendar al sărbătorilor sau alegeți 'Întreaga țară' pentru a folosi doar sărbătorile naționale",
+                "description": "Unele țări au sărbători regionale. Selectați statul/regiunea dvs. pentru cel mai precis calendar al sărbătorilor sau alegeți 'Întreaga țară' pentru a folosi doar sărbătorile naționale",
                 "data": {
                     "subdivision": "Stat/Regiune"
                 }
@@ -26,7 +26,7 @@
             },
             "monthly_day": {
                 "title": "Selectați ziua din lună",
-                "description": "Alegeți în ce zi a lunii sunteți plătit",
+                "description": "Alegeți în ce zi din lună sunteți plătit",
                 "data": {
                     "pay_day": "Ziua din lună"
                 }
@@ -39,7 +39,7 @@
                 }
             },
             "specific_day": {
-                "title": "Selectați ziua exactă",
+                "title": "Selectați o zi specifică",
                 "description": "Selectați ziua exactă în care sunteți plătit în fiecare lună",
                 "data": {
                     "pay_day": "Zi specifică"
@@ -56,7 +56,7 @@
                 "title": "Selectați ziua săptămânală de plată",
                 "description": "Alegeți în ce zi a săptămânii sunteți plătit în fiecare săptămână",
                 "data": {
-                    "pay_day": "Ziua săptămânii pentru plată"
+                    "pay_day": "Ziua săptămânală de plată"
                 }
             },
             "event_time": {
@@ -82,7 +82,7 @@
             },
             "subdivision": {
                 "title": "Selectați regiunea",
-                "description": "Unele țări au sărbători regionale. Selectați statul/regiunea pentru cel mai precis calendar al sărbătorilor sau alegeți 'Întreaga țară' pentru a folosi doar sărbătorile naționale",
+                "description": "Unele țări au sărbători regionale. Selectați statul/regiunea dvs. pentru cel mai precis calendar al sărbătorilor sau alegeți 'Întreaga țară' pentru a folosi doar sărbătorile naționale",
                 "data": {
                     "subdivision": "Stat/Regiune"
                 }
@@ -96,7 +96,7 @@
             },
             "monthly_day": {
                 "title": "Selectați ziua din lună",
-                "description": "Alegeți în ce zi a lunii sunteți plătit",
+                "description": "Alegeți în ce zi din lună sunteți plătit",
                 "data": {
                     "pay_day": "Ziua din lună"
                 }
@@ -109,7 +109,7 @@
                 }
             },
             "specific_day": {
-                "title": "Selectați ziua exactă",
+                "title": "Selectați o zi specifică",
                 "description": "Selectați ziua exactă în care sunteți plătit în fiecare lună",
                 "data": {
                     "pay_day": "Zi specifică"
@@ -126,7 +126,7 @@
                 "title": "Selectați ziua săptămânală de plată",
                 "description": "Alegeți în ce zi a săptămânii sunteți plătit în fiecare săptămână",
                 "data": {
-                    "pay_day": "Ziua săptămânii pentru plată"
+                    "pay_day": "Ziua săptămânală de plată"
                 }
             },
             "event_time": {
@@ -140,7 +140,7 @@
     },
     "issues": {
         "unsupported_country": {
-            "title": "Țara nu mai este acceptată",
+            "title": "Țară care nu mai este acceptată",
             "description": "Țara \"{country}\" configurată pentru IsItPayday nu mai este acceptată de biblioteca de sărbători. Deschideți opțiunile integrării și selectați o țară acceptată."
         }
     }

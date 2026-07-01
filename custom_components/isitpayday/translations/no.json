@@ -4,7 +4,7 @@
         "step": {
             "user": {
                 "title": "Velg land",
-                "description": "Det valgte landet brukes til å fastsette helligdager (beregnes lokalt, ingen internettilgang kreves)",
+                "description": "Det valgte landet brukes til å bestemme offentlige helligdager (beregnes lokalt, ingen internettforbindelse kreves)",
                 "data": {
                     "name": "Instansnavn",
                     "country": "Land"
@@ -12,49 +12,49 @@
             },
             "subdivision": {
                 "title": "Velg region",
-                "description": "Noen land har regionale helligdager. Velg din stat/region for den mest nøyaktige helligdagskalenderen, eller velg 'Hele landet' for å bruke kun nasjonale helligdager",
+                "description": "Noen land har regionale helligdager. Velg din stat/region for den mest nøyaktige helligdagskalenderen, eller velg 'Hele landet' for å bruke bare nasjonale helligdager",
                 "data": {
                     "subdivision": "Stat/region"
                 }
             },
             "frequency": {
                 "title": "Velg utbetalingsfrekvens",
-                "description": "Velg hvor ofte du får lønn",
+                "description": "Velg hvor ofte du får betalt",
                 "data": {
                     "pay_frequency": "Utbetalingsfrekvens"
                 }
             },
             "monthly_day": {
                 "title": "Velg dag i måneden",
-                "description": "Velg hvilken dag i måneden du får lønn",
+                "description": "Velg hvilken dag i måneden du får betalt",
                 "data": {
                     "pay_day": "Dag i måneden"
                 }
             },
             "bank_offset": {
                 "title": "Dager før siste bankdag",
-                "description": "Hvis du får lønn noen dager før siste bankdag, velg hvor mange dager før",
+                "description": "Hvis du får betalt noen dager før siste bankdag, velg hvor mange dager før",
                 "data": {
                     "bank_offset": "Dager før"
                 }
             },
             "specific_day": {
                 "title": "Velg spesifikk dag",
-                "description": "Velg den nøyaktige dagen du får lønn hver måned",
+                "description": "Velg den nøyaktige dagen du får betalt hver måned",
                 "data": {
                     "pay_day": "Spesifikk dag"
                 }
             },
             "cycle_last_paydate": {
                 "title": "Velg siste lønningsdag",
-                "description": "Velg den siste datoen du fikk lønn. Denne brukes til å beregne neste lønningsdag",
+                "description": "Velg den siste datoen du fikk betalt. Denne brukes til å beregne neste lønningsdag",
                 "data": {
                     "last_pay_date": "Siste lønningsdag"
                 }
             },
             "weekly": {
                 "title": "Velg ukentlig lønningsdag",
-                "description": "Velg hvilken ukedag du får lønn hver uke",
+                "description": "Velg hvilken ukedag du får betalt hver uke",
                 "data": {
                     "pay_day": "Ukedag for lønningsdag"
                 }
@@ -82,49 +82,49 @@
             },
             "subdivision": {
                 "title": "Velg region",
-                "description": "Noen land har regionale helligdager. Velg din stat/region for den mest nøyaktige helligdagskalenderen, eller velg 'Hele landet' for å bruke kun nasjonale helligdager",
+                "description": "Noen land har regionale helligdager. Velg din stat/region for den mest nøyaktige helligdagskalenderen, eller velg 'Hele landet' for å bruke bare nasjonale helligdager",
                 "data": {
                     "subdivision": "Stat/region"
                 }
             },
             "frequency": {
                 "title": "Velg utbetalingsfrekvens",
-                "description": "Velg hvor ofte du får lønn",
+                "description": "Velg hvor ofte du får betalt",
                 "data": {
                     "pay_frequency": "Utbetalingsfrekvens"
                 }
             },
             "monthly_day": {
                 "title": "Velg dag i måneden",
-                "description": "Velg hvilken dag i måneden du får lønn",
+                "description": "Velg hvilken dag i måneden du får betalt",
                 "data": {
                     "pay_day": "Dag i måneden"
                 }
             },
             "bank_offset": {
                 "title": "Dager før siste bankdag",
-                "description": "Hvis du får lønn noen dager før siste bankdag, velg hvor mange dager før",
+                "description": "Hvis du får betalt noen dager før siste bankdag, velg hvor mange dager før",
                 "data": {
                     "bank_offset": "Dager før"
                 }
             },
             "specific_day": {
                 "title": "Velg spesifikk dag",
-                "description": "Velg den nøyaktige dagen du får lønn hver måned",
+                "description": "Velg den nøyaktige dagen du får betalt hver måned",
                 "data": {
                     "pay_day": "Spesifikk dag"
                 }
             },
             "cycle_last_paydate": {
                 "title": "Velg siste lønningsdag",
-                "description": "Velg den siste datoen du fikk lønn. Denne brukes til å beregne neste lønningsdag",
+                "description": "Velg den siste datoen du fikk betalt. Denne brukes til å beregne neste lønningsdag",
                 "data": {
                     "last_pay_date": "Siste lønningsdag"
                 }
             },
             "weekly": {
                 "title": "Velg ukentlig lønningsdag",
-                "description": "Velg hvilken ukedag du får lønn hver uke",
+                "description": "Velg hvilken ukedag du får betalt hver uke",
                 "data": {
                     "pay_day": "Ukedag for lønningsdag"
                 }
@@ -140,7 +140,7 @@
     },
     "issues": {
         "unsupported_country": {
-            "title": "Land støttes ikke lenger",
+            "title": "Landet støttes ikke lenger",
             "description": "Landet \"{country}\" som er konfigurert for IsItPayday, støttes ikke lenger av helligdagsbiblioteket. Åpne integrasjonsalternativene og velg et støttet land."
         }
     }

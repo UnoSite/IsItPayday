@@ -14,14 +14,14 @@
                 "title": "Välj region",
                 "description": "Vissa länder har regionala helgdagar. Välj din delstat/region för den mest exakta helgdagskalendern, eller välj 'Hela landet' för att endast använda nationella helgdagar",
                 "data": {
-                    "subdivision": "Delstat/Region"
+                    "subdivision": "Delstat/region"
                 }
             },
             "frequency": {
-                "title": "Välj utbetalningsfrekvens",
+                "title": "Välj löneutbetalningsfrekvens",
                 "description": "Välj hur ofta du får lön",
                 "data": {
-                    "pay_frequency": "Utbetalningsfrekvens"
+                    "pay_frequency": "Löneutbetalningsfrekvens"
                 }
             },
             "monthly_day": {
@@ -47,7 +47,7 @@
             },
             "cycle_last_paydate": {
                 "title": "Välj senaste lönedag",
-                "description": "Välj det senaste datumet du fick lön. Detta kommer att användas för att beräkna nästa lönedag",
+                "description": "Välj det senaste datumet du fick lön. Detta används för att beräkna nästa lönedag",
                 "data": {
                     "last_pay_date": "Senaste lönedag"
                 }
@@ -84,14 +84,14 @@
                 "title": "Välj region",
                 "description": "Vissa länder har regionala helgdagar. Välj din delstat/region för den mest exakta helgdagskalendern, eller välj 'Hela landet' för att endast använda nationella helgdagar",
                 "data": {
-                    "subdivision": "Delstat/Region"
+                    "subdivision": "Delstat/region"
                 }
             },
             "frequency": {
-                "title": "Välj utbetalningsfrekvens",
+                "title": "Välj löneutbetalningsfrekvens",
                 "description": "Välj hur ofta du får lön",
                 "data": {
-                    "pay_frequency": "Utbetalningsfrekvens"
+                    "pay_frequency": "Löneutbetalningsfrekvens"
                 }
             },
             "monthly_day": {
@@ -117,7 +117,7 @@
             },
             "cycle_last_paydate": {
                 "title": "Välj senaste lönedag",
-                "description": "Välj det senaste datumet du fick lön. Detta kommer att användas för att beräkna nästa lönedag",
+                "description": "Välj det senaste datumet du fick lön. Detta används för att beräkna nästa lönedag",
                 "data": {
                     "last_pay_date": "Senaste lönedag"
                 }

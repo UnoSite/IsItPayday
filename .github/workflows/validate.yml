@@ -5,6 +5,13 @@ permissions:
 on:
   push:
   pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - edited
+      - labeled
+      - unlabeled
   schedule:
     - cron: "0 0 * * *"
 

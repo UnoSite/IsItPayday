@@ -11,6 +11,7 @@ TODAY = date(2026, 6, 15)  # Monday, matches conftest FIXED_TODAY
 # Supported countries / subdivisions                                          #
 # --------------------------------------------------------------------------- #
 
+
 def test_supported_countries_readable_names(calc):
     countries = calc.get_supported_countries()
     assert countries["DK"] == "Denmark"
@@ -36,10 +37,11 @@ def test_subdivisions_empty_for_country_without_regions(calc):
 # Bank holidays / categories                                                  #
 # --------------------------------------------------------------------------- #
 
+
 def test_denmark_includes_optional_bank_closing_days(calc):
     holidays = calc.get_bank_holidays("DK", [2026])
     assert date(2026, 12, 24) in holidays  # Christmas Eve
-    assert date(2026, 6, 5) in holidays    # Constitution Day
+    assert date(2026, 6, 5) in holidays  # Constitution Day
 
 
 def test_unknown_country_returns_empty(calc):
@@ -57,13 +59,18 @@ def test_regional_holiday_only_with_subdivision(calc):
 # Upcoming paydays - monthly                                                   #
 # --------------------------------------------------------------------------- #
 
+
 def test_monthly_last_bank_day_returns_requested_count(calc):
-    paydays = calc.calculate_upcoming_paydays("DK", "monthly", "last_bank_day", count=12)
+    paydays = calc.calculate_upcoming_paydays(
+        "DK", "monthly", "last_bank_day", count=12
+    )
     assert len(paydays) == 12
 
 
 def test_upcoming_paydays_sorted_unique_and_future(calc):
-    paydays = calc.calculate_upcoming_paydays("DK", "monthly", "last_bank_day", count=12)
+    paydays = calc.calculate_upcoming_paydays(
+        "DK", "monthly", "last_bank_day", count=12
+    )
     assert paydays == sorted(set(paydays))
     assert all(p >= TODAY for p in paydays)
 
@@ -102,6 +109,7 @@ def test_monthly_invalid_pay_day_returns_empty(calc):
 # Upcoming paydays - interval & bimonthly                                      #
 # --------------------------------------------------------------------------- #
 
+
 def test_14_day_interval_is_stable(calc):
     paydays = calc.calculate_upcoming_paydays(
         "DK", "14_days", None, "2026-06-12", count=6
@@ -137,6 +145,7 @@ def test_other_intervals_return_requested_count(calc, freq):
 # Upcoming paydays - weekly                                                    #
 # --------------------------------------------------------------------------- #
 
+
 def test_weekly_returns_requested_count(calc):
     paydays = calc.calculate_upcoming_paydays("DK", "weekly", weekday=4, count=12)
     assert len(paydays) == 12
@@ -151,8 +160,11 @@ def test_weekly_without_weekday_raises(calc):
 # Count bounds & invalid frequency                                            #
 # --------------------------------------------------------------------------- #
 
+
 def test_count_capped_at_24(calc):
-    assert len(calc.calculate_upcoming_paydays("DK", "weekly", weekday=0, count=99)) == 24
+    assert (
+        len(calc.calculate_upcoming_paydays("DK", "weekly", weekday=0, count=99)) == 24
+    )
 
 
 def test_count_minimum_one(calc):
@@ -167,15 +179,19 @@ def test_invalid_frequency_returns_empty(calc):
 # next == first upcoming                                                       #
 # --------------------------------------------------------------------------- #
 
+
 def test_next_payday_equals_first_upcoming(calc):
     nxt = calc.calculate_next_payday("DK", "monthly", "last_bank_day")
-    first = calc.calculate_upcoming_paydays("DK", "monthly", "last_bank_day", count=1)[0]
+    first = calc.calculate_upcoming_paydays("DK", "monthly", "last_bank_day", count=1)[
+        0
+    ]
     assert nxt == first
 
 
 # --------------------------------------------------------------------------- #
 # Last payday                                                                  #
 # --------------------------------------------------------------------------- #
+
 
 def test_last_payday_monthly_is_on_or_before_today(calc):
     last = calc.calculate_last_payday("DK", "monthly", "last_bank_day")

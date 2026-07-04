@@ -10,30 +10,30 @@ from homeassistant.data_entry_flow import FlowResult
 from homeassistant.helpers.selector import DateSelector, TimeSelector
 
 from .const import (
-    DOMAIN,
-    CONF_NAME,
-    CONF_COUNTRY,
-    CONF_PAY_FREQ,
-    CONF_PAY_DAY,
-    CONF_LAST_PAY_DATE,
     CONF_BANK_OFFSET,
-    CONF_WEEKDAY,
-    CONF_SUBDIV,
+    CONF_COUNTRY,
     CONF_EVENT_TIME,
+    CONF_LAST_PAY_DATE,
+    CONF_NAME,
+    CONF_PAY_DAY,
+    CONF_PAY_FREQ,
+    CONF_SUBDIV,
+    CONF_WEEKDAY,
     DEFAULT_COUNTRY,
     DEFAULT_EVENT_TIME,
-    PAY_FREQ_MONTHLY,
-    PAY_FREQ_BIMONTHLY,
-    PAY_FREQ_QUARTERLY,
-    PAY_FREQ_SEMIANNUAL,
-    PAY_FREQ_ANNUAL,
-    PAY_FREQ_28_DAYS,
-    PAY_FREQ_14_DAYS,
-    PAY_FREQ_WEEKLY,
-    PAY_FREQ_OPTIONS,
-    PAY_MONTHLY_OPTIONS,
+    DOMAIN,
     PAY_DAY_LAST_BANK_DAY,
     PAY_DAY_SPECIFIC_DAY,
+    PAY_FREQ_14_DAYS,
+    PAY_FREQ_28_DAYS,
+    PAY_FREQ_ANNUAL,
+    PAY_FREQ_BIMONTHLY,
+    PAY_FREQ_MONTHLY,
+    PAY_FREQ_OPTIONS,
+    PAY_FREQ_QUARTERLY,
+    PAY_FREQ_SEMIANNUAL,
+    PAY_FREQ_WEEKLY,
+    PAY_MONTHLY_OPTIONS,
     WEEKDAY_MAP,
     WEEKDAY_OPTIONS,
 )
@@ -88,11 +88,7 @@ class PaydayFlowMixin:
             return self.async_show_form(
                 step_id="event_time",
                 data_schema=vol.Schema(
-                    {
-                        vol.Required(
-                            CONF_EVENT_TIME, default=default
-                        ): TimeSelector()
-                    }
+                    {vol.Required(CONF_EVENT_TIME, default=default): TimeSelector()}
                 ),
             )
 
@@ -221,11 +217,7 @@ class PaydayFlowMixin:
             return self.async_show_form(
                 step_id="specific_day",
                 data_schema=vol.Schema(
-                    {
-                        vol.Required(CONF_PAY_DAY, default=default): vol.In(
-                            range(1, 32)
-                        )
-                    }
+                    {vol.Required(CONF_PAY_DAY, default=default): vol.In(range(1, 32))}
                 ),
             )
 
@@ -244,9 +236,7 @@ class PaydayFlowMixin:
                     }
                 )
             else:
-                schema = vol.Schema(
-                    {vol.Required(CONF_LAST_PAY_DATE): DateSelector()}
-                )
+                schema = vol.Schema({vol.Required(CONF_LAST_PAY_DATE): DateSelector()})
             return self.async_show_form(
                 step_id="cycle_last_paydate", data_schema=schema
             )
@@ -326,9 +316,9 @@ class IsItPaydayConfigFlow(PaydayFlowMixin, config_entries.ConfigFlow, domain=DO
                         vol.Required(CONF_NAME, default=""): vol.All(
                             str, vol.Length(min=1)
                         ),
-                        vol.Required(
-                            CONF_COUNTRY, default=default_country
-                        ): vol.In(self.country_list),
+                        vol.Required(CONF_COUNTRY, default=default_country): vol.In(
+                            self.country_list
+                        ),
                     }
                 ),
             )
@@ -380,17 +370,15 @@ class IsItPaydayOptionsFlow(PaydayFlowMixin, config_entries.OptionsFlow):
                 )
 
             default_country = (
-                self.country
-                if self.country in self.country_list
-                else DEFAULT_COUNTRY
+                self.country if self.country in self.country_list else DEFAULT_COUNTRY
             )
             return self.async_show_form(
                 step_id="init",
                 data_schema=vol.Schema(
                     {
-                        vol.Required(
-                            CONF_COUNTRY, default=default_country
-                        ): vol.In(self.country_list)
+                        vol.Required(CONF_COUNTRY, default=default_country): vol.In(
+                            self.country_list
+                        )
                     }
                 ),
             )

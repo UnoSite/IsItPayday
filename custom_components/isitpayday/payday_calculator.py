@@ -14,16 +14,16 @@ import holidays as holidays_lib
 from holidays.constants import BANK, OPTIONAL, PUBLIC
 
 from .const import (
-    PAY_FREQ_MONTHLY,
-    PAY_FREQ_28_DAYS,
+    PAY_DAY_FIRST_BANK_DAY,
+    PAY_DAY_LAST_BANK_DAY,
     PAY_FREQ_14_DAYS,
+    PAY_FREQ_28_DAYS,
+    PAY_FREQ_ANNUAL,
     PAY_FREQ_BIMONTHLY,
+    PAY_FREQ_MONTHLY,
     PAY_FREQ_QUARTERLY,
     PAY_FREQ_SEMIANNUAL,
-    PAY_FREQ_ANNUAL,
     PAY_FREQ_WEEKLY,
-    PAY_DAY_LAST_BANK_DAY,
-    PAY_DAY_FIRST_BANK_DAY,
 )
 
 _LOGGER = logging.getLogger(__name__)
@@ -118,16 +118,12 @@ def get_bank_holidays(country: str, years: list[int], subdiv: str | None = None)
             if extra in supported and extra not in categories:
                 categories.append(extra)
 
-        _LOGGER.debug(
-            "Using holiday categories %s for country %s", categories, country
-        )
+        _LOGGER.debug("Using holiday categories %s for country %s", categories, country)
         return holidays_lib.country_holidays(
             country, subdiv=subdiv, years=years, categories=tuple(categories)
         )
     except NotImplementedError:
-        _LOGGER.error(
-            "Country '%s' is not supported by the holidays package.", country
-        )
+        _LOGGER.error("Country '%s' is not supported by the holidays package.", country)
         return {}
     except Exception as e:
         _LOGGER.exception("Error generating holidays for %s: %s", country, e)
@@ -189,8 +185,14 @@ def calculate_next_payday(
 ):
     """Calculate the next payday date (first of the upcoming paydays)."""
     paydays = calculate_upcoming_paydays(
-        country, pay_frequency, pay_day, last_pay_date,
-        weekday, bank_offset, subdiv, count=1,
+        country,
+        pay_frequency,
+        pay_day,
+        last_pay_date,
+        weekday,
+        bank_offset,
+        subdiv,
+        count=1,
     )
     return paydays[0] if paydays else None
 
@@ -225,9 +227,7 @@ def calculate_last_payday(
     if pay_frequency == PAY_FREQ_MONTHLY:
         year, month = today.year, today.month
         for _ in range(24):
-            payday = _payday_for_month(
-                year, month, pay_day, bank_offset, bank_holidays
-            )
+            payday = _payday_for_month(year, month, pay_day, bank_offset, bank_holidays)
             if payday is not None and payday <= today:
                 return payday
             month -= 1
@@ -331,12 +331,15 @@ def calculate_upcoming_paydays(
     if pay_frequency == PAY_FREQ_MONTHLY:
         year, month = today.year, today.month
         for _ in range(count + 12):
-            payday = _payday_for_month(
-                year, month, pay_day, bank_offset, bank_holidays
-            )
-            if payday is None and not isinstance(pay_day, int) and pay_day not in (
-                PAY_DAY_LAST_BANK_DAY,
-                PAY_DAY_FIRST_BANK_DAY,
+            payday = _payday_for_month(year, month, pay_day, bank_offset, bank_holidays)
+            if (
+                payday is None
+                and not isinstance(pay_day, int)
+                and pay_day
+                not in (
+                    PAY_DAY_LAST_BANK_DAY,
+                    PAY_DAY_FIRST_BANK_DAY,
+                )
             ):
                 _LOGGER.error("Invalid payday value: %s", pay_day)
                 return []
@@ -452,9 +455,7 @@ def _find_first_bank_day(year: int, month: int, bank_holidays) -> date | None:
     return None
 
 
-def _find_specific_day(
-    year: int, month: int, day: int, bank_holidays
-) -> date | None:
+def _find_specific_day(year: int, month: int, day: int, bank_holidays) -> date | None:
     """Find a specific day of the month, adjusting backwards if not a bank day."""
     while day > 0:
         try:

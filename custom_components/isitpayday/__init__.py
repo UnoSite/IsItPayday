@@ -7,21 +7,21 @@ from homeassistant.core import HomeAssistant, callback
 from homeassistant.helpers import issue_registry as ir
 from homeassistant.helpers.event import async_track_point_in_time
 from homeassistant.helpers.typing import ConfigType
-from homeassistant.util import dt as dt_util
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
+from homeassistant.util import dt as dt_util
 
 from .const import (
-    DOMAIN,
-    CONF_NAME,
-    CONF_COUNTRY,
-    CONF_PAY_FREQ,
-    CONF_PAY_DAY,
-    CONF_LAST_PAY_DATE,
-    CONF_WEEKDAY,
     CONF_BANK_OFFSET,
-    CONF_SUBDIV,
+    CONF_COUNTRY,
     CONF_EVENT_TIME,
+    CONF_LAST_PAY_DATE,
+    CONF_NAME,
+    CONF_PAY_DAY,
+    CONF_PAY_FREQ,
+    CONF_SUBDIV,
+    CONF_WEEKDAY,
     DEFAULT_EVENT_TIME,
+    DOMAIN,
     EVENT_PAYDAY,
 )
 from .payday_calculator import (
@@ -259,7 +259,10 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     def _on_payday(now) -> None:
         _payday_event_unsubs.pop(entry.entry_id, None)
         payday = coordinator.data.get("payday_next") if coordinator.data else None
-        if isinstance(payday, date) and _payday_last_fired.get(entry.entry_id) != payday:
+        if (
+            isinstance(payday, date)
+            and _payday_last_fired.get(entry.entry_id) != payday
+        ):
             _payday_last_fired[entry.entry_id] = payday
             _fire_payday_event(hass, entry, instance_name, payday)
         # Refresh so the coordinator advances to the following payday,

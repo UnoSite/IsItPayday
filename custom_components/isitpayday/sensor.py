@@ -13,12 +13,12 @@ from homeassistant.helpers.update_coordinator import (
 
 from .const import (
     CONF_CONFIG_URL,
-    DOMAIN,
     CONF_MANUFACTURER,
     CONF_MODEL,
-    ICON_NEXT_PAYDAY,
+    DOMAIN,
     ICON_DAYS_TO,
     ICON_LAST_PAYDAY,
+    ICON_NEXT_PAYDAY,
 )
 
 _LOGGER = logging.getLogger(__name__)
@@ -87,9 +87,7 @@ class IsItPaydayNextSensor(CoordinatorEntity, SensorEntity):
 
         upcoming_dates = [d for d in upcoming if isinstance(d, date)]
         this_month = [
-            d
-            for d in upcoming_dates
-            if d.year == today.year and d.month == today.month
+            d for d in upcoming_dates if d.year == today.year and d.month == today.month
         ]
 
         return {

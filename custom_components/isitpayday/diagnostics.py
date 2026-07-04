@@ -6,7 +6,7 @@ from homeassistant.components.diagnostics import async_redact_data
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
 
-from .const import DOMAIN, CONF_NAME
+from .const import CONF_NAME, DOMAIN
 
 # The instance name may contain personal information (e.g. a person's name).
 TO_REDACT = {CONF_NAME}
@@ -36,11 +36,13 @@ async def async_get_config_entry_diagnostics(
             "options": async_redact_data(dict(entry.options), TO_REDACT),
         },
         "coordinator": {
-            "data": _serialize(dict(coordinator.data))
-            if coordinator and coordinator.data
-            else None,
-            "last_update_success": coordinator.last_update_success
-            if coordinator
-            else None,
+            "data": (
+                _serialize(dict(coordinator.data))
+                if coordinator and coordinator.data
+                else None
+            ),
+            "last_update_success": (
+                coordinator.last_update_success if coordinator else None
+            ),
         },
     }

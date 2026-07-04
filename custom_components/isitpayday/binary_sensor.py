@@ -9,11 +9,11 @@ from homeassistant.helpers.update_coordinator import (
 
 from .const import (
     CONF_CONFIG_URL,
-    DOMAIN,
     CONF_MANUFACTURER,
     CONF_MODEL,
-    ICON_IS_IT_PAYDAY_TRUE,
+    DOMAIN,
     ICON_IS_IT_PAYDAY_FALSE,
+    ICON_IS_IT_PAYDAY_TRUE,
 )
 
 _LOGGER = logging.getLogger(__name__)
@@ -24,9 +24,7 @@ async def async_setup_entry(hass, entry, async_add_entities):
     coordinator: DataUpdateCoordinator = data["coordinator"]
     instance_name = data.get("name", "IsItPayday")
 
-    async_add_entities(
-        [IsItPaydaySensor(coordinator, entry.entry_id, instance_name)]
-    )
+    async_add_entities([IsItPaydaySensor(coordinator, entry.entry_id, instance_name)])
 
 
 class IsItPaydaySensor(CoordinatorEntity, BinarySensorEntity):

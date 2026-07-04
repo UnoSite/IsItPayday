@@ -7,12 +7,7 @@ from homeassistant.helpers.update_coordinator import (
     DataUpdateCoordinator,
 )
 
-from .const import (
-    CONF_CONFIG_URL,
-    DOMAIN,
-    CONF_MANUFACTURER,
-    CONF_MODEL,
-)
+from .const import CONF_CONFIG_URL, CONF_MANUFACTURER, CONF_MODEL, DOMAIN
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -22,9 +17,7 @@ async def async_setup_entry(hass, entry, async_add_entities):
     coordinator: DataUpdateCoordinator = data["coordinator"]
     instance_name = data.get("name", "IsItPayday")
 
-    async_add_entities(
-        [IsItPaydayCalendar(coordinator, entry.entry_id, instance_name)]
-    )
+    async_add_entities([IsItPaydayCalendar(coordinator, entry.entry_id, instance_name)])
 
 
 class IsItPaydayCalendar(CoordinatorEntity, CalendarEntity):
@@ -106,4 +99,4 @@ class IsItPaydayCalendar(CoordinatorEntity, CalendarEntity):
             "manufacturer": CONF_MANUFACTURER,
             "model": CONF_MODEL,
             "configuration_url": CONF_CONFIG_URL,
-            }
+        }

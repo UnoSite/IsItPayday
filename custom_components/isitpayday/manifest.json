@@ -14,7 +14,7 @@
         "custom_components.isitpayday"
     ],
     "requirements": [
-        "holidays==0.99"
+        "holidays==0.103"
     ],
-    "version": "5.0.0"
+    "version": "5.0.1"
 }

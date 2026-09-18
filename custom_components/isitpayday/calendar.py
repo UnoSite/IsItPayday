@@ -6,6 +6,7 @@ from homeassistant.helpers.update_coordinator import (
     CoordinatorEntity,
     DataUpdateCoordinator,
 )
+from homeassistant.util import dt as dt_util
 
 from .const import CONF_CONFIG_URL, CONF_MANUFACTURER, CONF_MODEL, DOMAIN
 
@@ -71,7 +72,7 @@ class IsItPaydayCalendar(CoordinatorEntity, CalendarEntity):
     @property
     def event(self) -> CalendarEvent | None:
         """Return the next upcoming payday event."""
-        today = date.today()
+        today = dt_util.now().date()
         for payday in self._get_paydays():
             if payday >= today:
                 return self._build_event(payday)

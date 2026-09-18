@@ -135,10 +135,23 @@ def test_interval_requires_last_pay_date(calc):
     assert calc.calculate_upcoming_paydays("DK", "14_days", None, None, count=3) == []
 
 
-@pytest.mark.parametrize("freq", ["28_days", "quarterly", "semiannual", "annual"])
+@pytest.mark.parametrize("freq", ["28_days"])
 def test_other_intervals_return_requested_count(calc, freq):
     paydays = calc.calculate_upcoming_paydays("DK", freq, None, "2026-06-12", count=4)
     assert len(paydays) == 4
+
+
+@pytest.mark.parametrize(
+    ("freq", "anchor"),
+    [
+        ("quarterly", "2025-06-15"),
+        ("semiannual", "2025-06-15"),
+        ("annual", "2023-06-15"),
+    ],
+)
+def test_calendar_month_frequencies_preserve_anchor_day(calc, freq, anchor):
+    """Calendar-based frequencies must not drift by using fixed day counts."""
+    assert calc.calculate_upcoming_paydays("DK", freq, None, anchor, count=1) == [TODAY]
 
 
 # --------------------------------------------------------------------------- #
@@ -188,6 +201,17 @@ def test_next_payday_equals_first_upcoming(calc):
     assert nxt == first
 
 
+def test_explicit_today_overrides_host_date(calc):
+    """Callers can supply Home Assistant's local date to the calculator."""
+    local_today = date(2026, 6, 16)
+    assert calc.calculate_upcoming_paydays(
+        "DK", "weekly", weekday=0, count=1, today=local_today
+    ) == [date(2026, 6, 22)]
+    assert calc.calculate_last_payday(
+        "DK", "weekly", weekday=0, today=local_today
+    ) == date(2026, 6, 15)
+
+
 # --------------------------------------------------------------------------- #
 # Last payday                                                                  #
 # --------------------------------------------------------------------------- #
@@ -206,6 +230,10 @@ def test_last_payday_weekly(calc):
 
 def test_last_payday_interval_future_anchor_returns_none(calc):
     assert calc.calculate_last_payday("DK", "14_days", None, "2026-12-01") is None
+
+
+def test_last_payday_annual_preserves_anchor_day_across_leap_year(calc):
+    assert calc.calculate_last_payday("DK", "annual", None, "2023-06-15") == TODAY
 
 
 def test_last_payday_bimonthly(calc):

@@ -6,6 +6,7 @@ from homeassistant.helpers.update_coordinator import (
     CoordinatorEntity,
     DataUpdateCoordinator,
 )
+from homeassistant.util import dt as dt_util
 
 from .const import (
     CONF_CONFIG_URL,
@@ -50,7 +51,7 @@ class IsItPaydaySensor(CoordinatorEntity, BinarySensorEntity):
         if not payday_next:
             return False
 
-        today = date.today()
+        today = dt_util.now().date()
         if isinstance(payday_next, date):
             return payday_next == today
         try:

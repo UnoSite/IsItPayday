@@ -61,8 +61,12 @@ def _build_holidays_mock():
 
 
 @pytest.fixture(autouse=True)
-def mock_holidays(monkeypatch):
+def mock_holidays(request, monkeypatch):
     """Install the holidays mock for every test."""
+    if request.node.get_closest_marker("real_holidays"):
+        yield
+        return
+
     mock, constants, registry = _build_holidays_mock()
     monkeypatch.setitem(sys.modules, "holidays", mock)
     monkeypatch.setitem(sys.modules, "holidays.constants", constants)
@@ -87,14 +91,14 @@ def calc(mock_holidays, monkeypatch):
     sys.modules.setdefault("custom_components", pkg)
     sub = types.ModuleType("custom_components.isitpayday")
     sub.__path__ = [base]
-    sys.modules["custom_components.isitpayday"] = sub
+    monkeypatch.setitem(sys.modules, "custom_components.isitpayday", sub)
 
     spec_const = importlib.util.spec_from_file_location(
         "custom_components.isitpayday.const", os.path.join(base, "const.py")
     )
     const = importlib.util.module_from_spec(spec_const)
     spec_const.loader.exec_module(const)
-    sys.modules["custom_components.isitpayday.const"] = const
+    monkeypatch.setitem(sys.modules, "custom_components.isitpayday.const", const)
 
     spec = importlib.util.spec_from_file_location(
         "custom_components.isitpayday.payday_calculator",

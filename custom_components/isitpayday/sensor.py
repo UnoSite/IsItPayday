@@ -10,6 +10,7 @@ from homeassistant.helpers.update_coordinator import (
     CoordinatorEntity,
     DataUpdateCoordinator,
 )
+from homeassistant.util import dt as dt_util
 
 from .const import (
     CONF_CONFIG_URL,
@@ -62,7 +63,7 @@ class IsItPaydayNextSensor(CoordinatorEntity, SensorEntity):
         if not payday:
             return "Unknown"
 
-        today = date.today()
+        today = dt_util.now().date()
 
         if not isinstance(payday, date):
             try:
@@ -83,7 +84,7 @@ class IsItPaydayNextSensor(CoordinatorEntity, SensorEntity):
         months with e.g. three biweekly payouts.
         """
         upcoming = self.coordinator.data.get("paydays_upcoming") or []
-        today = date.today()
+        today = dt_util.now().date()
 
         upcoming_dates = [d for d in upcoming if isinstance(d, date)]
         this_month = [
@@ -137,7 +138,7 @@ class IsItPaydayDaysToSensor(CoordinatorEntity, SensorEntity):
             if isinstance(payday, str):
                 payday = date.fromisoformat(payday)
 
-            today = date.today()
+            today = dt_util.now().date()
             if payday <= today:
                 return 0
 

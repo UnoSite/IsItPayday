@@ -9,8 +9,12 @@ on:
 
 jobs:
   pytest:
-    name: Run unit tests
+    name: Test with holidays ${{ matrix.holidays-version }}
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        holidays-version: ["0.103", latest]
     steps:
       - name: Checkout
         uses: actions/checkout@v7
@@ -23,7 +27,12 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install pytest holidays==0.99
+          pip install -r requirements_test.txt
+          if [ "${{ matrix.holidays-version }}" = "latest" ]; then
+            pip install --upgrade holidays
+          else
+            pip install "holidays==${{ matrix.holidays-version }}"
+          fi
 
       - name: Run tests
         run: pytest tests/ -v

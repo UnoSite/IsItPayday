@@ -138,7 +138,9 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 
     async def async_update_data() -> dict:
         nonlocal last_data
-        today = date.today()
+        # Use Home Assistant's configured time zone. The host/container can
+        # run in a different zone (commonly UTC), especially around midnight.
+        today = dt_util.now().date()
 
         try:
             # Only use the cached result if the next payday is strictly in
@@ -162,6 +164,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
                     _normalize_int(data.get(CONF_BANK_OFFSET), 0),
                     data.get(CONF_SUBDIV),
                     12,
+                    today,
                 )
             )
 
@@ -175,6 +178,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
                     data.get(CONF_WEEKDAY),
                     _normalize_int(data.get(CONF_BANK_OFFSET), 0),
                     data.get(CONF_SUBDIV),
+                    today,
                 )
             )
 

@@ -95,6 +95,17 @@ _EXTRA_CATEGORIES_PER_COUNTRY: dict[str, tuple] = {
 }
 
 
+# These frequencies represent calendar-month intervals, not a fixed number of
+# days. Keeping the interval in months preserves the configured day of month
+# across months with different lengths and across leap years.
+_MONTH_INTERVALS = {
+    PAY_FREQ_BIMONTHLY: 2,
+    PAY_FREQ_QUARTERLY: 3,
+    PAY_FREQ_SEMIANNUAL: 6,
+    PAY_FREQ_ANNUAL: 12,
+}
+
+
 def get_bank_holidays(country: str, years: list[int], subdiv: str | None = None):
     """Return a holidays object covering all bank closing days for a country.
 
@@ -182,6 +193,7 @@ def calculate_next_payday(
     weekday=None,
     bank_offset: int = 0,
     subdiv: str | None = None,
+    today: date | None = None,
 ):
     """Calculate the next payday date (first of the upcoming paydays)."""
     paydays = calculate_upcoming_paydays(
@@ -193,6 +205,7 @@ def calculate_next_payday(
         bank_offset,
         subdiv,
         count=1,
+        today=today,
     )
     return paydays[0] if paydays else None
 
@@ -205,6 +218,7 @@ def calculate_last_payday(
     weekday=None,
     bank_offset: int = 0,
     subdiv: str | None = None,
+    today: date | None = None,
 ) -> date | None:
     """Calculate the most recent payday on or before today.
 
@@ -219,7 +233,7 @@ def calculate_last_payday(
     except (TypeError, ValueError):
         bank_offset = 0
 
-    today = date.today()
+    today = today or date.today()
     bank_holidays = get_bank_holidays(
         country, [today.year - 1, today.year, today.year + 1], subdiv
     )
@@ -236,35 +250,27 @@ def calculate_last_payday(
                 year -= 1
         return None
 
-    if pay_frequency == PAY_FREQ_BIMONTHLY:
+    if pay_frequency in _MONTH_INTERVALS:
         if not last_pay_date:
             return None
         anchor = date.fromisoformat(last_pay_date)
         prev = None
         cursor = anchor
-        # Walk forward in 2-month steps, tracking the last value <= today.
+        # Walk forward in calendar-month steps, tracking the last value
+        # on or before today.
         guard = 0
         while cursor <= today and guard < 600:
             prev = cursor
-            cursor = _add_months(cursor, 2)
+            cursor = _add_months(cursor, _MONTH_INTERVALS[pay_frequency])
             guard += 1
         if prev is None:
             return None
         return _adjust_to_previous_bank_day(prev, bank_holidays)
 
-    if pay_frequency in (
-        PAY_FREQ_28_DAYS,
-        PAY_FREQ_14_DAYS,
-        PAY_FREQ_QUARTERLY,
-        PAY_FREQ_SEMIANNUAL,
-        PAY_FREQ_ANNUAL,
-    ):
+    if pay_frequency in (PAY_FREQ_28_DAYS, PAY_FREQ_14_DAYS):
         interval = {
             PAY_FREQ_14_DAYS: 14,
             PAY_FREQ_28_DAYS: 28,
-            PAY_FREQ_QUARTERLY: 91,
-            PAY_FREQ_SEMIANNUAL: 182,
-            PAY_FREQ_ANNUAL: 365,
         }[pay_frequency]
         if not last_pay_date:
             return None
@@ -297,6 +303,7 @@ def calculate_upcoming_paydays(
     bank_offset: int = 0,
     subdiv: str | None = None,
     count: int = 12,
+    today: date | None = None,
 ) -> list[date]:
     """Calculate the upcoming paydays, adjusted for weekends and holidays.
 
@@ -321,7 +328,7 @@ def calculate_upcoming_paydays(
         pay_frequency,
     )
 
-    today = date.today()
+    today = today or date.today()
     bank_holidays = get_bank_holidays(
         country, [today.year, today.year + 1, today.year + 2], subdiv
     )
@@ -351,30 +358,22 @@ def calculate_upcoming_paydays(
             year += (month - 1) // 12
             month = (month - 1) % 12 + 1
 
-    elif pay_frequency == PAY_FREQ_BIMONTHLY:
+    elif pay_frequency in _MONTH_INTERVALS:
         if not last_pay_date:
             _LOGGER.error("Missing last payday date for month-interval payout.")
             return []
-        nxt = _add_months(date.fromisoformat(last_pay_date), 2)
+        months = _MONTH_INTERVALS[pay_frequency]
+        nxt = _add_months(date.fromisoformat(last_pay_date), months)
         while nxt < today:
-            nxt = _add_months(nxt, 2)
+            nxt = _add_months(nxt, months)
         for _ in range(count):
             raw.append(_adjust_not_before_today(nxt, today, bank_holidays))
-            nxt = _add_months(nxt, 2)
+            nxt = _add_months(nxt, months)
 
-    elif pay_frequency in (
-        PAY_FREQ_28_DAYS,
-        PAY_FREQ_14_DAYS,
-        PAY_FREQ_QUARTERLY,
-        PAY_FREQ_SEMIANNUAL,
-        PAY_FREQ_ANNUAL,
-    ):
+    elif pay_frequency in (PAY_FREQ_28_DAYS, PAY_FREQ_14_DAYS):
         interval = {
             PAY_FREQ_14_DAYS: 14,
             PAY_FREQ_28_DAYS: 28,
-            PAY_FREQ_QUARTERLY: 91,
-            PAY_FREQ_SEMIANNUAL: 182,
-            PAY_FREQ_ANNUAL: 365,
         }[pay_frequency]
         if not last_pay_date:
             _LOGGER.error("Missing last payday date for recurring payout.")

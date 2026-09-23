@@ -75,13 +75,6 @@ def _parse_event_time(value) -> time:
 
 _PLATFORMS = ["sensor", "binary_sensor", "calendar"]
 
-# Tracks the scheduled "fire at 06:00" callback per config entry.
-_payday_event_unsubs: dict[str, object] = {}
-
-# Tracks the last payday date we already fired an event for, per config entry,
-# so coordinator refreshes during the day do not fire the event repeatedly.
-_payday_last_fired: dict[str, date] = {}
-
 
 @callback
 def _fire_payday_event(hass, entry, instance_name: str, payday: date) -> None:
@@ -101,7 +94,11 @@ async def _async_check_country_supported(hass, entry, country) -> None:
     issue_id = f"unsupported_country_{entry.entry_id}"
     try:
         supported = await hass.async_add_executor_job(get_supported_countries)
-    except Exception:  # pragma: no cover - defensive
+    except Exception:
+        _LOGGER.exception(
+            "Could not determine supported countries; skipping the "
+            "unsupported-country repair check for this refresh"
+        )
         return
 
     if country and country not in supported:
@@ -138,7 +135,9 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 
     async def async_update_data() -> dict:
         nonlocal last_data
-        today = date.today()
+        # Use HA's configured time zone rather than the host system clock,
+        # which may run in a different zone (e.g. UTC in a container).
+        today = dt_util.now().date()
 
         try:
             # Only use the cached result if the next payday is strictly in
@@ -162,6 +161,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
                     _normalize_int(data.get(CONF_BANK_OFFSET), 0),
                     data.get(CONF_SUBDIV),
                     12,
+                    today,
                 )
             )
 
@@ -175,6 +175,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
                     data.get(CONF_WEEKDAY),
                     _normalize_int(data.get(CONF_BANK_OFFSET), 0),
                     data.get(CONF_SUBDIV),
+                    today,
                 )
             )
 
@@ -194,7 +195,11 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         _LOGGER,
         name=f"{instance_name} Coordinator ({entry.entry_id})",
         update_method=async_update_data,
-        update_interval=timedelta(minutes=5),
+        # Paydays only change once per day and the exact payday moment is
+        # already handled precisely by the scheduled timer below; this
+        # periodic refresh is just a fallback (e.g. after a restart that
+        # missed the timer), so it does not need to run every few minutes.
+        update_interval=timedelta(hours=1),
     )
 
     # A failed initial update raises ConfigEntryNotReady and HA retries
@@ -205,9 +210,15 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     # by the holidays package (e.g. removed in a later package version).
     await _async_check_country_supported(hass, entry, data.get(CONF_COUNTRY))
 
-    hass.data.setdefault(DOMAIN, {})[entry.entry_id] = {
+    # Per-entry runtime state (not persisted): the scheduled "fire at
+    # event_time" callback unsub, and the last payday date we already fired
+    # the event for (so coordinator refreshes during the day do not fire it
+    # repeatedly).
+    entry.runtime_data = {
         "coordinator": coordinator,
         "name": instance_name,
+        "event_unsub": None,
+        "last_fired": None,
     }
 
     # Fire an event at the configured local time on each payday so
@@ -215,7 +226,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     # the binary sensor.
     #
     # The event must fire exactly once per payday. The coordinator refreshes
-    # every few minutes, so we guard with the last date we already fired for
+    # periodically, so we guard with the last date we already fired for
     # and (re)schedule a single timer for the next payday's event time.
     def _payday_fire_time(payday: date) -> datetime:
         """Return the UTC datetime at which to fire for a given payday."""
@@ -232,7 +243,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         if not isinstance(next_payday, date):
             return
 
-        already_fired = _payday_last_fired.get(entry.entry_id)
+        already_fired = entry.runtime_data["last_fired"]
         now = dt_util.utcnow()
         fire_at = _payday_fire_time(next_payday)
 
@@ -240,7 +251,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         if fire_at <= now:
             # Only fire if we have not already fired for this exact date.
             if already_fired != next_payday:
-                _payday_last_fired[entry.entry_id] = next_payday
+                entry.runtime_data["last_fired"] = next_payday
                 _fire_payday_event(hass, entry, instance_name, next_payday)
                 # Advance the coordinator to the following payday.
                 hass.async_create_task(coordinator.async_request_refresh())
@@ -248,22 +259,22 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 
         # Otherwise schedule a single timer for the event time on the payday.
         # Cancel any existing timer first so we never stack multiple timers.
-        unsub = _payday_event_unsubs.pop(entry.entry_id, None)
+        unsub = entry.runtime_data["event_unsub"]
         if unsub:
             unsub()
-        _payday_event_unsubs[entry.entry_id] = async_track_point_in_time(
+        entry.runtime_data["event_unsub"] = async_track_point_in_time(
             hass, _on_payday, fire_at
         )
 
     @callback
     def _on_payday(now) -> None:
-        _payday_event_unsubs.pop(entry.entry_id, None)
+        entry.runtime_data["event_unsub"] = None
         payday = coordinator.data.get("payday_next") if coordinator.data else None
         if (
             isinstance(payday, date)
-            and _payday_last_fired.get(entry.entry_id) != payday
+            and entry.runtime_data["last_fired"] != payday
         ):
-            _payday_last_fired[entry.entry_id] = payday
+            entry.runtime_data["last_fired"] = payday
             _fire_payday_event(hass, entry, instance_name, payday)
         # Refresh so the coordinator advances to the following payday,
         # then reschedule for it.
@@ -274,10 +285,11 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 
     @callback
     def _cleanup_event() -> None:
-        unsub = _payday_event_unsubs.pop(entry.entry_id, None)
+        unsub = entry.runtime_data["event_unsub"]
         if unsub:
             unsub()
-        _payday_last_fired.pop(entry.entry_id, None)
+        entry.runtime_data["event_unsub"] = None
+        entry.runtime_data["last_fired"] = None
 
     entry.async_on_unload(_cleanup_event)
 
@@ -289,9 +301,4 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 
 
 async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
-    unload_ok = await hass.config_entries.async_unload_platforms(entry, _PLATFORMS)
-
-    if unload_ok:
-        hass.data[DOMAIN].pop(entry.entry_id, None)
-
-    return unload_ok
+    return await hass.config_entries.async_unload_platforms(entry, _PLATFORMS)

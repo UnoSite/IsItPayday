@@ -10,6 +10,7 @@ from homeassistant.helpers.update_coordinator import (
     CoordinatorEntity,
     DataUpdateCoordinator,
 )
+from homeassistant.util import dt as dt_util
 
 from .const import (
     CONF_CONFIG_URL,
@@ -25,7 +26,7 @@ _LOGGER = logging.getLogger(__name__)
 
 
 async def async_setup_entry(hass, entry, async_add_entities):
-    data = hass.data[DOMAIN][entry.entry_id]
+    data = entry.runtime_data
     coordinator: DataUpdateCoordinator = data["coordinator"]
     instance_name = data.get("name", "IsItPayday")
 
@@ -41,7 +42,7 @@ async def async_setup_entry(hass, entry, async_add_entities):
 class IsItPaydayNextSensor(CoordinatorEntity, SensorEntity):
     """Sensor showing the date of the next payday."""
 
-    _attr_device_class = None
+    _attr_device_class = SensorDeviceClass.DATE
 
     def __init__(
         self,
@@ -57,22 +58,19 @@ class IsItPaydayNextSensor(CoordinatorEntity, SensorEntity):
         self._entry_id = entry_id
 
     @property
-    def state(self) -> str:
+    def native_value(self) -> date | None:
         payday = self.coordinator.data.get("payday_next")
         if not payday:
-            return "Unknown"
-
-        today = date.today()
+            return None
 
         if not isinstance(payday, date):
             try:
                 payday = date.fromisoformat(payday)
             except (ValueError, TypeError):
-                return "Unknown"
+                return None
 
-        if payday >= today:
-            return payday.strftime("%Y-%m-%d")
-        return "Unknown"
+        today = dt_util.now().date()
+        return payday if payday >= today else None
 
     @property
     def extra_state_attributes(self) -> dict:
@@ -83,7 +81,7 @@ class IsItPaydayNextSensor(CoordinatorEntity, SensorEntity):
         months with e.g. three biweekly payouts.
         """
         upcoming = self.coordinator.data.get("paydays_upcoming") or []
-        today = date.today()
+        today = dt_util.now().date()
 
         upcoming_dates = [d for d in upcoming if isinstance(d, date)]
         this_month = [
@@ -137,7 +135,7 @@ class IsItPaydayDaysToSensor(CoordinatorEntity, SensorEntity):
             if isinstance(payday, str):
                 payday = date.fromisoformat(payday)
 
-            today = date.today()
+            today = dt_util.now().date()
             if payday <= today:
                 return 0
 
@@ -160,7 +158,7 @@ class IsItPaydayDaysToSensor(CoordinatorEntity, SensorEntity):
 class IsItPaydayLastSensor(CoordinatorEntity, SensorEntity):
     """Sensor showing the most recent payday on or before today."""
 
-    _attr_device_class = None
+    _attr_device_class = SensorDeviceClass.DATE
 
     def __init__(
         self,
@@ -176,18 +174,18 @@ class IsItPaydayLastSensor(CoordinatorEntity, SensorEntity):
         self._entry_id = entry_id
 
     @property
-    def state(self) -> str:
+    def native_value(self) -> date | None:
         payday = self.coordinator.data.get("payday_last")
         if not payday:
-            return "Unknown"
+            return None
 
         if not isinstance(payday, date):
             try:
                 payday = date.fromisoformat(payday)
             except (ValueError, TypeError):
-                return "Unknown"
+                return None
 
-        return payday.strftime("%Y-%m-%d")
+        return payday
 
     @property
     def device_info(self) -> dict:

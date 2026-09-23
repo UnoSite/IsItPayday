@@ -6,7 +6,7 @@ from homeassistant.components.diagnostics import async_redact_data
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
 
-from .const import CONF_NAME, DOMAIN
+from .const import CONF_NAME
 
 # The instance name may contain personal information (e.g. a person's name).
 TO_REDACT = {CONF_NAME}
@@ -27,7 +27,7 @@ async def async_get_config_entry_diagnostics(
     hass: HomeAssistant, entry: ConfigEntry
 ) -> dict:
     """Return diagnostics for a config entry."""
-    info = hass.data.get(DOMAIN, {}).get(entry.entry_id, {})
+    info = entry.runtime_data or {}
     coordinator = info.get("coordinator")
 
     return {

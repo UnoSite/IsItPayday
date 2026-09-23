@@ -8,6 +8,7 @@ from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import callback
 from homeassistant.data_entry_flow import FlowResult
 from homeassistant.helpers.selector import DateSelector, TimeSelector
+from homeassistant.util import slugify
 
 from .const import (
     CONF_BANK_OFFSET,
@@ -325,6 +326,12 @@ class IsItPaydayConfigFlow(PaydayFlowMixin, config_entries.ConfigFlow, domain=DO
 
         self.name = user_input[CONF_NAME]
         self.country = user_input[CONF_COUNTRY]
+
+        # Prevent adding two instances with the same name; the name is the
+        # only thing that visibly distinguishes instances in the UI.
+        await self.async_set_unique_id(slugify(self.name))
+        self._abort_if_unique_id_configured()
+
         return await self._async_continue_after_country()
 
     def _finish(self) -> FlowResult:

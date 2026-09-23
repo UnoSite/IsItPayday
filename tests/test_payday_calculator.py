@@ -211,3 +211,40 @@ def test_last_payday_interval_future_anchor_returns_none(calc):
 def test_last_payday_bimonthly(calc):
     last = calc.calculate_last_payday("DK", "bimonthly", None, "2026-04-15")
     assert last is not None and last <= TODAY
+
+
+# --------------------------------------------------------------------------- #
+# Explicit `today` overrides the default `date.today()`                       #
+#                                                                               #
+# Callers running inside Home Assistant pass an explicit `today`              #
+# (HA's configured time zone) so results do not depend on the host system     #
+# clock's time zone. These tests pin an explicit `today` far from the         #
+# module-patched default (2026-06-15) to prove the parameter is honored.      #
+# --------------------------------------------------------------------------- #
+
+EXPLICIT_TODAY = date(2026, 1, 5)  # Monday, months before the patched default
+
+
+def test_upcoming_paydays_honors_explicit_today(calc):
+    paydays = calc.calculate_upcoming_paydays(
+        "DK", "weekly", weekday=4, count=1, today=EXPLICIT_TODAY
+    )
+    assert paydays[0] >= EXPLICIT_TODAY
+    assert paydays[0] < TODAY
+
+
+def test_next_payday_honors_explicit_today(calc):
+    nxt = calc.calculate_next_payday(
+        "DK", "weekly", weekday=4, today=EXPLICIT_TODAY
+    )
+    assert nxt >= EXPLICIT_TODAY
+    assert nxt < TODAY
+
+
+def test_last_payday_honors_explicit_today(calc):
+    last = calc.calculate_last_payday(
+        "DK", "weekly", weekday=4, today=EXPLICIT_TODAY
+    )
+    assert last is not None
+    assert last <= EXPLICIT_TODAY
+    assert last < TODAY

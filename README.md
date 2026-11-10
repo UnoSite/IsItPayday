@@ -98,7 +98,7 @@ Requires Home Assistant 2026.11 or newer, where HACS is built in as the **Market
 
 Or open the repository in the Marketplace directly:
 
-[![Open your Home Assistant instance and open this repository in the Marketplace.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=UnoSite&repository=IsItPayday&category=Integration)
+[![Open your Home Assistant instance and open this repository in the Marketplace.](https://my.home-assistant.io/badges/marketplace_repository.svg)](https://my.home-assistant.io/redirect/marketplace_repository/?owner=UnoSite&repository=IsItPayday&category=integration)
 
 ---
 

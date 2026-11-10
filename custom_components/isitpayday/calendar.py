@@ -2,13 +2,10 @@ import logging
 from datetime import date, datetime, timedelta
 
 from homeassistant.components.calendar import CalendarEntity, CalendarEvent
-from homeassistant.helpers.update_coordinator import (
-    CoordinatorEntity,
-    DataUpdateCoordinator,
-)
+from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
 from homeassistant.util import dt as dt_util
 
-from .const import CONF_CONFIG_URL, CONF_MANUFACTURER, CONF_MODEL, DOMAIN
+from .entity import IsItPaydayEntity
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -21,7 +18,7 @@ async def async_setup_entry(hass, entry, async_add_entities):
     async_add_entities([IsItPaydayCalendar(coordinator, entry.entry_id, instance_name)])
 
 
-class IsItPaydayCalendar(CoordinatorEntity, CalendarEntity):
+class IsItPaydayCalendar(IsItPaydayEntity, CalendarEntity):
     """Calendar entity exposing the next payday as an all-day event."""
 
     def __init__(
@@ -30,11 +27,9 @@ class IsItPaydayCalendar(CoordinatorEntity, CalendarEntity):
         entry_id: str,
         instance_name: str,
     ) -> None:
-        super().__init__(coordinator)
+        super().__init__(coordinator, entry_id, instance_name)
         self._attr_unique_id = f"{entry_id}_payday_calendar"
         self._attr_name = f"{instance_name}: Payday"
-        self._instance_name = instance_name
-        self._entry_id = entry_id
 
     def _get_paydays(self) -> list[date]:
         """Return all upcoming paydays from the coordinator as dates."""
@@ -91,13 +86,3 @@ class IsItPaydayCalendar(CoordinatorEntity, CalendarEntity):
             for payday in self._get_paydays()
             if start_date.date() <= payday < end_date.date()
         ]
-
-    @property
-    def device_info(self) -> dict:
-        return {
-            "identifiers": {(DOMAIN, self._entry_id)},
-            "name": self._instance_name,
-            "manufacturer": CONF_MANUFACTURER,
-            "model": CONF_MODEL,
-            "configuration_url": CONF_CONFIG_URL,
-        }

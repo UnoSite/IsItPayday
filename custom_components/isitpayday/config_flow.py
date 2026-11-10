@@ -4,9 +4,8 @@ import logging
 
 import voluptuous as vol
 from homeassistant import config_entries
-from homeassistant.config_entries import ConfigEntry
+from homeassistant.config_entries import ConfigEntry, ConfigFlowResult
 from homeassistant.core import callback
-from homeassistant.data_entry_flow import FlowResult
 from homeassistant.helpers.selector import DateSelector, TimeSelector
 from homeassistant.util import slugify
 
@@ -75,14 +74,14 @@ class PaydayFlowMixin:
     event_time: str | None = None
     subdivision_list: dict[str, str]
 
-    def _finish(self) -> FlowResult:
+    def _finish(self) -> ConfigFlowResult:
         raise NotImplementedError
 
-    async def _async_continue_to_event_time(self) -> FlowResult:
+    async def _async_continue_to_event_time(self) -> ConfigFlowResult:
         """Show the event-time step as the final step before finishing."""
         return await self.async_step_event_time()
 
-    async def async_step_event_time(self, user_input=None) -> FlowResult:
+    async def async_step_event_time(self, user_input=None) -> ConfigFlowResult:
         """Handle selection of the time of day the payday event fires."""
         if user_input is None:
             default = self.event_time or DEFAULT_EVENT_TIME
@@ -96,7 +95,7 @@ class PaydayFlowMixin:
         self.event_time = user_input[CONF_EVENT_TIME]
         return self._finish()
 
-    async def _async_continue_after_country(self) -> FlowResult:
+    async def _async_continue_after_country(self) -> ConfigFlowResult:
         """Continue to subdivision selection if relevant, else frequency."""
         self.subdivision_list = await self.hass.async_add_executor_job(
             get_country_subdivisions, self.country
@@ -107,7 +106,7 @@ class PaydayFlowMixin:
         self.subdiv = None
         return await self.async_step_frequency()
 
-    async def async_step_subdivision(self, user_input=None) -> FlowResult:
+    async def async_step_subdivision(self, user_input=None) -> ConfigFlowResult:
         """Handle optional selection of a state/region within the country."""
         if user_input is None:
             options = {SUBDIV_NONE: "Entire country (no region)"}
@@ -124,7 +123,7 @@ class PaydayFlowMixin:
         self.subdiv = None if selection == SUBDIV_NONE else selection
         return await self.async_step_frequency()
 
-    async def async_step_frequency(self, user_input=None) -> FlowResult:
+    async def async_step_frequency(self, user_input=None) -> ConfigFlowResult:
         """Handle pay frequency selection."""
         if user_input is None:
             return self.async_show_form(
@@ -157,7 +156,7 @@ class PaydayFlowMixin:
 
         return await self._async_continue_to_event_time()
 
-    async def async_step_monthly_day(self, user_input=None) -> FlowResult:
+    async def async_step_monthly_day(self, user_input=None) -> ConfigFlowResult:
         """Handle selection of which day of the month payday falls on."""
         if user_input is None:
             # If pay_day is an int (specific day) from a previous config,
@@ -189,7 +188,7 @@ class PaydayFlowMixin:
 
         return await self._async_continue_to_event_time()
 
-    async def async_step_bank_offset(self, user_input=None) -> FlowResult:
+    async def async_step_bank_offset(self, user_input=None) -> ConfigFlowResult:
         """Handle selection of days before last bank day."""
         if user_input is None:
             default = _coerce_int(self.bank_offset, 0)
@@ -209,7 +208,7 @@ class PaydayFlowMixin:
         self.bank_offset = _coerce_int(user_input[CONF_BANK_OFFSET], 0)
         return await self._async_continue_to_event_time()
 
-    async def async_step_specific_day(self, user_input=None) -> FlowResult:
+    async def async_step_specific_day(self, user_input=None) -> ConfigFlowResult:
         """Handle selection of a specific day of the month."""
         if user_input is None:
             default = _coerce_int(self.pay_day, 31)
@@ -225,7 +224,7 @@ class PaydayFlowMixin:
         self.pay_day = _coerce_int(user_input[CONF_PAY_DAY], 31)
         return await self._async_continue_to_event_time()
 
-    async def async_step_cycle_last_paydate(self, user_input=None) -> FlowResult:
+    async def async_step_cycle_last_paydate(self, user_input=None) -> ConfigFlowResult:
         """Handle selection of the last payday date for interval-based frequencies."""
         if user_input is None:
             if self.last_pay_date:
@@ -245,7 +244,7 @@ class PaydayFlowMixin:
         self.last_pay_date = user_input[CONF_LAST_PAY_DATE]
         return await self._async_continue_to_event_time()
 
-    async def async_step_weekly(self, user_input=None) -> FlowResult:
+    async def async_step_weekly(self, user_input=None) -> ConfigFlowResult:
         """Handle selection of weekday for weekly pay frequency."""
         if user_input is None:
             default = self.pay_day if self.pay_day in WEEKDAY_OPTIONS else "Monday"
@@ -294,7 +293,7 @@ class IsItPaydayConfigFlow(PaydayFlowMixin, config_entries.ConfigFlow, domain=DO
         """Return the options flow for an existing entry."""
         return IsItPaydayOptionsFlow()
 
-    async def async_step_user(self, user_input=None) -> FlowResult:
+    async def async_step_user(self, user_input=None) -> ConfigFlowResult:
         """Handle the initial user step (name + country)."""
         if user_input is None:
             if not self.country_list:
@@ -334,25 +333,25 @@ class IsItPaydayConfigFlow(PaydayFlowMixin, config_entries.ConfigFlow, domain=DO
 
         return await self._async_continue_after_country()
 
-    def _finish(self) -> FlowResult:
+    def _finish(self) -> ConfigFlowResult:
         """Create the config entry."""
         data = {CONF_NAME: self.name, **self._collect_settings()}
         return self.async_create_entry(title=self.name, data=data)
 
 
-class IsItPaydayOptionsFlow(PaydayFlowMixin, config_entries.OptionsFlow):
+class IsItPaydayOptionsFlow(PaydayFlowMixin, config_entries.OptionsFlowWithReload):
     """Options flow for changing settings on an existing entry.
 
     Saved options are stored in entry.options and take precedence over
-    entry.data (see __init__.py). An update listener reloads the
-    integration automatically when options change.
+    entry.data (see __init__.py). OptionsFlowWithReload reloads the
+    integration automatically when the options change.
     """
 
     def __init__(self) -> None:
         self.country_list: dict[str, str] = {}
         self.subdivision_list: dict[str, str] = {}
 
-    async def async_step_init(self, user_input=None) -> FlowResult:
+    async def async_step_init(self, user_input=None) -> ConfigFlowResult:
         """Entry point: select country, prefilled with current settings."""
         config = {**self.config_entry.data, **self.config_entry.options}
 
@@ -393,6 +392,6 @@ class IsItPaydayOptionsFlow(PaydayFlowMixin, config_entries.OptionsFlow):
         self.country = user_input[CONF_COUNTRY]
         return await self._async_continue_after_country()
 
-    def _finish(self) -> FlowResult:
+    def _finish(self) -> ConfigFlowResult:
         """Save the new settings to entry.options."""
         return self.async_create_entry(title="", data=self._collect_settings())

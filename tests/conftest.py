@@ -103,9 +103,17 @@ def _build_homeassistant_mock():
     class OptionsFlow:
         pass
 
+    class OptionsFlowWithReload(OptionsFlow):
+        pass
+
+    class ConfigFlowResult(dict):
+        pass
+
     config_entries.ConfigEntry = ConfigEntry
     config_entries.ConfigFlow = ConfigFlow
     config_entries.OptionsFlow = OptionsFlow
+    config_entries.OptionsFlowWithReload = OptionsFlowWithReload
+    config_entries.ConfigFlowResult = ConfigFlowResult
 
     data_entry_flow = types.ModuleType("homeassistant.data_entry_flow")
 

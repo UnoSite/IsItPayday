@@ -119,11 +119,6 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
     return True
 
 
-async def _async_update_listener(hass: HomeAssistant, entry: ConfigEntry) -> None:
-    """Reload the integration when options are changed."""
-    await hass.config_entries.async_reload(entry.entry_id)
-
-
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     # Options (from the options flow) take precedence over the original
     # setup data, so changed settings apply without touching entry.data.
@@ -270,10 +265,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     def _on_payday(now) -> None:
         entry.runtime_data["event_unsub"] = None
         payday = coordinator.data.get("payday_next") if coordinator.data else None
-        if (
-            isinstance(payday, date)
-            and entry.runtime_data["last_fired"] != payday
-        ):
+        if isinstance(payday, date) and entry.runtime_data["last_fired"] != payday:
             entry.runtime_data["last_fired"] = payday
             _fire_payday_event(hass, entry, instance_name, payday)
         # Refresh so the coordinator advances to the following payday,
@@ -292,9 +284,6 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         entry.runtime_data["last_fired"] = None
 
     entry.async_on_unload(_cleanup_event)
-
-    # Reload automatically when the user saves new options.
-    entry.async_on_unload(entry.add_update_listener(_async_update_listener))
 
     await hass.config_entries.async_forward_entry_setups(entry, _PLATFORMS)
     return True

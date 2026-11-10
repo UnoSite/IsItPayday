@@ -6,21 +6,11 @@ from homeassistant.components.sensor import (
     SensorEntity,
     SensorStateClass,
 )
-from homeassistant.helpers.update_coordinator import (
-    CoordinatorEntity,
-    DataUpdateCoordinator,
-)
+from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
 from homeassistant.util import dt as dt_util
 
-from .const import (
-    CONF_CONFIG_URL,
-    CONF_MANUFACTURER,
-    CONF_MODEL,
-    DOMAIN,
-    ICON_DAYS_TO,
-    ICON_LAST_PAYDAY,
-    ICON_NEXT_PAYDAY,
-)
+from .const import ICON_DAYS_TO, ICON_LAST_PAYDAY, ICON_NEXT_PAYDAY
+from .entity import IsItPaydayEntity
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -39,7 +29,7 @@ async def async_setup_entry(hass, entry, async_add_entities):
     )
 
 
-class IsItPaydayNextSensor(CoordinatorEntity, SensorEntity):
+class IsItPaydayNextSensor(IsItPaydayEntity, SensorEntity):
     """Sensor showing the date of the next payday."""
 
     _attr_device_class = SensorDeviceClass.DATE
@@ -50,12 +40,10 @@ class IsItPaydayNextSensor(CoordinatorEntity, SensorEntity):
         entry_id: str,
         instance_name: str,
     ) -> None:
-        super().__init__(coordinator)
+        super().__init__(coordinator, entry_id, instance_name)
         self._attr_unique_id = f"{entry_id}_payday_next"
         self._attr_name = f"{instance_name}: Next payday"
         self._attr_icon = ICON_NEXT_PAYDAY
-        self._instance_name = instance_name
-        self._entry_id = entry_id
 
     @property
     def native_value(self) -> date | None:
@@ -94,18 +82,8 @@ class IsItPaydayNextSensor(CoordinatorEntity, SensorEntity):
             "paydays_this_month_count": len(this_month),
         }
 
-    @property
-    def device_info(self) -> dict:
-        return {
-            "identifiers": {(DOMAIN, self._entry_id)},
-            "name": self._instance_name,
-            "manufacturer": CONF_MANUFACTURER,
-            "model": CONF_MODEL,
-            "configuration_url": CONF_CONFIG_URL,
-        }
 
-
-class IsItPaydayDaysToSensor(CoordinatorEntity, SensorEntity):
+class IsItPaydayDaysToSensor(IsItPaydayEntity, SensorEntity):
     """Sensor showing the number of days until the next payday."""
 
     _attr_device_class = SensorDeviceClass.DURATION
@@ -118,12 +96,10 @@ class IsItPaydayDaysToSensor(CoordinatorEntity, SensorEntity):
         entry_id: str,
         instance_name: str,
     ) -> None:
-        super().__init__(coordinator)
+        super().__init__(coordinator, entry_id, instance_name)
         self._attr_unique_id = f"{entry_id}_days_to"
         self._attr_name = f"{instance_name}: Days until"
         self._attr_icon = ICON_DAYS_TO
-        self._instance_name = instance_name
-        self._entry_id = entry_id
 
     @property
     def native_value(self) -> int | None:
@@ -144,18 +120,8 @@ class IsItPaydayDaysToSensor(CoordinatorEntity, SensorEntity):
             _LOGGER.exception("Error calculating days to payday: %s", e)
             return None
 
-    @property
-    def device_info(self) -> dict:
-        return {
-            "identifiers": {(DOMAIN, self._entry_id)},
-            "name": self._instance_name,
-            "manufacturer": CONF_MANUFACTURER,
-            "model": CONF_MODEL,
-            "configuration_url": CONF_CONFIG_URL,
-        }
 
-
-class IsItPaydayLastSensor(CoordinatorEntity, SensorEntity):
+class IsItPaydayLastSensor(IsItPaydayEntity, SensorEntity):
     """Sensor showing the most recent payday on or before today."""
 
     _attr_device_class = SensorDeviceClass.DATE
@@ -166,12 +132,10 @@ class IsItPaydayLastSensor(CoordinatorEntity, SensorEntity):
         entry_id: str,
         instance_name: str,
     ) -> None:
-        super().__init__(coordinator)
+        super().__init__(coordinator, entry_id, instance_name)
         self._attr_unique_id = f"{entry_id}_payday_last"
         self._attr_name = f"{instance_name}: Last payday"
         self._attr_icon = ICON_LAST_PAYDAY
-        self._instance_name = instance_name
-        self._entry_id = entry_id
 
     @property
     def native_value(self) -> date | None:
@@ -186,13 +150,3 @@ class IsItPaydayLastSensor(CoordinatorEntity, SensorEntity):
                 return None
 
         return payday
-
-    @property
-    def device_info(self) -> dict:
-        return {
-            "identifiers": {(DOMAIN, self._entry_id)},
-            "name": self._instance_name,
-            "manufacturer": CONF_MANUFACTURER,
-            "model": CONF_MODEL,
-            "configuration_url": CONF_CONFIG_URL,
-        }

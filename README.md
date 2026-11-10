@@ -87,13 +87,18 @@ All calculations are performed **locally** using the [holidays](https://pypi.org
 
 ## 📥 Installation
 
-### **1. HACS Installation (Recommended)**
+### **1. Marketplace Installation (Recommended)**
 
-1. Add this repository as a **custom repository** in [HACS](https://hacs.xyz/).
-2. Search for **Is It Payday?** in HACS and install the integration.
-3. Restart Home Assistant.
+Requires Home Assistant 2026.11 or newer, where HACS is built in as the **Marketplace**.
 
-[![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=UnoSite&repository=IsItPayday&category=Integration)
+1. Go to **Settings > Marketplace**.
+2. Select **Add from link** in the upper-right corner, enter `UnoSite/IsItPayday` and select **Add**. If asked for a type, choose **Integration**.
+3. Install **Is It Payday** and restart Home Assistant.
+4. Go to **Settings > Devices & Services > Add Integration** and search for **Is It Payday**.
+
+Or open the repository in the Marketplace directly:
+
+[![Open your Home Assistant instance and open this repository in the Marketplace.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=UnoSite&repository=IsItPayday&category=Integration)
 
 ---
 
